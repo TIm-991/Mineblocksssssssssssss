@@ -20682,6 +20682,256 @@
       border: 1px solid rgba(255, 198, 127, 0.45);
       background: linear-gradient(160deg, rgba(20, 14, 10, 0.96), rgba(12, 10, 18, 0.96));
     }
+    #shopMenu.shopCompactOnly #shopViewTabs,
+    #shopMenu.shopCompactOnly #shopFilterPanel,
+    #shopMenu.shopCompactOnly [data-store-section="passes"],
+    #shopMenu.shopCompactOnly [data-store-section="bundles"],
+    #shopMenu.shopCompactOnly [data-store-section="owned"] {
+      display: none !important;
+    }
+    #shopMenu.shopCompactOnly .storeRebootSections {
+      display: block;
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+    #shopMenu.shopCompactOnly .storeRebootBody {
+      grid-template-columns: 1fr !important;
+      gap: 0;
+    }
+    #shopMenu.shopCompactOnly .storeRebootTop {
+      margin-bottom: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(104, 178, 255, 0.28);
+      background: linear-gradient(135deg, rgba(10, 22, 48, 0.92), rgba(8, 18, 36, 0.94));
+      padding: 12px;
+    }
+    #shopMenu.shopCompactOnly .shopSectionHeadRow {
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(110, 184, 255, 0.24);
+      background: linear-gradient(90deg, rgba(9, 20, 45, 0.88), rgba(7, 15, 32, 0.88));
+    }
+    #shopMenu.shopCompactOnly .shopGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 12px;
+    }
+    #shopMenu.shopCompactOnly .storeReboot .shopSection {
+      width: 100%;
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+    #shopMenu.shopCompactOnly .storeUtilityBar {
+      display: grid !important;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(112, 184, 255, 0.25);
+      background: linear-gradient(90deg, rgba(9, 20, 45, 0.88), rgba(7, 15, 32, 0.88));
+    }
+    #shopMenu.shopCompactOnly .storeUtilityBar > :not(.shopCreatorControls) {
+      display: none !important;
+    }
+    #shopMenu.shopCompactOnly .shopCreatorControls {
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto auto;
+      gap: 8px;
+      align-items: center;
+    }
+    #shopMenu.shopCompactOnly .shopCreatorInput {
+      min-height: 40px;
+      border-radius: 9px;
+      border: 1px solid rgba(125, 196, 255, 0.45);
+      background: rgba(4, 12, 26, 0.78);
+      color: #f4fbff;
+    }
+    #shopMenu.shopCompactOnly #applyShopCreatorBtn {
+      min-height: 40px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 200, 103, 0.5);
+      background: linear-gradient(135deg, #ffcc73, #ff9f45);
+      color: #221303;
+      font-weight: 900;
+      padding: 0 14px;
+    }
+    #shopMenu.shopCompactOnly #shopCreatorActiveInfo {
+      border-radius: 9px;
+      border: 1px solid rgba(116, 184, 255, 0.38);
+      background: rgba(7, 18, 38, 0.72);
+      color: #dff1ff;
+      padding: 10px 12px;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    #shopMenu #shopCreatorActiveInfo.creatorCodePulse {
+      animation: creatorCodePulse 0.95s ease;
+    }
+    @keyframes creatorCodePulse {
+      0% {
+        box-shadow: 0 0 0 rgba(81, 255, 162, 0);
+        border-color: rgba(116, 184, 255, 0.38);
+      }
+      35% {
+        box-shadow: 0 0 0 2px rgba(99, 255, 177, 0.25), 0 0 22px rgba(83, 255, 167, 0.52);
+        border-color: rgba(138, 255, 196, 0.92);
+      }
+      100% {
+        box-shadow: 0 0 0 rgba(81, 255, 162, 0);
+        border-color: rgba(116, 184, 255, 0.38);
+      }
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard {
+      position: relative;
+      border-radius: 6px;
+      border: 2px solid rgba(100, 194, 255, 0.8);
+      background: linear-gradient(180deg, #328ef6 0%, #214fcb 100%);
+      overflow: hidden;
+      min-height: 262px;
+      padding: 0;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      box-shadow: 0 10px 26px rgba(6, 16, 44, 0.45);
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard.era-rarity-epic {
+      background: linear-gradient(180deg, #ca45de 0%, #7b2dcc 100%);
+      border-color: rgba(235, 133, 255, 0.86);
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard.era-rarity-legendary,
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard.era-rarity-mythic {
+      background: linear-gradient(180deg, #ff9a1f 0%, #d46400 100%);
+      border-color: rgba(255, 196, 97, 0.9);
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard.era-rarity-rare {
+      background: linear-gradient(180deg, #24a0ff 0%, #2565df 100%);
+      border-color: rgba(132, 209, 255, 0.86);
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.1), transparent 36%);
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraVisual {
+      padding: 8px 8px 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .shopPreview {
+      width: 100%;
+      height: 136px;
+      border-radius: 6px;
+      background-size: cover;
+      background-position: center;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraFooter {
+      background: rgba(22, 15, 56, 0.7);
+      border-top: 1px solid rgba(214, 156, 255, 0.45);
+      padding: 7px;
+      display: grid;
+      gap: 4px;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraType {
+      font-size: 9px;
+      font-weight: 800;
+      color: #b9d8ff;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraName {
+      font-size: 25px;
+      font-weight: 900;
+      line-height: 1;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraPrice {
+      margin-top: 4px;
+      border-radius: 6px;
+      background: rgba(8, 13, 30, 0.88);
+      border: 1px solid rgba(99, 194, 255, 0.5);
+      color: #d7f1ff;
+      font-weight: 900;
+      padding: 6px 9px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 20px;
+      line-height: 1;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .shopActionBtn {
+      margin-top: 2px !important;
+      min-height: 26px;
+      font-size: 11px;
+      border-radius: 6px;
+      opacity: 0.78;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .shopActionBtn:hover {
+      opacity: 1;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraNew {
+      position: absolute;
+      left: 6px;
+      top: 6px;
+      z-index: 2;
+      font-size: 9px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(135deg, #ff3c70, #ff6a3c);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraOwned {
+      position: absolute;
+      right: 6px;
+      top: 6px;
+      z-index: 2;
+      font-size: 9px;
+      font-weight: 900;
+      color: #10260f;
+      background: linear-gradient(135deg, #8dff8a, #5ae46e);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 4px;
+      padding: 2px 6px;
+      text-transform: uppercase;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraOwned.owned-rare {
+      background: linear-gradient(135deg, #8ce0ff, #5dbdff);
+      color: #05263e;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraOwned.owned-epic {
+      background: linear-gradient(135deg, #e1a3ff, #bb67ff);
+      color: #24063f;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraOwned.owned-legendary,
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraOwned.owned-mythic {
+      background: linear-gradient(135deg, #ffe083, #ffb648);
+      color: #362004;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraOwned.owned-common,
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraOwned.owned-uncommon {
+      background: linear-gradient(135deg, #9dffae, #5adf76);
+      color: #0d2b12;
+    }
+    #shopMenu.shopCompactOnly .shopItem.shopEraCard .eraTapHint {
+      margin-top: 4px;
+      font-size: 10px;
+      font-weight: 800;
+      color: rgba(222, 236, 255, 0.86);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
     .commandPlusSuccessCard {
       width: min(620px, 94vw);
       border-radius: 20px;
@@ -57236,24 +57486,33 @@ async function loadMaintenanceStateFromSupabase() {
       return `${y}-${m}-${d}`;
     }
 
+    function getShopRotationSeed() {
+      return getShopRotationKey().split("-").reduce((acc, part) => acc + Number(part || 0), 0);
+    }
+
+    function pickDailyOne(list = [], seed = 0, offset = 0) {
+      if (!Array.isArray(list) || !list.length) return null;
+      const index = Math.abs((seed + offset) % list.length);
+      return list[index] || null;
+    }
+
     function getFeaturedStoreOffers() {
-      const rotationKey = getShopRotationKey();
-      const seed = rotationKey.split("-").reduce((acc, part) => acc + Number(part || 0), 0);
+      const seed = getShopRotationSeed();
       const lookOffers = getNewShopSkinEntries().slice();
       const itemOffers = newShopCatalog.slice();
       const bundleOffers = shopBundles.filter((bundle) => bundle.id !== "starter_packet").slice();
       const picks = [];
 
       if (lookOffers.length) {
-        const look = lookOffers[seed % lookOffers.length];
+        const look = pickDailyOne(lookOffers, seed, 0);
         picks.push({ type: look.type, id: look.item.id });
       }
       if (bundleOffers.length) {
-        const bundle = bundleOffers[seed % bundleOffers.length];
+        const bundle = pickDailyOne(bundleOffers, seed, 3);
         picks.push({ type: "bundle", id: bundle.id });
       }
       if (itemOffers.length) {
-        const item = itemOffers[seed % itemOffers.length];
+        const item = pickDailyOne(itemOffers, seed, 7);
         picks.push({ type: "catalog", id: item.id });
       }
       picks.push({ type: "pass", id: seed % 2 === 0 ? "premium" : "25" });
@@ -57612,15 +57871,21 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function getNewShopSkinEntries() {
-      const outfitEntries = Object.values(threeDOutfits || {}).filter((item) => item && !item.shopHidden).slice(0, 3).map((item) => ({ type: "outfits", item }));
-      return [
-        ...eyeSkins.filter((item) => item && !item.shopHidden).slice(0, 3).map((item) => ({ type: "eyes", item })),
-        ...bodySkins.filter((item) => item && !item.shopHidden).slice(0, 3).map((item) => ({ type: "bodies", item })),
-        ...specialSkins.filter((item) => item && !item.shopHidden).slice(0, 3).map((item) => ({ type: "specials", item })),
-        ...outfitEntries,
-        ...countdownThemes.filter((item) => item && Number(item.price || 0) > 0).map((item) => ({ type: "countdowns", item })),
-        ...lobbyBackgrounds.filter((item) => item && item.sourceType === "shop" && Number(item.price || 0) > 0).map((item) => ({ type: "lobbyBackgrounds", item }))
-      ];
+      const seed = getShopRotationSeed();
+      const entries = [];
+      const countdownPick = pickDailyOne(countdownThemes.filter((item) => item && Number(item.price || 0) > 0), seed, 0);
+      const outfitPick = pickDailyOne(Object.values(threeDOutfits || {}).filter((item) => item && !item.shopHidden), seed, 2);
+      const specialPick = pickDailyOne(specialSkins.filter((item) => item && !item.shopHidden), seed, 4);
+      const bodyPick = pickDailyOne(bodySkins.filter((item) => item && !item.shopHidden), seed, 6);
+      const bgPick = pickDailyOne(lobbyBackgrounds.filter((item) => item && item.sourceType === "shop" && Number(item.price || 0) > 0), seed, 8);
+
+      if (countdownPick) entries.push({ type: "countdowns", item: countdownPick }); // 1 Sache aus 3.2.1 GO
+      if (outfitPick) entries.push({ type: "outfits", item: outfitPick });
+      if (specialPick) entries.push({ type: "specials", item: specialPick });
+      if (bodyPick) entries.push({ type: "bodies", item: bodyPick });
+      if (bgPick) entries.push({ type: "lobbyBackgrounds", item: bgPick });
+
+      return entries;
     }
 
     function isNewShopSkinOwned(type, id) {
@@ -57674,7 +57939,7 @@ async function loadMaintenanceStateFromSupabase() {
 
     function renderNewShopPassPackages() {
       if (!newShopPassGrid) return;
-      const offers = sortStoreOffers(["premium", "25"].map((id) => getStoreOfferMeta("pass", id)).filter(Boolean)).filter(matchesStoreSearch);
+      const offers = sortStoreOffers(["premium"].map((id) => getStoreOfferMeta("pass", id)).filter(Boolean)).filter(matchesStoreSearch);
       if (!offers.length) {
         newShopPassGrid.innerHTML = '<div class="shopWishlistEmpty">Keine Pass-Angebote für diese Suche.</div>';
         return;
@@ -57708,17 +57973,21 @@ async function loadMaintenanceStateFromSupabase() {
       newShopSkinGrid.innerHTML = entries.map((offer) => {
         const item = offer.item;
         const rarity = getRarityMeta(offer.rarity || "common");
+        const typeLabel = `${rarity.label} • ${getStoreTypeLabel(offer.type)}`;
+        const rarityType = (rarity.type || "common").toLowerCase();
+        const ownedBadgeClass = `owned-${rarityType}`;
         return `
-          <div class="${getStoreCardClassNames(offer.type, item.id, { owned: offer.owned, active: offer.active })}" data-store-type="${offer.type}" data-store-id="${item.id}">
-            <div class="shopBadgeRow">
-              <span class="shopBadge ${rarity.type}">${rarity.label}</span>
-              ${offer.owned ? '<span class="shopBadge owned">Besitzt du</span>' : '<span class="shopBadge new">Neu</span>'}
+          <div class="${getStoreCardClassNames(offer.type, item.id, { owned: offer.owned, active: offer.active })} shopEraCard era-rarity-${rarityType}" data-store-type="${offer.type}" data-store-id="${item.id}">
+            ${offer.owned ? "" : '<div class="eraNew">NEU</div>'}
+            ${offer.owned ? `<div class="eraOwned ${ownedBadgeClass}">Im Besitz</div>` : ""}
+            <div class="eraVisual">
+              ${getShopPreviewMarkup(offer.type, item)}
             </div>
-            ${getShopPreviewMarkup(offer.type, item)}
-            <div><strong>${item.name}</strong></div>
-            <div class="shopPrice">${offer.description}<br>Preis: ${formatCurrencyMarkup(offer.price)}</div>
-            <div class="shopActionRow">
-              <button class="shopActionBtn" data-store-action="${offer.type}:${item.id}">${offer.actionLabel}</button>
+            <div class="eraFooter">
+              <div class="eraType">${typeLabel}</div>
+              <div class="eraName">${item.name}</div>
+              <div class="eraPrice">${Number(offer.price || 0).toLocaleString("de-DE")} M-Bucks</div>
+              <div class="eraTapHint">${offer.owned ? (offer.active ? "Aktiv • Tippen zum Auswaehlen" : "Besitzt du • Tippen zum Ausruesten") : "Tippen zum Kaufen"}</div>
             </div>
           </div>
         `;
@@ -57774,7 +58043,9 @@ async function loadMaintenanceStateFromSupabase() {
 
     function renderNewShopCatalog() {
       if (!newShopGrid) return;
-      const offers = sortStoreOffers(newShopCatalog.map((item) => getStoreOfferMeta("catalog", item.id)).filter(Boolean).filter(matchesStoreSearch));
+      const seed = getShopRotationSeed();
+      const catalogPick = pickDailyOne(newShopCatalog, seed, 11);
+      const offers = sortStoreOffers((catalogPick ? [catalogPick] : []).map((item) => getStoreOfferMeta("catalog", item.id)).filter(Boolean).filter(matchesStoreSearch));
       if (!offers.length) {
         newShopGrid.innerHTML = '<div class="shopWishlistEmpty">Keine Utility-Items für diese Suche.</div>';
         return;
@@ -57800,7 +58071,10 @@ async function loadMaintenanceStateFromSupabase() {
 
     function renderNewShopBundleGrid() {
       if (!newShopBundleGrid) return;
-      const offers = sortStoreOffers(shopBundles.map((bundle) => getStoreOfferMeta("bundle", bundle.id)).filter(Boolean).filter(matchesStoreSearch));
+      const seed = getShopRotationSeed();
+      const bundleSource = shopBundles.filter((bundle) => bundle.id !== "starter_packet");
+      const bundlePick = pickDailyOne(bundleSource, seed, 13);
+      const offers = sortStoreOffers((bundlePick ? [bundlePick] : []).map((bundle) => getStoreOfferMeta("bundle", bundle.id)).filter(Boolean).filter(matchesStoreSearch));
       if (!offers.length) {
         newShopBundleGrid.innerHTML = '<div class="shopWishlistEmpty">Keine Bundles für diese Suche.</div>';
         return;
@@ -57877,6 +58151,7 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function renderShop() {
+      if (shopMenu) shopMenu.classList.add("shopCompactOnly");
       loadNewShopState();
       ensureValidNewShopPreviewSelection();
       const ownedCount = getNewShopOwnedEntries().length;
@@ -57900,23 +58175,22 @@ async function loadMaintenanceStateFromSupabase() {
         const liveTotal = Number(window.FORTNITE_GG_SHOP_DATA?.total || 0);
         newShopStatus.textContent = `${getStoreViewLabel(newShopActiveView)} aktiv · ${ownedCount} Store-Freischaltungen verfügbar${liveTotal > 0 ? ` · Live-Rotation: ${liveTotal} Offers` : ""}`;
       }
-      renderNewShopPassPackages();
       renderNewShopSkinGrid();
-      renderNewShopPreviewPanel();
-      renderNewShopCatalog();
-      renderNewShopBundleGrid();
-      renderNewShopOwned();
+      if (newShopGrid) newShopGrid.innerHTML = "";
+      if (newShopPassGrid) newShopPassGrid.innerHTML = "";
+      if (newShopBundleGrid) newShopBundleGrid.innerHTML = "";
+      if (newShopOwnedList) newShopOwnedList.innerHTML = "";
       const passCountEl = document.getElementById("shopPassCount");
       const featuredCountEl = document.getElementById("shopFeaturedCount");
       const skinsCountEl = document.getElementById("shopSkinsCount");
       const bundleCountEl = document.getElementById("shopBundleCount");
       const ownedCountEl = document.getElementById("shopOwnedCount");
-      if (passCountEl) passCountEl.textContent = String(newShopPassGrid?.children?.length || 0);
-      if (featuredCountEl) featuredCountEl.textContent = String(newShopGrid?.children?.length || 0);
+      if (passCountEl) passCountEl.textContent = "0";
+      if (featuredCountEl) featuredCountEl.textContent = "0";
       if (skinsCountEl) skinsCountEl.textContent = String(newShopSkinGrid?.children?.length || 0);
-      if (bundleCountEl) bundleCountEl.textContent = String(newShopBundleGrid?.children?.length || 0);
-      if (ownedCountEl) ownedCountEl.textContent = String(newShopOwnedList?.children?.length || 0);
-      setNewShopActiveView(newShopActiveView);
+      if (bundleCountEl) bundleCountEl.textContent = "0";
+      if (ownedCountEl) ownedCountEl.textContent = "0";
+      setNewShopActiveView("items");
     }
 
     function handleStoreAction(type, id) {
@@ -57960,6 +58234,10 @@ async function loadMaintenanceStateFromSupabase() {
       const type = storeCard.dataset.storeType || "";
       const id = storeCard.dataset.storeId || "";
       if (!type || !id) return;
+      if (shopMenu && shopMenu.classList.contains("shopCompactOnly")) {
+        handleStoreAction(type, id);
+        return;
+      }
       newShopPreviewSelection = { type, id };
       renderShop();
     }
@@ -58330,10 +58608,14 @@ async function loadMaintenanceStateFromSupabase() {
         const creator = creatorAccountProfiles[code] || { label: code };
         shopCreatorActiveInfo.textContent = `Aktiv: ${creator.label}`;
         shopCreatorActiveInfo.style.color = "var(--shop-accent)";
+        shopCreatorActiveInfo.classList.remove("creatorCodePulse");
+        void shopCreatorActiveInfo.offsetWidth;
+        shopCreatorActiveInfo.classList.add("creatorCodePulse");
         if (shopCreatorInput) shopCreatorInput.value = code;
       } else {
         shopCreatorActiveInfo.textContent = "Kein Code aktiv";
         shopCreatorActiveInfo.style.color = "var(--shop-muted)";
+        shopCreatorActiveInfo.classList.remove("creatorCodePulse");
         if (shopCreatorInput) shopCreatorInput.value = "";
       }
     }
