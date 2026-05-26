@@ -20605,6 +20605,102 @@
       gap: 10px;
     }
 
+    .commandPlusCard {
+      width: min(1080px, 97vw);
+      border-radius: 26px;
+      padding: 28px;
+      background:
+        radial-gradient(1200px 520px at 8% 0%, rgba(67, 147, 255, 0.22), transparent 58%),
+        radial-gradient(900px 480px at 96% 100%, rgba(255, 166, 62, 0.18), transparent 60%),
+        linear-gradient(150deg, rgba(6,14,34,0.96), rgba(6,11,24,0.95));
+      border: 1px solid rgba(138, 195, 255, 0.34);
+      box-shadow: 0 30px 60px rgba(4, 10, 26, 0.6);
+    }
+    .commandPlusHero {
+      padding: 12px 4px 14px;
+    }
+    .commandPlusBenefitsGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 12px 0 18px;
+    }
+    .commandPlusBenefitCard {
+      border: 1px solid rgba(153, 196, 255, 0.28);
+      border-radius: 14px;
+      padding: 14px 12px;
+      background: linear-gradient(145deg, rgba(14, 26, 56, 0.72), rgba(12, 19, 38, 0.6));
+    }
+    .commandPlusBenefitCard .emoji {
+      font-size: 22px;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .commandPlusBenefitCard .title {
+      font-weight: 900;
+      color: #f3f8ff;
+      margin-bottom: 4px;
+    }
+    .commandPlusBenefitCard .text {
+      font-size: 13px;
+      color: rgba(212, 228, 247, 0.88);
+      line-height: 1.4;
+    }
+    .commandPlusActions {
+      justify-content: flex-start;
+      gap: 12px;
+    }
+    .commandPlusBtn {
+      min-height: 54px;
+      border-radius: 14px;
+      font-weight: 900;
+      font-size: 15px;
+      padding: 0 18px;
+    }
+    .commandPlusBtnBuy {
+      color: #1a1100;
+      border-color: rgba(255, 220, 152, 0.8);
+      background: linear-gradient(115deg, #ffd36f 15%, #fff1b4 36%, #ffb254 52%, #ff9e42 72%, #ffd36f 100%);
+      background-size: 220% 100%;
+      box-shadow: 0 12px 24px rgba(255, 166, 63, 0.32);
+      animation: commandPlusShine 2.4s linear infinite;
+    }
+    .commandPlusBtnVault {
+      color: #e9f6ff;
+      border-color: rgba(155, 219, 255, 0.7);
+      background: linear-gradient(135deg, #2f79ff, #2bb8ff);
+      box-shadow: 0 12px 24px rgba(53, 136, 255, 0.28);
+    }
+    .commandPlusBtnClose {
+      color: #f2f7ff;
+      border-color: rgba(214, 228, 246, 0.45);
+      background: linear-gradient(135deg, rgba(28,36,56,0.9), rgba(18,25,42,0.92));
+    }
+    .commandPlusConfirmCard {
+      width: min(560px, 94vw);
+      border-radius: 20px;
+      border: 1px solid rgba(255, 198, 127, 0.45);
+      background: linear-gradient(160deg, rgba(20, 14, 10, 0.96), rgba(12, 10, 18, 0.96));
+    }
+    .commandPlusSuccessCard {
+      width: min(620px, 94vw);
+      border-radius: 20px;
+      border: 1px solid rgba(129, 226, 255, 0.5);
+      background:
+        radial-gradient(500px 220px at 50% -20%, rgba(83, 205, 255, 0.3), transparent 70%),
+        linear-gradient(160deg, rgba(7, 20, 30, 0.97), rgba(9, 22, 42, 0.96));
+      box-shadow: 0 26px 50px rgba(6, 22, 42, 0.55);
+      animation: commandPlusPopIn 0.28s ease-out;
+    }
+    @keyframes commandPlusShine {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+    @keyframes commandPlusPopIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
     .mbucksCreditCard {
       width: min(660px, calc(100vw - 36px));
       background:
@@ -36175,15 +36271,40 @@
   </div>
 
   <div id="commandPlusMenu" class="inventoryMenu hidden">
-    <div class="modeRulesCard" style="width:min(860px,96vw);">
-      <div class="modeRulesEyebrow">Membership</div>
-      <div class="modeRulesTitle">RIFT COMMAND+</div>
-      <div id="commandPlusMeta" class="modeRulesLead">Hol dir COMMAND+ fuer 5.000 M-Bucks und sichere dir exklusive Vorteile.</div>
-      <div id="commandPlusBenefits" class="modeRulesList"></div>
+    <div class="modeRulesCard commandPlusCard">
+      <div class="commandPlusHero">
+        <div class="modeRulesEyebrow">🚀 MEMBERSHIP</div>
+        <div class="modeRulesTitle">RIFT COMMAND+</div>
+        <div id="commandPlusMeta" class="modeRulesLead">Hol dir COMMAND+ fuer 5.000 M-Bucks und sichere dir exklusive Vorteile.</div>
+      </div>
+      <div id="commandPlusBenefits" class="commandPlusBenefitsGrid"></div>
+      <div class="modeRulesActions commandPlusActions">
+        <button id="commandPlusBuyBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnBuy">💳 COMMAND+ kaufen (5.000 M-Bucks)</button>
+        <button id="commandPlusVaultBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnVault">🏦 Woechentlichen Tresor holen (+450)</button>
+        <button id="closeCommandPlusBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnClose">✖ Schliessen</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="commandPlusConfirmMenu" class="inventoryMenu hidden">
+    <div class="modeRulesCard commandPlusConfirmCard">
+      <div class="modeRulesEyebrow">🧾 Kaufbestaetigung</div>
+      <div class="modeRulesTitle">COMMAND+ freischalten?</div>
+      <div id="commandPlusConfirmMeta" class="modeRulesLead">Du kaufst COMMAND+ fuer 5.000 M-Bucks. Dieser Kauf wird sofort ausgefuehrt.</div>
       <div class="modeRulesActions">
-        <button id="commandPlusBuyBtn" class="achievementCloseBtn">COMMAND+ kaufen (5.000 M-Bucks)</button>
-        <button id="commandPlusVaultBtn" class="achievementCloseBtn">Woechentlichen Tresor holen (+450)</button>
-        <button id="closeCommandPlusBtn" class="achievementCloseBtn">Schliessen</button>
+        <button id="commandPlusConfirmBuyBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnBuy">✅ Ja, jetzt kaufen</button>
+        <button id="commandPlusConfirmCancelBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnClose">↩ Abbrechen</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="commandPlusSuccessMenu" class="inventoryMenu hidden">
+    <div class="modeRulesCard commandPlusSuccessCard">
+      <div class="modeRulesEyebrow">🎉 Freigeschaltet</div>
+      <div class="modeRulesTitle">Willkommen bei COMMAND+</div>
+      <div class="modeRulesLead">Premium ist aktiv, dein neuer Lobby-Hintergrund wurde geliefert und der Tresor ist bereit.</div>
+      <div class="modeRulesActions">
+        <button id="commandPlusSuccessCloseBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnVault">✨ Nice!</button>
       </div>
     </div>
   </div>
@@ -37084,6 +37205,12 @@
     const commandPlusBuyBtn = document.getElementById("commandPlusBuyBtn");
     const commandPlusVaultBtn = document.getElementById("commandPlusVaultBtn");
     const closeCommandPlusBtn = document.getElementById("closeCommandPlusBtn");
+    const commandPlusConfirmMenu = document.getElementById("commandPlusConfirmMenu");
+    const commandPlusConfirmMeta = document.getElementById("commandPlusConfirmMeta");
+    const commandPlusConfirmBuyBtn = document.getElementById("commandPlusConfirmBuyBtn");
+    const commandPlusConfirmCancelBtn = document.getElementById("commandPlusConfirmCancelBtn");
+    const commandPlusSuccessMenu = document.getElementById("commandPlusSuccessMenu");
+    const commandPlusSuccessCloseBtn = document.getElementById("commandPlusSuccessCloseBtn");
     const twitchMenu = document.getElementById("twitchMenu");
     const closeTwitchBtn = document.getElementById("closeTwitchBtn");
     const twitchChannelInput = document.getElementById("twitchChannelInput");
@@ -52345,6 +52472,12 @@ async function loadMaintenanceStateFromSupabase() {
         commandPlusOpen = false;
         if (commandPlusMenu) commandPlusMenu.classList.add("hidden");
       }
+      if (except !== "commandPlusConfirm") {
+        if (commandPlusConfirmMenu) commandPlusConfirmMenu.classList.add("hidden");
+      }
+      if (except !== "commandPlusSuccess") {
+        if (commandPlusSuccessMenu) commandPlusSuccessMenu.classList.add("hidden");
+      }
       if (except !== "twitch") {
         twitchOpen = false;
         if (twitchMenu) twitchMenu.classList.add("hidden");
@@ -53015,10 +53148,26 @@ async function loadMaintenanceStateFromSupabase() {
         ? `Aktiv seit ${commandPlusState.purchasedAt ? new Date(commandPlusState.purchasedAt).toLocaleDateString("de-DE") : "heute"} • Premium Pass dauerhaft freigeschaltet`
         : "Hol dir COMMAND+ fuer 5.000 M-Bucks und sichere dir exklusive Vorteile.";
       commandPlusBenefits.innerHTML = `
-        <div>• Premium Battle Pass wird sofort freigeschaltet (jetzt 950 M-Bucks Standardpreis).</div>
-        <div>• Exklusiver Lobby-Hintergrund: Command Plus Horizon (${owned ? "freigeschaltet" : "im Paket enthalten"}).</div>
-        <div>• Woechentlicher Tresor: +${COMMAND_PLUS_WEEKLY_VAULT} M-Bucks alle 7 Tage.</div>
-        <div>• VIP Status im Account gespeichert (Cloud/Local Snapshot).</div>
+        <div class="commandPlusBenefitCard">
+          <span class="emoji">🎫</span>
+          <div class="title">Premium Pass Unlock</div>
+          <div class="text">Battle Pass Premium wird sofort aktiviert. Standardpreis liegt jetzt bei 950 M-Bucks.</div>
+        </div>
+        <div class="commandPlusBenefitCard">
+          <span class="emoji">🖼️</span>
+          <div class="title">Exklusiver Lobby Hintergrund</div>
+          <div class="text">Command Plus Horizon (${owned ? "bereits freigeschaltet" : "im Paket enthalten"}).</div>
+        </div>
+        <div class="commandPlusBenefitCard">
+          <span class="emoji">🏦</span>
+          <div class="title">Woechentlicher Tresor</div>
+          <div class="text">Alle 7 Tage +${COMMAND_PLUS_WEEKLY_VAULT} M-Bucks direkt in deine Wallet.</div>
+        </div>
+        <div class="commandPlusBenefitCard">
+          <span class="emoji">☁️</span>
+          <div class="title">VIP Cloud Status</div>
+          <div class="text">Mitgliedschaft bleibt im Account gespeichert (Cloud/Local Snapshot).</div>
+        </div>
       `;
       if (commandPlusBuyBtn) commandPlusBuyBtn.disabled = owned;
       if (commandPlusVaultBtn) {
@@ -53029,13 +53178,39 @@ async function loadMaintenanceStateFromSupabase() {
       }
     }
 
+    function openCommandPlusConfirmPopup() {
+      if (!commandPlusConfirmMenu) return;
+      if (commandPlusConfirmMeta) {
+        commandPlusConfirmMeta.textContent = `Du kaufst COMMAND+ fuer ${COMMAND_PLUS_PRICE.toLocaleString("de-DE")} M-Bucks und bekommst Premium Pass + exklusive Rewards sofort.`;
+      }
+      commandPlusConfirmMenu.classList.remove("hidden");
+    }
+
+    function closeCommandPlusConfirmPopup() {
+      if (commandPlusConfirmMenu) commandPlusConfirmMenu.classList.add("hidden");
+    }
+
+    function openCommandPlusSuccessPopup() {
+      if (!commandPlusSuccessMenu) return;
+      commandPlusSuccessMenu.classList.remove("hidden");
+      setTimeout(() => {
+        if (commandPlusSuccessMenu) commandPlusSuccessMenu.classList.add("hidden");
+      }, 2400);
+    }
+
+    function closeCommandPlusSuccessPopup() {
+      if (commandPlusSuccessMenu) commandPlusSuccessMenu.classList.add("hidden");
+    }
+
     function buyCommandPlus() {
       if (commandPlusState.owned) {
+        closeCommandPlusConfirmPopup();
         showMessage("COMMAND+ ist bereits aktiv.", 1800);
         renderCommandPlusMenu();
         return;
       }
       if ((inventory[7] || 0) < COMMAND_PLUS_PRICE) {
+        closeCommandPlusConfirmPopup();
         showMessage(`Nicht genug M-Bucks. Benoetigt: ${COMMAND_PLUS_PRICE.toLocaleString("de-DE")}`, 2200);
         return;
       }
@@ -53053,6 +53228,8 @@ async function loadMaintenanceStateFromSupabase() {
       updateBattlePassAvailability();
       renderBattlePass();
       updateLobbyUi();
+      closeCommandPlusConfirmPopup();
+      openCommandPlusSuccessPopup();
       showMessage("COMMAND+ aktiviert! Premium freigeschaltet + Command Plus Horizon erhalten.", 3200);
     }
 
@@ -58047,10 +58224,19 @@ async function loadMaintenanceStateFromSupabase() {
       if (commandPlusMenu) commandPlusMenu.classList.add("hidden");
     });
     if (commandPlusBuyBtn) commandPlusBuyBtn.addEventListener("click", () => {
-      buyCommandPlus();
+      openCommandPlusConfirmPopup();
     });
     if (commandPlusVaultBtn) commandPlusVaultBtn.addEventListener("click", () => {
       claimCommandPlusVault();
+    });
+    if (commandPlusConfirmBuyBtn) commandPlusConfirmBuyBtn.addEventListener("click", () => {
+      buyCommandPlus();
+    });
+    if (commandPlusConfirmCancelBtn) commandPlusConfirmCancelBtn.addEventListener("click", () => {
+      closeCommandPlusConfirmPopup();
+    });
+    if (commandPlusSuccessCloseBtn) commandPlusSuccessCloseBtn.addEventListener("click", () => {
+      closeCommandPlusSuccessPopup();
     });
     if (closeTwitchBtn) closeTwitchBtn.addEventListener("click", () => {
       twitchOpen = false;
