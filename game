@@ -20665,6 +20665,27 @@
       box-shadow: 0 12px 24px rgba(255, 166, 63, 0.32);
       animation: commandPlusShine 2.4s linear infinite;
     }
+    .commandPlusBtnBuy.isBought {
+      color: #dfe8f4;
+      border-color: rgba(155, 170, 192, 0.58);
+      background: linear-gradient(145deg, rgba(70, 80, 96, 0.95), rgba(48, 56, 68, 0.95));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 18px rgba(8, 12, 20, 0.35);
+      animation: none;
+      position: relative;
+    }
+    .commandPlusBtnBuy .boughtStamp {
+      display: inline-flex;
+      margin-left: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(187, 255, 187, 0.8);
+      background: linear-gradient(135deg, #8cff8a, #53db66);
+      color: #0f3b11;
+      font-size: 11px;
+      font-weight: 1000;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
     .commandPlusBtnVault {
       color: #e9f6ff;
       border-color: rgba(155, 219, 255, 0.7);
@@ -53419,7 +53440,13 @@ async function loadMaintenanceStateFromSupabase() {
           <div class="text">Mitgliedschaft bleibt im Account gespeichert (Cloud/Local Snapshot).</div>
         </div>
       `;
-      if (commandPlusBuyBtn) commandPlusBuyBtn.disabled = owned;
+      if (commandPlusBuyBtn) {
+        commandPlusBuyBtn.disabled = owned;
+        commandPlusBuyBtn.classList.toggle("isBought", owned);
+        commandPlusBuyBtn.innerHTML = owned
+          ? `💳 COMMAND+ <span class="boughtStamp">GEKAUFT</span>`
+          : "💳 COMMAND+ kaufen (5.000 M-Bucks)";
+      }
       if (commandPlusVaultBtn) {
         commandPlusVaultBtn.disabled = !canClaimVault;
         commandPlusVaultBtn.textContent = canClaimVault
