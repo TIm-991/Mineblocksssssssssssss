@@ -33720,7 +33720,6 @@
             
             <button class="lobbyNavBtn" onclick="openMenu('quest')"><span class="lobbyNavIcon">📜</span> Quests</button>
             <button class="lobbyNavBtn" onclick="openMenu('skill')"><span class="lobbyNavIcon">⚡</span> Skills</button>
-            <button class="lobbyNavBtn" onclick="openMenu('strike7')"><span class="lobbyNavIcon">🔥</span> 7 Tage</button>
             <button class="lobbyNavBtn" onclick="openMenu('commandPlus')"><span class="lobbyNavIcon">🛡️</span> COMMAND+</button>
             <button class="lobbyNavBtn" onclick="openMenu('creator')"><span class="lobbyNavIcon">💎</span> Creator</button>
           </div>
@@ -41220,6 +41219,21 @@ let shopWishlist = [];
         tintC2: "rgba(18, 10, 14, 0.24)",
         tintC3: "rgba(6, 8, 12, 0.44)",
         dynamicAccent: "rgba(255, 99, 92, 0.24)"
+      },
+      {
+        id: "command_plus_bg",
+        name: "Command Plus Horizon",
+        image: "assets/g6x45p.png",
+        rarity: "mythic",
+        sourceType: "membership",
+        sourceLabel: "COMMAND+",
+        dynamic: false,
+        tintA: "rgba(84, 141, 255, 0.18)",
+        tintB: "rgba(52, 88, 196, 0.14)",
+        tintC1: "rgba(22, 42, 96, 0.2)",
+        tintC2: "rgba(12, 24, 56, 0.24)",
+        tintC3: "rgba(6, 12, 28, 0.42)",
+        dynamicAccent: "rgba(126, 189, 255, 0.26)"
       }
     ];
 
@@ -41409,7 +41423,7 @@ let shopWishlist = [];
       totalClaims: 0
     };
 
-    const BATTLE_PASS_PREMIUM_PRICE = 1000;
+    const BATTLE_PASS_PREMIUM_PRICE = 950;
     const PASS_SUPPORT_PACKAGE_PRICE = 750;
     const CURRENCY_NAME = "M-Bucks";
     const CURRENCY_ICON_PATH = "assets/ui/vbucks-icon.png";
@@ -44495,7 +44509,10 @@ let shopWishlist = [];
           questClaimedDaily: uniqueStringList(questState.claimedDaily || []),
           questClaimedWeekly: uniqueStringList(questState.claimedWeekly || []),
           questLastDailyKey: String(questState.lastDailyKey || ""),
-          questLastWeeklyKey: String(questState.lastWeeklyKey || "")
+          questLastWeeklyKey: String(questState.lastWeeklyKey || ""),
+          commandPlusOwned: !!commandPlusState.owned,
+          commandPlusPurchasedAt: Number(commandPlusState.purchasedAt || 0),
+          commandPlusLastVaultClaimAt: Number(commandPlusState.lastVaultClaimAt || 0)
         }
       };
     }
@@ -44542,6 +44559,9 @@ let shopWishlist = [];
         if (!questState.lastWeeklyKey && snapshot.claims.questLastWeeklyKey) {
           questState.lastWeeklyKey = String(snapshot.claims.questLastWeeklyKey);
         }
+        if (snapshot.claims.commandPlusOwned) commandPlusState.owned = true;
+        commandPlusState.purchasedAt = Math.max(Number(commandPlusState.purchasedAt || 0), Number(snapshot.claims.commandPlusPurchasedAt || 0));
+        commandPlusState.lastVaultClaimAt = Math.max(Number(commandPlusState.lastVaultClaimAt || 0), Number(snapshot.claims.commandPlusLastVaultClaimAt || 0));
       }
     }
 
@@ -46543,6 +46563,11 @@ let shopWishlist = [];
         return communityEventState.biomeUnlocked
           ? { unlockable: true, reason: "Event abgeschlossen" }
           : { unlockable: false, reason: "Community-Event abschliessen" };
+      }
+      if (background.sourceType === "membership") {
+        return commandPlusState.owned
+          ? { unlockable: true, reason: "COMMAND+ aktiv" }
+          : { unlockable: false, reason: "Nur mit COMMAND+" };
       }
       if (background.sourceType === "achievement") {
         const requiredSpecials = Math.max(1, Number(background.requiredSpecials) || 3);
@@ -52316,6 +52341,10 @@ async function loadMaintenanceStateFromSupabase() {
         creatorOpen = false;
         if (creatorMenu) creatorMenu.classList.add("hidden");
       }
+      if (except !== "commandPlus") {
+        commandPlusOpen = false;
+        if (commandPlusMenu) commandPlusMenu.classList.add("hidden");
+      }
       if (except !== "twitch") {
         twitchOpen = false;
         if (twitchMenu) twitchMenu.classList.add("hidden");
@@ -52352,6 +52381,7 @@ async function loadMaintenanceStateFromSupabase() {
       else if (name === 'roadmap') toggleLeakMenu();
       else if (name === 'admin') askAdminPassword();
       else if (name === 'blog') toggleLeakMenu();
+      else if (name === 'commandPlus') toggleCommandPlusMenu();
       else if (name === 'creator') toggleCreatorMenu();
       setLobbyNavActive(name);
       updateLobbyUi();
@@ -52376,6 +52406,7 @@ async function loadMaintenanceStateFromSupabase() {
         passMenu,
         questMenu,
         skillMenu,
+        commandPlusMenu,
         creatorMenu
       ].filter(Boolean);
       tabMenus.forEach((menu) => menu.classList.add("tabMenuSurface"));
@@ -52956,6 +52987,101 @@ async function loadMaintenanceStateFromSupabase() {
       if (creatorOpen) {
         updateCreatorCodeUi();
         animateTabMenuEntry(creatorMenu);
+      }
+    }
+
+    function getCommandPlusVaultRemainingMs() {
+      const nextAt = Number(commandPlusState.lastVaultClaimAt || 0) + COMMAND_PLUS_VAULT_COOLDOWN_MS;
+      return Math.max(0, nextAt - Date.now());
+    }
+
+    function syncCommandPlusEntitlements() {
+      if (!commandPlusState.owned) return;
+      battlePassState.premiumUnlocked = true;
+      if (!playerSkin.ownedLobbyBackgrounds.includes("command_plus_bg")) {
+        playerSkin.ownedLobbyBackgrounds.push("command_plus_bg");
+      }
+    }
+
+    function renderCommandPlusMenu() {
+      if (!commandPlusBenefits) return;
+      syncCommandPlusEntitlements();
+      const owned = !!commandPlusState.owned;
+      const remainingMs = getCommandPlusVaultRemainingMs();
+      const canClaimVault = owned && remainingMs <= 0;
+      const h = Math.floor(remainingMs / 3600000);
+      const m = Math.floor((remainingMs % 3600000) / 60000);
+      commandPlusMeta.textContent = owned
+        ? `Aktiv seit ${commandPlusState.purchasedAt ? new Date(commandPlusState.purchasedAt).toLocaleDateString("de-DE") : "heute"} • Premium Pass dauerhaft freigeschaltet`
+        : "Hol dir COMMAND+ fuer 5.000 M-Bucks und sichere dir exklusive Vorteile.";
+      commandPlusBenefits.innerHTML = `
+        <div>• Premium Battle Pass wird sofort freigeschaltet (jetzt 950 M-Bucks Standardpreis).</div>
+        <div>• Exklusiver Lobby-Hintergrund: Command Plus Horizon (${owned ? "freigeschaltet" : "im Paket enthalten"}).</div>
+        <div>• Woechentlicher Tresor: +${COMMAND_PLUS_WEEKLY_VAULT} M-Bucks alle 7 Tage.</div>
+        <div>• VIP Status im Account gespeichert (Cloud/Local Snapshot).</div>
+      `;
+      if (commandPlusBuyBtn) commandPlusBuyBtn.disabled = owned;
+      if (commandPlusVaultBtn) {
+        commandPlusVaultBtn.disabled = !canClaimVault;
+        commandPlusVaultBtn.textContent = canClaimVault
+          ? `Woechentlichen Tresor holen (+${COMMAND_PLUS_WEEKLY_VAULT})`
+          : (owned ? `Tresor bereit in ${h}h ${m}m` : "Tresor erst nach Kauf verfuegbar");
+      }
+    }
+
+    function buyCommandPlus() {
+      if (commandPlusState.owned) {
+        showMessage("COMMAND+ ist bereits aktiv.", 1800);
+        renderCommandPlusMenu();
+        return;
+      }
+      if ((inventory[7] || 0) < COMMAND_PLUS_PRICE) {
+        showMessage(`Nicht genug M-Bucks. Benoetigt: ${COMMAND_PLUS_PRICE.toLocaleString("de-DE")}`, 2200);
+        return;
+      }
+      inventory[7] -= COMMAND_PLUS_PRICE;
+      battlePassState.premiumUnlocked = true;
+      commandPlusState.owned = true;
+      commandPlusState.purchasedAt = Date.now();
+      if (!playerSkin.ownedLobbyBackgrounds.includes("command_plus_bg")) playerSkin.ownedLobbyBackgrounds.push("command_plus_bg");
+      if (!playerSkin.activeLobbyBackground || playerSkin.activeLobbyBackground === "season8_standard") {
+        playerSkin.activeLobbyBackground = "command_plus_bg";
+      }
+      saveGame();
+      renderCommandPlusMenu();
+      renderLocker();
+      updateBattlePassAvailability();
+      renderBattlePass();
+      updateLobbyUi();
+      showMessage("COMMAND+ aktiviert! Premium freigeschaltet + Command Plus Horizon erhalten.", 3200);
+    }
+
+    function claimCommandPlusVault() {
+      if (!commandPlusState.owned) {
+        showMessage("COMMAND+ zuerst kaufen.", 1800);
+        return;
+      }
+      const remainingMs = getCommandPlusVaultRemainingMs();
+      if (remainingMs > 0) {
+        showMessage("Tresor noch im Cooldown.", 1800);
+        renderCommandPlusMenu();
+        return;
+      }
+      inventory[7] = (inventory[7] || 0) + COMMAND_PLUS_WEEKLY_VAULT;
+      commandPlusState.lastVaultClaimAt = Date.now();
+      saveGame();
+      renderCommandPlusMenu();
+      updateUI();
+      showMessage(`Tresor geclaimt: +${COMMAND_PLUS_WEEKLY_VAULT} M-Bucks`, 2400);
+    }
+
+    function toggleCommandPlusMenu() {
+      closeMenus("commandPlus");
+      commandPlusOpen = !commandPlusOpen;
+      if (commandPlusMenu) commandPlusMenu.classList.toggle("hidden", !commandPlusOpen);
+      if (commandPlusOpen) {
+        renderCommandPlusMenu();
+        animateTabMenuEntry(commandPlusMenu);
       }
     }
 
@@ -57916,6 +58042,16 @@ async function loadMaintenanceStateFromSupabase() {
       creatorOpen = false;
       if (creatorMenu) creatorMenu.classList.add("hidden");
     });
+    if (closeCommandPlusBtn) closeCommandPlusBtn.addEventListener("click", () => {
+      commandPlusOpen = false;
+      if (commandPlusMenu) commandPlusMenu.classList.add("hidden");
+    });
+    if (commandPlusBuyBtn) commandPlusBuyBtn.addEventListener("click", () => {
+      buyCommandPlus();
+    });
+    if (commandPlusVaultBtn) commandPlusVaultBtn.addEventListener("click", () => {
+      claimCommandPlusVault();
+    });
     if (closeTwitchBtn) closeTwitchBtn.addEventListener("click", () => {
       twitchOpen = false;
       if (twitchMenu) twitchMenu.classList.add("hidden");
@@ -61574,6 +61710,7 @@ drawRiftGlitchOverlay(cam);
       loadSeason2TeamState();
       
       loadGame();
+      syncCommandPlusEntitlements();
       loadThreeDOutfitSetting();
       bindLooksTabs();
       ensureLobbyBackgroundOwnership();
