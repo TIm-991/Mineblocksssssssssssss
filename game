@@ -41342,18 +41342,16 @@ let shopWishlist = [];
     let shopRarityFilters = [];
     let shopMaxPrice = 5000;
     const newShopCatalog = [
-      { id: "starter_builder", name: "Frontline Builder Kit", price: 420, rarity: "rare", description: "+80 Holz, +40 Stein und +20 Kohle.", onBuy: () => { inventory[1] = (inventory[1] || 0) + 80; inventory[2] = (inventory[2] || 0) + 40; inventory[6] = (inventory[6] || 0) + 20; } },
-      { id: "healer_supply", name: "Emergency Med Crate", price: 360, rarity: "epic", description: "+4 Heiltraenke.", onBuy: () => { consumables.heal = (consumables.heal || 0) + 4; } },
-      { id: "rift_xp_core", name: "Rift Accelerator Core", price: 690, rarity: "legendary", description: "Sofort +650 XP und +45 Battle-Pass-XP.", onBuy: () => { grantXp(650); grantBattlePassXp(45); } },
-      { id: "wood_exchange", name: "Fortress Material Cache", price: 930, rarity: "mythic", description: "+300 Holz, +120 Stein und +120 M-Bucks Cashback.", onBuy: () => { inventory[4] = (inventory[4] || 0) + 300; inventory[2] = (inventory[2] || 0) + 120; inventory[7] = Number(inventory[7] || 0) + 120; } },
-      { id: "countdown_solar_gold", name: "Intro Theme: Solar Gold", price: 420, rarity: "rare", description: "Schaltet die 3-2-1-GO Farbvariante Solar Gold frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("solar_gold")) playerSkin.ownedCountdownThemes.push("solar_gold"); } },
-      { id: "countdown_neon_pulse", name: "Intro Theme: Neon Pulse", price: 760, rarity: "epic", description: "Schaltet die 3-2-1-GO Farbvariante Neon Pulse frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("neon_pulse")) playerSkin.ownedCountdownThemes.push("neon_pulse"); } },
-      { id: "countdown_void_ember", name: "Intro Theme: Void Ember", price: 1100, rarity: "legendary", description: "Schaltet die 3-2-1-GO Farbvariante Void Ember frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("void_ember")) playerSkin.ownedCountdownThemes.push("void_ember"); } },
-      { id: "countdown_frostbyte", name: "Intro Theme: Frostbyte", price: 540, rarity: "rare", description: "Schaltet die 3-2-1-GO Farbvariante Frostbyte frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("frostbyte")) playerSkin.ownedCountdownThemes.push("frostbyte"); } },
-      { id: "countdown_magma_core", name: "Intro Theme: Magma Core", price: 860, rarity: "epic", description: "Schaltet die 3-2-1-GO Farbvariante Magma Core frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("magma_core")) playerSkin.ownedCountdownThemes.push("magma_core"); } },
-      { id: "countdown_aurora_shift", name: "Intro Theme: Aurora Shift", price: 980, rarity: "epic", description: "Schaltet die 3-2-1-GO Farbvariante Aurora Shift frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("aurora_shift")) playerSkin.ownedCountdownThemes.push("aurora_shift"); } },
-      { id: "countdown_shadow_strike", name: "Intro Theme: Shadow Strike", price: 1320, rarity: "legendary", description: "Schaltet die 3-2-1-GO Farbvariante Shadow Strike frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("shadow_strike")) playerSkin.ownedCountdownThemes.push("shadow_strike"); } },
-      { id: "countdown_quantum_pop", name: "Intro Theme: Quantum Pop", price: 1540, rarity: "mythic", description: "Schaltet die 3-2-1-GO Farbvariante Quantum Pop frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("quantum_pop")) playerSkin.ownedCountdownThemes.push("quantum_pop"); } }
+      { id: "starter_builder", name: "GO Build Boost", price: 390, rarity: "rare", description: "+120 Holz, +40 Stein und +10 Kohle.", onBuy: () => { inventory[1] = (inventory[1] || 0) + 120; inventory[2] = (inventory[2] || 0) + 40; inventory[6] = (inventory[6] || 0) + 10; } },
+      { id: "healer_supply", name: "GO Med Pack", price: 340, rarity: "epic", description: "+5 Heiltraenke.", onBuy: () => { consumables.heal = (consumables.heal || 0) + 5; } },
+      { id: "rift_xp_core", name: "XP Split Booster", price: 720, rarity: "legendary", description: "Sofort +700 Level-XP und +80 Battle-Pass-XP.", onBuy: () => { grantXp(700); grantBattlePassXp(80); } },
+      { id: "wood_exchange", name: "M-Bucks Material Trade", price: 990, rarity: "mythic", description: "+260 Holz, +160 Stein und +180 M-Bucks Cashback.", onBuy: () => { inventory[4] = (inventory[4] || 0) + 260; inventory[2] = (inventory[2] || 0) + 160; inventory[7] = Number(inventory[7] || 0) + 180; } },
+      { id: "countdown_turbo_cyan", name: "3-2-1 GO: Turbo Cyan", price: 480, rarity: "rare", description: "Schaltet den Countdown-Look Turbo Cyan frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("go_turbo_cyan")) playerSkin.ownedCountdownThemes.push("go_turbo_cyan"); } },
+      { id: "countdown_inferno_lime", name: "3-2-1 GO: Inferno Lime", price: 760, rarity: "epic", description: "Schaltet den Countdown-Look Inferno Lime frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("go_inferno_lime")) playerSkin.ownedCountdownThemes.push("go_inferno_lime"); } },
+      { id: "countdown_plasma_rose", name: "3-2-1 GO: Plasma Rose", price: 980, rarity: "epic", description: "Schaltet den Countdown-Look Plasma Rose frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("go_plasma_rose")) playerSkin.ownedCountdownThemes.push("go_plasma_rose"); } },
+      { id: "countdown_auric_wave", name: "3-2-1 GO: Auric Wave", price: 1160, rarity: "legendary", description: "Schaltet den Countdown-Look Auric Wave frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("go_auric_wave")) playerSkin.ownedCountdownThemes.push("go_auric_wave"); } },
+      { id: "countdown_shadow_mint", name: "3-2-1 GO: Shadow Mint", price: 1380, rarity: "legendary", description: "Schaltet den Countdown-Look Shadow Mint frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("go_shadow_mint")) playerSkin.ownedCountdownThemes.push("go_shadow_mint"); } },
+      { id: "countdown_zero_gold", name: "3-2-1 GO: Zero Gold", price: 1620, rarity: "mythic", description: "Schaltet den Countdown-Look Zero Gold frei.", onBuy: () => { if (!playerSkin.ownedCountdownThemes.includes("go_zero_gold")) playerSkin.ownedCountdownThemes.push("go_zero_gold"); } }
     ];
     const creatorCodes = {};
     const creatorAccountProfiles = {};
@@ -41586,15 +41584,15 @@ let shopWishlist = [];
 
     const rainColors = [
       { id: "default", name: "Standard Regen", color: "#d7e7ff", secondaryColor: "#ffffff", price: 0, rarity: "common", shopHidden: true },
-      { id: "jungledrip", name: "Verdant Pulse", color: "#4de39a", secondaryColor: "#e7fff4", price: 28, rarity: "uncommon" },
-      { id: "ruinvine", name: "Ruin Circuit", color: "#2fbfaa", secondaryColor: "#dffff9", price: 36, rarity: "rare" },
-      { id: "stormberry", name: "Stormline Violet", color: "#7b63ff", secondaryColor: "#ece8ff", price: 52, rarity: "epic" },
-      { id: "ambermist", name: "Amber Signal", color: "#ff9461", secondaryColor: "#ffe9d8", price: 56, rarity: "epic" },
-      { id: "sunmango", name: "Solar Mango", color: "#ffcc3f", secondaryColor: "#fff6cd", price: 58, rarity: "epic" },
-      { id: "mintdrift", name: "Mint Protocol", color: "#34f0df", secondaryColor: "#defffc", price: 66, rarity: "legendary" },
-      { id: "templeglow", name: "Temple Flux", color: "#7aff6a", secondaryColor: "#efffe9", price: 68, rarity: "legendary" },
-      { id: "roseflash", name: "Rose Nova", color: "#ff4f93", secondaryColor: "#ffe3ef", price: 70, rarity: "legendary" },
-      { id: "idolstorm", name: "Idol Overdrive", color: "#ffd24a", secondaryColor: "#fff7cf", price: 84, rarity: "mythic" },
+      { id: "jungledrip", name: "GO Lime Fall", color: "#67f48c", secondaryColor: "#effff5", price: 42, rarity: "uncommon" },
+      { id: "ruinvine", name: "Hyper Aqua Rain", color: "#37d8ff", secondaryColor: "#e8fbff", price: 54, rarity: "rare" },
+      { id: "stormberry", name: "Neon Berry Fall", color: "#b072ff", secondaryColor: "#f1e9ff", price: 66, rarity: "epic" },
+      { id: "ambermist", name: "Inferno Amber Rain", color: "#ff9a5a", secondaryColor: "#ffead6", price: 72, rarity: "epic" },
+      { id: "sunmango", name: "Zero Gold Rain", color: "#ffd65b", secondaryColor: "#fff7d7", price: 78, rarity: "epic" },
+      { id: "mintdrift", name: "Shadow Mint Fall", color: "#49f3cb", secondaryColor: "#defff7", price: 86, rarity: "legendary" },
+      { id: "templeglow", name: "Pulse Core Rain", color: "#74a8ff", secondaryColor: "#ebf2ff", price: 92, rarity: "legendary" },
+      { id: "roseflash", name: "Plasma Rose Rain", color: "#ff66b8", secondaryColor: "#ffe5f4", price: 94, rarity: "legendary" },
+      { id: "idolstorm", name: "Auric Wave Rain", color: "#ffcf4d", secondaryColor: "#fff4cf", price: 108, rarity: "mythic" },
       { id: "nudelregen", name: "Nudelregen", color: "#f6f07a", secondaryColor: "#efffb4", price: 24, rarity: "mythic", shopHidden: true },
       { id: "sandglow", name: "Sandglow Regen", color: "#f1a668", secondaryColor: "#ffe9ce", price: 22, rarity: "legendary", shopHidden: true },
       { id: "skydrop", name: "Skydrop Regen", color: "#58c8ff", secondaryColor: "#e8f9ff", price: 22, rarity: "legendary", shopHidden: true },
@@ -41607,17 +41605,17 @@ let shopWishlist = [];
     ];
 
     const eyeSkins = [
-      { id: "black", name: "Rabenblick", color: "#0a0a12", price: 0, rarity: "common", shopHidden: true },
-      { id: "stonewink", name: "Granit-Fokus", color: "#94a0b2", price: 20, rarity: "uncommon" },
-      { id: "leafspark", name: "Verdant Spark", color: "#59ff7c", price: 24, rarity: "rare" },
-      { id: "sunforge", name: "Solar Ember Eyes", color: "#ff8b2f", price: 32, rarity: "epic" },
-      { id: "tideglass", name: "Tidal Prism Eyes", color: "#3fd1ff", price: 34, rarity: "epic" },
-      { id: "petalpop", name: "Petal Surge Eyes", color: "#ff5bb5", price: 30, rarity: "rare" },
-      { id: "mossbeam", name: "Moss Beam", color: "#9bff4d", price: 28, rarity: "rare" },
-      { id: "moonsteel", name: "Moonsteel Core", color: "#b9c9ff", price: 44, rarity: "legendary" },
-      { id: "neondrift", name: "Neo Drift Optics", color: "#22ffd9", price: 46, rarity: "legendary" },
-      { id: "ruinamber", name: "Ruin Amber Core", color: "#ffbf54", price: 50, rarity: "mythic" },
-      { id: "dustgold", name: "Dustgold Scope", color: "#ffd24a", price: 38, rarity: "epic" },
+      { id: "black", name: "Default Focus", color: "#0a0a12", price: 0, rarity: "common", shopHidden: true },
+      { id: "stonewink", name: "Slate Lens", color: "#8f9ab0", price: 36, rarity: "uncommon" },
+      { id: "leafspark", name: "Lime Trigger Eyes", color: "#67ff92", price: 48, rarity: "rare" },
+      { id: "sunforge", name: "Inferno Gold Eyes", color: "#ff9f45", price: 62, rarity: "epic" },
+      { id: "tideglass", name: "Turbo Cyan Eyes", color: "#54dbff", price: 66, rarity: "epic" },
+      { id: "petalpop", name: "Plasma Rose Eyes", color: "#ff6bc4", price: 64, rarity: "rare" },
+      { id: "mossbeam", name: "Mint Strike Eyes", color: "#a1ff65", price: 58, rarity: "rare" },
+      { id: "moonsteel", name: "Zero Silver Eyes", color: "#c7d4ff", price: 82, rarity: "legendary" },
+      { id: "neondrift", name: "Hyper Flux Eyes", color: "#34ffe2", price: 86, rarity: "legendary" },
+      { id: "ruinamber", name: "Auric Wave Eyes", color: "#ffc65a", price: 94, rarity: "mythic" },
+      { id: "dustgold", name: "GO Gold Eyes", color: "#ffe06a", price: 74, rarity: "epic" },
       { id: "ember", name: "Funkenblick", color: "#ff5a2a", price: 7, rarity: "rare", shopHidden: true },
       { id: "gold", name: "Kronenblick", color: "#ffea3d", price: 12, rarity: "legendary", shopHidden: true },
       { id: "glacier", name: "Gletscherblick", color: "#76ebff", price: 14, rarity: "epic", shopHidden: true },
@@ -41632,17 +41630,17 @@ let shopWishlist = [];
     ];
 
     const bodySkins = [
-      { id: "red", name: "Kirschrot", color: "#ff4c66", price: 0, rarity: "common", shopHidden: true },
-      { id: "stonewash", name: "Basalt Shell", color: "#6e7b90", price: 22, rarity: "uncommon" },
-      { id: "ferncoat", name: "Canopy Armor", color: "#28c870", price: 26, rarity: "rare" },
-      { id: "emberfield", name: "Ember Frame", color: "#ff6d3b", price: 34, rarity: "epic" },
-      { id: "lagoonfoam", name: "Lagoon Frame", color: "#3bd9d2", price: 34, rarity: "epic" },
-      { id: "dustrose", name: "Rose Alloy", color: "#ff6ba8", price: 30, rarity: "rare" },
-      { id: "jadeblock", name: "Jade Plating", color: "#1ec295", price: 32, rarity: "epic" },
-      { id: "nightdrive", name: "Nightdrive Chassis", color: "#1d2742", price: 44, rarity: "legendary" },
-      { id: "mossstone", name: "Mossstone Core", color: "#4a7d47", price: 48, rarity: "mythic" },
-      { id: "sunlinen", name: "Sunlinen Alloy", color: "#ffd26f", price: 36, rarity: "epic" },
-      { id: "plumstorm", name: "Plumstorm Armor", color: "#6844c9", price: 40, rarity: "legendary" },
+      { id: "red", name: "Default Shell", color: "#ff4c66", price: 0, rarity: "common", shopHidden: true },
+      { id: "stonewash", name: "Graphite Block", color: "#707b92", price: 38, rarity: "uncommon" },
+      { id: "ferncoat", name: "Lime Command Body", color: "#2ed97f", price: 52, rarity: "rare" },
+      { id: "emberfield", name: "Inferno Ember Body", color: "#ff7a45", price: 66, rarity: "epic" },
+      { id: "lagoonfoam", name: "Turbo Cyan Body", color: "#43e0e0", price: 68, rarity: "epic" },
+      { id: "dustrose", name: "Plasma Rose Body", color: "#ff77b0", price: 64, rarity: "rare" },
+      { id: "jadeblock", name: "Mint Reactor Body", color: "#24cda0", price: 72, rarity: "epic" },
+      { id: "nightdrive", name: "Night Ops Chassis", color: "#1b2747", price: 88, rarity: "legendary" },
+      { id: "mossstone", name: "Shadow Core Body", color: "#486f53", price: 96, rarity: "mythic" },
+      { id: "sunlinen", name: "Auric Alloy Body", color: "#ffd979", price: 76, rarity: "epic" },
+      { id: "plumstorm", name: "Pulse Violet Body", color: "#6f54d6", price: 84, rarity: "legendary" },
       { id: "sunset", name: "Sunset", color: "#ff8f4d", price: 8, rarity: "rare", shopHidden: true },
       { id: "berry", name: "Beerenlila", color: "#8d3bff", price: 7, rarity: "rare", shopHidden: true },
       { id: "mint", name: "Minze", color: "#4dffc7", price: 6, rarity: "uncommon", shopHidden: true },
@@ -41804,14 +41802,12 @@ let shopWishlist = [];
     const CONSUMABLE_HOTBAR = ["potion_heal", "potion_speed", "potion_jump", "potion_shield"];
     const countdownThemes = [
       { id: "rift_blue", name: "Rift Blau", rarity: "common", price: 0, numberColor: "#8cd4ff", goColor: "#79b8ff", glow: "rgba(120,190,255,0.65)", description: "Klassischer Rift-Look in Eisblau." },
-      { id: "solar_gold", name: "Solar Gold", rarity: "rare", price: 420, numberColor: "#ffd66b", goColor: "#ffb347", glow: "rgba(255,190,90,0.75)", description: "Warmer Turnier-Countdown mit Goldenergie." },
-      { id: "neon_pulse", name: "Neon Pulse", rarity: "epic", price: 760, numberColor: "#8effc1", goColor: "#5cff9f", glow: "rgba(102,255,186,0.8)", description: "Neon-Impuls für aggressive Starts." },
-      { id: "void_ember", name: "Void Ember", rarity: "legendary", price: 1100, numberColor: "#ff8db5", goColor: "#ff6e8f", glow: "rgba(255,106,152,0.82)", description: "Rift-Feuer trifft dunklen Void-Kontrast." },
-      { id: "frostbyte", name: "Frostbyte", rarity: "rare", price: 540, numberColor: "#9ef3ff", goColor: "#68deff", glow: "rgba(90,225,255,0.78)", description: "Eiskalter Countdown mit klaren Cryo-Tönen." },
-      { id: "magma_core", name: "Magma Core", rarity: "epic", price: 860, numberColor: "#ffbe74", goColor: "#ff7a2d", glow: "rgba(255,120,46,0.82)", description: "Vulkan-Farben für heiße GO-Momente." },
-      { id: "aurora_shift", name: "Aurora Shift", rarity: "epic", price: 980, numberColor: "#b1ffda", goColor: "#63f0ff", glow: "rgba(102,255,228,0.8)", description: "Nordlicht-Shift zwischen Mint und Cyan." },
-      { id: "shadow_strike", name: "Shadow Strike", rarity: "legendary", price: 1320, numberColor: "#c9b7ff", goColor: "#9a7dff", glow: "rgba(143,110,255,0.86)", description: "Dunkler Stealth-Look mit violettem Impact." },
-      { id: "quantum_pop", name: "Quantum Pop", rarity: "mythic", price: 1540, numberColor: "#ffe38d", goColor: "#ff59e8", glow: "rgba(255,112,230,0.9)", description: "Mythischer Finale-Countdown mit Quantum-Flash." },
+      { id: "go_turbo_cyan", name: "Turbo Cyan", rarity: "rare", price: 480, numberColor: "#7ae3ff", goColor: "#38cfff", glow: "rgba(88,215,255,0.78)", description: "Schneller 3-2-1-Look mit eisigem GO-Finish." },
+      { id: "go_inferno_lime", name: "Inferno Lime", rarity: "epic", price: 760, numberColor: "#ffd86a", goColor: "#8bff51", glow: "rgba(159,255,93,0.84)", description: "Feuer und Neon-Lime für harte Starts." },
+      { id: "go_plasma_rose", name: "Plasma Rose", rarity: "epic", price: 980, numberColor: "#ff98d2", goColor: "#ff5fb8", glow: "rgba(255,106,190,0.84)", description: "Pinker Plasma-Impact für stylische Queue-Momente." },
+      { id: "go_auric_wave", name: "Auric Wave", rarity: "legendary", price: 1160, numberColor: "#ffe17e", goColor: "#ffb84a", glow: "rgba(255,192,96,0.86)", description: "Goldene Welle mit starkem GO-Flash." },
+      { id: "go_shadow_mint", name: "Shadow Mint", rarity: "legendary", price: 1380, numberColor: "#9effd9", goColor: "#56f1c2", glow: "rgba(102,255,206,0.88)", description: "Dunkler Hintergrund und frischer Mint-Glow." },
+      { id: "go_zero_gold", name: "Zero Gold", rarity: "mythic", price: 1620, numberColor: "#fff1a8", goColor: "#ffd357", glow: "rgba(255,219,110,0.92)", description: "Mythischer 3-2-1 GO-Look für Endgame-Lobbys." },
       { id: "strike_helix_go", name: "Strike Helix GO", rarity: "mythic", price: 0, numberColor: "#6df4ff", goColor: "#ff4f59", glow: "rgba(255, 102, 130, 0.88)", description: "Exklusives 7-Tage Strike Theme mit neuer 3-2-1-GO Farbe." }
     ];
 
@@ -42097,12 +42093,12 @@ let shopWishlist = [];
         let freeReward = createSeason8LaneReward("free", tier, freeCycle[(tier - 1) % freeCycle.length]);
         let premiumReward = createSeason8LaneReward("premium", tier, premiumCycle[(tier - 1) % premiumCycle.length]);
 
-        if (tier === 8) freeReward = { type: "countdownTheme", id: "frostbyte", label: "3-2-1 GO: Frostbyte" };
-        if (tier === 15) premiumReward = { type: "countdownTheme", id: "solar_gold", label: "3-2-1 GO: Solar Gold" };
-        if (tier === 30) premiumReward = { type: "countdownTheme", id: "neon_pulse", label: "3-2-1 GO: Neon Pulse" };
-        if (tier === 55) premiumReward = { type: "countdownTheme", id: "magma_core", label: "3-2-1 GO: Magma Core" };
-        if (tier === 80) premiumReward = { type: "countdownTheme", id: "aurora_shift", label: "3-2-1 GO: Aurora Shift" };
-        if (tier === 100) premiumReward = { type: "countdownTheme", id: "quantum_pop", label: "3-2-1 GO: Quantum Pop (Finale)" };
+        if (tier === 8) freeReward = { type: "countdownTheme", id: "go_turbo_cyan", label: "3-2-1 GO: Turbo Cyan" };
+        if (tier === 15) premiumReward = { type: "countdownTheme", id: "go_inferno_lime", label: "3-2-1 GO: Inferno Lime" };
+        if (tier === 30) premiumReward = { type: "countdownTheme", id: "go_plasma_rose", label: "3-2-1 GO: Plasma Rose" };
+        if (tier === 55) premiumReward = { type: "countdownTheme", id: "go_auric_wave", label: "3-2-1 GO: Auric Wave" };
+        if (tier === 80) premiumReward = { type: "countdownTheme", id: "go_shadow_mint", label: "3-2-1 GO: Shadow Mint" };
+        if (tier === 100) premiumReward = { type: "countdownTheme", id: "go_zero_gold", label: "3-2-1 GO: Zero Gold (Finale)" };
 
         rewards.push({ tier, free: freeReward, premium: premiumReward, pageTheme: getBattlePassPageTheme(Math.floor((tier - 1) / BATTLE_PASS_PAGE_SIZE)).name });
       }
@@ -53542,8 +53538,8 @@ async function loadMaintenanceStateFromSupabase() {
     function syncCommandPlusEntitlements() {
       if (!commandPlusState.owned) return;
       battlePassState.premiumUnlocked = true;
-      if (!playerSkin.ownedLobbyBackgrounds.includes("command_plus_bg")) {
-        playerSkin.ownedLobbyBackgrounds.push("command_plus_bg");
+      if (!playerSkin.ownedLobbyBackgrounds.includes("zero_strike_command_bg")) {
+        playerSkin.ownedLobbyBackgrounds.push("zero_strike_command_bg");
       }
     }
 
@@ -53567,7 +53563,7 @@ async function loadMaintenanceStateFromSupabase() {
         <div class="commandPlusBenefitCard">
           <span class="emoji">🖼️</span>
           <div class="title">Exklusiver Lobby Hintergrund</div>
-          <div class="text">Command Plus Horizon (${owned ? "bereits freigeschaltet" : "im Paket enthalten"}).</div>
+          <div class="text">Zero Strike Command (${owned ? "bereits freigeschaltet" : "im Paket enthalten"}).</div>
         </div>
         <div class="commandPlusBenefitCard">
           <span class="emoji">🏦</span>
@@ -53635,9 +53631,9 @@ async function loadMaintenanceStateFromSupabase() {
       battlePassState.premiumUnlocked = true;
       commandPlusState.owned = true;
       commandPlusState.purchasedAt = Date.now();
-      if (!playerSkin.ownedLobbyBackgrounds.includes("command_plus_bg")) playerSkin.ownedLobbyBackgrounds.push("command_plus_bg");
+      if (!playerSkin.ownedLobbyBackgrounds.includes("zero_strike_command_bg")) playerSkin.ownedLobbyBackgrounds.push("zero_strike_command_bg");
       if (!playerSkin.activeLobbyBackground || playerSkin.activeLobbyBackground === "season8_standard") {
-        playerSkin.activeLobbyBackground = "command_plus_bg";
+        playerSkin.activeLobbyBackground = "zero_strike_command_bg";
       }
       saveGame();
       renderCommandPlusMenu();
