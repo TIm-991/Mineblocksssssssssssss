@@ -41887,7 +41887,8 @@ let shopWishlist = [];
     const NUDEL_PASS_END_AT = new Date("2026-04-01T16:15:00+02:00").getTime();
     const MINI_PASS_END_AT = new Date("2026-04-05T21:00:00+02:00").getTime();
     const BATTLE_PASS_END_AT = new Date("2026-09-12T18:00:00+02:00").getTime();
-    const BATTLE_PASS_BASE_TIERS = 100;
+    const PLAYER_MAX_LEVEL = 200;
+    const BATTLE_PASS_BASE_TIERS = 200;
     const BATTLE_PASS_BONUS_PAGES = 0;
     const BATTLE_PASS_MAX_TIERS = BATTLE_PASS_BASE_TIERS + (BATTLE_PASS_BONUS_PAGES * BATTLE_PASS_PAGE_SIZE);
     const BATTLE_PASS_END_LABEL = "12.09.2026 18:00 Uhr";
@@ -47483,6 +47484,7 @@ let shopWishlist = [];
     }
 
     function getXpNeeded() {
+      if ((progression.level || 1) >= PLAYER_MAX_LEVEL) return Infinity;
       return 100 + (progression.level - 1) * 50;
     }
 
@@ -47509,11 +47511,15 @@ let shopWishlist = [];
       battlePassState.xp += Math.round(finalAmount * getLiveBattlePassMultiplier() * (1 + riftSkill * 0.05));
       registerCommunityEventXp(finalAmount);
 
-      while (progression.xp >= getXpNeeded()) {
+      while ((progression.level || 1) < PLAYER_MAX_LEVEL && progression.xp >= getXpNeeded()) {
         progression.xp -= getXpNeeded();
         progression.level++;
         progression.skillPoints++;
         showMessage(`Level Up! Level ${progression.level}`, 2600);
+      }
+      if ((progression.level || 1) >= PLAYER_MAX_LEVEL) {
+        progression.level = PLAYER_MAX_LEVEL;
+        progression.xp = 0;
       }
 
       renderXp();
@@ -62365,4 +62371,3 @@ drawRiftGlitchOverlay(cam);
   
 </body>
 </html>
-
