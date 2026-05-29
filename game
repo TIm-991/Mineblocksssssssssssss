@@ -45085,8 +45085,9 @@ let shopWishlist = [];
         merged.season2FactionChoice = "";
       } else if (localProgression || remoteProgression) {
         merged.progression = merged.progression || {};
-        merged.progression.level = Math.max(Number(localProgression.level) || 1, Number(remoteProgression.level) || 1);
+        merged.progression.level = Math.min(PLAYER_MAX_LEVEL, Math.max(Number(localProgression.level) || 1, Number(remoteProgression.level) || 1));
         merged.progression.xp = Math.max(Number(localProgression.xp) || 0, Number(remoteProgression.xp) || 0);
+        if (merged.progression.level >= PLAYER_MAX_LEVEL) merged.progression.xp = 0;
         merged.progression.skillPoints = Math.max(Number(localProgression.skillPoints) || 0, Number(remoteProgression.skillPoints) || 0);
       }
 
@@ -49434,7 +49435,7 @@ let shopWishlist = [];
           rewards: [
             "Battle Pass für alle zurückgesetzt",
             "Premium muss neu gekauft werden",
-            "Neue 3-2-1 GO Belohnungen bis Tier 100"
+            "Neue 3-2-1 GO Belohnungen bis Tier 200"
           ],
           equipAction: null,
           equipLabel: "Okay"
@@ -50408,8 +50409,9 @@ async function loadMaintenanceStateFromSupabase() {
       }
 
       if (seasonResetTokenOk && parsed.progressionResetId === PROGRESSION_RESET_ID && parsed.progression) {
-        progression.level = parsed.progression.level || progression.level;
+        progression.level = Math.min(PLAYER_MAX_LEVEL, parsed.progression.level || progression.level);
         progression.xp = parsed.progression.xp || progression.xp;
+        if (progression.level >= PLAYER_MAX_LEVEL) progression.xp = 0;
         progression.skillPoints = parsed.progression.skillPoints || progression.skillPoints;
         if (parsed.progression.skills) Object.assign(progression.skills, parsed.progression.skills);
       } else {
@@ -57020,7 +57022,7 @@ async function loadMaintenanceStateFromSupabase() {
         date: "23.04.2026",
         tags: ["Season 3", "Wuerfel", "Patch Notes"],
         imageClass: "blogImgSeason3",
-        body: "Build 2.8.0 • 23.04.2026\n\nChapter 3 Season 3 \"Wuerfel\" ist jetzt live. Das Update spult die Spielwelt direkt in die Cube-Season vor, setzt den Battle Pass komplett zurueck und stellt den gesamten Flow auf einen 100-Stufen-Track mit drei Rewards pro Seite um. Gleichzeitig fuehren neue Solo-Direktiven durch jeden Run und geben klares Ingame-Feedback fuer Ziele, Fortschritt und Rewards.\n\nNeu:\n- Season 3 Wuerfel als aktives Chapter-Thema\n- Battle Pass mit 100 Hauptstufen\n- Neue Cube-, Rift- und Oracle-Belohnungen bis Level 100\n- Solo-Direktiven mit Live-HUD im Match\n- Frischer Pass-Flow mit drei Stufen pro Seite\n- Ueberarbeitete Season-Texte in Lobby, Pass und News\n\nGameplay:\n- Solo-Runs bekommen rotierende Direktiven fuer Mining, Kills, Bewegung, Gold und Build-Aufgaben\n- Abgeschlossene Direktiven geben XP und M-Bucks direkt waehrend des Runs\n- Die Season fuehlt sich dadurch schneller, klarer und deutlich missionslastiger an\n- Cube-Thema und Riss-Elemente tragen den Fortschritt jetzt sichtbar durch das Match\n\nBattle Pass:\n- Der Pass wurde vollstaendig auf Season 3 umgestellt\n- Premium laeuft weiter ueber +1 oder +25 Stufen Pakete\n- Kostenlos und Premium bleiben parallel aktiv\n- Der Track ist jetzt kompakter, sauberer und klar auf 34 Seiten aufgebaut\n\nUI & Flow:\n- Alte Season-Texte wurden im aktiven Flow auf Season 3 angezogen\n- Das Match-HUD zeigt jetzt Solo-Direktiven statt nur Combo-Fokus\n- News, Pass, Lobby und Hintergrund-Galerie laufen auf dem neuen Season-Stand\n\nKurzfassung: Season 3 setzt auf Cube-Energie, klare Direktiven, einen frischen 100-Level-Pass und mehr echtes Solo-Gameplay mitten im Run.",
+        body: "Build 2.8.0 • 23.04.2026\n\nChapter 3 Season 3 \"Wuerfel\" ist jetzt live. Das Update spult die Spielwelt direkt in die Cube-Season vor, setzt den Battle Pass komplett zurueck und stellt den gesamten Flow auf einen 200-Stufen-Track mit drei Rewards pro Seite um. Gleichzeitig fuehren neue Solo-Direktiven durch jeden Run und geben klares Ingame-Feedback fuer Ziele, Fortschritt und Rewards.\n\nNeu:\n- Season 3 Wuerfel als aktives Chapter-Thema\n- Battle Pass mit 200 Hauptstufen\n- Neue Cube-, Rift- und Oracle-Belohnungen bis Level 200\n- Solo-Direktiven mit Live-HUD im Match\n- Frischer Pass-Flow mit drei Stufen pro Seite\n- Ueberarbeitete Season-Texte in Lobby, Pass und News\n\nGameplay:\n- Solo-Runs bekommen rotierende Direktiven fuer Mining, Kills, Bewegung, Gold und Build-Aufgaben\n- Abgeschlossene Direktiven geben XP und M-Bucks direkt waehrend des Runs\n- Die Season fuehlt sich dadurch schneller, klarer und deutlich missionslastiger an\n- Cube-Thema und Riss-Elemente tragen den Fortschritt jetzt sichtbar durch das Match\n\nBattle Pass:\n- Der Pass wurde vollstaendig auf Season 3 umgestellt\n- Premium laeuft weiter ueber +1 oder +25 Stufen Pakete\n- Kostenlos und Premium bleiben parallel aktiv\n- Der Track ist jetzt kompakter, sauberer und klar auf 67 Seiten aufgebaut\n\nUI & Flow:\n- Alte Season-Texte wurden im aktiven Flow auf Season 3 angezogen\n- Das Match-HUD zeigt jetzt Solo-Direktiven statt nur Combo-Fokus\n- News, Pass, Lobby und Hintergrund-Galerie laufen auf dem neuen Season-Stand\n\nKurzfassung: Season 3 setzt auf Cube-Energie, klare Direktiven, einen frischen 200-Level-Pass und mehr echtes Solo-Gameplay mitten im Run.",
       },
       {
         id: "season3_flood_drop_2026_04_08",
@@ -62358,7 +62360,6 @@ drawRiftGlitchOverlay(cam);
           <div id="allFriendsList" class="allFriendsList"></div>
         </div>
       </div>
-      
       <div class="friendsListFooter">
         <div class="addFriendSection">
           <input id="addFriendInput" class="addFriendInput" placeholder="Spielername eingeben..." maxlength="32" />
@@ -62367,7 +62368,5 @@ drawRiftGlitchOverlay(cam);
       </div>
     </div>
   </div>
-
-  
 </body>
 </html>
