@@ -15099,6 +15099,144 @@
       opacity: 0.9;
     }
 
+    .questXpSummary {
+      margin: 14px 0 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .questXpCard {
+      border-radius: 14px;
+      border: 1px solid rgba(172, 212, 255, 0.32);
+      background: linear-gradient(145deg, rgba(9, 28, 66, 0.86), rgba(19, 58, 118, 0.5));
+      padding: 12px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      display: grid;
+      gap: 5px;
+    }
+
+    .questXpCardLabel {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(193, 226, 255, 0.88);
+    }
+
+    .questXpCardValue {
+      font-size: 24px;
+      font-weight: 1000;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .questXpCardMeta {
+      font-size: 12px;
+      color: rgba(214, 234, 255, 0.84);
+      font-weight: 700;
+    }
+
+    .questTrackGrid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .questTrackCard {
+      border-radius: 16px;
+      border: 1px solid rgba(164, 213, 255, 0.38);
+      background: linear-gradient(150deg, rgba(10, 30, 72, 0.94), rgba(16, 49, 105, 0.72));
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      box-shadow: 0 10px 20px rgba(4, 13, 34, 0.26);
+    }
+
+    .questTrackCard.isClaimed {
+      border-color: rgba(131, 255, 173, 0.55);
+      background: linear-gradient(150deg, rgba(9, 46, 34, 0.88), rgba(11, 78, 51, 0.66));
+    }
+
+    .questTrackTop {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .questTrackName {
+      font-size: 17px;
+      font-weight: 1000;
+      color: #f7fbff;
+    }
+
+    .questTrackDesc {
+      font-size: 12px;
+      color: rgba(210, 228, 245, 0.86);
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    .questTrackCadence {
+      border-radius: 999px;
+      border: 1px solid rgba(165, 217, 255, 0.5);
+      background: rgba(73, 146, 255, 0.26);
+      padding: 4px 10px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #eefdff;
+      white-space: nowrap;
+    }
+
+    .questTrackMeta {
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: rgba(190, 219, 246, 0.85);
+    }
+
+    .questRewardRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .questRewardPill {
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.02em;
+      border: 1px solid transparent;
+    }
+
+    .questRewardPill.level { background: rgba(98, 181, 255, 0.24); border-color: rgba(132, 201, 255, 0.52); color: #e8f6ff; }
+    .questRewardPill.pass { background: rgba(255, 201, 96, 0.25); border-color: rgba(255, 219, 149, 0.58); color: #fff3d4; }
+    .questRewardPill.mbucks { background: rgba(118, 255, 190, 0.2); border-color: rgba(157, 255, 204, 0.52); color: #dbffe8; }
+    .questRewardPill.skill { background: rgba(206, 158, 255, 0.22); border-color: rgba(224, 183, 255, 0.52); color: #f6e9ff; }
+
+    .questTrackAction {
+      margin-top: 2px;
+      border: 1px solid rgba(189, 223, 255, 0.5);
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: linear-gradient(180deg, rgba(123, 195, 255, 0.2), rgba(74, 142, 255, 0.26));
+      color: #f4fbff;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .questTrackAction[disabled] {
+      opacity: 0.58;
+      cursor: not-allowed;
+      filter: saturate(0.55);
+    }
+
     body.lobbyTabMode .inventoryMenu.tabMenuSurface {
       position: absolute;
       inset: 126px 292px 24px 304px;
@@ -35744,66 +35882,68 @@
   </div>
 
   <div id="questMenu" class="inventoryMenu hidden">
-    <div class="skillWrap">
-      <div class="skillTop">
-        <div>
-          <div class="skillTitle">Herausforderungen</div>
-          <div class="shopLead">Chapter 3 Season 3: Event-, Daily- und Wochen-Quests im neuen Board-Layout mit Live-Countdown.</div>
+    <div class="skillWrap skillRedesign">
+      <header class="skillHeader">
+        <div class="skillHero">
+          <div class="skillBadge">Quest Control</div>
+          <div class="skillTitle">Mission Ops Board</div>
+          <div class="shopLead">Komplett neue Quest-Struktur mit getrenntem Progress fuer Level-XP und Battle-Pass-XP.</div>
         </div>
-        <div id="questInfo" class="skillInfo">0 / 0 erledigt</div>
-      </div>
-      <div class="questBoard">
-        <div class="questBoardTop">
-          <div class="questBoardTabs">
-            <div class="questBoardTab active">Event</div>
-            <div class="questBoardTab">Taeglich</div>
-            <div class="questBoardTab">Woechentlich</div>
-            <div class="questBoardTab">Stil</div>
-          </div>
+        <div class="skillMeta">
           <div class="questBoardWeek">
             <div class="questBoardWeekLabel">Chapter 3 Season 3</div>
             <div id="questWeekLabel" class="questBoardWeekValue">Woche 1</div>
             <div id="questWeekCountdownLabel" class="questBoardWeekCountdown">--:--:--</div>
           </div>
+          <div id="questInfo" class="skillInfo skillPointsPill">0 / 0 erledigt</div>
+          <button id="closeQuestBtn" class="achievementCloseBtn skillCloseBtn">Schließen</button>
+        </div>
+      </header>
+      <div class="questXpSummary">
+        <div class="questXpCard">
+          <div class="questXpCardLabel">Level-XP Track</div>
+          <div id="questLevelXpValue" class="questXpCardValue">0</div>
+          <div id="questLevelXpMeta" class="questXpCardMeta">0 XP bis Level-Up</div>
+        </div>
+        <div class="questXpCard">
+          <div class="questXpCardLabel">Battle-Pass-XP Track</div>
+          <div id="questPassXpValue" class="questXpCardValue">0</div>
+          <div id="questPassXpMeta" class="questXpCardMeta">0 XP bis Pass-Stufe</div>
         </div>
       </div>
       <div class="questSection">
         <div class="questSectionHeader">
           <div>
-            <div class="questSectionTitle">Daily Quests</div>
+            <div class="questSectionTitle">Tägliche Einsätze</div>
             <div class="questSectionLead">Reset um Mitternacht • <span id="questDailyCountdown" class="questCountdown">--:--:--</span></div>
           </div>
           <div id="questDailyInfo" class="skillInfo">0 / 0 erledigt</div>
         </div>
-        <div id="questDailyGrid" class="skillGrid"></div>
+        <div id="questDailyGrid" class="questTrackGrid"></div>
       </div>
       <div class="questSection">
         <div class="questSectionHeader">
           <div>
-            <div class="questSectionTitle">Weekly Quests</div>
+            <div class="questSectionTitle">Wöchentliche Operationen</div>
             <div class="questSectionLead">Reset pro Woche • <span id="questWeeklyCountdown" class="questCountdown">--:--:--</span></div>
           </div>
           <div id="questWeeklyInfo" class="skillInfo">0 / 0 erledigt</div>
         </div>
         <div class="questWeekCard">
           <div id="questWeeklyCardTitle" class="questWeekCardTitle">Woche 1</div>
-          <div id="questWeeklyCardMeta" class="questWeekCardMeta">Start: heute</div>
+          <div id="questWeeklyCardMeta" class="questWeekCardMeta">Priorität: Teamprogress + höhere Pass-XP</div>
         </div>
-        <div id="questWeeklyDeck" class="questWeeklyDeck"></div>
-        <div id="questWeeklyGrid" class="skillGrid"></div>
+        <div id="questWeeklyGrid" class="questTrackGrid"></div>
       </div>
       <div class="questSection">
         <div class="questSectionHeader">
           <div>
-            <div class="questSectionTitle">Meilensteine</div>
-            <div class="questSectionLead">Langzeit-Ziele • bleiben dauerhaft aktiv</div>
+            <div class="questSectionTitle">Langzeit-Missionen</div>
+            <div class="questSectionLead">Permanente Ziele • eigener Fortschritt pro Karriere</div>
           </div>
           <div id="questMilestoneInfo" class="skillInfo">0 / 0 erledigt</div>
         </div>
         <div id="questMilestoneGrid" class="skillGrid"></div>
-      </div>
-      <div style="text-align:center; margin-top:18px;">
-        <button id="closeQuestBtn" class="achievementCloseBtn">Schließen</button>
       </div>
     </div>
   </div>
@@ -37393,6 +37533,10 @@
     const questInfo = document.getElementById("questInfo");
     const questDailyInfo = document.getElementById("questDailyInfo");
     const questWeeklyInfo = document.getElementById("questWeeklyInfo");
+    const questLevelXpValue = document.getElementById("questLevelXpValue");
+    const questLevelXpMeta = document.getElementById("questLevelXpMeta");
+    const questPassXpValue = document.getElementById("questPassXpValue");
+    const questPassXpMeta = document.getElementById("questPassXpMeta");
     const questMilestoneInfo = document.getElementById("questMilestoneInfo");
     const questDailyCountdown = document.getElementById("questDailyCountdown");
     const questWeeklyCountdown = document.getElementById("questWeeklyCountdown");
@@ -41252,26 +41396,28 @@ let shopWishlist = [];
     };
     const questPools = {
       daily: [
-        { id: "ops_mine_40", name: "Frontlinie Abbau", desc: "Baue 40 Blöcke im Einsatz ab.", type: "blocksMined", target: 40, reward: { type: "gold", amount: 70, label: "+70 M-Bucks" } },
-        { id: "ops_place_35", name: "Barrikadenbau", desc: "Platziere 35 Blöcke zur Verteidigung.", type: "blocksPlaced", target: 35, reward: { type: "xp", amount: 180, label: "+180 XP" } },
-        { id: "ops_walk_22000", name: "Patrouille", desc: "Laufe 22.000 Pixel im Einsatzgebiet.", type: "distanceWalked", target: 22000, reward: { type: "xp", amount: 210, label: "+210 XP" } },
-        { id: "ops_blocks_180", name: "Riss-Saeuberung", desc: "Baue 180 Bloecke ab.", type: "blocksMined", target: 180, reward: { type: "gold", amount: 90, label: "+90 M-Bucks" } },
-        { id: "ops_gold_8", name: "Sektor-Finanzierung", desc: "Finde 8 Goldblöcke.", type: "goldMined", target: 8, reward: { type: "gold", amount: 110, label: "+110 M-Bucks" } },
-        { id: "ops_craft_2", name: "Feldwerkstatt", desc: "Stelle 2 Rezepte her.", type: "crafts", target: 2, reward: { type: "xp", amount: 160, label: "+160 XP" } }
+        { id: "d_ember_route", name: "Ember-Route", desc: "Baue 65 Blöcke in Feuer- oder Misch-Biomen ab.", type: "blocksMined", target: 65, reward: { levelXp: 170, passXp: 120, mBucks: 35 } },
+        { id: "d_wall_shift", name: "Wall Shift", desc: "Platziere 55 Blöcke für eine sichere Aufstiegsroute.", type: "blocksPlaced", target: 55, reward: { levelXp: 160, passXp: 125 } },
+        { id: "d_scout_loop", name: "Scout Loop", desc: "Laufe 28.000 Pixel in einem Einsatz.", type: "distanceWalked", target: 28000, reward: { levelXp: 185, passXp: 135 } },
+        { id: "d_gold_ping", name: "Gold Ping", desc: "Finde 10 Goldblöcke im Match.", type: "goldMined", target: 10, reward: { levelXp: 145, passXp: 110, mBucks: 90 } },
+        { id: "d_bench_sync", name: "Bench Sync", desc: "Stelle 3 Rezepte her.", type: "crafts", target: 3, reward: { levelXp: 170, passXp: 120, skillPoints: 1 } },
+        { id: "d_frag_hunt", name: "Fragment Hunt", desc: "Sammle 6 Alien-Fragmente.", type: "alienFragment", target: 6, reward: { levelXp: 150, passXp: 130, mBucks: 50 } }
       ],
       weekly: [
-        { id: "ops_week_mine_220", name: "Belagerungsbohrer", desc: "Baue 220 Blöcke in dieser Woche ab.", type: "blocksMined", target: 220, reward: { type: "xp", amount: 420, label: "+420 XP" } },
-        { id: "ops_week_place_140", name: "Bollwerkmeister", desc: "Platziere 140 Blöcke.", type: "blocksPlaced", target: 140, reward: { type: "gold", amount: 260, label: "+260 M-Bucks" } },
-        { id: "ops_week_walk_90000", name: "Langstrecken-Scout", desc: "Laufe 90.000 Pixel.", type: "distanceWalked", target: 90000, reward: { type: "xp", amount: 500, label: "+500 XP" } },
-        { id: "ops_week_alien_18", name: "Anomalie-Bergung", desc: "Sammle 18 Alien-Fragmente.", type: "alienFragment", target: 18, reward: { type: "gold", amount: 320, label: "+320 M-Bucks" } },
-        { id: "ops_week_craft_8", name: "Werkbank-Offensive", desc: "Stelle 8 Rezepte her.", type: "crafts", target: 8, reward: { type: "xp", amount: 380, label: "+380 XP" } }
+        { id: "w_sector_break", name: "Sector Break", desc: "Baue 340 Blöcke in dieser Woche ab.", type: "blocksMined", target: 340, reward: { levelXp: 520, passXp: 430, mBucks: 180 } },
+        { id: "w_fort_axis", name: "Fort Axis", desc: "Platziere 240 Blöcke für Team-Festungen.", type: "blocksPlaced", target: 240, reward: { levelXp: 460, passXp: 390, mBucks: 220 } },
+        { id: "w_long_run", name: "Long Run Ops", desc: "Laufe 130.000 Pixel.", type: "distanceWalked", target: 130000, reward: { levelXp: 640, passXp: 470 } },
+        { id: "w_anomaly_bank", name: "Anomaly Bank", desc: "Sammle 26 Alien-Fragmente.", type: "alienFragment", target: 26, reward: { levelXp: 420, passXp: 500, mBucks: 260 } },
+        { id: "w_craftline", name: "Craftline Prime", desc: "Stelle 14 Rezepte her.", type: "crafts", target: 14, reward: { levelXp: 510, passXp: 420, skillPoints: 1 } },
+        { id: "w_goldstorm", name: "Goldstorm", desc: "Finde 34 Goldblöcke in der Woche.", type: "goldMined", target: 34, reward: { levelXp: 480, passXp: 410, mBucks: 320 } }
       ]
     };
     const questState = {
       claimedDaily: [],
       claimedWeekly: [],
       lastDailyKey: "",
-      lastWeeklyKey: ""
+      lastWeeklyKey: "",
+      version: "ops_board_rework_2026_05_29"
     };
     let questUiSelectedWeek = 1;
 
@@ -41879,7 +42025,8 @@ let shopWishlist = [];
     const BATTLE_PASS_COUNTDOWN_ENABLED = false;
     const SEASON_HARD_RESET_TOKEN = "season3_hard_reset_2026_05_r2";
     const PROGRESSION_RESET_ID = "progression_reset_chapter3_s3_riftwars_v2";
-    const QUEST_RESET_ID = "quest_reset_chapter3_s3_riftwars_v2";
+    const QUEST_RESET_ID = "quest_reset_chapter3_s3_riftwars_v3";
+    const QUEST_TRACK_VERSION = "ops_board_rework_2026_05_29";
     const BATTLE_PASS_PAGE_SIZE = 3;
     const MINI_PASS_SEASON_ID = "mini_pass_easter_2026";
     const MINI_PASS_DISABLED = true;
@@ -44905,6 +45052,7 @@ let shopWishlist = [];
         claims: {
           miniPassClaimedTiers: uniqueNumericTierList(miniPassState.claimedTiers || []),
           communityPassClaimedMilestones: uniqueNumericTierList(communityPassState.claimedMilestones || []),
+          questVersion: QUEST_TRACK_VERSION,
           questClaimedDaily: uniqueStringList(questState.claimedDaily || []),
           questClaimedWeekly: uniqueStringList(questState.claimedWeekly || []),
           questLastDailyKey: String(questState.lastDailyKey || ""),
@@ -44944,19 +45092,22 @@ let shopWishlist = [];
           ...(communityPassState.claimedMilestones || []),
           ...(snapshot.claims.communityPassClaimedMilestones || [])
         ]);
-        questState.claimedDaily = uniqueStringList([
-          ...(questState.claimedDaily || []),
-          ...(snapshot.claims.questClaimedDaily || [])
-        ]);
-        questState.claimedWeekly = uniqueStringList([
-          ...(questState.claimedWeekly || []),
-          ...(snapshot.claims.questClaimedWeekly || [])
-        ]);
-        if (!questState.lastDailyKey && snapshot.claims.questLastDailyKey) {
-          questState.lastDailyKey = String(snapshot.claims.questLastDailyKey);
-        }
-        if (!questState.lastWeeklyKey && snapshot.claims.questLastWeeklyKey) {
-          questState.lastWeeklyKey = String(snapshot.claims.questLastWeeklyKey);
+        const snapshotQuestVersion = String(snapshot.claims.questVersion || "");
+        if (snapshotQuestVersion === QUEST_TRACK_VERSION) {
+          questState.claimedDaily = uniqueStringList([
+            ...(questState.claimedDaily || []),
+            ...(snapshot.claims.questClaimedDaily || [])
+          ]);
+          questState.claimedWeekly = uniqueStringList([
+            ...(questState.claimedWeekly || []),
+            ...(snapshot.claims.questClaimedWeekly || [])
+          ]);
+          if (!questState.lastDailyKey && snapshot.claims.questLastDailyKey) {
+            questState.lastDailyKey = String(snapshot.claims.questLastDailyKey);
+          }
+          if (!questState.lastWeeklyKey && snapshot.claims.questLastWeeklyKey) {
+            questState.lastWeeklyKey = String(snapshot.claims.questLastWeeklyKey);
+          }
         }
         if (snapshot.claims.commandPlusOwned) commandPlusState.owned = true;
         commandPlusState.purchasedAt = Math.max(Number(commandPlusState.purchasedAt || 0), Number(snapshot.claims.commandPlusPurchasedAt || 0));
@@ -45696,6 +45847,7 @@ let shopWishlist = [];
       const xpAmount = Number(reward.xp ?? 0) || 0;
       if (xpAmount) {
         addXp(xpAmount);
+        addBattlePassXp(Math.max(10, Math.round(xpAmount * 0.45)));
         summary.push(`+${xpAmount.toLocaleString("de-DE")} XP`);
       }
 
@@ -47493,9 +47645,24 @@ let shopWishlist = [];
       return Math.max(1, Number(progression?.level || 1));
     }
 
+    function addBattlePassXp(amount, options = {}) {
+      const numericAmount = Number(amount || 0);
+      if (numericAmount <= 0) return 0;
+      const riftSkill = areSkillsDisabledInCurrentMode() ? 0 : (progression.skills.rift || 0);
+      const liveMultiplier = getLiveBattlePassMultiplier();
+      const finalAmount = Math.max(1, Math.round(numericAmount * liveMultiplier * (1 + riftSkill * 0.05)));
+      battlePassState.xp = Math.min(
+        battlePassRewards.length * BATTLE_PASS_TIER_XP,
+        (battlePassState.xp || 0) + finalAmount
+      );
+      if (options?.showToast) {
+        showMessage(`+${finalAmount.toLocaleString("de-DE")} Pass-XP`, 1800);
+      }
+      return finalAmount;
+    }
+
     function addXp(amount) {
       const scholarSkill = areSkillsDisabledInCurrentMode() ? 0 : (progression.skills.scholar || 0);
-      const riftSkill = areSkillsDisabledInCurrentMode() ? 0 : (progression.skills.rift || 0);
       const riftDecisionXpBonus = Number(riftDecisionState.runBuffs.xpMultiplier || 0);
       
       const customSettings = getActiveCustomGameSettings();
@@ -47509,7 +47676,6 @@ let shopWishlist = [];
       const xpMultiplier = (1 + scholarSkill * 0.07 + riftDecisionXpBonus) * getLiveXpMultiplier() * customXpMultiplier * contractXpMultiplier * act3FinalXpMultiplier;
       const finalAmount = Math.round(amount * xpMultiplier);
       progression.xp += finalAmount;
-      battlePassState.xp += Math.round(finalAmount * getLiveBattlePassMultiplier() * (1 + riftSkill * 0.05));
       registerCommunityEventXp(finalAmount);
 
       while ((progression.level || 1) < PLAYER_MAX_LEVEL && progression.xp >= getXpNeeded()) {
@@ -47901,11 +48067,13 @@ let shopWishlist = [];
         craftedState.ruinBladeForged = true;
         currentSword = "ruinBlade";
         addXp(120);
+        addBattlePassXp(60);
         showMessage("Ruinenklinge geschmiedet!", 2600);
       }
       if (recipe.id === "relic_core") {
         progression.skillPoints++;
         addXp(90);
+        addBattlePassXp(45);
         showMessage("Reliktkern aktiviert! +1 Skillpunkt und +90 XP", 2400);
       }
       if (recipe.id === "vine_bundle") {
@@ -47916,6 +48084,7 @@ let shopWishlist = [];
       if (progression.skills.crafting > 0) {
         inventory[7] += progression.skills.crafting * 3;
         addXp(progression.skills.crafting * 4);
+        addBattlePassXp(Math.max(6, progression.skills.crafting * 2));
       }
 
       updateSwordUnlocks();
@@ -48193,7 +48362,10 @@ let shopWishlist = [];
       if (!reward) return;
 
       if (reward.type === "gold" || reward.type === "currency") inventory[7] += reward.amount;
-      if (reward.type === "xp") addXp(reward.amount);
+      if (reward.type === "xp") {
+        addXp(reward.amount);
+        addBattlePassXp(Math.max(8, Math.round((reward.amount || 0) * 0.4)));
+      }
       if (reward.type === "skillPoints") progression.skillPoints += reward.amount;
       if (reward.type === "loot") loot[reward.id] = (loot[reward.id] || 0) + reward.amount;
       if (reward.type === "eyeSkin" && !playerSkin.ownedEyes.includes(reward.id)) {
@@ -48436,6 +48608,7 @@ let shopWishlist = [];
       soloDirectiveState.lastCompletedId = soloDirectiveState.currentId;
       soloDirectiveState.chain += 1;
       addXp(soloDirectiveState.rewardXp || 0);
+      addBattlePassXp(Math.max(20, Math.round((soloDirectiveState.rewardXp || 0) * 0.7)));
       inventory[7] += Number(soloDirectiveState.rewardCurrency || 0);
       showMessage(`Solo-Direktive abgeschlossen: ${soloDirectiveState.title} • ${getSoloDirectiveRewardText()}`, 2600);
       queueDeferredSave(60);
@@ -50266,25 +50439,31 @@ async function loadMaintenanceStateFromSupabase() {
         if (parsed.equipmentState.equipped) Object.assign(equipmentState.equipped, parsed.equipmentState.equipped);
       }
       if (parsed.questState) {
-        if (Array.isArray(parsed.questState.claimedDaily)) questState.claimedDaily = parsed.questState.claimedDaily.filter(Boolean);
-        if (Array.isArray(parsed.questState.claimedWeekly)) questState.claimedWeekly = parsed.questState.claimedWeekly.filter(Boolean);
-        if (typeof parsed.questState.lastDailyKey === "string") questState.lastDailyKey = parsed.questState.lastDailyKey;
-        if (typeof parsed.questState.lastWeeklyKey === "string") questState.lastWeeklyKey = parsed.questState.lastWeeklyKey;
-        if (Array.isArray(parsed.questState.claimed) && !questState.claimedDaily.length && !questState.claimedWeekly.length) {
-          const legacyClaims = parsed.questState.claimed.filter(Boolean);
-          questState.claimedDaily = legacyClaims.slice();
-          questState.claimedWeekly = legacyClaims.slice();
+        const loadedQuestVersion = String(parsed.questState.version || "");
+        if (loadedQuestVersion === QUEST_TRACK_VERSION) {
+          if (Array.isArray(parsed.questState.claimedDaily)) questState.claimedDaily = parsed.questState.claimedDaily.filter(Boolean);
+          if (Array.isArray(parsed.questState.claimedWeekly)) questState.claimedWeekly = parsed.questState.claimedWeekly.filter(Boolean);
+          if (typeof parsed.questState.lastDailyKey === "string") questState.lastDailyKey = parsed.questState.lastDailyKey;
+          if (typeof parsed.questState.lastWeeklyKey === "string") questState.lastWeeklyKey = parsed.questState.lastWeeklyKey;
+          if (Array.isArray(parsed.questState.claimed) && !questState.claimedDaily.length && !questState.claimedWeekly.length) {
+            const legacyClaims = parsed.questState.claimed.filter(Boolean);
+            questState.claimedDaily = legacyClaims.slice();
+            questState.claimedWeekly = legacyClaims.slice();
+          }
+          questState.version = QUEST_TRACK_VERSION;
         }
       }
       if (!Array.isArray(questState.claimedDaily)) questState.claimedDaily = [];
       if (!Array.isArray(questState.claimedWeekly)) questState.claimedWeekly = [];
       if (typeof questState.lastDailyKey !== "string") questState.lastDailyKey = "";
       if (typeof questState.lastWeeklyKey !== "string") questState.lastWeeklyKey = "";
+      questState.version = QUEST_TRACK_VERSION;
       if ((parsed.questResetId || "legacy") !== QUEST_RESET_ID) {
         questState.claimedDaily = [];
         questState.claimedWeekly = [];
         questState.lastDailyKey = "";
         questState.lastWeeklyKey = "";
+        questState.version = QUEST_TRACK_VERSION;
       }
       ensureQuestCadenceState();
       if (typeof parsed.season2FactionChoice === "string") {
@@ -50703,7 +50882,10 @@ async function loadMaintenanceStateFromSupabase() {
     function applyCreatorStreakMilestoneReward(streakValue) {
       const reward = getCreatorStreakMilestoneReward(streakValue);
       if (!reward) return null;
-      if (reward.xp > 0) addXp(reward.xp);
+      if (reward.xp > 0) {
+        addXp(reward.xp);
+        addBattlePassXp(Math.max(10, Math.round((reward.xp || 0) * 0.45)));
+      }
       if (reward.mBucks > 0) inventory[7] += reward.mBucks;
       setTimeout(() => {
         showMessage(`Code-Streak x${reward.streak}! +${fmt(reward.mBucks)} M-Bucks & +${fmt(reward.xp)} XP`, 2600);
@@ -51076,6 +51258,7 @@ async function loadMaintenanceStateFromSupabase() {
         handled = true;
       } else if (text === "!xp" && twitchState.settings?.enableXp) {
         addXp(40);
+        addBattlePassXp(24);
         showMessage(`Twitch ${event.chatter_user_name}: +40 XP!`, 2200);
         handled = true;
       } else if (text === "!slime") {
@@ -52015,6 +52198,7 @@ async function loadMaintenanceStateFromSupabase() {
 
       if (reward.type === "xp") {
         addXp(reward.amount);
+        addBattlePassXp(Math.max(8, Math.round((reward.amount || 0) * 0.5)));
         showMessage(`Gratis-Kiste: +${reward.amount} XP!`, 2200);
       }
       if (reward.type === "loot") {
@@ -52134,15 +52318,40 @@ async function loadMaintenanceStateFromSupabase() {
       return getQuestProgress(def) >= def.target;
     }
 
+    function normalizeQuestRewardPackage(reward = {}, cadence = "daily") {
+      const base = reward && typeof reward === "object" ? reward : {};
+      const weeklyBoost = cadence === "weekly" ? 1.2 : 1;
+      const levelXp = Math.max(0, Math.round((Number(base.levelXp || 0) || 0) * weeklyBoost));
+      const passXp = Math.max(0, Math.round((Number(base.passXp || 0) || 0) * weeklyBoost));
+      const mBucks = Math.max(0, Math.round((Number(base.mBucks || 0) || 0) * weeklyBoost));
+      const skillPoints = Math.max(0, Math.round(Number(base.skillPoints || 0) || 0));
+      return { levelXp, passXp, mBucks, skillPoints };
+    }
+
+    function buildQuestRewardPills(packageReward = {}) {
+      const pills = [];
+      if (packageReward.levelXp > 0) pills.push(`<span class="questRewardPill level">+${packageReward.levelXp.toLocaleString("de-DE")} Level-XP</span>`);
+      if (packageReward.passXp > 0) pills.push(`<span class="questRewardPill pass">+${packageReward.passXp.toLocaleString("de-DE")} Pass-XP</span>`);
+      if (packageReward.mBucks > 0) pills.push(`<span class="questRewardPill mbucks">+${packageReward.mBucks.toLocaleString("de-DE")} M-Bucks</span>`);
+      if (packageReward.skillPoints > 0) pills.push(`<span class="questRewardPill skill">+${packageReward.skillPoints.toLocaleString("de-DE")} Skillpunkt${packageReward.skillPoints > 1 ? "e" : ""}</span>`);
+      return pills.join("");
+    }
+
+    function applyQuestRewardPackage(packageReward = {}) {
+      if (packageReward.levelXp > 0) addXp(packageReward.levelXp);
+      if (packageReward.passXp > 0) addBattlePassXp(packageReward.passXp);
+      if (packageReward.mBucks > 0) inventory[7] += packageReward.mBucks;
+      if (packageReward.skillPoints > 0) progression.skillPoints += packageReward.skillPoints;
+    }
+
     function claimQuestReward(id) {
       const didReset = ensureQuestCadenceState();
       const def = getActiveQuestDefinitions().find((entry) => entry.id === id);
       if (!def) return;
       if (isQuestClaimed(id, def.cadence)) return showMessage("Quest schon abgeholt!", 1800);
       if (!isQuestComplete(def)) return showMessage("Quest noch nicht fertig!", 1800);
-
-      if (def.reward.type === "gold") inventory[7] += def.reward.amount;
-      if (def.reward.type === "xp") addXp(def.reward.amount);
+      const rewardPack = normalizeQuestRewardPackage(def.reward, def.cadence);
+      applyQuestRewardPackage(rewardPack);
       if (def.cadence === "weekly") {
         questState.claimedWeekly.push(id);
       } else {
@@ -52152,7 +52361,7 @@ async function loadMaintenanceStateFromSupabase() {
       renderInventory();
       updateUI();
       queueDeferredSave();
-      showMessage(`Quest abgeschlossen: ${def.reward.label}`, 2200);
+      showMessage(`Quest abgeschlossen: ${def.name} Rewards gutgeschrieben.`, 2200);
     }
 
     function renderQuestMenu() {
@@ -52167,61 +52376,50 @@ async function loadMaintenanceStateFromSupabase() {
       if (questInfo) questInfo.textContent = `${claimedCount} / ${activeQuests.length} erledigt`;
       if (questDailyInfo) questDailyInfo.textContent = `${claimedDaily} / ${dailyQuests.length} erledigt`;
       if (questWeeklyInfo) questWeeklyInfo.textContent = `${getQuestWeekDisplayText()} • ${claimedWeekly} / ${weeklyQuests.length} erledigt`;
-      const currentWeek = getQuestSeasonWeekInfo(Date.now()).weekIndex;
-      if (questUiSelectedWeek < 1) questUiSelectedWeek = 1;
-      if (questUiSelectedWeek > 10) questUiSelectedWeek = 10;
-
+      const levelCapReached = (progression.level || 1) >= PLAYER_MAX_LEVEL;
+      if (questLevelXpValue) questLevelXpValue.textContent = levelCapReached
+        ? "MAX / MAX"
+        : `${(progression.xp || 0).toLocaleString("de-DE")} / ${getXpNeeded().toLocaleString("de-DE")}`;
+      if (questLevelXpMeta) questLevelXpMeta.textContent = levelCapReached
+        ? "Maximales Account-Level erreicht"
+        : `${Math.max(0, getXpNeeded() - (progression.xp || 0)).toLocaleString("de-DE")} XP bis Level ${Math.min(PLAYER_MAX_LEVEL, (progression.level || 1) + 1)}`;
+      const currentPassTierXp = Number(battlePassState.xp || 0) % BATTLE_PASS_TIER_XP;
+      if (questPassXpValue) questPassXpValue.textContent = `${currentPassTierXp.toLocaleString("de-DE")} / ${BATTLE_PASS_TIER_XP.toLocaleString("de-DE")}`;
+      if (questPassXpMeta) {
+        const passTier = getBattlePassCurrentTier();
+        questPassXpMeta.textContent = passTier >= battlePassRewards.length
+          ? "Maximale Pass-Stufe erreicht"
+          : `${Math.max(0, BATTLE_PASS_TIER_XP - currentPassTierXp).toLocaleString("de-DE")} XP bis Pass-Stufe ${Math.min(battlePassRewards.length, passTier + 1)}`;
+      }
       const buildQuestCards = (list) => list.map((def) => {
         const progress = getQuestProgress(def);
         const complete = progress >= def.target;
         const claimed = isQuestClaimed(def.id, def.cadence);
         const pct = Math.max(0, Math.min(100, (progress / def.target) * 100));
-        const rewardLabel = withXpIcon(def.reward.label || "");
+        const rewardPack = normalizeQuestRewardPackage(def.reward, def.cadence);
+        const cadenceLabel = def.cadence === "weekly" ? "Woechentlich" : "Taeglich";
+        const rewardsMarkup = buildQuestRewardPills(rewardPack);
         return `
-          <div class="skillCard ${claimed ? "claimed" : ""}">
-            <div class="skillHeader">
+          <div class="questTrackCard ${claimed ? "isClaimed" : ""}">
+            <div class="questTrackTop">
               <div>
-                <div class="skillName">${def.name}</div>
-                <div class="skillLevel">Belohnung: ${rewardLabel}</div>
+                <div class="questTrackName">${def.name}</div>
+                <div class="questTrackDesc">${def.desc}</div>
               </div>
+              <div class="questTrackCadence">${cadenceLabel}</div>
             </div>
-            <div class="skillDesc">${def.desc}</div>
-            <div class="shopBonusText">${Math.min(progress, def.target)} / ${def.target}</div>
+            <div class="questTrackMeta">Fortschritt ${Math.min(progress, def.target)} / ${def.target}</div>
             <div class="xpBarWrap" style="margin-bottom:10px;">
               <div class="xpBar" style="width:${pct}%;"></div>
             </div>
-            <button class="skillActionBtn" data-quest-id="${def.id}" ${(!complete || claimed) ? "disabled" : ""}>${claimed ? "Abgeholt" : (complete ? "Abholen" : "In Arbeit")}</button>
+            <div class="questRewardRow">${rewardsMarkup}</div>
+            <button class="questTrackAction" data-quest-id="${def.id}" ${(!complete || claimed) ? "disabled" : ""}>${claimed ? "Abgeholt" : (complete ? "Rewards abholen" : "In Arbeit")}</button>
           </div>
         `;
       }).join("");
 
       questDailyGrid.innerHTML = buildQuestCards(dailyQuests);
       questWeeklyGrid.innerHTML = buildQuestCards(weeklyQuests);
-      if (questWeeklyDeck) {
-        const currentPct = weeklyQuests.length ? Math.round((claimedWeekly / weeklyQuests.length) * 100) : 0;
-        questWeeklyDeck.innerHTML = Array.from({ length: 10 }, (_, i) => {
-          const week = i + 1;
-          const pct = week < currentWeek ? 100 : (week === currentWeek ? currentPct : 0);
-          const status = week < currentWeek ? "Abgeschlossen" : (week === currentWeek ? "Aktiv" : "Gesperrt");
-          return `
-            <button class="questWeekTile ${questUiSelectedWeek === week ? "active" : ""}" data-quest-week="${week}">
-              <div class="questWeekTileTitle">Woche ${week}</div>
-              <div class="questWeekTileMeta">Chapter 3 Season 3 • ${status}</div>
-              <div class="questWeekTileBar"><div class="questWeekTileFill" style="width:${pct}%;"></div></div>
-              <div class="questWeekTilePct">${pct}%</div>
-            </button>
-          `;
-        }).join("");
-        questWeeklyDeck.querySelectorAll("[data-quest-week]").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const week = Number(btn.dataset.questWeek || 1);
-            questUiSelectedWeek = week;
-            const weekStatus = week < currentWeek ? "abgeschlossen" : (week === currentWeek ? "aktiv" : "noch gesperrt");
-            showMessage(`Woche ${week}: ${weekStatus}.`, 2000);
-            renderQuestMenu();
-          });
-        });
-      }
 
       const totalSkillLevel = Object.values(progression.skills || {}).reduce((sum, value) => sum + (value || 0), 0);
       const milestoneDefs = [
@@ -52240,19 +52438,20 @@ async function loadMaintenanceStateFromSupabase() {
         const pct = Math.max(0, Math.min(100, (def.current / def.target) * 100));
         const rewardLabel = withXpIcon(def.reward || "");
         return `
-          <div class="skillCard ${complete ? "claimed" : ""}">
-            <div class="skillHeader">
+          <div class="questTrackCard ${complete ? "isClaimed" : ""}">
+            <div class="questTrackTop">
               <div>
-                <div class="skillName">${def.name}</div>
-                <div class="skillLevel">Belohnung: ${rewardLabel}</div>
+                <div class="questTrackName">${def.name}</div>
+                <div class="questTrackDesc">${def.desc}</div>
               </div>
+              <div class="questTrackCadence">Meilenstein</div>
             </div>
-            <div class="skillDesc">${def.desc}</div>
-            <div class="shopBonusText">${Math.min(def.current, def.target)} / ${def.target}</div>
+            <div class="questTrackMeta">Fortschritt ${Math.min(def.current, def.target)} / ${def.target}</div>
             <div class="xpBarWrap" style="margin-bottom:10px;">
               <div class="xpBar" style="width:${pct}%;"></div>
             </div>
-            <button class="skillActionBtn" disabled>${complete ? "Abgeschlossen" : "In Arbeit"}</button>
+            <div class="questRewardRow"><span class="questRewardPill level">${rewardLabel}</span></div>
+            <button class="questTrackAction" disabled>${complete ? "Abgeschlossen" : "In Arbeit"}</button>
           </div>
         `;
       }).join("");
@@ -52478,6 +52677,7 @@ async function loadMaintenanceStateFromSupabase() {
             stats.slimesKilled++;
             heroUltKills++;
             addXp(30 + progression.skills.combat * 4);
+            addBattlePassXp(s.type === "alien" || s.type === "fire" ? 16 : 12);
             updateSwordUnlocks();
             checkAchievements();
             saveGame();
@@ -52511,7 +52711,7 @@ async function loadMaintenanceStateFromSupabase() {
           const dx = (s.x + s.w / 2) - pc; const dy = (s.y + s.h / 2) - pyc;
           if (Math.sqrt(dx * dx + dy * dy) < 140) {
             s.health -= 4; s.hurtTimer = 15; hit++;
-            if (s.health <= 0) { heroUltKills++; stats.slimesKilled++; addXp(30); slimes.splice(i, 1); }
+            if (s.health <= 0) { heroUltKills++; stats.slimesKilled++; addXp(30); addBattlePassXp(10); slimes.splice(i, 1); }
           }
         }
         updateSwordUnlocks(); checkAchievements(); saveGame();
@@ -52528,7 +52728,7 @@ async function loadMaintenanceStateFromSupabase() {
           const dx = (s.x + s.w / 2) - pc; const dy = (s.y + s.h / 2) - pyc;
           if (Math.sqrt(dx * dx + dy * dy) < 160) {
             s.health -= 3; s.hurtTimer = 12; hit++;
-            if (s.health <= 0) { heroUltKills++; stats.slimesKilled++; addXp(30); slimes.splice(i, 1); }
+            if (s.health <= 0) { heroUltKills++; stats.slimesKilled++; addXp(30); addBattlePassXp(10); slimes.splice(i, 1); }
           }
         }
         updateSwordUnlocks(); checkAchievements(); saveGame();
@@ -52550,7 +52750,7 @@ async function loadMaintenanceStateFromSupabase() {
         const s = slimes[i];
         const sx = s.x - cam.x; const sy = s.y - cam.y;
         if (sx > -80 && sx < canvas.width + 80 && sy > -80 && sy < canvas.height + 80) {
-          stats.slimesKilled++; addXp(30); slimes.splice(i, 1); killed++;
+          stats.slimesKilled++; addXp(30); addBattlePassXp(9); slimes.splice(i, 1); killed++;
         }
       }
       if (selectedHero === "ironshield") { effects.shield = Math.max(effects.shield, 360); showMessage(`?? RAKETEN-SALVE! ${killed} Feinde eliminiert!`, 2400); }
@@ -56063,6 +56263,9 @@ async function loadMaintenanceStateFromSupabase() {
       if (lobbyStatsPanel) {
         const currentTier = getBattlePassCurrentTier();
         const totalTiers = battlePassRewards.length;
+        const currentPassXp = Number(battlePassState.xp || 0);
+        const passTierXp = currentPassXp % BATTLE_PASS_TIER_XP;
+        const passXpToNext = Math.max(0, BATTLE_PASS_TIER_XP - passTierXp);
         
         // Active Boosts
         const activeLiveEvents = getActiveLiveEventEntries();
@@ -56092,6 +56295,11 @@ async function loadMaintenanceStateFromSupabase() {
               <div class="lobbyStatLabel">Pass Stufe</div>
               <div class="lobbyStatValue">${Math.min(currentTier, totalTiers)}</div>
               <div class="lobbyStatMeta">${battlePassState.premiumUnlocked ? "Premium aktiv" : "Kostenlos aktiv"}</div>
+            </div>
+            <div class="lobbyStatCard">
+              <div class="lobbyStatLabel">Pass-XP</div>
+              <div class="lobbyStatValue">${passTierXp.toLocaleString("de-DE")} / ${BATTLE_PASS_TIER_XP.toLocaleString("de-DE")}</div>
+              <div class="lobbyStatMeta">${Math.min(currentTier, totalTiers) >= totalTiers ? "Max Stufe erreicht" : `${passXpToNext.toLocaleString("de-DE")} bis naechste Stufe`}</div>
             </div>
             ${boostCardsMarkup}
             <div class="lobbyStatCard">
@@ -60388,6 +60596,7 @@ async function loadMaintenanceStateFromSupabase() {
       s5ChainReactionState.lastXp = xpGain;
       inventory[7] += mbucksGain;
       addXp(xpGain);
+      addBattlePassXp(Math.max(12, Math.round(destroyed * 2 + chainCount * 4)));
       showMessage(`Vermischung-Kettenreaktion x${chainCount}: +${destroyed} Blöcke, +${mbucksGain} M-Bucks`, 2200);
     }
 
@@ -60435,6 +60644,7 @@ async function loadMaintenanceStateFromSupabase() {
             }
           }
           addXp(xpGain);
+          addBattlePassXp(block === 7 ? 12 : block === 6 ? 9 : 6);
 
           if (block === 7) showMessage("Gold gefunden!");
           if (block === 6) showMessage("Kohle abgebaut");
@@ -61751,6 +61961,7 @@ async function loadMaintenanceStateFromSupabase() {
       updateDerivedStats();
       inventory[7] += 1200;
       addXp(1200);
+      addBattlePassXp(700);
       progression.skillPoints += 2;
       showMessage("Hero Gauntlet abgeschlossen! +1200 XP, +1200 M-Bucks, +2 Skillpunkte", 3400);
       openShopPurchaseModal({
@@ -62360,6 +62571,7 @@ drawRiftGlitchOverlay(cam);
           <div id="allFriendsList" class="allFriendsList"></div>
         </div>
       </div>
+      
       <div class="friendsListFooter">
         <div class="addFriendSection">
           <input id="addFriendInput" class="addFriendInput" placeholder="Spielername eingeben..." maxlength="32" />
@@ -62368,5 +62580,8 @@ drawRiftGlitchOverlay(cam);
       </div>
     </div>
   </div>
+
+  
 </body>
 </html>
+
