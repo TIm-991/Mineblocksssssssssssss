@@ -52673,6 +52673,8 @@ async function loadMaintenanceStateFromSupabase() {
           hitSomething = true;
           const minPercentDamage = Math.max(1, Math.ceil(Number(s.maxHealth || s.health || 1) * 0.18));
           s.health -= Math.max(swordDamage, minPercentDamage);
+          s.hitCount = (Number(s.hitCount) || 0) + 1;
+          if (s.hitCount >= 8) s.health = 0;
           s.hurtTimer = 10;
 
           if (player.x < s.x) s.x += 14;
@@ -61770,6 +61772,7 @@ async function loadMaintenanceStateFromSupabase() {
         health: finalHealth,
         maxHealth: finalHealth,
         hurtTimer: 0,
+        hitCount: 0,
         phase: Math.random() * Math.PI * 2,
         tactic: Math.random() > 0.5 ? "flank" : "rush"
       });
@@ -62160,6 +62163,11 @@ async function loadMaintenanceStateFromSupabase() {
         if (!Number.isFinite(s.vx)) s.vx = s.moveSpeed;
         if (!Number.isFinite(s.vy)) s.vy = 0;
         if (!Number.isFinite(s.health)) s.health = 1;
+        if (!Number.isFinite(s.hitCount)) s.hitCount = 0;
+        if (s.health <= 0) {
+          slimes.splice(i, 1);
+          continue;
+        }
         if (!Number.isFinite(s.phase)) s.phase = 0;
         s.dirTimer--;
         s.jumpCooldown--;
@@ -62213,6 +62221,8 @@ async function loadMaintenanceStateFromSupabase() {
 
           if (player.vy > 2 && playerBottom - slimeTop < 20) {
             s.health--;
+            s.hitCount = (Number(s.hitCount) || 0) + 1;
+            if (s.hitCount >= 10) s.health = 0;
             s.hurtTimer = 10;
             player.vy = -8;
 
