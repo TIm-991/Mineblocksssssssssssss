@@ -34617,6 +34617,35 @@
                 </div>
               </div>
 
+              <!-- Respawn Rules -->
+              <div class="customGameModernCard">
+                <div class="cardHeader">
+                  <div class="cardIcon">♻️</div>
+                  <div class="cardTitle">Respawn-Regeln</div>
+                </div>
+                <div class="cardContent">
+                  <div class="environmentGrid">
+                    <div class="settingField">
+                      <label class="settingLabel">Respawn-Modus</label>
+                      <select id="modePickerCustomRespawnRuleInput" class="modernSelect">
+                        <option value="instant">Sofort</option>
+                        <option value="delay">Mit Delay</option>
+                        <option value="limited">Begrenzte Leben</option>
+                        <option value="off">Kein Respawn</option>
+                      </select>
+                    </div>
+                    <div class="settingField">
+                      <label class="settingLabel">Respawn-Delay (Sek.)</label>
+                      <input id="modePickerCustomRespawnDelayInput" class="modernInput" type="number" min="0" max="20" step="1" value="0">
+                    </div>
+                    <div class="settingField">
+                      <label class="settingLabel">Leben (bei "Begrenzte Leben")</label>
+                      <input id="modePickerCustomRespawnLivesInput" class="modernInput" type="number" min="0" max="30" step="1" value="3">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <!-- Slime Custom Games -->
               <div class="customGameModernCard">
                 <div class="cardHeader">
@@ -37226,6 +37255,9 @@
     const modePickerCustomGravityMultiplierInput = document.getElementById("modePickerCustomGravityMultiplierInput");
     const modePickerCustomWeatherLockInput = document.getElementById("modePickerCustomWeatherLockInput");
     const modePickerCustomDayTimeLockInput = document.getElementById("modePickerCustomDayTimeLockInput");
+    const modePickerCustomRespawnRuleInput = document.getElementById("modePickerCustomRespawnRuleInput");
+    const modePickerCustomRespawnDelayInput = document.getElementById("modePickerCustomRespawnDelayInput");
+    const modePickerCustomRespawnLivesInput = document.getElementById("modePickerCustomRespawnLivesInput");
     const modePickerRecentCodes = document.getElementById("modePickerRecentCodes");
     const modePickerRecentCodesList = document.getElementById("modePickerRecentCodesList");
     const modePickerCustomPublishBtn = document.getElementById("modePickerCustomPublishBtn");
@@ -38269,6 +38301,9 @@
       settings: null,
       source: ""
     };
+    const customRespawnState = {
+      remainingLives: null
+    };
     let modePickerCustomPanelOpen = false;
     let creativeSessionInventoryBackup = null;
     let creativeSessionPortalKeyBackup = null;
@@ -38586,7 +38621,10 @@ function createDefaultCustomGameSettings() {
     enemySpeedMultiplier: 1,
     healthRegen: 0,
     weatherLock: "none",
-    dayTimeLock: -1
+    dayTimeLock: -1,
+    respawnRule: "instant",
+    respawnDelaySeconds: 0,
+    respawnLives: 3
   };
 }
 
@@ -38611,7 +38649,12 @@ function normalizeCustomGameSettings(settings = null) {
     enemySpeedMultiplier: clampMultiplier(settings?.enemySpeedMultiplier, fallback.enemySpeedMultiplier),
     healthRegen: Math.max(0, Math.min(5, Number(settings?.healthRegen) || 0)),
     weatherLock: String(settings?.weatherLock || fallback.weatherLock),
-    dayTimeLock: Number(settings?.dayTimeLock ?? fallback.dayTimeLock)
+    dayTimeLock: Number(settings?.dayTimeLock ?? fallback.dayTimeLock),
+    respawnRule: ["instant", "delay", "limited", "off"].includes(String(settings?.respawnRule || ""))
+      ? String(settings?.respawnRule)
+      : fallback.respawnRule,
+    respawnDelaySeconds: Math.max(0, Math.min(20, Math.floor(Number(settings?.respawnDelaySeconds) || fallback.respawnDelaySeconds))),
+    respawnLives: Math.max(0, Math.min(30, Math.floor(Number(settings?.respawnLives) || fallback.respawnLives)))
   };
 }
 
@@ -38935,6 +38978,7 @@ function setActiveCustomGamePreset(entry = null, options = {}) {
     customGameState.creatorName = "";
     customGameState.settings = null;
     customGameState.source = "";
+    customRespawnState.remainingLives = null;
     if (modePickerCustomCodeInput) modePickerCustomCodeInput.value = "";
     if (showMessageText) showMessage("Custom Game entfernt. Solo laeuft wieder normal.", 2200);
   } else {
@@ -38944,6 +38988,7 @@ function setActiveCustomGamePreset(entry = null, options = {}) {
     customGameState.creatorName = normalized.creatorName;
     customGameState.settings = normalized.settings;
     customGameState.source = normalized.source;
+    resetCustomRespawnStateForMatch(normalized.settings);
     if (modePickerCustomCodeInput) modePickerCustomCodeInput.value = normalized.code;
     if (showMessageText) showMessage(`Custom Game ${normalized.code} geladen!`, 2200);
 
@@ -39050,6 +39095,9 @@ function applyQuickCustomPresetToInputs(presetSettings = {}, autoStart = false) 
   if (modePickerCustomEnemyHealthInput) modePickerCustomEnemyHealthInput.value = String(Math.round(settings.enemyHealthMultiplier * 100));
   if (modePickerCustomWeatherLockInput) modePickerCustomWeatherLockInput.value = settings.weatherLock;
   if (modePickerCustomDayTimeLockInput) modePickerCustomDayTimeLockInput.value = String(settings.dayTimeLock);
+  if (modePickerCustomRespawnRuleInput) modePickerCustomRespawnRuleInput.value = settings.respawnRule || "instant";
+  if (modePickerCustomRespawnDelayInput) modePickerCustomRespawnDelayInput.value = String(settings.respawnDelaySeconds ?? 0);
+  if (modePickerCustomRespawnLivesInput) modePickerCustomRespawnLivesInput.value = String(settings.respawnLives ?? 3);
   renderModePickerCustomGameUi();
   if (autoStart) startCustomMatchFromPanel();
 }
@@ -39165,7 +39213,10 @@ function getModePickerCustomGameDraftSettings() {
     xpMultiplier: (Number(modePickerCustomXpMultiplierInput?.value) || 100) / 100,
     enemyHealthMultiplier: (Number(modePickerCustomEnemyHealthInput?.value) || 100) / 100,
     weatherLock: modePickerCustomWeatherLockInput?.value || "none",
-    dayTimeLock: Number(modePickerCustomDayTimeLockInput?.value ?? -1)
+    dayTimeLock: Number(modePickerCustomDayTimeLockInput?.value ?? -1),
+    respawnRule: modePickerCustomRespawnRuleInput?.value || "instant",
+    respawnDelaySeconds: Number(modePickerCustomRespawnDelayInput?.value ?? 0),
+    respawnLives: Number(modePickerCustomRespawnLivesInput?.value ?? 3)
   });
 }
 
@@ -39247,6 +39298,7 @@ function startCustomMatchFromPanel() {
 function applyCustomGameSettingsAtMatchStart() {
   const settings = getActiveCustomGameSettings();
   if (!settings || currentMatchMode !== "normal") return;
+  resetCustomRespawnStateForMatch(settings);
   captureMainSaveBeforeCustomSession();
   respawnPlayer();
   
@@ -39352,6 +39404,13 @@ function renderModePickerCustomGameUi() {
 
   if (modePickerCustomWeatherLockInput) modePickerCustomWeatherLockInput.value = draftSettings.weatherLock;
   if (modePickerCustomDayTimeLockInput) modePickerCustomDayTimeLockInput.value = String(draftSettings.dayTimeLock);
+  if (modePickerCustomRespawnRuleInput) modePickerCustomRespawnRuleInput.value = draftSettings.respawnRule || "instant";
+  if (modePickerCustomRespawnDelayInput && document.activeElement !== modePickerCustomRespawnDelayInput) {
+    modePickerCustomRespawnDelayInput.value = String(draftSettings.respawnDelaySeconds ?? 0);
+  }
+  if (modePickerCustomRespawnLivesInput && document.activeElement !== modePickerCustomRespawnLivesInput) {
+    modePickerCustomRespawnLivesInput.value = String(draftSettings.respawnLives ?? 3);
+  }
 
   if (modePickerCustomPublishBtn) {
     modePickerCustomPublishBtn.disabled = false;
@@ -48583,6 +48642,14 @@ let shopWishlist = [];
         if (settings.xpMultiplier !== 1) mods.push(`XP ${Math.round(settings.xpMultiplier * 100)}%`);
         if (settings.damageTakenMultiplier !== 1) mods.push(`Erh. DMG ${Math.round(settings.damageTakenMultiplier * 100)}%`);
         if (settings.enemyHealthMultiplier !== 1) mods.push(`Gegner HP ${Math.round(settings.enemyHealthMultiplier * 100)}%`);
+        if (settings.respawnRule === "off") mods.push("Respawn AUS");
+        if (settings.respawnRule === "delay") mods.push(`Respawn ${Math.max(0, Math.floor(Number(settings.respawnDelaySeconds || 0)))}s`);
+        if (settings.respawnRule === "limited") {
+          const livesLeft = Number.isFinite(customRespawnState.remainingLives)
+            ? customRespawnState.remainingLives
+            : Math.max(0, Number(settings.respawnLives || 0));
+          mods.push(`Leben ${Math.max(0, livesLeft)}`);
+        }
         leadEl.textContent = mods.length > 0 ? mods.join(" • ") : "Individuelle Regeln aktiv";
       }
     }
@@ -60267,6 +60334,67 @@ async function loadMaintenanceStateFromSupabase() {
       player.invincibleTimer = 120;
     }
 
+    function resetCustomRespawnStateForMatch(settings = null) {
+      const resolved = normalizeCustomGameSettings(settings || getActiveCustomGameSettings() || createDefaultCustomGameSettings());
+      if (resolved.respawnRule === "limited") {
+        customRespawnState.remainingLives = Math.max(0, Number(resolved.respawnLives || 0));
+      } else {
+        customRespawnState.remainingLives = null;
+      }
+    }
+
+    function eliminatePlayerNoRespawn(message) {
+      gameStarted = false;
+      showMessage(message, 2600);
+      setTimeout(() => openLobby(), 900);
+    }
+
+    function handleCustomRespawnFlow(deathMessage = "Du bist gestorben!") {
+      if (currentMatchMode !== "normal") return false;
+      const settings = getActiveCustomGameSettings();
+      if (!settings) return false;
+
+      const delayMs = Math.max(0, Math.floor((Number(settings.respawnDelaySeconds || 0)) * 1000));
+      const doRespawn = () => {
+        respawnPlayer();
+        player.health = Math.max(1, Math.min(player.maxHealth, Number(settings.startHealth || player.maxHealth || 5)));
+        player.invincibleTimer = Math.max(Number(player.invincibleTimer || 0), 120);
+      };
+
+      if (settings.respawnRule === "off") {
+        eliminatePlayerNoRespawn(`${deathMessage} Kein Respawn aktiv.`);
+        return true;
+      }
+
+      if (settings.respawnRule === "limited") {
+        const lives = Number.isFinite(customRespawnState.remainingLives) ? customRespawnState.remainingLives : Math.max(0, Number(settings.respawnLives || 0));
+        if (lives <= 0) {
+          eliminatePlayerNoRespawn(`${deathMessage} Keine Leben mehr.`);
+          return true;
+        }
+        customRespawnState.remainingLives = lives - 1;
+        const livesText = customRespawnState.remainingLives === 1 ? "1 Leben übrig" : `${customRespawnState.remainingLives} Leben übrig`;
+        if (delayMs > 0) {
+          showMessage(`${deathMessage} Respawn in ${Math.round(delayMs / 1000)}s... (${livesText})`, 1800);
+          setTimeout(doRespawn, delayMs);
+        } else {
+          showMessage(`${deathMessage} Respawn... (${livesText})`, 1600);
+          doRespawn();
+        }
+        return true;
+      }
+
+      if (settings.respawnRule === "delay" && delayMs > 0) {
+        showMessage(`${deathMessage} Respawn in ${Math.round(delayMs / 1000)}s...`, 1800);
+        setTimeout(doRespawn, delayMs);
+        return true;
+      }
+
+      showMessage(`${deathMessage} Respawn...`, 1500);
+      doRespawn();
+      return true;
+    }
+
     function handleSkySurvivalElimination(reason = "Sky Survival ist vorbei.") {
       player.health = Math.max(0, player.health);
       gameStarted = false;
@@ -60355,6 +60483,7 @@ async function loadMaintenanceStateFromSupabase() {
           setTimeout(() => openLobby(), 900);
           return;
         }
+        if (handleCustomRespawnFlow("Du bist heruntergefallen!")) return;
         respawnPlayer();
       }
 
@@ -60717,6 +60846,7 @@ async function loadMaintenanceStateFromSupabase() {
           setTimeout(() => openLobby(), 900);
           return;
         }
+        if (handleCustomRespawnFlow("Du bist gestorben!")) return;
         showMessage("Du bist gestorben! Respawn...");
         respawnPlayer();
       }
