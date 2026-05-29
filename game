@@ -38619,6 +38619,12 @@ function createDefaultCustomGameSettings() {
     xpMultiplier: 1,
     enemyHealthMultiplier: 1,
     enemySpeedMultiplier: 1,
+    slimeSize: 1,
+    slimeSpeed: 100,
+    slimePrimary: "ball",
+    slimeType: "normal",
+    slimeBotDifficulty: "normal",
+    slimeGameMode: "arena",
     healthRegen: 0,
     weatherLock: "none",
     dayTimeLock: -1,
@@ -38647,6 +38653,20 @@ function normalizeCustomGameSettings(settings = null) {
     xpMultiplier: clampMultiplier(settings?.xpMultiplier, fallback.xpMultiplier),
     enemyHealthMultiplier: clampMultiplier(settings?.enemyHealthMultiplier, fallback.enemyHealthMultiplier),
     enemySpeedMultiplier: clampMultiplier(settings?.enemySpeedMultiplier, fallback.enemySpeedMultiplier),
+    slimeSize: Math.max(0.5, Math.min(3, Number(settings?.slimeSize) || fallback.slimeSize)),
+    slimeSpeed: Math.max(30, Math.min(250, Number(settings?.slimeSpeed) || fallback.slimeSpeed)),
+    slimePrimary: ["ball", "spray", "wave", "spike"].includes(String(settings?.slimePrimary || ""))
+      ? String(settings?.slimePrimary)
+      : fallback.slimePrimary,
+    slimeType: ["normal", "fire", "desert", "alien", "ice", "poison"].includes(String(settings?.slimeType || ""))
+      ? String(settings?.slimeType)
+      : fallback.slimeType,
+    slimeBotDifficulty: ["easy", "normal", "hard", "master"].includes(String(settings?.slimeBotDifficulty || ""))
+      ? String(settings?.slimeBotDifficulty)
+      : fallback.slimeBotDifficulty,
+    slimeGameMode: ["arena", "king", "evolution", "fusion"].includes(String(settings?.slimeGameMode || ""))
+      ? String(settings?.slimeGameMode)
+      : fallback.slimeGameMode,
     healthRegen: Math.max(0, Math.min(5, Number(settings?.healthRegen) || 0)),
     weatherLock: String(settings?.weatherLock || fallback.weatherLock),
     dayTimeLock: Number(settings?.dayTimeLock ?? fallback.dayTimeLock),
@@ -56635,6 +56655,9 @@ async function loadMaintenanceStateFromSupabase() {
         applyCreativeSessionSettings(true);
         respawnPlayer();
         player.health = Math.min(player.maxHealth, normalizeCreativeMapSettings(creativeState.settings).startHealth);
+        populateDefaultSlimeSet();
+        clearSlimesNearPlayer(240);
+        player.invincibleTimer = Math.max(Number(player.invincibleTimer || 0), 240);
         renderCreativeHud();
       } else {
         populateDefaultSlimeSet();
@@ -61594,10 +61617,21 @@ async function loadMaintenanceStateFromSupabase() {
 
     canvas.addEventListener("mouseleave", () => cancelMining());
 
-    function areSlimesEnabledBySeasonMilestone() {
-      return season2MilestoneState.claimed.includes("m1");
+    const SLIME_SYSTEM_REWORK_ENABLED = true;
+    function areSlimesEnabledGlobally() {
+      if (!SLIME_SYSTEM_REWORK_ENABLED) return false;
+      return gameStarted && !inLobby;
     }
     const slimes = [];
+
+    function getSlimeModeTuning() {
+      const mode = selectedLobbyMode || "solo";
+      if (mode === "flood") return { countScale: 1.2, speedMult: 1.1, healthMult: 1.15 };
+      if (mode === "rift") return { countScale: 1.25, speedMult: 1.12, healthMult: 1.2 };
+      if (mode === "datamine") return { countScale: 1.15, speedMult: 1.16, healthMult: 1.1 };
+      if (mode === "creative") return { countScale: 0.9, speedMult: 0.95, healthMult: 0.9 };
+      return { countScale: 1, speedMult: 1, healthMult: 1 };
+    }
 
     function resetSoloBossState() {
       soloBossState.startedAt = Date.now();
@@ -61629,8 +61663,7 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function createSlime(x, y, type = "normal") {
-      if (!areSlimesEnabledBySeasonMilestone()) return null;
-      if (currentMatchMode === "lava" || currentMatchMode === "sky") return null;
+      if (!areSlimesEnabledGlobally()) return null;
       let color = "#44dd66";
       let damage = 1;
       let health = 2;
@@ -61708,20 +61741,25 @@ async function loadMaintenanceStateFromSupabase() {
       }
 
       const customSettings = getActiveCustomGameSettings();
+      const modeTuning = getSlimeModeTuning();
       const customEnemyHealthMultiplier = customSettings?.enemyHealthMultiplier || 1;
-      const rawHealth = Math.max(1, Math.round(health * customEnemyHealthMultiplier));
+      const speedMultiplier = Math.max(0.3, (customSettings?.slimeSpeed || 100) / 100);
+      const sizeMultiplier = Math.max(0.5, Number(customSettings?.slimeSize || 1));
+      const rawHealth = Math.max(1, Math.round(health * customEnemyHealthMultiplier * modeTuning.healthMult));
       const hpCap = type === "overlord_boss" ? 120 : 12;
       const finalHealth = Math.min(hpCap, rawHealth);
 
       const baseSize = type === "overlord_boss" ? 52 : (elite ? 34 : (type.includes("alien") ? 30 : 28));
+      const finalSize = Math.max(16, Math.round(baseSize * sizeMultiplier));
+      const finalSpeed = Math.max(0.45, speed * speedMultiplier * modeTuning.speedMult);
       slimes.push({
         type,
         elite,
         x, y,
-        w: baseSize,
-        h: Math.max(20, baseSize - 6),
-        vx: Math.random() > 0.5 ? speed : -speed,
-        moveSpeed: speed,
+        w: finalSize,
+        h: Math.max(20, finalSize - 6),
+        vx: Math.random() > 0.5 ? finalSpeed : -finalSpeed,
+        moveSpeed: finalSpeed,
         damage,
         color,
         highlight,
@@ -61849,9 +61887,13 @@ async function loadMaintenanceStateFromSupabase() {
 
     function populateDefaultSlimeSet() {
       slimes.length = 0;
-      for (let i = 0; i < 4; i++) createSlime((14 + WORLD_LEFT_PADDING + i * 10) * TILE, 16 * TILE, "fire");
-      for (let i = 0; i < 4; i++) createSlime((82 + WORLD_LEFT_PADDING + i * 10) * TILE, 16 * TILE, "desert");
-      for (let i = 0; i < 3; i++) createSlime((95 + WORLD_LEFT_PADDING + i * 4) * TILE, 16 * TILE, "alien");
+      const tuning = getSlimeModeTuning();
+      const fireCount = Math.max(2, Math.round(4 * tuning.countScale));
+      const desertCount = Math.max(2, Math.round(4 * tuning.countScale));
+      const alienCount = Math.max(2, Math.round(3 * tuning.countScale));
+      for (let i = 0; i < fireCount; i++) createSlime((14 + WORLD_LEFT_PADDING + i * 10) * TILE, 16 * TILE, "fire");
+      for (let i = 0; i < desertCount; i++) createSlime((82 + WORLD_LEFT_PADDING + i * 10) * TILE, 16 * TILE, "desert");
+      for (let i = 0; i < alienCount; i++) createSlime((95 + WORLD_LEFT_PADDING + i * 4) * TILE, 16 * TILE, "alien");
       createSlime((26 + WORLD_LEFT_PADDING) * TILE, 16 * TILE, "elite_fire");
       createSlime((90 + WORLD_LEFT_PADDING) * TILE, 16 * TILE, "elite_desert");
       createSlime((102 + WORLD_LEFT_PADDING) * TILE, 16 * TILE, "elite_alien");
@@ -62098,7 +62140,7 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function updateSlimes() {
-      if (!areSlimesEnabledBySeasonMilestone()) {
+      if (!areSlimesEnabledGlobally()) {
         if (slimes.length) slimes.length = 0;
         return;
       }
@@ -62231,7 +62273,7 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function drawSlimes(cam) {
-      if (!areSlimesEnabledBySeasonMilestone()) return;
+      if (!areSlimesEnabledGlobally()) return;
       if (isSkySurvivalActive()) return;
       for (const s of slimes) {
         const sx = s.x - cam.x;
