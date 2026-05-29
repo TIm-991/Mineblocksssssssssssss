@@ -35972,14 +35972,7 @@
     </div>
   </div>
 
-  <script id="leakDatamineDiff" type="application/json">
-    [
-      { "status": "new", "code": "SOLO-RUSH", "title": "Solo Rush", "text": "Solo-Loop, Abwurf und Progress-Schritte bekommen morgen neue Gameplay-Parts." },
-      { "status": "new", "code": "RUNTIME-06APR", "title": "Update Tag", "text": "Ingame update erst am 06.04.2026 im Lauf des Tages mit neuen Gameplay-Sachen." },
-      { "status": "new", "code": "GAMELOOP-REFRESH", "title": "Gameplay Rework", "text": "Neue Solo-Gameplay-Sachen, Balancing und UI-Feedback kommen mit dem Update." },
-      { "status": "removed", "code": "OLD-ROADMAP", "title": "Roadmap Archiv", "text": "Die alte Roadmap-Ansicht wurde gestrichen, Hinweise leben jetzt im Solo-HUD." }
-    ]
-  </script>
+  
 
   <!-- Friends List Menu -->
   <div id="friendsListMenu" class="friendsListMenu hidden">
@@ -37043,6 +37036,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.min.js"></script>
   <script src="assets/data/fortnite-gg-shop.js"></script>
+  <script src="assets/config/lobby_backgrounds.js"></script>
+  <script src="assets/config/leaks.js"></script>
   
   <script>
           const SUPABASE_URL = "https://bunuotplzgsikgstcpig.supabase.co";
@@ -41701,85 +41696,19 @@ let shopWishlist = [];
       { id: "last_reality", name: "Last Reality", bodyColor: "#a926ff", eyeColor: "#ffe0ff", price: 35, rarity: "mythic", shopHidden: true }
     ];
 
-    const lobbyBackgrounds = [
-      {
-        id: "season8_standard",
-        name: "Season 3 Standard",
-        image: "assets/llL1pC.png",
-        rarity: "common",
-        sourceType: "starter",
-        sourceLabel: "Season 3",
-        dynamic: false,
-        tintA: "rgba(64, 154, 176, 0.16)",
-        tintB: "rgba(116, 224, 207, 0.12)",
-        tintC1: "rgba(18, 70, 108, 0.18)",
-        tintC2: "rgba(10, 36, 72, 0.2)",
-        tintC3: "rgba(8, 18, 40, 0.4)",
-        dynamicAccent: "rgba(118, 220, 255, 0.22)"
-      },
-      {
-        id: "s3_oasis_dawn",
-        name: "Oasis Dawn",
-        image: "assets/4EhlxO.jpg",
-        rarity: "epic",
-        sourceType: "shop",
-        sourceLabel: "Shop",
-        price: 750,
-        dynamic: false,
-        tintA: "rgba(255, 164, 94, 0.16)",
-        tintB: "rgba(104, 214, 255, 0.12)",
-        tintC1: "rgba(56, 92, 140, 0.16)",
-        tintC2: "rgba(20, 38, 82, 0.18)",
-        tintC3: "rgba(8, 14, 34, 0.35)",
-        dynamicAccent: "rgba(255, 206, 132, 0.24)"
-      },
-      {
-        id: "c3s3_morvel_bg",
-        name: "Morvel Skyline",
-        image: "assets/morvel.jpg",
-        rarity: "morvel",
-        sourceType: "shop",
-        sourceLabel: "Shop",
-        price: 1000,
-        dynamic: false,
-        tintA: "rgba(219, 44, 44, 0.18)",
-        tintB: "rgba(44, 106, 235, 0.14)",
-        tintC1: "rgba(33, 23, 68, 0.2)",
-        tintC2: "rgba(14, 20, 48, 0.24)",
-        tintC3: "rgba(8, 12, 26, 0.42)",
-        dynamicAccent: "rgba(255, 72, 72, 0.22)"
-      },
-      {
-        id: "krieg_loading_screen",
-        name: "Krieg Loading",
-        image: "assets/krieg.jpg",
-        rarity: "legendary",
-        sourceType: "event",
-        sourceLabel: "Legacy Event",
-        dynamic: false,
-        tintA: "rgba(156, 32, 25, 0.18)",
-        tintB: "rgba(84, 24, 20, 0.14)",
-        tintC1: "rgba(40, 16, 18, 0.2)",
-        tintC2: "rgba(18, 10, 14, 0.24)",
-        tintC3: "rgba(6, 8, 12, 0.44)",
-        dynamicAccent: "rgba(255, 99, 92, 0.24)"
-      },
-      {
-        id: "command_plus_bg",
-        name: "Command Plus Horizon",
-        image: "assets/g6x45p.png",
-        rarity: "mythic",
-        sourceType: "membership",
-        sourceLabel: "COMMAND+",
-        dynamic: false,
-        tintA: "rgba(84, 141, 255, 0.18)",
-        tintB: "rgba(52, 88, 196, 0.14)",
-        tintC1: "rgba(22, 42, 96, 0.2)",
-        tintC2: "rgba(12, 24, 56, 0.24)",
-        tintC3: "rgba(6, 12, 28, 0.42)",
-        dynamicAccent: "rgba(126, 189, 255, 0.26)"
-      }
-    ];
+        let lobbyBackgrounds = Array.isArray(window.LOBBY_BACKGROUNDS_CONFIG)
+      ? window.LOBBY_BACKGROUNDS_CONFIG.slice()
+      : [
+        {
+          id: "season8_standard",
+          name: "Season 3 Standard",
+          description: "Fallback Hintergrund falls keine Config geladen wurde.",
+          image: "assets/default_bg.jpg",
+          sourceType: "default",
+          rarity: "normal",
+          theme: "classic"
+        }
+      ];
 
     const archivedSkinCatalog = {
       eyes: [],
@@ -52478,6 +52407,9 @@ async function loadMaintenanceStateFromSupabase() {
 
     function getDatamineDiffEntries() {
       try {
+        if (Array.isArray(window.LEAK_DATAMINE_DIFF)) {
+          return window.LEAK_DATAMINE_DIFF;
+        }
         const node = document.getElementById("leakDatamineDiff");
         if (!node) return [];
         const parsed = JSON.parse(node.textContent || "[]");
@@ -62584,4 +62516,6 @@ drawRiftGlitchOverlay(cam);
   
 </body>
 </html>
+
+
 
