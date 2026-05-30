@@ -21587,6 +21587,87 @@
       margin-top: 6px;
     }
 
+    .mbucksStoreCard {
+      max-width: 980px;
+    }
+
+    .mbucksStoreLead {
+      color: rgba(232, 240, 255, 0.88);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .mbucksStoreGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 14px 0 12px;
+    }
+
+    .mbucksStorePack {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background:
+        radial-gradient(circle at top right, rgba(114, 176, 255, 0.18), transparent 35%),
+        linear-gradient(180deg, rgba(16, 24, 40, 0.92), rgba(10, 15, 24, 0.96));
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+      display: grid;
+      gap: 8px;
+    }
+
+    .mbucksStorePackTitle {
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(211, 226, 255, 0.84);
+    }
+
+    .mbucksStorePackAmount {
+      font-size: 28px;
+      font-weight: 1000;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .mbucksStorePackPrice {
+      font-size: 14px;
+      font-weight: 800;
+      color: rgba(255, 228, 169, 0.96);
+    }
+
+    .mbucksStoreBuyBtn {
+      min-height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(175, 213, 255, 0.2);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), transparent),
+        linear-gradient(135deg, rgba(103, 156, 255, 0.95), rgba(73, 216, 208, 0.9));
+      color: #f7fbff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .mbucksStoreBuyBtn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .mbucksStoreNote {
+      margin-top: 8px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(230, 239, 252, 0.84);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
     .mbucksEconomyGrid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -35244,6 +35325,7 @@
             
             <button class="lobbyNavBtn" onclick="openMenu('quest')"><span class="lobbyNavIcon">📜</span> Quests</button>
             <button class="lobbyNavBtn" onclick="openMenu('skill')"><span class="lobbyNavIcon">⚡</span> Skills</button>
+            <button class="lobbyNavBtn" onclick="openMenu('mbucksStore')"><span class="lobbyNavIcon">💰</span> M-BUCKS</button>
             <button class="lobbyNavBtn" onclick="openMenu('commandPlus')"><span class="lobbyNavIcon">🛡️</span> COMMAND+</button>
             <button class="lobbyNavBtn" onclick="openMenu('creator')"><span class="lobbyNavIcon">💎</span> Creator</button>
           </div>
@@ -35387,6 +35469,49 @@
       <div class="modeRulesActions mbucksCreditActions">
         <button id="mbucksCreditRepayBtn" class="achievementCloseBtn">Jetzt abbezahlen</button>
         <button class="achievementCloseBtn" onclick="toggleMBucksCreditMenu()">Schliessen</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mbucksStoreMenu" class="inventoryMenu hidden">
+    <div class="modeRulesCard mbucksStoreCard">
+      <div class="modeRulesEyebrow">M-Bucks Store</div>
+      <div class="modeRulesTitle">M-BUCKS KAUFEN</div>
+      <div class="mbucksStoreLead">
+        Kaufe M-BUCKS mit Echtgeld. Zahlungen laufen sicher über den Payment-Provider (z. B. Stripe), danach werden M-BUCKS serverseitig gutgeschrieben.
+      </div>
+      <div class="mbucksStoreGrid">
+        <div class="mbucksStorePack">
+          <div class="mbucksStorePackTitle">Starter</div>
+          <div class="mbucksStorePackAmount">1.000</div>
+          <div class="mbucksStorePackPrice">4,99 EUR</div>
+          <button class="mbucksStoreBuyBtn" data-mbucks-pack="starter" data-pack-price-cents="499">Jetzt kaufen</button>
+        </div>
+        <div class="mbucksStorePack">
+          <div class="mbucksStorePackTitle">Action</div>
+          <div class="mbucksStorePackAmount">2.800</div>
+          <div class="mbucksStorePackPrice">11,99 EUR</div>
+          <button class="mbucksStoreBuyBtn" data-mbucks-pack="action" data-pack-price-cents="1199">Jetzt kaufen</button>
+        </div>
+        <div class="mbucksStorePack">
+          <div class="mbucksStorePackTitle">Pro</div>
+          <div class="mbucksStorePackAmount">5.000</div>
+          <div class="mbucksStorePackPrice">19,99 EUR</div>
+          <button class="mbucksStoreBuyBtn" data-mbucks-pack="pro" data-pack-price-cents="1999">Jetzt kaufen</button>
+        </div>
+        <div class="mbucksStorePack">
+          <div class="mbucksStorePackTitle">Ultra</div>
+          <div class="mbucksStorePackAmount">13.500</div>
+          <div class="mbucksStorePackPrice">49,99 EUR</div>
+          <button class="mbucksStoreBuyBtn" data-mbucks-pack="ultra" data-pack-price-cents="4999">Jetzt kaufen</button>
+        </div>
+      </div>
+      <div id="mbucksStoreStatus" class="mbucksStoreNote">
+        Hinweis: Für Echtgeld-Käufe musst du mit Cloud-Account eingeloggt sein.
+      </div>
+      <div class="modeRulesActions mbucksCreditActions">
+        <button id="mbucksStoreRefreshBtn" class="achievementCloseBtn" type="button">Status prüfen</button>
+        <button id="closeMBucksStoreBtn" class="achievementCloseBtn" type="button">Schließen</button>
       </div>
     </div>
   </div>
@@ -38331,6 +38456,10 @@
     const modeRulesCancelBtn = document.getElementById("modeRulesCancelBtn");
     const modeRulesStartBtn = document.getElementById("modeRulesStartBtn");
     const mbucksCreditMenu = document.getElementById("mbucksCreditMenu");
+    const mbucksStoreMenu = document.getElementById("mbucksStoreMenu");
+    const mbucksStoreStatus = document.getElementById("mbucksStoreStatus");
+    const mbucksStoreRefreshBtn = document.getElementById("mbucksStoreRefreshBtn");
+    const closeMBucksStoreBtn = document.getElementById("closeMBucksStoreBtn");
     const mbucksCreditInfo = document.getElementById("mbucksCreditInfo");
     const mbucksCreditTimerWrap = document.getElementById("mbucksCreditTimerWrap");
     const mbucksCreditTimerMeta = document.getElementById("mbucksCreditTimerMeta");
@@ -38341,6 +38470,7 @@
     const mbucksAutoMeta = document.getElementById("mbucksAutoMeta");
     const mbucksAutoEnabledToggle = document.getElementById("mbucksAutoEnabledToggle");
     const mbucksLedger = document.getElementById("mbucksLedger");
+    const mbucksStoreBuyBtns = Array.from(document.querySelectorAll(".mbucksStoreBuyBtn"));
     const floodModeInline = document.getElementById("floodModeInline");
     const floodModeInlineTitle = floodModeInline?.querySelector(".floodModeInlineTitle") || null;
     const floodModeHudTimer = document.getElementById("floodModeHudTimer");
@@ -42423,6 +42553,7 @@ async function resetGlobalDiscount() {
     let lockerOpen = false;
     let moreMenuOpen = false;
     let mbucksCreditOpen = false;
+    let mbucksStoreOpen = false;
     let passOpen = false;
     let roadmapOpen = false;
     let blogOpen = false;
@@ -42436,6 +42567,12 @@ async function resetGlobalDiscount() {
     let communityEventOpen = false;
     let loreOpen = false;
     let npcOpen = false;
+    const MBUCKS_PACKS = {
+      starter: { mbucks: 1000, priceCents: 499, label: "Starter" },
+      action: { mbucks: 2800, priceCents: 1199, label: "Action" },
+      pro: { mbucks: 5000, priceCents: 1999, label: "Pro" },
+      ultra: { mbucks: 13500, priceCents: 4999, label: "Ultra" }
+    };
     let riftNextGlitchAt = 0;
     let riftGlitchTimer = 0;
     const riftParticles = [];
@@ -52222,7 +52359,7 @@ async function loadMaintenanceStateFromSupabase() {
       
       const verifiedBadge = document.getElementById("creatorVerifiedBadge");
       if (verifiedBadge) {
-        verifiedBadge.classList.toggle("hidden", !verifiedBadge);
+        verifiedBadge.classList.toggle("hidden", !verified);
       }
       
       const tierProgressBar = document.getElementById("creatorTierProgressBar");
@@ -54343,6 +54480,10 @@ async function loadMaintenanceStateFromSupabase() {
         mbucksCreditOpen = false;
         if (mbucksCreditMenu) mbucksCreditMenu.classList.add("hidden");
       }
+      if (except !== "mbucksStore") {
+        mbucksStoreOpen = false;
+        if (mbucksStoreMenu) mbucksStoreMenu.classList.add("hidden");
+      }
       if (except !== "lore") {
         loreOpen = false;
         if (loreMenu) loreMenu.classList.add("hidden");
@@ -54391,6 +54532,12 @@ async function loadMaintenanceStateFromSupabase() {
         if (mbucksCreditMenu) mbucksCreditMenu.classList.toggle("hidden", !mbucksCreditOpen);
         if (mbucksCreditOpen) renderMBucksCreditMenu();
       }
+      else if (name === 'mbucksStore') {
+        closeMenus("mbucksStore");
+        mbucksStoreOpen = !mbucksStoreOpen;
+        if (mbucksStoreMenu) mbucksStoreMenu.classList.toggle("hidden", !mbucksStoreOpen);
+        if (mbucksStoreOpen) renderMBucksStoreStatus();
+      }
       else if (name === 'showdown') {
         const msg = "Alle acten wurden erledigt viel spaß";
         showMessage(msg, 2800);
@@ -54426,6 +54573,7 @@ async function loadMaintenanceStateFromSupabase() {
         lockerMenu,
         shopMenu,
         passMenu,
+        mbucksStoreMenu,
         questMenu,
         skillMenu,
         commandPlusMenu,
@@ -54454,6 +54602,71 @@ async function loadMaintenanceStateFromSupabase() {
       mbucksCreditOpen = false;
       if (mbucksCreditMenu) mbucksCreditMenu.classList.add("hidden");
       updateUI();
+    }
+
+    function closeMBucksStoreMenu() {
+      mbucksStoreOpen = false;
+      if (mbucksStoreMenu) mbucksStoreMenu.classList.add("hidden");
+      updateUI();
+    }
+
+    function setMBucksStoreBusy(isBusy) {
+      mbucksStoreBuyBtns.forEach((btn) => {
+        btn.disabled = !!isBusy;
+        btn.textContent = isBusy ? "Verbinde..." : "Jetzt kaufen";
+      });
+      if (mbucksStoreRefreshBtn) mbucksStoreRefreshBtn.disabled = !!isBusy;
+    }
+
+    function renderMBucksStoreStatus(message = "") {
+      if (!mbucksStoreStatus) return;
+      const wallet = Math.max(0, Math.floor(Number(inventory[7] || 0))).toLocaleString("de-DE");
+      const base = `Wallet: ${wallet} M-Bucks`;
+      if (message) {
+        mbucksStoreStatus.textContent = `${base} | ${message}`;
+      } else if (!cloudPlayerKey || !cloudSyncEnabled) {
+        mbucksStoreStatus.textContent = `${base} | Cloud-Login erforderlich für Echtgeld-Käufe.`;
+      } else {
+        mbucksStoreStatus.textContent = `${base} | Bereit für Checkout.`;
+      }
+    }
+
+    async function startMBucksCheckout(packId) {
+      const pack = MBUCKS_PACKS[packId];
+      if (!pack) {
+        showMessage("Unbekanntes Paket.", 1800);
+        return;
+      }
+      if (!supabaseClient || !cloudSyncEnabled || !cloudPlayerKey) {
+        showMessage("Bitte zuerst mit Cloud-Account einloggen.", 2400);
+        renderMBucksStoreStatus("Cloud-Login fehlt.");
+        return;
+      }
+
+      setMBucksStoreBusy(true);
+      renderMBucksStoreStatus(`Checkout wird gestartet (${pack.label})...`);
+      try {
+        const { data, error } = await supabaseClient.rpc("create_mbucks_checkout_session", {
+          p_player_key: cloudPlayerKey,
+          p_pack_id: packId,
+          p_mbucks_amount: pack.mbucks,
+          p_price_cents: pack.priceCents,
+          p_currency: "EUR"
+        });
+        if (error) throw error;
+        const checkoutUrl = data?.checkout_url || data?.url || null;
+        if (!checkoutUrl) {
+          throw new Error("CHECKOUT_URL_MISSING");
+        }
+        renderMBucksStoreStatus(`Weiterleitung zum Zahlungsanbieter (${pack.label})...`);
+        window.open(checkoutUrl, "_blank");
+      } catch (err) {
+        console.error("MBucks checkout failed:", err);
+        showMessage("Checkout konnte nicht gestartet werden.", 2600);
+        renderMBucksStoreStatus("Fehler beim Checkout-Start. Prüfe SQL/RPC + Payment Backend.");
+      } finally {
+        setMBucksStoreBusy(false);
+      }
     }
 
     function toggleInventory() {
@@ -57816,7 +58029,7 @@ async function loadMaintenanceStateFromSupabase() {
         lobbyYoutubeLayer.innerHTML = "";
       }
       const hideHud = inLobby || startScreenActive;
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || mbucksCreditOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       if (mbucksCreditOpen) renderMBucksCreditMenu();
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
       if (hudCombo) hudCombo.style.display = (hideHud || anyMenuOpen) ? "none" : "grid";
@@ -60183,6 +60396,16 @@ async function loadMaintenanceStateFromSupabase() {
       creatorOpen = false;
       if (creatorMenu) creatorMenu.classList.add("hidden");
     });
+    if (closeMBucksStoreBtn) closeMBucksStoreBtn.addEventListener("click", () => {
+      closeMBucksStoreMenu();
+    });
+    if (mbucksStoreRefreshBtn) mbucksStoreRefreshBtn.addEventListener("click", () => {
+      renderMBucksStoreStatus("Status aktualisiert.");
+      showMessage("M-Bucks Store aktualisiert.", 1600);
+    });
+    mbucksStoreBuyBtns.forEach((btn) => {
+      btn.addEventListener("click", () => startMBucksCheckout(btn.dataset.mbucksPack));
+    });
     if (closeCommandPlusBtn) closeCommandPlusBtn.addEventListener("click", () => {
       commandPlusOpen = false;
       if (commandPlusMenu) commandPlusMenu.classList.add("hidden");
@@ -61112,12 +61335,17 @@ async function loadMaintenanceStateFromSupabase() {
     function setupDonationButtons() {
       const donationButtons = document.querySelectorAll('.donationBtn');
       donationButtons.forEach(btn => {
+        if (btn.dataset.boundDonation === "1") return;
+        btn.dataset.boundDonation = "1";
         btn.addEventListener('click', () => {
           const amount = btn.dataset.amount;
           if (amount === 'custom') {
             const customAmount = prompt('Gib den Betrag ein (M-Bucks):');
-            if (customAmount && !isNaN(customAmount) && Number(customAmount) > 0) {
-              processDonation(Number(customAmount));
+            const parsedAmount = Math.floor(Number(customAmount || 0));
+            if (Number.isFinite(parsedAmount) && parsedAmount > 0) {
+              processDonation(parsedAmount);
+            } else if (customAmount !== null) {
+              showMessage('Ungültiger Betrag. Bitte nur ganze Zahlen > 0.', 2200);
             }
           } else {
             processDonation(Number(amount));
@@ -61127,35 +61355,43 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     async function processDonation(amount) {
-      if (!hasVerifiedCreatorAccess()) {
-        showMessage('Bitte aktiviere zuerst einen Creator-Code.', 2000);
+      const donationAmount = Math.max(0, Math.floor(Number(amount || 0)));
+      if (donationAmount <= 0) {
+        showMessage('Ungültiger Spendenbetrag.', 2000);
         return;
       }
 
-      if (inventory[7] < amount) {
+      const activeCreator = getActiveCreatorCodeData();
+      if (!activeCreator || !activeCreator.playerKey) {
+        showMessage('Bitte aktiviere zuerst einen Creator-Code.', 2200);
+        return;
+      }
+
+      if (!supabaseClient || !cloudSyncEnabled || !cloudPlayerKey) {
+        showMessage('Spenden gehen nur mit Cloud-Login (Supabase).', 2400);
+        return;
+      }
+
+      if (!spendMBucks(donationAmount, "Creator Donation", { showToast: false })) {
         showMessage('Nicht genug M-Bucks für diese Donation.', 2000);
         return;
       }
-
-      // Deduct from inventory
-      inventory[7] -= amount;
       
       // Record donation to Supabase
-      const profile = getActiveCreatorCodeData();
-      if (profile && supabaseClient) {
-        const success = await recordCreatorDonationToSupabase(profile.playerKey, amount);
+      if (activeCreator && supabaseClient) {
+        const success = await recordCreatorDonationToSupabase(activeCreator.playerKey, donationAmount);
         if (success) {
-          showMessage(`Vielen Dank für deine Donation von ${amount} M-Bucks!`, 2500);
+          showMessage(`Vielen Dank für deine Donation von ${donationAmount} M-Bucks!`, 2500);
           // Refresh UI with real data
           await updateCreatorProfileUI();
         } else {
           showMessage('Fehler bei der Donation. Bitte versuche es erneut.', 2000);
           // Refund on failure
-          inventory[7] += amount;
+          grantMBucks(donationAmount, "Donation Refund", { showToast: false });
         }
       } else {
         showMessage('Creator-Profile nicht gefunden.', 2000);
-        inventory[7] += amount; // Refund
+        grantMBucks(donationAmount, "Donation Refund", { showToast: false }); // Refund
       }
       
       updateUI();
@@ -62831,7 +63067,7 @@ async function loadMaintenanceStateFromSupabase() {
 
     function updateUI() {
       const startScreenActive = !!startScreen && startScreen.style.display !== "none";
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || mbucksCreditOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       const hideHud = inLobby || startScreenActive || anyMenuOpen;
 
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
