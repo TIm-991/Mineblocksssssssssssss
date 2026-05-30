@@ -34033,6 +34033,153 @@
       background: linear-gradient(125deg, rgba(255, 157, 81, 0.85), rgba(255, 198, 95, 0.7));
       color: #1c1306;
     }
+
+    .loginLoadingOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 12000;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 16% 24%, rgba(117, 211, 255, 0.24), transparent 38%),
+        radial-gradient(circle at 82% 74%, rgba(255, 177, 107, 0.2), transparent 40%),
+        linear-gradient(165deg, rgba(6, 10, 18, 0.94), rgba(2, 4, 10, 0.98));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 260ms ease;
+      overflow: hidden;
+    }
+
+    .loginLoadingOverlay.isVisible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .loginLoadingOverlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--login-loading-bg-image, none);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.5;
+      transform: scale(1.05);
+      filter: saturate(1.04) brightness(0.72);
+    }
+
+    .loginLoadingOverlay::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(6, 10, 18, 0.58), rgba(6, 10, 18, 0.9)),
+        radial-gradient(circle at 50% 30%, rgba(99, 185, 255, 0.12), transparent 35%);
+    }
+
+    .loginLoadingShell {
+      position: relative;
+      z-index: 2;
+      width: min(760px, calc(100vw - 36px));
+      padding: 28px 26px;
+      border-radius: 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(7, 12, 22, 0.56);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 28px 64px rgba(0, 0, 0, 0.45);
+      display: grid;
+      gap: 14px;
+    }
+
+    .loginLoadingTitle {
+      margin: 0;
+      font-family: "Bangers", "Arial Black", sans-serif;
+      letter-spacing: 0.05em;
+      font-size: clamp(44px, 10vw, 96px);
+      line-height: 0.88;
+      color: #f8fbff;
+      text-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+    }
+
+    .loginLoadingText {
+      margin: 0;
+      font-size: clamp(15px, 2.5vw, 22px);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #61dbff;
+    }
+
+    .loginLoadingSpinner {
+      width: 40px;
+      height: 40px;
+      margin: 2px auto 0;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.22);
+      border-top-color: #6de5ff;
+      animation: loginLoadingSpin 0.85s linear infinite;
+      box-sizing: border-box;
+    }
+
+    .loginLoadingProgressWrap {
+      width: min(520px, 100%);
+      margin: 4px auto 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .loginLoadingProgressBar {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+    }
+
+    .loginLoadingProgressFill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #5dd4ff, #7fffb7);
+      box-shadow: 0 0 14px rgba(93, 212, 255, 0.48);
+      transition: width 180ms linear;
+    }
+
+    .loginLoadingMeta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: rgba(231, 244, 255, 0.88);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    @keyframes loginLoadingSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    #lobbyScreen.lobbyVNext.isLoginEntering .lobbyBackdropDecor {
+      animation: lobbyLoginBackdropFade 460ms ease-out both;
+    }
+
+    #lobbyScreen.lobbyVNext.isLoginEntering .lobbyHub {
+      animation: lobbyLoginHubFade 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes lobbyLoginBackdropFade {
+      from { opacity: 0; filter: blur(10px) brightness(0.7); }
+      to { opacity: 1; filter: blur(0) brightness(1); }
+    }
+
+    @keyframes lobbyLoginHubFade {
+      from { opacity: 0; transform: translateY(22px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
   </style>
 </head>
 <body class="startScreenActive">
@@ -34185,6 +34332,23 @@
         <div class="startFooterLink">Support</div>
         <div class="startFooterLink">© 2026 Mineblock</div>
       </footer>
+    </div>
+  </div>
+
+  <div id="loginLoadingOverlay" class="loginLoadingOverlay hidden" aria-hidden="true">
+    <div class="loginLoadingShell">
+      <h2 class="loginLoadingTitle">MINEBLOCK</h2>
+      <p id="loginLoadingText" class="loginLoadingText">Anmeldung läuft ...</p>
+      <div class="loginLoadingSpinner" aria-hidden="true"></div>
+      <div class="loginLoadingProgressWrap">
+        <div class="loginLoadingProgressBar">
+          <div id="loginLoadingProgressFill" class="loginLoadingProgressFill"></div>
+        </div>
+        <div class="loginLoadingMeta">
+          <span id="loginLoadingStepText">Verbinde Dienste ...</span>
+          <span id="loginLoadingProgressText">0%</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -37186,6 +37350,11 @@
     const createAccountBtn = document.getElementById("createAccountBtn");
     const pinLoginBtn = document.getElementById("pinLoginBtn");
     const startInfo = document.getElementById("startInfo");
+    const loginLoadingOverlay = document.getElementById("loginLoadingOverlay");
+    const loginLoadingText = document.getElementById("loginLoadingText");
+    const loginLoadingProgressFill = document.getElementById("loginLoadingProgressFill");
+    const loginLoadingProgressText = document.getElementById("loginLoadingProgressText");
+    const loginLoadingStepText = document.getElementById("loginLoadingStepText");
     const hudRack = document.querySelector(".hudRack");
     const hudCombo = document.querySelector(".hudCombo");
     const xpHud = document.querySelector(".xpHud");
@@ -38269,6 +38438,9 @@
     let adminSessionName = "";
     let lobbyFriendCloudSyncTimer = null;
     let pendingSupabaseRewardModal = null;
+    let loginLoadingProgressTimer = null;
+    let loginLoadingStepTimer = null;
+    let lobbyLoginEntryTimer = null;
     let cloudSyncTimer = null;
     let cloudSyncInFlight = false;
     let cloudSyncLastSuccessAt = 0;
@@ -46142,6 +46314,180 @@ let shopWishlist = [];
       }
     }
 
+    function getLoginLoadingBackgroundUrl() {
+      const activeBackground = getActiveLobbyBackground();
+      if (!activeBackground?.image) return "";
+      return getSafeAssetImage(
+        activeBackground.image,
+        activeBackground.id || activeBackground.name || "login-loading"
+      );
+    }
+
+    function showLoginLoadingOverlay(message = "Anmeldung läuft ...") {
+      if (!loginLoadingOverlay) return;
+      const bgUrl = getLoginLoadingBackgroundUrl();
+      if (bgUrl) {
+        loginLoadingOverlay.style.setProperty("--login-loading-bg-image", `url("${bgUrl}")`);
+      } else {
+        loginLoadingOverlay.style.removeProperty("--login-loading-bg-image");
+      }
+      if (loginLoadingText) loginLoadingText.textContent = message;
+      loginLoadingOverlay.classList.remove("hidden");
+      requestAnimationFrame(() => {
+        loginLoadingOverlay.classList.add("isVisible");
+      });
+    }
+
+    function startLoginLoadingSequence() {
+      if (loginLoadingProgressTimer) {
+        clearInterval(loginLoadingProgressTimer);
+        loginLoadingProgressTimer = null;
+      }
+      if (loginLoadingStepTimer) {
+        clearInterval(loginLoadingStepTimer);
+        loginLoadingStepTimer = null;
+      }
+
+      const stepMessages = [
+        "Verbinde Dienste ...",
+        "Lade Cloud-Daten ...",
+        "Synchronisiere Spind ...",
+        "Bereite Lobby vor ...",
+        "Starte Session ..."
+      ];
+
+      let currentStep = 0;
+      let progress = 4;
+      if (loginLoadingProgressFill) loginLoadingProgressFill.style.width = `${progress}%`;
+      if (loginLoadingProgressText) loginLoadingProgressText.textContent = `${progress}%`;
+      if (loginLoadingStepText) loginLoadingStepText.textContent = stepMessages[currentStep];
+
+      loginLoadingProgressTimer = setInterval(() => {
+        if (progress >= 92) return;
+        progress = Math.min(92, progress + (progress < 50 ? 4 : 2));
+        if (loginLoadingProgressFill) loginLoadingProgressFill.style.width = `${progress}%`;
+        if (loginLoadingProgressText) loginLoadingProgressText.textContent = `${progress}%`;
+      }, 220);
+
+      loginLoadingStepTimer = setInterval(() => {
+        currentStep = (currentStep + 1) % stepMessages.length;
+        if (loginLoadingStepText) loginLoadingStepText.textContent = stepMessages[currentStep];
+      }, 700);
+    }
+
+    function setLoginLoadingProgress(percent = 0, stepText = "") {
+      const safePercent = Math.max(0, Math.min(100, Math.round(Number(percent) || 0)));
+      if (loginLoadingProgressFill) loginLoadingProgressFill.style.width = `${safePercent}%`;
+      if (loginLoadingProgressText) loginLoadingProgressText.textContent = `${safePercent}%`;
+      if (stepText && loginLoadingStepText) loginLoadingStepText.textContent = stepText;
+    }
+
+    function preloadImageAsset(url, seed = "login-warmup", timeoutMs = 3500) {
+      return new Promise((resolve) => {
+        const safeUrl = getSafeAssetImage(url, seed);
+        if (!safeUrl) {
+          resolve(false);
+          return;
+        }
+        const img = new Image();
+        let settled = false;
+        const finish = (ok) => {
+          if (settled) return;
+          settled = true;
+          resolve(!!ok);
+        };
+        const timer = setTimeout(() => finish(false), timeoutMs);
+        img.onload = () => {
+          clearTimeout(timer);
+          finish(true);
+        };
+        img.onerror = () => {
+          clearTimeout(timer);
+          finish(false);
+        };
+        img.src = safeUrl;
+      });
+    }
+
+    async function preloadLoginTransitionAssets() {
+      const targets = [];
+      const activeBg = getActiveLobbyBackground();
+      if (activeBg?.image) {
+        targets.push({ url: activeBg.image, seed: activeBg.id || "active-lobby-bg" });
+      }
+
+      const ownedBackgrounds = Array.isArray(playerSkin?.ownedLobbyBackgrounds)
+        ? playerSkin.ownedLobbyBackgrounds.slice(0, 8)
+        : [];
+      ownedBackgrounds.forEach((bgId) => {
+        const bg = getLobbyBackgroundData(bgId);
+        if (bg?.image) targets.push({ url: bg.image, seed: bg.id || "owned-lobby-bg" });
+      });
+
+      targets.push({ url: "assets/ui/xpicon.png", seed: "xp-icon" });
+      targets.push({ url: "assets/ui/xpboost.png", seed: "xp-boost-icon" });
+
+      const unique = [];
+      const seen = new Set();
+      targets.forEach((entry) => {
+        const key = `${entry.seed}|${entry.url}`;
+        if (!entry.url || seen.has(key)) return;
+        seen.add(key);
+        unique.push(entry);
+      });
+
+      if (!unique.length) return;
+      await Promise.all(unique.map((entry) => preloadImageAsset(entry.url, entry.seed)));
+    }
+
+    async function warmupLobbyUiBeforeEnter() {
+      runLoginUiRenderStep("Battle Pass", renderBattlePass);
+      runLoginUiRenderStep("Inventory", renderInventory);
+      runLoginUiRenderStep("Shop", renderShop);
+      runLoginUiRenderStep("Locker", renderLocker);
+      runLoginUiRenderStep("Skills", renderSkills);
+      runLoginUiRenderStep("Effects", renderEffects);
+      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+    }
+
+    function finishLoginLoadingSequence() {
+      if (loginLoadingProgressTimer) {
+        clearInterval(loginLoadingProgressTimer);
+        loginLoadingProgressTimer = null;
+      }
+      if (loginLoadingStepTimer) {
+        clearInterval(loginLoadingStepTimer);
+        loginLoadingStepTimer = null;
+      }
+      if (loginLoadingStepText) loginLoadingStepText.textContent = "Fertig ...";
+      if (loginLoadingProgressFill) loginLoadingProgressFill.style.width = "100%";
+      if (loginLoadingProgressText) loginLoadingProgressText.textContent = "100%";
+    }
+
+    function hideLoginLoadingOverlay() {
+      if (!loginLoadingOverlay) return;
+      finishLoginLoadingSequence();
+      loginLoadingOverlay.classList.remove("isVisible");
+      setTimeout(() => {
+        loginLoadingOverlay.classList.add("hidden");
+      }, 280);
+    }
+
+    function triggerLobbyLoginEntryTransition() {
+      if (!lobbyScreen) return;
+      if (lobbyLoginEntryTimer) {
+        clearTimeout(lobbyLoginEntryTimer);
+        lobbyLoginEntryTimer = null;
+      }
+      lobbyScreen.classList.remove("isLoginEntering");
+      void lobbyScreen.offsetWidth;
+      lobbyScreen.classList.add("isLoginEntering");
+      lobbyLoginEntryTimer = setTimeout(() => {
+        lobbyScreen.classList.remove("isLoginEntering");
+        lobbyLoginEntryTimer = null;
+      }, 760);
+    }
+
     async function finishCloudLogin(account, authUser = null) {
       const normalizedName = normalizePlayerName(account?.player_key || "");
       const displayName = String(account?.player_name || "").trim().slice(0, 20) || "Spieler";
@@ -46239,44 +46585,64 @@ let shopWishlist = [];
     }
 
     async function launchIntoLobby(name) {
-      playerName = name;
-      savePlayerName();
-      startScreen.style.display = "none";
-      Promise.all([
-        refreshCloudCreatorStatus().catch(() => ""),
-        refreshActiveCreatorCodeProfile().catch(() => null)
-      ]).then(() => {
-        updateCreatorCodeUi();
-        renderLobbyModeSelection();
-      }).catch(() => {});
-      updateLobbyUi();
-      showMessage(`Willkommen, ${playerName}!`, 2200);
-      openLobby();
-      if (!localStorage.getItem(`${PROGRESSION_RESET_ID}_free_level_popup`)) {
-        localStorage.setItem(`${PROGRESSION_RESET_ID}_free_level_popup`, "1");
-        progression.xp = 0;
+      showLoginLoadingOverlay("Loginvorgang läuft ...");
+      startLoginLoadingSequence();
+      const loginLoadStartedAt = Date.now();
+      const minLoadingMs = 3400;
+      setLoginLoadingProgress(8, "Prüfe Lobby-Ressourcen ...");
+      await preloadLoginTransitionAssets();
+      setLoginLoadingProgress(42, "Lade Assets ...");
+      await warmupLobbyUiBeforeEnter();
+      setLoginLoadingProgress(72, "Bereite Benutzeroberfläche vor ...");
+      await new Promise((resolve) => setTimeout(resolve, 420));
+      const elapsed = Date.now() - loginLoadStartedAt;
+      if (elapsed < minLoadingMs) {
+        await new Promise((resolve) => setTimeout(resolve, minLoadingMs - elapsed));
       }
-      // Legacy compensation flows disabled for Chapter 3 Season 3 hard reset.
-      if (isCurrentAccountBanned()) {
-        startInfo.textContent = "Dieses Konto ist von einem Admin gesperrt.";
-        setTimeout(() => {
-          openBanPopup();
-        }, 320);
+      setLoginLoadingProgress(92, "Starte Lobby ...");
+      try {
+        playerName = name;
+        savePlayerName();
+        startScreen.style.display = "none";
+        Promise.all([
+          refreshCloudCreatorStatus().catch(() => ""),
+          refreshActiveCreatorCodeProfile().catch(() => null)
+        ]).then(() => {
+          updateCreatorCodeUi();
+          renderLobbyModeSelection();
+        }).catch(() => {});
+        updateLobbyUi();
+        showMessage(`Willkommen, ${playerName}!`, 2200);
+        openLobby();
+        triggerLobbyLoginEntryTransition();
+        if (!localStorage.getItem(`${PROGRESSION_RESET_ID}_free_level_popup`)) {
+          localStorage.setItem(`${PROGRESSION_RESET_ID}_free_level_popup`, "1");
+          progression.xp = 0;
+        }
+        // Legacy compensation flows disabled for Chapter 3 Season 3 hard reset.
+        if (isCurrentAccountBanned()) {
+          startInfo.textContent = "Dieses Konto ist von einem Admin gesperrt.";
+          setTimeout(() => {
+            openBanPopup();
+          }, 320);
+        }
+        if (pendingSupabaseRewardModal && Array.isArray(pendingSupabaseRewardModal.rewards) && pendingSupabaseRewardModal.rewards.length) {
+          const modalPayload = {
+            lead: pendingSupabaseRewardModal.lead || "Neue Kontobelohnungen wurden geladen.",
+            reasons: Array.isArray(pendingSupabaseRewardModal.reasons) ? pendingSupabaseRewardModal.reasons.slice() : [],
+            rewards: pendingSupabaseRewardModal.rewards.slice(),
+            equipAction: null,
+            equipLabel: "Weiter"
+          };
+          pendingSupabaseRewardModal = null;
+          setTimeout(() => {
+            openShopPurchaseModal(modalPayload);
+          }, 900);
+        }
+        updateUI();
+      } finally {
+        hideLoginLoadingOverlay();
       }
-      if (pendingSupabaseRewardModal && Array.isArray(pendingSupabaseRewardModal.rewards) && pendingSupabaseRewardModal.rewards.length) {
-        const modalPayload = {
-          lead: pendingSupabaseRewardModal.lead || "Neue Kontobelohnungen wurden geladen.",
-          reasons: Array.isArray(pendingSupabaseRewardModal.reasons) ? pendingSupabaseRewardModal.reasons.slice() : [],
-          rewards: pendingSupabaseRewardModal.rewards.slice(),
-          equipAction: null,
-          equipLabel: "Weiter"
-        };
-        pendingSupabaseRewardModal = null;
-        setTimeout(() => {
-          openShopPurchaseModal(modalPayload);
-        }, 900);
-      }
-      updateUI();
     }
 
     async function createAccountAction() {
