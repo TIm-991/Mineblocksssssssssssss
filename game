@@ -35563,7 +35563,7 @@
           <div class="modeFortGrid">
             <button class="modeFortTile active" id="modeCardSolo" data-pick-mode="solo" data-category="solo">
               <div class="modeFortTileBg modeFortBgSolo"></div>
-              <div class="modeFortTileBar"><strong>SOLO</strong></div>
+              <div class="modeFortTileBar"><strong>SINGLEPLAYER</strong></div>
             </button>
             <button class="modeFortTile" id="modeCardCustomGamesBtn" data-category="custom" type="button">
               <div class="modeFortTileBg modeFortBgWorkshop"></div>
@@ -35571,7 +35571,7 @@
             </button>
           </div>
           <aside class="modeFortDetail" id="modeDetailPane">
-            <div class="modeFortDetailTitle" id="modeDetailTitle">SOLO</div>
+            <div class="modeFortDetailTitle" id="modeDetailTitle">SINGLEPLAYER</div>
             <div class="modeFortDetailDesc" id="modeDetailDesc">Überlebe allein und sichere deinen Fortschritt im Run.</div>
             <div class="modeFortDetailMeta" id="modeDetailMeta">
               <span class="modePickerMetaPill">1 Spieler</span>
@@ -35908,7 +35908,7 @@
                   <span class="btnIcon">💾</span><span>Save</span>
                 </button>
                 <button id="modePickerCustomUseSoloBtn" class="modernBtn danger" type="button">
-                  <span class="btnIcon">🧼</span><span>Solo</span>
+                  <span class="btnIcon">🧼</span><span>Singleplayer</span>
                 </button>
                 <button id="modePickerCustomPlayBtn" class="modernBtn primary large" type="button">
                   <span class="btnIcon">▶</span><span>Start</span>
@@ -35995,7 +35995,7 @@
             <div class="adminSectionEyebrow">Lobby-Modi</div>
             <div class="adminMiniGrid">
               <div>
-                <div class="adminModeTitle">Solo</div>
+                <div class="adminModeTitle">Singleplayer</div>
                 <div class="adminToggleRow">
                   <button id="adminModeNormalOnBtn" class="achievementCloseBtn">AN</button>
                   <button id="adminModeNormalOffBtn" class="achievementCloseBtn">AUS</button>
@@ -36016,7 +36016,7 @@
             />
             <select id="adminHeartsWarningScope" class="startInput">
               <option value="all">Alle Modi</option>
-              <option value="solo">Nur Solo</option>
+              <option value="solo">Nur Singleplayer</option>
             </select>
             <div class="adminToggleRow">
               <button id="adminHeartsWarningSaveBtn" class="achievementCloseBtn">Text speichern</button>
@@ -36219,7 +36219,7 @@
       </div>
       <div id="soloDirectiveHud" class="soloDirectiveHud hidden">
         <div class="soloDirectiveTop">
-          <div class="soloDirectiveBadge">Solo Direktive</div>
+          <div class="soloDirectiveBadge">Singleplayer Direktive</div>
           <div id="soloDirectiveChain" class="soloDirectiveChain">Run 1</div>
         </div>
         <div id="soloDirectiveTitle" class="soloDirectiveTitle">Wuerfel-Auftakt</div>
@@ -37472,7 +37472,7 @@
       <div class="riftDecisionHeader">
         <div class="riftDecisionEyebrow">Chapter 3 Season 3 • Riss-Entscheidung</div>
         <div id="riftDecisionTitle" class="riftDecisionTitle">Der Wuerfel antwortet</div>
-        <div id="riftDecisionLead" class="riftDecisionLead">Waehle eine Route fuer diesen Solo-Run. Jede Entscheidung kippt Risiko, Wasser und Buffs in eine andere Richtung.</div>
+        <div id="riftDecisionLead" class="riftDecisionLead">Waehle eine Route fuer diesen Singleplayer-Run. Jede Entscheidung kippt Risiko, Wasser und Buffs in eine andere Richtung.</div>
       </div>
       <div class="riftDecisionChoices">
         <div class="riftDecisionCard" data-tone="safe">
@@ -38320,7 +38320,7 @@
     const EMERGENCY_STATE_KEY = "mini_minecraft_emergency_state_v1";
     const LIVE_EVENT_STATE_KEY = "mini_minecraft_live_event_state_v1";
     const HEARTS_WARNING_KEY = "mini_minecraft_hearts_warning_v3";
-    const HEARTS_WARNING_DEFAULT = "Chapter 3 Season 3 Wuerfel ist live. Solo-Direktiven laufen jetzt in jedem Run.";
+    const HEARTS_WARNING_DEFAULT = "Chapter 3 Season 3 Wuerfel ist live. Singleplayer-Direktiven laufen jetzt in jedem Run.";
     const HEARTS_WARNING_LEGACY = "Ingame update erst am 06.04.2026 im Lauf des Tages mit neuen Gameplay-Sachen.";
     const HEARTS_WARNING_SCOPES = ["all", "solo"];
     const CREATIVE_MAP_LIBRARY_KEY = "mini_minecraft_creative_maps_v1";
@@ -39950,7 +39950,7 @@ function upsertLocalCustomGamePreset(entry = {}) {
 function normalizeCustomGamePresetRow(row = {}, fallbackSource = "cloud") {
   return {
     code: normalizeCustomGameCode(row.preset_code || row.code || ""),
-    name: sanitizeCreativeMapName(row.preset_name || row.name || "Solo Custom"),
+    name: sanitizeCreativeMapName(row.preset_name || row.name || "Singleplayer Custom"),
     creatorKey: normalizePlayerName(row.creator_key || row.creatorKey || ""),
     creatorName: String(row.creator_name || row.creatorName || "").trim(),
     settings: normalizeCustomGameSettings(row.settings),
@@ -40190,7 +40190,7 @@ async function publishCustomGamePresetToSupabase(code, presetName, settings) {
     .from(CUSTOM_GAME_PRESETS_TABLE)
     .upsert({
       preset_code: normalizedCode,
-      preset_name: sanitizeCreativeMapName(presetName || "Solo Custom"),
+      preset_name: sanitizeCreativeMapName(presetName || "Singleplayer Custom"),
       creator_key: cloudPlayerKey,
       creator_name: cloudAccountName || playerName || cloudPlayerKey,
       settings: normalizedSettings,
@@ -40211,7 +40211,7 @@ function setActiveCustomGamePreset(entry = null, options = {}) {
     customGameState.source = "";
     customRespawnState.remainingLives = null;
     if (modePickerCustomCodeInput) modePickerCustomCodeInput.value = "";
-    if (showMessageText) showMessage("Custom Game entfernt. Solo laeuft wieder normal.", 2200);
+    if (showMessageText) showMessage("Custom Game entfernt. Singleplayer laeuft wieder normal.", 2200);
   } else {
     const normalized = normalizeCustomGamePresetRow(entry, entry.source || "cloud");
     customGameState.activeCode = normalized.code;
@@ -40452,7 +40452,7 @@ function getModePickerCustomGameDraftSettings() {
 }
 
 async function publishCustomGamePresetFromMenu() {
-  const presetName = sanitizeCreativeMapName(modePickerCustomNameInput?.value || "Solo Custom");
+  const presetName = sanitizeCreativeMapName(modePickerCustomNameInput?.value || "Singleplayer Custom");
   let code = normalizeCustomGameCode(modePickerCustomShareCodeInput?.value || "");
   if (!code) code = createCustomGameCode();
   try {
@@ -40500,6 +40500,11 @@ async function publishCustomGamePresetFromMenu() {
 }
 
 function startCustomMatchFromPanel() {
+  if (isDowntimeAccessBlocked()) {
+    showMessage("Server ist in Wartung. Match-Start ist gesperrt.", 2600);
+    if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+    return;
+  }
   const settings = getModePickerCustomGameDraftSettings();
   const presetName = sanitizeCreativeMapName(modePickerCustomNameInput?.value || "Local Custom");
   
@@ -41403,7 +41408,7 @@ function ensureSelectedLobbyModeAvailable() {
 function getLobbyModeLabel(mode) {
   if (mode === "datamine") return "Data-Mine: Extraction";
   if (mode === "creative") return "Custom Games";
-  return "Solo";
+  return "Singleplayer";
 }
 
 function getSeason4LiveEventPhase() {
@@ -41523,7 +41528,7 @@ function applySeason4LiveEventSchedule() {
 
   if (season4LiveEventPhase === "live" && !season4LiveEventStartNoticeShown && inLobby) {
     season4LiveEventStartNoticeShown = true;
-    showMessage("Live Event gestartet! Solo und Hero sind jetzt deaktiviert.", 3200);
+    showMessage("Live Event gestartet! Singleplayer und Hero sind jetzt deaktiviert.", 3200);
   }
 
   if (season4LiveEventPhase === "live") {
@@ -41626,7 +41631,7 @@ function updateAdminModeInfo() {
     return;
   }
   const enabledModes = [
-    modeAccessState.solo ? "Solo" : null,
+    modeAccessState.solo ? "Singleplayer" : null,
     modeAccessState.creative ? "Custom Games" : null,
     modeAccessState.datamine ? "Data-Mine" : null
   ].filter(Boolean);
@@ -41641,7 +41646,11 @@ function isAnyLobbyModeEnabled() {
 }
 
 function shouldShowGlobalMaintenanceOverlay() {
-  return maintenanceMode && !isAnyLobbyModeEnabled();
+  return maintenanceMode;
+}
+
+function isDowntimeAccessBlocked() {
+  return maintenanceMode && !isAdminLoggedIn;
 }
 
 function applyModeAccessPayload(payload = {}) {
@@ -42001,7 +42010,7 @@ function updateGlobalDiscountInfo() {
     function getHeartsWarningModeLabel(scope) {
       const labels = {
         all: "Alle Modi",
-        solo: "Solo"
+        solo: "Singleplayer"
       };
       return labels[scope] || "Alle Modi";
     }
@@ -42717,14 +42726,14 @@ let shopWishlist = [];
     const NEWS_ENTRIES = {
       added: [
         "Chapter 3 Season 3 \"Wuerfel\" ist live mit 100 Battle-Pass-Hauptstufen, Reset und neuem Pass-Flow.",
-        "Solo-Direktiven bringen im Match rotierende Ziele mit XP- und M-Bucks-Rewards.",
+        "Singleplayer-Direktiven bringen im Match rotierende Ziele mit XP- und M-Bucks-Rewards.",
         "Neue Cube-Looks, Rift-Regenfarben und Oracle-Belohnungen laufen jetzt ueber den Pass.",
         "Der Battle Pass wurde auf Season 3 umgestellt und hat neue Pakete fuer +1 oder +25 Stufen."
       ],
       adjusted: [
         "Der News-Tab zeigt jetzt Season-8-Patchnotes, Shop-Highlights und aktuelle Wuerfel-Updates.",
         "Der Battle Pass nutzt ein neues Intro, ein neues Layout und eine klare Premium-Paketstruktur.",
-        "Das HUD wurde fuer Season 3 erweitert: Solo-Direktiven sitzen jetzt kompakt oben links im Match.",
+        "Das HUD wurde fuer Season 3 erweitert: Singleplayer-Direktiven sitzen jetzt kompakt oben links im Match.",
         "Die Lobby- und Fortschrittsanzeigen wurden an Chapter 3 Season 3 Wuerfel angepasst."
       ],
       removed: [
@@ -43543,7 +43552,7 @@ let shopWishlist = [];
         showMessage("Meilenstein 2 abgeholt: +13.500 M-Bucks", 2400);
       } else if (milestoneId === "m3") {
         season2MilestoneState.communitySoloWishUnlocked = true;
-        showMessage("Meilenstein 3 abgeholt: Community-Wunsch fuer Solo aktiv!", 2600);
+        showMessage("Meilenstein 3 abgeholt: Community-Wunsch fuer Singleplayer aktiv!", 2600);
       }
 
       season2MilestoneState.claimed.push(milestoneId);
@@ -43583,7 +43592,7 @@ let shopWishlist = [];
         const already = season2MilestoneState.claimed.includes("m3");
         unlock("m3");
         season2MilestoneState.communitySoloWishUnlocked = true;
-        if (!already && showToast) showMessage("ACT I M3 aktiv: Community-Wunsch für Solo freigeschaltet.", 2600);
+        if (!already && showToast) showMessage("ACT I M3 aktiv: Community-Wunsch für Singleplayer freigeschaltet.", 2600);
       }
 
       if (changed) {
@@ -43667,7 +43676,7 @@ let shopWishlist = [];
       };
 
       unlockIfReached("m1", ACT2_MILESTONE_TARGETS.m1, "ACT II M1 freigeschaltet: Rift Storm Runs jetzt aktiv.");
-      unlockIfReached("m2", ACT2_MILESTONE_TARGETS.m2, "ACT II M2 freigeschaltet: Solo Contracts jetzt aktiv.");
+      unlockIfReached("m2", ACT2_MILESTONE_TARGETS.m2, "ACT II M2 freigeschaltet: Singleplayer Contracts jetzt aktiv.");
       unlockIfReached("m3", ACT2_MILESTONE_TARGETS.m3, "ACT II M3 freigeschaltet: Reality Splits jetzt aktiv.");
 
       if (isAct2MilestoneUnlocked("m3")) season2MilestoneState.act2SoloEventUnlocked = true;
@@ -43712,7 +43721,7 @@ let shopWishlist = [];
       if (isAct2MilestoneUnlocked("m2")) {
         act2RuntimeState.contractId = pickAct2ContractId();
         act2RuntimeState.contractAssignedAt = Date.now();
-        showMessage(`Solo Contract aktiv: ${getAct2ContractLabel()}`, 2600);
+        showMessage(`Singleplayer Contract aktiv: ${getAct2ContractLabel()}`, 2600);
       }
     }
 
@@ -43763,7 +43772,7 @@ let shopWishlist = [];
       if (isAct2MilestoneUnlocked("m2") && !act2RuntimeState.contractId) {
         act2RuntimeState.contractId = pickAct2ContractId();
         act2RuntimeState.contractAssignedAt = now;
-        showMessage(`Solo Contract aktiv: ${getAct2ContractLabel()}`, 2400);
+        showMessage(`Singleplayer Contract aktiv: ${getAct2ContractLabel()}`, 2400);
       }
 
       if (isAct2MilestoneUnlocked("m2") && act2RuntimeState.contractId === "no_fall_reward") {
@@ -43858,7 +43867,7 @@ let shopWishlist = [];
       { id: "rift_stride", title: "Risslauf", lead: "Lege 1200 Pixel zurueck und halte das Portal-Feld unter Kontrolle.", type: "distanceWalked", target: 1200, rewardXp: 130, rewardCurrency: 80 },
       { id: "rift_cleanse", title: "Splitter-Saeuberung", lead: "Baue 90 Bloecke ab, bevor der Riss kippt.", type: "blocksMined", target: 90, rewardXp: 170, rewardCurrency: 95 },
       { id: "gold_probe", title: "Nullpunkt-Bohrung", lead: "Finde 3 Goldadern fuer den Season-8-Scan.", type: "goldMined", target: 3, rewardXp: 180, rewardCurrency: 110 },
-      { id: "builder_loop", title: "Deck aufbauen", lead: "Setze 18 Bloecke und sichere deinen Solo-Pfad.", type: "blocksPlaced", target: 18, rewardXp: 135, rewardCurrency: 85 },
+      { id: "builder_loop", title: "Deck aufbauen", lead: "Setze 18 Bloecke und sichere deinen Singleplayer-Pfad.", type: "blocksPlaced", target: 18, rewardXp: 135, rewardCurrency: 85 },
       { id: "cube_surge", title: "Cube-Surge", lead: "Baue 18 Bloecke ab und laufe 800 Pixel im gleichen Run.", type: "hybrid", target: 100, rewardXp: 220, rewardCurrency: 130 }
     ];
     const soloDirectiveState = {
@@ -48038,7 +48047,14 @@ let shopWishlist = [];
 
     // Downtime-Status prüfen
     async function checkDowntimeStatus() {
-      if (!supabaseClient) return { isDowntime: false, message: '' };
+      if (!supabaseClient) {
+        const fallbackDowntime = !!maintenanceMode;
+        return {
+          isDowntime: fallbackDowntime,
+          loginEnabled: !fallbackDowntime,
+          message: fallbackDowntime ? "Login ist waehrend der Wartung deaktiviert." : ""
+        };
+      }
       
       try {
         let { data, error } = await supabaseClient
@@ -48057,10 +48073,12 @@ let shopWishlist = [];
           error = fallback.error;
         }
         if (error) throw error;
-        const loginEnabled = (data?.login_enabled ?? data?.pin_login_enabled) !== false;
+        const isDowntime = data?.is_downtime === true || data?.maintenance_active === true;
+        const flagAllowsLogin = (data?.login_enabled ?? data?.pin_login_enabled) !== false;
+        const loginEnabled = !isDowntime && flagAllowsLogin;
         downtimeLoginEnabled = loginEnabled;
         return {
-          isDowntime: data?.is_downtime || false,
+          isDowntime,
           loginEnabled,
           message: data?.message || '',
           startTime: data?.start_time,
@@ -48068,7 +48086,12 @@ let shopWishlist = [];
         };
       } catch (err) {
         console.warn('Downtime-Status konnte nicht abgerufen werden:', err);
-        return { isDowntime: false, loginEnabled: true, message: '' };
+        const fallbackDowntime = !!maintenanceMode;
+        return {
+          isDowntime: fallbackDowntime,
+          loginEnabled: !fallbackDowntime,
+          message: fallbackDowntime ? "Login ist waehrend der Wartung deaktiviert." : ""
+        };
       }
     }
 
@@ -50022,7 +50045,7 @@ let shopWishlist = [];
       if (!preserveChain) soloDirectiveState.chain = 0;
       assignSoloDirective(template);
       if (showToast) {
-        showMessage(`Neue Solo-Direktive: ${soloDirectiveState.title}`, 2200);
+        showMessage(`Neue Singleplayer-Direktive: ${soloDirectiveState.title}`, 2200);
       }
     }
 
@@ -50039,7 +50062,7 @@ let shopWishlist = [];
       addXp(soloDirectiveState.rewardXp || 0);
       addBattlePassXp(Math.max(20, Math.round((soloDirectiveState.rewardXp || 0) * 0.7)));
       inventory[7] += Number(soloDirectiveState.rewardCurrency || 0);
-      showMessage(`Solo-Direktive abgeschlossen: ${soloDirectiveState.title} • ${getSoloDirectiveRewardText()}`, 2600);
+      showMessage(`Singleplayer-Direktive abgeschlossen: ${soloDirectiveState.title} • ${getSoloDirectiveRewardText()}`, 2600);
       queueDeferredSave(60);
       rollNextSoloDirective({ preserveChain: true, showToast: false });
     }
@@ -50054,7 +50077,7 @@ let shopWishlist = [];
       const progress = Math.max(0, currentValue - Number(soloDirectiveState.startValue || 0));
       soloDirectiveState.progress = progress;
       const pct = soloDirectiveState.target > 0 ? Math.max(0, Math.min(100, (progress / soloDirectiveState.target) * 100)) : 0;
-      if (soloDirectiveTitle) soloDirectiveTitle.textContent = soloDirectiveState.title || "Solo Direktive";
+      if (soloDirectiveTitle) soloDirectiveTitle.textContent = soloDirectiveState.title || "Singleplayer Direktive";
       if (soloDirectiveLead) soloDirectiveLead.textContent = soloDirectiveState.lead || "";
       if (soloDirectiveFill) soloDirectiveFill.style.width = `${pct}%`;
       if (soloDirectiveProgress) soloDirectiveProgress.textContent = `${Math.min(progress, soloDirectiveState.target)} / ${soloDirectiveState.target}`;
@@ -51480,6 +51503,10 @@ let shopWishlist = [];
           maintenanceOverlay.classList.remove("hidden");
           addLogEntry('Wartungsmodus aktiviert');
         }
+        if (!isAdminLoggedIn && gameStarted) {
+          openLobby();
+          showMessage("Wartung aktiviert. Du wurdest in die Lobby zurückgesetzt.", 3200);
+        }
       } else {
         // Stop maintenance features
         stopMaintenanceCountdown();
@@ -51541,7 +51568,8 @@ let shopWishlist = [];
     function applyRemoteDowntimeRow(data) {
       if (!data) return;
       const downtimeActive = data.is_downtime === true || data.maintenance_active === true;
-      downtimeLoginEnabled = (data.login_enabled ?? data.pin_login_enabled) !== false;
+      const flagAllowsLogin = (data.login_enabled ?? data.pin_login_enabled) !== false;
+      downtimeLoginEnabled = !downtimeActive && flagAllowsLogin;
       setMaintenanceMode(downtimeActive);
       const hasFlatModeState = (
         data.mode_solo_enabled !== undefined ||
@@ -54152,7 +54180,7 @@ async function loadMaintenanceStateFromSupabase() {
       const item = consumableItems.find(i => i.id === id);
       if (!item) return;
       if (isAct2MilestoneUnlocked("m2") && act2RuntimeState.contractId === "no_heal" && item.effect?.type === "heal" && gameStarted && !inLobby && currentMatchMode === "normal") {
-        showMessage("Solo Contract aktiv: Heal ist in diesem Run gesperrt.", 2200);
+        showMessage("Singleplayer Contract aktiv: Heal ist in diesem Run gesperrt.", 2200);
         return;
       }
       if ((consumables[item.id] || 0) <= 0) {
@@ -54188,7 +54216,7 @@ async function loadMaintenanceStateFromSupabase() {
     function attackWithSword() {
       if (maintenanceMode || inventoryOpen || helpOpen || skillOpen || craftOpen || communityEventOpen || npcOpen || !gameStarted) return;
       if (isAct2MilestoneUnlocked("m2") && act2RuntimeState.contractId === "pickaxe_only" && !inLobby && currentMatchMode === "normal") {
-        showMessage("Solo Contract aktiv: Nur Pickaxe erlaubt.", 1800);
+        showMessage("Singleplayer Contract aktiv: Nur Pickaxe erlaubt.", 1800);
         return;
       }
       if (currentSword === "none") {
@@ -54546,6 +54574,11 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function openMenu(name) {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Menues sind aktuell gesperrt.", 2600);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       if (name === 'locker') toggleLocker();
       else if (name === 'shop') toggleShopMenu();
       else if (name === 'pass') toggleBattlePass();
@@ -54736,6 +54769,11 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function toggleInventory() {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Inventar ist gesperrt.", 2400);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       closeMenus("inventory");
       inventoryOpen = !inventoryOpen;
       if (inventoryMenu) inventoryMenu.classList.toggle("hidden", !inventoryOpen);
@@ -54982,6 +55020,11 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function toggleShopMenu() {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Shop ist gesperrt.", 2400);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       closeMenus("shop");
       shopOpen = !shopOpen;
       if (shopMenu) shopMenu.classList.toggle("hidden", !shopOpen);
@@ -54993,6 +55036,11 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function toggleQuestMenu() {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Quests sind gesperrt.", 2400);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       if (isQuestFeatureDisabled()) {
         showMessage("Quests sind aktuell per Notfallschalter deaktiviert.", 2200);
         return;
@@ -55141,8 +55189,8 @@ async function loadMaintenanceStateFromSupabase() {
                   <div class="showdownBar">
                     <div class="showdownBarFill fundament" style="width:${isAct1 ? fundamentPercent : act2FundamentPercent}%;"></div>
                     <button type="button" class="showdownNode ${isAct1 ? (m1Claimed ? "isClaimed" : (m1Done ? "isDone" : "")) : (act2FundamentM1Done ? "isDone" : "")}" style="left:20%;" data-season2-claim="${isAct1 ? "m1" : ""}" data-reward="${isAct1 ? "Slimes aktivieren" : "Rift Storm Runs (alle 90s, 15s Storm-Event)"}" data-target="${isAct1 ? m1Target : act2M1Target}" title="Meilenstein 1">🪓</button>
-                    <button type="button" class="showdownNode ${isAct1 ? (m2Claimed ? "isClaimed" : (m2Done ? "isDone" : "")) : (act2FundamentM2Done ? "isDone" : "")}" style="left:50%;" data-season2-claim="${isAct1 ? "m2" : ""}" data-reward="${isAct1 ? "+13.500 M-Bucks" : "Solo Contracts (1 von 3 automatisch aktiv)"}" data-target="${isAct1 ? m2Target : act2M2Target}" title="Meilenstein 2">📦</button>
-                    <button type="button" class="showdownNode ${isAct1 ? (m3Claimed ? "isClaimed" : (m3Done ? "isDone" : "")) : (act2FundamentM3Done ? "isDone" : "")}" style="left:100%;" data-season2-claim="${isAct1 ? "m3" : ""}" data-reward="${isAct1 ? "Community-Wunsch für Solo" : "Reality Splits (Biome-Boni im Solo-Run)"}" data-target="${isAct1 ? m3Target : act2M3Target}" title="Meilenstein 3">👑</button>
+                    <button type="button" class="showdownNode ${isAct1 ? (m2Claimed ? "isClaimed" : (m2Done ? "isDone" : "")) : (act2FundamentM2Done ? "isDone" : "")}" style="left:50%;" data-season2-claim="${isAct1 ? "m2" : ""}" data-reward="${isAct1 ? "+13.500 M-Bucks" : "Singleplayer Contracts (1 von 3 automatisch aktiv)"}" data-target="${isAct1 ? m2Target : act2M2Target}" title="Meilenstein 2">📦</button>
+                    <button type="button" class="showdownNode ${isAct1 ? (m3Claimed ? "isClaimed" : (m3Done ? "isDone" : "")) : (act2FundamentM3Done ? "isDone" : "")}" style="left:100%;" data-season2-claim="${isAct1 ? "m3" : ""}" data-reward="${isAct1 ? "Community-Wunsch für Singleplayer" : "Reality Splits (Biome-Boni im Singleplayer-Run)"}" data-target="${isAct1 ? m3Target : act2M3Target}" title="Meilenstein 3">👑</button>
                   </div>
                 </div>
                 <div class="showdownNodePctRow"><span>20%</span><span>50%</span><span>100%</span></div>
@@ -55156,8 +55204,8 @@ async function loadMaintenanceStateFromSupabase() {
                   <div class="showdownBar">
                     <div class="showdownBarFill ice" style="width:${isAct1 ? icePercent : act2IcePercent}%;"></div>
                     <button type="button" class="showdownNode ${isAct1 ? (m1Claimed ? "isClaimed" : (m1Done ? "isDone" : "")) : (act2IceM1Done ? "isDone" : "")}" style="left:20%;" data-season2-claim="${isAct1 ? "m1" : ""}" data-reward="${isAct1 ? "Slimes aktivieren" : "Rift Storm Runs (alle 90s, 15s Storm-Event)"}" data-target="${isAct1 ? m1Target : act2M1Target}" title="Meilenstein 1">🪓</button>
-                    <button type="button" class="showdownNode ${isAct1 ? (m2Claimed ? "isClaimed" : (m2Done ? "isDone" : "")) : (act2IceM2Done ? "isDone" : "")}" style="left:50%;" data-season2-claim="${isAct1 ? "m2" : ""}" data-reward="${isAct1 ? "+13.500 M-Bucks" : "Solo Contracts (1 von 3 automatisch aktiv)"}" data-target="${isAct1 ? m2Target : act2M2Target}" title="Meilenstein 2">📦</button>
-                    <button type="button" class="showdownNode ${isAct1 ? (m3Claimed ? "isClaimed" : (m3Done ? "isDone" : "")) : (act2IceM3Done ? "isDone" : "")}" style="left:100%;" data-season2-claim="${isAct1 ? "m3" : ""}" data-reward="${isAct1 ? "Community-Wunsch für Solo" : "Reality Splits (Biome-Boni im Solo-Run)"}" data-target="${isAct1 ? m3Target : act2M3Target}" title="Meilenstein 3">👑</button>
+                    <button type="button" class="showdownNode ${isAct1 ? (m2Claimed ? "isClaimed" : (m2Done ? "isDone" : "")) : (act2IceM2Done ? "isDone" : "")}" style="left:50%;" data-season2-claim="${isAct1 ? "m2" : ""}" data-reward="${isAct1 ? "+13.500 M-Bucks" : "Singleplayer Contracts (1 von 3 automatisch aktiv)"}" data-target="${isAct1 ? m2Target : act2M2Target}" title="Meilenstein 2">📦</button>
+                    <button type="button" class="showdownNode ${isAct1 ? (m3Claimed ? "isClaimed" : (m3Done ? "isDone" : "")) : (act2IceM3Done ? "isDone" : "")}" style="left:100%;" data-season2-claim="${isAct1 ? "m3" : ""}" data-reward="${isAct1 ? "Community-Wunsch für Singleplayer" : "Reality Splits (Biome-Boni im Singleplayer-Run)"}" data-target="${isAct1 ? m3Target : act2M3Target}" title="Meilenstein 3">👑</button>
                   </div>
                 </div>
                 <div class="showdownNodePctRow"><span>20%</span><span>50%</span><span>100%</span></div>
@@ -55171,7 +55219,7 @@ async function loadMaintenanceStateFromSupabase() {
           </div>
           ${isAct2 ? `<div class="showdownAct2Ideas">
             <div class="showdownAct2Idea"><strong>ACT II M1:</strong> ${act2M1Target.toLocaleString("de-DE")} Blöcke • Reward: Rift Storm Runs automatisch aktiv.</div>
-            <div class="showdownAct2Idea"><strong>ACT II M2:</strong> ${act2M2Target.toLocaleString("de-DE")} Blöcke • Reward: Solo Contracts automatisch aktiv (XP/M-Bucks Bonus).</div>
+            <div class="showdownAct2Idea"><strong>ACT II M2:</strong> ${act2M2Target.toLocaleString("de-DE")} Blöcke • Reward: Singleplayer Contracts automatisch aktiv (XP/M-Bucks Bonus).</div>
             <div class="showdownAct2Idea"><strong>ACT II M3:</strong> ${act2M3Target.toLocaleString("de-DE")} Blöcke • Reward: Reality Splits automatisch aktiv (Desert/Alien Mining-Boni).</div>
           </div>` : ""}
           ${isAct3 ? `<div class="showdownAct2Ideas">
@@ -55278,6 +55326,11 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function toggleCreatorMenu() {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Creator-Menue ist gesperrt.", 2400);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       if (isCreatorFeatureDisabled()) {
         showMessage("Creator ist aktuell per Notfallschalter deaktiviert.", 2200);
         return;
@@ -57012,7 +57065,7 @@ async function loadMaintenanceStateFromSupabase() {
       const mode = button.getAttribute("data-pick-mode") || button.getAttribute("data-mode") || "solo";
       const fallbackConfig = {
         solo: {
-          title: "SOLO",
+          title: "SINGLEPLAYER",
           desc: "Überlebe allein und sichere deinen Fortschritt im Run.",
           list: ["Voller Progress zählt.", "Battle Pass XP aktiv.", "Direkter Matchstart."]
         },
@@ -57078,7 +57131,7 @@ async function loadMaintenanceStateFromSupabase() {
           : ((ended)
           ? "Season vorbei"
           : (selectedModeBlockedByLock
-            ? "Solo/Custom gesperrt"
+            ? "Singleplayer/Custom gesperrt"
           : (!anyModeEnabled
             ? "Modus gesperrt"
             : (selectedModeAvailable ? "Lobby bereit" : `${modeLabel} eingeschraenkt`))));
@@ -57101,7 +57154,7 @@ async function loadMaintenanceStateFromSupabase() {
       }
       if (modePickerRecommendedValue) modePickerRecommendedValue.textContent = getLobbyModeLabel(recommendedMode);
       if (modePickerRecommendedMeta) {
-        modePickerRecommendedMeta.textContent = "Solo ist ideal fuer freies Erkunden und entspanntes Farmen.";
+        modePickerRecommendedMeta.textContent = "Singleplayer ist ideal fuer freies Erkunden und entspanntes Farmen.";
       }
       if (modePickerLastPlayedValue) modePickerLastPlayedValue.textContent = lastPlayedLobbyMode ? getLobbyModeLabel(lastPlayedLobbyMode) : "Noch keiner";
       if (modePickerLastPlayedMeta) {
@@ -57194,7 +57247,7 @@ async function loadMaintenanceStateFromSupabase() {
             } else if (!isPlayableMode) {
               footer.textContent = "Aktuell nicht verfuegbar";
             } else {
-              footer.textContent = "Direkt bereit fuer deinen Solo-Run";
+              footer.textContent = "Direkt bereit fuer deinen Singleplayer-Run";
             }
           }
         });
@@ -57207,7 +57260,7 @@ async function loadMaintenanceStateFromSupabase() {
         lobbyReadyBtn.disabled = !selectedModeAvailable;
         lobbyReadyBtn.textContent = selectedModeAvailable
           ? "Bereit"
-          : (ended ? "Season vorbei" : (selectedModeBlockedByLock ? "Solo/Custom gesperrt" : "Modus gesperrt"));
+          : (ended ? "Season vorbei" : (selectedModeBlockedByLock ? "Singleplayer/Custom gesperrt" : "Modus gesperrt"));
       }
       if (modePickerAcceptBtn) {
         modePickerAcceptBtn.textContent = hasActiveCustomGamePreset()
@@ -57230,7 +57283,7 @@ async function loadMaintenanceStateFromSupabase() {
       }
       const targetMode = mode || "solo";
       if (isSoloCustomLocked() && targetMode === "solo") {
-        showMessage("Solo ist seit 21.05.2026, 23:00 gesperrt.", 2600);
+        showMessage("Singleplayer ist seit 21.05.2026, 23:00 gesperrt.", 2600);
         return;
       }
       selectedLobbyMode = targetMode;
@@ -58062,6 +58115,11 @@ async function loadMaintenanceStateFromSupabase() {
 
       if (lobbyReadyBtn) {
         lobbyReadyBtn.addEventListener("click", () => {
+          if (isDowntimeAccessBlocked()) {
+            showMessage("Server ist in Wartung. Start ist gesperrt.", 2600);
+            if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+            return;
+          }
           if (selectedLobbyMode === "datamine") {
             const rules = document.getElementById("ltmRulesMenu");
             if (rules) rules.classList.remove("hidden");
@@ -58073,6 +58131,11 @@ async function loadMaintenanceStateFromSupabase() {
 
       if (ltmStartBtn) {
         ltmStartBtn.addEventListener("click", () => {
+          if (isDowntimeAccessBlocked()) {
+            showMessage("Server ist in Wartung. Start ist gesperrt.", 2600);
+            if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+            return;
+          }
           ltmRulesMenu.classList.add("hidden");
           showCountdownAndStart();
         });
@@ -58286,8 +58349,17 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function finalizeEnterGameWorld() {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Match-Start ist gesperrt.", 2600);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        inLobby = true;
+        gameStarted = false;
+        updateLobbyUi();
+        updateUI();
+        return;
+      }
       if (isSoloOrCustomBlockedForStart()) {
-        showMessage("Solo und Custom Games sind seit 21.05.2026, 23:00 deaktiviert.", 3000);
+        showMessage("Singleplayer und Custom Games sind seit 21.05.2026, 23:00 deaktiviert.", 3000);
         updateLobbyUi();
         return;
       }
@@ -58406,13 +58478,18 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function showCountdownAndStart() {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Start ist gesperrt.", 2600);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       if (!isLobbyModeEnabled(selectedLobbyMode)) {
         showMessage(`${getLobbyModeLabel(selectedLobbyMode)} ist aktuell im Wartungsmodus deaktiviert.`, 2800);
         updateLobbyUi();
         return;
       }
       if (isSoloOrCustomBlockedForStart()) {
-        showMessage("Solo und Custom Games sind seit 21.05.2026, 23:00 deaktiviert.", 3000);
+        showMessage("Singleplayer und Custom Games sind seit 21.05.2026, 23:00 deaktiviert.", 3000);
         updateLobbyUi();
         return;
       }
@@ -58887,6 +58964,11 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function toggleSkillMenu() {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Skills sind gesperrt.", 2400);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       if (areSkillsDisabledInCurrentMode()) {
         showMessage("Skills sind aktuell deaktiviert!", 2200);
         return;
@@ -58901,6 +58983,11 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function toggleLocker() {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Spind ist gesperrt.", 2400);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       closeMenus("locker");
       lockerOpen = !lockerOpen;
       if (lockerMenu) lockerMenu.classList.toggle("hidden", !lockerOpen);
@@ -58911,6 +58998,11 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function toggleBattlePass() {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Battle Pass ist gesperrt.", 2400);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       if (isBattlePassFeatureDisabled()) {
         passOpen = false;
         if (passMenu) passMenu.classList.add("hidden");
@@ -58952,7 +59044,7 @@ async function loadMaintenanceStateFromSupabase() {
         date: "23.04.2026",
         tags: ["Season 3", "Wuerfel", "Patch Notes"],
         imageClass: "blogImgSeason3",
-        body: "Build 2.8.0 • 23.04.2026\n\nChapter 3 Season 3 \"Wuerfel\" ist jetzt live. Das Update spult die Spielwelt direkt in die Cube-Season vor, setzt den Battle Pass komplett zurueck und stellt den gesamten Flow auf einen 200-Stufen-Track mit drei Rewards pro Seite um. Gleichzeitig fuehren neue Solo-Direktiven durch jeden Run und geben klares Ingame-Feedback fuer Ziele, Fortschritt und Rewards.\n\nNeu:\n- Season 3 Wuerfel als aktives Chapter-Thema\n- Battle Pass mit 200 Hauptstufen\n- Neue Cube-, Rift- und Oracle-Belohnungen bis Level 200\n- Solo-Direktiven mit Live-HUD im Match\n- Frischer Pass-Flow mit drei Stufen pro Seite\n- Ueberarbeitete Season-Texte in Lobby, Pass und News\n\nGameplay:\n- Solo-Runs bekommen rotierende Direktiven fuer Mining, Kills, Bewegung, Gold und Build-Aufgaben\n- Abgeschlossene Direktiven geben XP und M-Bucks direkt waehrend des Runs\n- Die Season fuehlt sich dadurch schneller, klarer und deutlich missionslastiger an\n- Cube-Thema und Riss-Elemente tragen den Fortschritt jetzt sichtbar durch das Match\n\nBattle Pass:\n- Der Pass wurde vollstaendig auf Season 3 umgestellt\n- Premium laeuft weiter ueber +1 oder +25 Stufen Pakete\n- Kostenlos und Premium bleiben parallel aktiv\n- Der Track ist jetzt kompakter, sauberer und klar auf 67 Seiten aufgebaut\n\nUI & Flow:\n- Alte Season-Texte wurden im aktiven Flow auf Season 3 angezogen\n- Das Match-HUD zeigt jetzt Solo-Direktiven statt nur Combo-Fokus\n- News, Pass, Lobby und Hintergrund-Galerie laufen auf dem neuen Season-Stand\n\nKurzfassung: Season 3 setzt auf Cube-Energie, klare Direktiven, einen frischen 200-Level-Pass und mehr echtes Solo-Gameplay mitten im Run.",
+        body: "Build 2.8.0 • 23.04.2026\n\nChapter 3 Season 3 \"Wuerfel\" ist jetzt live. Das Update spult die Spielwelt direkt in die Cube-Season vor, setzt den Battle Pass komplett zurueck und stellt den gesamten Flow auf einen 200-Stufen-Track mit drei Rewards pro Seite um. Gleichzeitig fuehren neue Singleplayer-Direktiven durch jeden Run und geben klares Ingame-Feedback fuer Ziele, Fortschritt und Rewards.\n\nNeu:\n- Season 3 Wuerfel als aktives Chapter-Thema\n- Battle Pass mit 200 Hauptstufen\n- Neue Cube-, Rift- und Oracle-Belohnungen bis Level 200\n- Singleplayer-Direktiven mit Live-HUD im Match\n- Frischer Pass-Flow mit drei Stufen pro Seite\n- Ueberarbeitete Season-Texte in Lobby, Pass und News\n\nGameplay:\n- Singleplayer-Runs bekommen rotierende Direktiven fuer Mining, Kills, Bewegung, Gold und Build-Aufgaben\n- Abgeschlossene Direktiven geben XP und M-Bucks direkt waehrend des Runs\n- Die Season fuehlt sich dadurch schneller, klarer und deutlich missionslastiger an\n- Cube-Thema und Riss-Elemente tragen den Fortschritt jetzt sichtbar durch das Match\n\nBattle Pass:\n- Der Pass wurde vollstaendig auf Season 3 umgestellt\n- Premium laeuft weiter ueber +1 oder +25 Stufen Pakete\n- Kostenlos und Premium bleiben parallel aktiv\n- Der Track ist jetzt kompakter, sauberer und klar auf 67 Seiten aufgebaut\n\nUI & Flow:\n- Alte Season-Texte wurden im aktiven Flow auf Season 3 angezogen\n- Das Match-HUD zeigt jetzt Singleplayer-Direktiven statt nur Combo-Fokus\n- News, Pass, Lobby und Hintergrund-Galerie laufen auf dem neuen Season-Stand\n\nKurzfassung: Season 3 setzt auf Cube-Energie, klare Direktiven, einen frischen 200-Level-Pass und mehr echtes Singleplayer-Gameplay mitten im Run.",
       },
       {
         id: "season3_flood_drop_2026_04_08",
@@ -60332,6 +60424,11 @@ async function loadMaintenanceStateFromSupabase() {
     if (unlockBtn) unlockBtn.addEventListener("click", () => toggleUnlockMenu());
     if (lobbyReadyBtn) {
       lobbyReadyBtn.addEventListener("click", () => {
+        if (isDowntimeAccessBlocked()) {
+          showMessage("Server ist in Wartung. Start ist gesperrt.", 2600);
+          if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+          return;
+        }
         if (selectedLobbyMode === "datamine") {
           const ltmRulesMenu = document.getElementById("ltmRulesMenu");
           if (ltmRulesMenu) ltmRulesMenu.classList.remove("hidden");
@@ -60676,6 +60773,11 @@ async function loadMaintenanceStateFromSupabase() {
       if (modeRulesMenu) modeRulesMenu.classList.add("hidden");
     });
     if (modeRulesStartBtn) modeRulesStartBtn.addEventListener("click", () => {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Start ist gesperrt.", 2600);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
       if (modeRulesMenu) modeRulesMenu.classList.add("hidden");
       const ltmRulesMenu = document.getElementById("ltmRulesMenu");
       if (ltmRulesMenu) ltmRulesMenu.classList.add("hidden");
@@ -64434,6 +64536,7 @@ drawRiftGlitchOverlay(cam);
   
 </body>
 </html>
+
 
 
 
