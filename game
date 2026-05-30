@@ -34180,6 +34180,503 @@
       from { opacity: 0; transform: translateY(22px) scale(0.985); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
+
+    /* Start Menu Overhaul (Not Screenshot-Like) */
+    #startScreen.startScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 184, 107, 0.18), transparent 36%),
+        radial-gradient(circle at 82% 82%, rgba(90, 210, 255, 0.16), transparent 34%),
+        linear-gradient(135deg, #0f172a 0%, #111827 40%, #0b1220 100%);
+      overflow: hidden;
+      animation: startScreenFadeIn 420ms ease-out both;
+    }
+
+    #startScreen .startBackdrop {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    #startScreen .startGlowOrb {
+      filter: blur(80px);
+      opacity: 0.55;
+      animation: startOrbDrift 16s ease-in-out infinite;
+    }
+
+    #startScreen .startGlowOrb1 {
+      width: 520px;
+      height: 520px;
+      left: -160px;
+      top: -140px;
+      background: rgba(255, 158, 92, 0.45);
+    }
+
+    #startScreen .startGlowOrb2 {
+      width: 560px;
+      height: 560px;
+      right: -220px;
+      top: 110px;
+      background: rgba(92, 178, 255, 0.4);
+      animation-delay: -4s;
+    }
+
+    #startScreen .startGlowOrb3 {
+      width: 500px;
+      height: 500px;
+      left: 38%;
+      bottom: -240px;
+      background: rgba(105, 255, 190, 0.26);
+      animation-delay: -8s;
+    }
+
+    #startScreen .startGridOverlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 34px 34px;
+      opacity: 0.42;
+      mask-image: radial-gradient(circle at center, black 48%, transparent 100%);
+    }
+
+    #startScreen .startShell {
+      position: relative;
+      z-index: 2;
+      width: min(1460px, calc(100vw - 34px));
+      margin: 18px auto;
+      padding: 20px;
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 16px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background:
+        linear-gradient(155deg, rgba(12, 19, 33, 0.84), rgba(11, 18, 30, 0.72));
+      box-shadow:
+        0 28px 80px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    #startScreen .startTopBar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(8, 14, 24, 0.55);
+    }
+
+    #startScreen .startLogo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #ffb36b, #66d4ff);
+      color: #081221;
+      font-size: 22px;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+    }
+
+    #startScreen .startBrandName {
+      margin: 0;
+      font-family: "Bangers", "Arial Black", sans-serif;
+      font-size: 38px;
+      letter-spacing: 0.08em;
+      color: #fffaf0;
+    }
+
+    #startScreen .startStatusPing {
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #d5fff0;
+      border: 1px solid rgba(114, 255, 196, 0.36);
+      background: rgba(16, 55, 52, 0.62);
+    }
+
+    #startScreen .startMainContent {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.95fr) minmax(0, 1.2fr) minmax(420px, 1fr);
+      gap: 16px;
+      align-items: stretch;
+      min-height: 0;
+    }
+
+    #startScreen .startHeroSection,
+    #startScreen .startFormSection,
+    #startScreen .startRailSection {
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        rgba(9, 15, 26, 0.72);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    #startScreen .startRailSection {
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    #startScreen .startRailTitle {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(198, 224, 255, 0.72);
+      margin-bottom: 4px;
+    }
+
+    #startScreen .startRailCard {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(235, 245, 255, 0.9);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    #startScreen .startHeroSection {
+      padding: 22px;
+      display: grid;
+      align-content: space-between;
+      gap: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #startScreen .startHeroSection::before {
+      content: "";
+      position: absolute;
+      right: -58px;
+      top: -58px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 188, 117, 0.28), transparent 68%);
+      pointer-events: none;
+    }
+
+    #startScreen .startHeroTagline {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #9df1ff;
+      margin-bottom: 10px;
+    }
+
+    #startScreen .startHeroTitle {
+      margin: 0;
+      font-size: clamp(42px, 5.2vw, 84px);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: #fffdf7;
+    }
+
+    #startScreen .startHeroDescription {
+      margin-top: 14px;
+      font-size: 16px;
+      color: rgba(237, 245, 255, 0.84);
+      line-height: 1.55;
+    }
+
+    #startScreen .startVersion {
+      color: rgba(255, 211, 153, 0.92);
+      font-weight: 800;
+    }
+
+    #startScreen .startFeatures {
+      display: grid;
+      gap: 10px;
+    }
+
+    #startScreen .startFeature {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      background: rgba(255, 255, 255, 0.035);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 10px;
+      transition: transform 160ms ease, border-color 160ms ease;
+    }
+
+    #startScreen .startFeature:hover {
+      transform: translateY(-2px);
+      border-color: rgba(154, 220, 255, 0.32);
+    }
+
+    #startScreen .startFeatureIcon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255, 182, 111, 0.28), rgba(102, 212, 255, 0.28));
+      font-size: 18px;
+    }
+
+    #startScreen .startFeatureTitle {
+      font-size: 15px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.1;
+    }
+
+    #startScreen .startFeatureText {
+      font-size: 12px;
+      color: rgba(218, 231, 247, 0.78);
+      margin-top: 3px;
+    }
+
+    #startScreen .startFormSection {
+      padding: 20px;
+      display: grid;
+      align-content: start;
+      gap: 12px;
+      position: relative;
+    }
+
+    #startScreen .startFormSection::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 25%);
+      opacity: 0.9;
+    }
+
+    #startScreen .startLoginTabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 16px;
+      background: rgba(6, 12, 22, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    #startScreen .startTab {
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: rgba(223, 234, 248, 0.72);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 180ms ease;
+    }
+
+    #startScreen .startTab.startTabActive {
+      color: #fffaf2;
+      border-color: rgba(255, 195, 132, 0.35);
+      background: linear-gradient(135deg, rgba(255, 161, 99, 0.3), rgba(98, 205, 255, 0.22));
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+    }
+
+    #startScreen .startFormTitle {
+      font-size: 30px;
+      font-weight: 1000;
+      color: #ffffff;
+      margin: 8px 0 4px;
+      line-height: 1.05;
+    }
+
+    #startScreen .startLoginForm {
+      display: grid;
+      gap: 10px;
+    }
+
+    #startScreen .startFormLabel {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      color: rgba(165, 244, 232, 0.92);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    #startScreen .startInputContainer {
+      min-height: 50px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.04);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+    }
+
+    #startScreen .startInputIcon {
+      font-size: 16px;
+      opacity: 0.82;
+    }
+
+    #startScreen .startFormInput {
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      outline: none;
+      background: transparent;
+      color: #f8fbff;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    #startScreen .startFormInput::placeholder {
+      color: rgba(214, 227, 245, 0.46);
+    }
+
+    #startScreen .startLoginButton {
+      min-height: 52px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(135deg, #ff9b64, #59c9ff);
+      color: #071321;
+      font-size: 14px;
+      font-weight: 1000;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    #startScreen .startLoginButton:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    #startScreen .startButtonSecondary {
+      background: linear-gradient(135deg, #78ffa8, #69d8ff);
+    }
+
+    #startScreen .startFormDivider {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(213, 226, 245, 0.58);
+      margin: 2px 0;
+    }
+
+    #startScreen .startAlertBox {
+      min-height: 42px;
+      border-radius: 12px;
+      border: 1px solid rgba(140, 217, 255, 0.24);
+      background: rgba(39, 94, 118, 0.25);
+      color: #cef5ff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+    }
+
+    #startScreen .serverStatusBar {
+      min-height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(6, 12, 20, 0.58);
+      color: rgba(236, 244, 255, 0.86);
+    }
+
+    #startScreen .startFooter {
+      min-height: 48px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(8, 13, 22, 0.46);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: rgba(205, 220, 240, 0.7);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    #startScreen .startFooterLink {
+      opacity: 0.86;
+    }
+
+    @keyframes startOrbDrift {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(0, 24px, 0) scale(1.04); }
+    }
+
+    @media (max-width: 1220px) {
+      #startScreen .startMainContent {
+        grid-template-columns: 1fr;
+      }
+
+      #startScreen .startRailSection {
+        order: 3;
+      }
+    }
+
+    @media (max-width: 760px) {
+      #startScreen .startShell {
+        width: calc(100vw - 14px);
+        margin: 7px;
+        padding: 12px;
+        border-radius: 18px;
+      }
+
+      #startScreen .startBrandName {
+        font-size: 28px;
+      }
+
+      #startScreen .startHeroTitle {
+        font-size: clamp(32px, 13vw, 56px);
+      }
+
+      #startScreen .startFormTitle {
+        font-size: 24px;
+      }
+
+      #startScreen .startFooter {
+        gap: 10px;
+        font-size: 10px;
+      }
+    }
   </style>
 </head>
 <body class="startScreenActive">
@@ -34205,18 +34702,26 @@
       </header>
 
       <main class="startMainContent">
+        <aside class="startRailSection">
+          <div class="startRailTitle">Mission Briefing</div>
+          <div class="startRailCard">Server-Cluster werden beim Login geprüft und stabilisiert.</div>
+          <div class="startRailCard">Dein Spind-Hintergrund und Profilstatus werden automatisch geladen.</div>
+          <div class="startRailCard">Cloud-Sync bleibt aktiv, falls Verbindung verfügbar ist.</div>
+          <div class="startRailCard">Tipp: Nutze 4-8 Ziffern für PIN und sichere deinen Zugang.</div>
+        </aside>
+
         <!-- Left: Hero Section -->
         <div class="startHeroSection">
           <div class="startHeroContent">
-            <div class="startHeroTagline">Welcome back</div>
+            <div class="startHeroTagline">Bereit für den Einsatz</div>
             <h2 class="startHeroTitle">
-              <span class="startTitleWord">LAUNCH</span>
-              <span class="startTitleWord">YOUR</span>
-              <span class="startTitleWord">ADVENTURE</span>
+              <span class="startTitleWord">ENTER</span>
+              <span class="startTitleWord">THE</span>
+              <span class="startTitleWord">RIFT</span>
             </h2>
             <p class="startHeroDescription">
-              Cloud-Synchronization • Live Events • Persistent Progress<br/>
-              <span class="startVersion">v2.4 | Season 3 Active</span>
+              Neues Terminal-Design mit Fokus auf schnelle Anmeldung, klare Statusinfos und saubere Übergänge.<br/>
+              <span class="startVersion">v2.4 | Command Season Active</span>
             </p>
 
             <!-- Feature Highlights -->
@@ -34224,22 +34729,22 @@
               <div class="startFeature">
                 <div class="startFeatureIcon">☁️</div>
                 <div>
-                  <div class="startFeatureTitle">Cloud Save</div>
-                  <div class="startFeatureText">Auto-sync across devices</div>
+                  <div class="startFeatureTitle">Cloud-Kern</div>
+                  <div class="startFeatureText">Automatisches Laden von Account und Besitzdaten.</div>
                 </div>
               </div>
               <div class="startFeature">
                 <div class="startFeatureIcon">🎯</div>
                 <div>
-                  <div class="startFeatureTitle">Live Events</div>
-                  <div class="startFeatureText">Real-time challenges</div>
+                  <div class="startFeatureTitle">Live-Match Feed</div>
+                  <div class="startFeatureText">Direkter Einstieg mit aktuellen Lobby-Modifikatoren.</div>
                 </div>
               </div>
               <div class="startFeature">
                 <div class="startFeatureIcon">🏆</div>
                 <div>
-                  <div class="startFeatureTitle">Achievements</div>
-                  <div class="startFeatureText">Track your progress</div>
+                  <div class="startFeatureTitle">Progress Matrix</div>
+                  <div class="startFeatureText">XP, Pass und Freischaltungen bleiben synchron.</div>
                 </div>
               </div>
             </div>
@@ -34256,31 +34761,31 @@
 
           <!-- Login Form -->
           <div class="startTabContent startTabContentActive" data-content="login">
-            <div class="startFormTitle">Welcome back, adventurer</div>
+            <div class="startFormTitle">Zugang freischalten</div>
             <form class="startLoginForm" onsubmit="event.preventDefault(); loginWithPinAction();">
               <div class="startFormGroup">
-                <label class="startFormLabel">USERNAME</label>
+                <label class="startFormLabel">Spielername</label>
                 <div class="startInputContainer">
                   <span class="startInputIcon">👤</span>
-                  <input id="playerNameInput" class="startFormInput" type="text" placeholder="Enter your username" maxlength="20" />
+                  <input id="playerNameInput" class="startFormInput" type="text" placeholder="Name eingeben" maxlength="20" />
                 </div>
               </div>
 
               <div class="startFormGroup">
-                <label class="startFormLabel">PASSWORD</label>
+                <label class="startFormLabel">PIN-Code</label>
                 <div class="startInputContainer">
                   <span class="startInputIcon">🔐</span>
-                  <input id="playerPinInput" class="startFormInput" type="password" inputmode="numeric" placeholder="Enter your PIN" maxlength="8" />
+                  <input id="playerPinInput" class="startFormInput" type="password" inputmode="numeric" placeholder="PIN eingeben" maxlength="8" />
                 </div>
               </div>
 
               <button id="pinLoginBtn" class="startLoginButton startButtonPrimary" type="submit">
-                <span class="startButtonText">LOGIN</span>
+                <span class="startButtonText">ANMELDEN</span>
                 <span class="startButtonIcon">→</span>
               </button>
             </form>
 
-            <div class="startFormDivider">or</div>
+            <div class="startFormDivider">Status</div>
 
             <div id="startInfo" class="startAlertBox"></div>
 
@@ -34292,33 +34797,33 @@
 
           <!-- Create Account Form -->
           <div class="startTabContent" data-content="create">
-            <div class="startFormTitle">Create new account</div>
+            <div class="startFormTitle">Neues Profil erstellen</div>
             <form class="startLoginForm" onsubmit="event.preventDefault(); createAccountAction();">
               <div class="startFormGroup">
-                <label class="startFormLabel">CHOOSE USERNAME</label>
+                <label class="startFormLabel">Spielername</label>
                 <div class="startInputContainer">
                   <span class="startInputIcon">✨</span>
-                  <input id="playerNameInput" class="startFormInput" type="text" placeholder="Your unique name" maxlength="20" />
+                  <input id="playerNameInput" class="startFormInput" type="text" placeholder="Neuen Namen eingeben" maxlength="20" />
                 </div>
               </div>
 
               <div class="startFormGroup">
-                <label class="startFormLabel">SET PASSWORD</label>
+                <label class="startFormLabel">PIN festlegen</label>
                 <div class="startInputContainer">
                   <span class="startInputIcon">🔐</span>
-                  <input id="playerPinInput" class="startFormInput" type="password" inputmode="numeric" placeholder="4-8 digit PIN" maxlength="8" />
+                  <input id="playerPinInput" class="startFormInput" type="password" inputmode="numeric" placeholder="4-8 Ziffern PIN" maxlength="8" />
                 </div>
               </div>
 
               <button id="createAccountBtn" class="startLoginButton startButtonSecondary" type="submit">
-                <span class="startButtonText">CREATE ACCOUNT</span>
+                <span class="startButtonText">KONTO ERSTELLEN</span>
                 <span class="startButtonIcon">✓</span>
               </button>
             </form>
 
-            <div class="startFormDivider">have an account?</div>
+            <div class="startFormDivider">Schon registriert?</div>
 
-            <button class="startTab startTabToggle" data-toggle="login">Switch to Login</button>
+            <button class="startTab startTabToggle" data-toggle="login">Zur Anmeldung</button>
           </div>
 
           <button id="adminLoginBtn" class="startAdminBtn" onclick="adminLoginAction()" style="display: none;">🔧</button>
