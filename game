@@ -35322,6 +35322,7 @@
             <button class="lobbyNavBtn" onclick="openMenu('locker')"><span class="lobbyNavIcon">👕</span> Spind</button>
             <button class="lobbyNavBtn" onclick="openMenu('shop')"><span class="lobbyNavIcon">🛒</span> Shop</button>
             <button class="lobbyNavBtn" onclick="openMenu('pass')"><span class="lobbyNavIcon">🎫</span> Battle Pass</button>
+            <button id="seasonFinaleVoteBtn" class="lobbyNavBtn" onclick="openMenu('seasonFinaleVote')"><span class="lobbyNavIcon">🗳️</span> Finale Vote</button>
             
             <button class="lobbyNavBtn" onclick="openMenu('quest')"><span class="lobbyNavIcon">📜</span> Quests</button>
             <button class="lobbyNavBtn" onclick="openMenu('skill')"><span class="lobbyNavIcon">⚡</span> Skills</button>
@@ -35529,6 +35530,35 @@
       <div class="modeRulesActions mbucksCreditActions">
         <button id="mbucksStoreRefreshBtn" class="achievementCloseBtn" type="button">Status prüfen</button>
         <button id="closeMBucksStoreBtn" class="achievementCloseBtn" type="button">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="seasonFinaleVoteMenu" class="inventoryMenu hidden">
+    <div class="voteWrap">
+      <div class="voteTop">
+        <div class="voteHeroCard">
+          <div class="loreEyebrow">Chapter 3 • Season 4 Finale</div>
+          <div class="loreTitle">Community Entscheidung</div>
+          <div class="voteLead">
+            Stimme ab, welche Endgame-Route die Season abschließt. Dein Vote wird mit Supabase synchronisiert.
+          </div>
+          <div class="voteHeroChips">
+            <span class="voteHeroChip">Live Vote</span>
+            <span class="voteHeroChip">Ein Vote pro Konto</span>
+            <span class="voteHeroChip">Direkte Lobby-Sync</span>
+          </div>
+        </div>
+        <div class="voteStatusCard">
+          <div class="voteStatusLabel">Status</div>
+          <div id="seasonFinaleVoteStatusValue" class="voteStatusValue">Lädt...</div>
+          <div id="seasonFinaleVoteStatusText" class="voteStatusText">Verbinde mit Supabase...</div>
+        </div>
+      </div>
+      <div id="seasonFinaleVoteGrid" class="voteGrid"></div>
+      <div class="helpFooter">
+        <button id="seasonFinaleVoteRefreshBtn" class="achievementCloseBtn" type="button">Aktualisieren</button>
+        <button id="closeSeasonFinaleVoteBtn" class="achievementCloseBtn" type="button">Schließen</button>
       </div>
     </div>
   </div>
@@ -38345,6 +38375,9 @@
     const ADMIN_GRANTS_TABLE = "admin_grants";
     const PLAYER_REWARD_CLAIMS_TABLE = "player_reward_claims";
     const COMMUNITY_JACKPOT_TABLE = "community_jackpot";
+    const SEASON_FINALE_VOTE_STORAGE_KEY = "mini_minecraft_season_finale_vote_v1";
+    const SEASON_FINALE_VOTE_SEASON_ID = "chapter3_s4_finale";
+    const SEASON_FINALE_VOTE_END_AT = new Date("2026-12-15T20:00:00+01:00").getTime();
     const ENABLE_3D_MODE = false;
     const SHOP_COMING_SOON = false;
     const SHOP_PLACEHOLDER_MESSAGE = "Inhalt unbekannt. Der Bereich bleibt leer und kann nicht gekauft werden.";
@@ -38847,6 +38880,12 @@
     const communityEventRewardText = document.getElementById("communityEventRewardText");
     const communityEventStageRail = document.getElementById("communityEventStageRail");
     const closeCommunityEventBtn = document.getElementById("closeCommunityEventBtn");
+    const seasonFinaleVoteMenu = document.getElementById("seasonFinaleVoteMenu");
+    const seasonFinaleVoteGrid = document.getElementById("seasonFinaleVoteGrid");
+    const seasonFinaleVoteStatusValue = document.getElementById("seasonFinaleVoteStatusValue");
+    const seasonFinaleVoteStatusText = document.getElementById("seasonFinaleVoteStatusText");
+    const seasonFinaleVoteRefreshBtn = document.getElementById("seasonFinaleVoteRefreshBtn");
+    const closeSeasonFinaleVoteBtn = document.getElementById("closeSeasonFinaleVoteBtn");
     const creatorMenu = document.getElementById("creatorMenu");
     const closeCreatorBtn = document.getElementById("closeCreatorBtn");
     const commandPlusMenu = document.getElementById("commandPlusMenu");
@@ -42596,6 +42635,7 @@ async function resetGlobalDiscount() {
     let shopPurchaseOpen = false;
     let passPurchaseOpen = false;
     let communityEventOpen = false;
+    let seasonFinaleVoteOpen = false;
     let loreOpen = false;
     let npcOpen = false;
     const MBUCKS_PACKS = {
@@ -44395,6 +44435,19 @@ let shopWishlist = [];
       biomeAnnouncementShown: false
     };
 
+    const seasonFinaleVoteState = {
+      seasonId: SEASON_FINALE_VOTE_SEASON_ID,
+      endAt: SEASON_FINALE_VOTE_END_AT,
+      totalVotes: 0,
+      options: {
+        rift_stabilizer: 0,
+        zero_storm: 0
+      },
+      playerVotes: {},
+      updatedAt: 0
+    };
+    loadSeasonFinaleVoteLocal();
+
     const threeDOutfits = {
       metro: {
         id: "metro",
@@ -45005,6 +45058,207 @@ let shopWishlist = [];
             <div class="communityStageDesc">${entry.desc}</div>
           </div>
         `).join("");
+      }
+    }
+
+    function getSeasonFinaleVoteOptions() {
+      return [
+        {
+          id: "rift_stabilizer",
+          title: "Rift-Stabilizer",
+          badge: "Safe Route",
+          desc: "Stabilisiert die Risse und öffnet eine kontrollierte Endgame-Zone mit defensiven Rewards."
+        },
+        {
+          id: "zero_storm",
+          title: "Zero Storm",
+          badge: "Risk Route",
+          desc: "Löst einen chaotischen Finale-Sturm aus mit aggressiven Gegnern und höheren Drop-Raten."
+        }
+      ];
+    }
+
+    function saveSeasonFinaleVoteLocal() {
+      localStorage.setItem(SEASON_FINALE_VOTE_STORAGE_KEY, JSON.stringify({
+        seasonId: seasonFinaleVoteState.seasonId,
+        endAt: seasonFinaleVoteState.endAt,
+        totalVotes: seasonFinaleVoteState.totalVotes,
+        options: seasonFinaleVoteState.options,
+        playerVotes: seasonFinaleVoteState.playerVotes,
+        updatedAt: seasonFinaleVoteState.updatedAt
+      }));
+    }
+
+    function normalizeSeasonFinaleVotePayload(payload = {}) {
+      const options = payload?.options && typeof payload.options === "object" ? payload.options : {};
+      const playerVotes = payload?.playerVotes && typeof payload.playerVotes === "object" ? payload.playerVotes : {};
+      const normalized = {
+        seasonId: payload?.seasonId || SEASON_FINALE_VOTE_SEASON_ID,
+        endAt: Number(payload?.endAt || SEASON_FINALE_VOTE_END_AT),
+        totalVotes: Math.max(0, Math.floor(Number(payload?.totalVotes || 0))),
+        options: {
+          rift_stabilizer: Math.max(0, Math.floor(Number(options.rift_stabilizer || 0))),
+          zero_storm: Math.max(0, Math.floor(Number(options.zero_storm || 0)))
+        },
+        playerVotes: {},
+        updatedAt: Number(payload?.updatedAt || Date.now())
+      };
+      const maxEntries = 600;
+      let count = 0;
+      for (const [key, value] of Object.entries(playerVotes)) {
+        if (count >= maxEntries) break;
+        if (value === "rift_stabilizer" || value === "zero_storm") {
+          normalized.playerVotes[key] = value;
+          count += 1;
+        }
+      }
+      normalized.totalVotes = normalized.options.rift_stabilizer + normalized.options.zero_storm;
+      return normalized;
+    }
+
+    function applySeasonFinaleVotePayload(payload = {}, { saveLocal = true } = {}) {
+      const next = normalizeSeasonFinaleVotePayload(payload);
+      seasonFinaleVoteState.seasonId = next.seasonId;
+      seasonFinaleVoteState.endAt = next.endAt;
+      seasonFinaleVoteState.totalVotes = next.totalVotes;
+      seasonFinaleVoteState.options = next.options;
+      seasonFinaleVoteState.playerVotes = next.playerVotes;
+      seasonFinaleVoteState.updatedAt = next.updatedAt;
+      if (saveLocal) saveSeasonFinaleVoteLocal();
+    }
+
+    function loadSeasonFinaleVoteLocal() {
+      const raw = localStorage.getItem(SEASON_FINALE_VOTE_STORAGE_KEY);
+      if (!raw) return;
+      try {
+        applySeasonFinaleVotePayload(JSON.parse(raw), { saveLocal: false });
+      } catch {}
+    }
+
+    function renderSeasonFinaleVoteMenu() {
+      if (!seasonFinaleVoteGrid || !seasonFinaleVoteStatusValue || !seasonFinaleVoteStatusText) return;
+      const options = getSeasonFinaleVoteOptions();
+      const now = Date.now();
+      const ended = now >= seasonFinaleVoteState.endAt;
+      const me = cloudPlayerKey ? seasonFinaleVoteState.playerVotes[cloudPlayerKey] : "";
+      const total = Math.max(1, Number(seasonFinaleVoteState.totalVotes || 0));
+      const remaining = Math.max(0, seasonFinaleVoteState.endAt - now);
+      const winner = options.slice().sort((a, b) => (seasonFinaleVoteState.options[b.id] || 0) - (seasonFinaleVoteState.options[a.id] || 0))[0];
+
+      seasonFinaleVoteStatusValue.textContent = ended ? "Abgeschlossen" : "Live";
+      seasonFinaleVoteStatusText.textContent = ended
+        ? `Gewinner: ${winner?.title || "-"} • Gesamtvotes: ${seasonFinaleVoteState.totalVotes.toLocaleString("de-DE")}`
+        : `Endet in ${formatRemainingTime(Date.now() + remaining)} • Gesamtvotes: ${seasonFinaleVoteState.totalVotes.toLocaleString("de-DE")}`;
+
+      seasonFinaleVoteGrid.innerHTML = options.map((option) => {
+        const votes = Number(seasonFinaleVoteState.options[option.id] || 0);
+        const percent = Math.max(0, Math.min(100, (votes / total) * 100));
+        const active = me === option.id;
+        const disabled = ended || !cloudSyncEnabled || !cloudPlayerKey;
+        return `
+          <article class="voteModeCard ${active ? "active" : ""}">
+            <div class="voteModeTop">
+              <div class="voteModeTitle">${option.title}</div>
+              <div class="voteModeBadge">${option.badge}</div>
+            </div>
+            <div class="voteModeDesc">${option.desc}</div>
+            <div class="voteProgressBar"><div class="voteProgressFill" style="width:${percent.toFixed(2)}%"></div></div>
+            <div class="voteMetaRow">
+              <span>${votes.toLocaleString("de-DE")} Votes</span>
+              <strong>${percent.toFixed(1)}%</strong>
+            </div>
+            <button class="achievementCloseBtn" type="button" data-finale-vote-option="${option.id}" ${disabled ? "disabled" : ""}>
+              ${active ? "Dein Vote" : "Für diese Route stimmen"}
+            </button>
+          </article>
+        `;
+      }).join("");
+    }
+
+    async function loadSeasonFinaleVoteFromSupabase() {
+      if (!supabaseClient) {
+        renderSeasonFinaleVoteMenu();
+        return false;
+      }
+      try {
+        const { data, error } = await supabaseClient
+          .from(GAME_STATE_TABLE)
+          .select("id, season_finale_vote_state")
+          .eq("id", GAME_STATE_ID)
+          .maybeSingle();
+        if (error) throw error;
+        const remote = normalizeSeasonFinaleVotePayload(data?.season_finale_vote_state || {});
+        if (remote.seasonId !== SEASON_FINALE_VOTE_SEASON_ID) {
+          applySeasonFinaleVotePayload({
+            seasonId: SEASON_FINALE_VOTE_SEASON_ID,
+            endAt: SEASON_FINALE_VOTE_END_AT,
+            totalVotes: 0,
+            options: { rift_stabilizer: 0, zero_storm: 0 },
+            playerVotes: {},
+            updatedAt: Date.now()
+          });
+        } else {
+          applySeasonFinaleVotePayload(remote);
+        }
+        renderSeasonFinaleVoteMenu();
+        return true;
+      } catch (err) {
+        console.warn("Season Finale Vote Sync fehlgeschlagen:", err);
+        renderSeasonFinaleVoteMenu();
+        return false;
+      }
+    }
+
+    async function submitSeasonFinaleVote(optionId) {
+      if (!optionId || !["rift_stabilizer", "zero_storm"].includes(optionId)) return;
+      if (!cloudSyncEnabled || !cloudPlayerKey || !supabaseClient) {
+        showMessage("Vote nur mit Cloud-Login möglich.", 2200);
+        return;
+      }
+      if (Date.now() >= seasonFinaleVoteState.endAt) {
+        showMessage("Voting ist bereits beendet.", 2200);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabaseClient
+          .from(GAME_STATE_TABLE)
+          .select("id, season_finale_vote_state")
+          .eq("id", GAME_STATE_ID)
+          .maybeSingle();
+        if (error) throw error;
+
+        const rowId = data?.id || GAME_STATE_ID;
+        const payload = normalizeSeasonFinaleVotePayload(data?.season_finale_vote_state || seasonFinaleVoteState);
+        const existing = payload.playerVotes[cloudPlayerKey] || "";
+        if (existing === optionId) {
+          showMessage("Du hast diese Route bereits gewählt.", 1800);
+          applySeasonFinaleVotePayload(payload);
+          renderSeasonFinaleVoteMenu();
+          return;
+        }
+        if (existing && payload.options[existing] > 0) payload.options[existing] -= 1;
+        payload.playerVotes[cloudPlayerKey] = optionId;
+        payload.options[optionId] = Math.max(0, Number(payload.options[optionId] || 0) + 1);
+        payload.totalVotes = payload.options.rift_stabilizer + payload.options.zero_storm;
+        payload.updatedAt = Date.now();
+        payload.seasonId = SEASON_FINALE_VOTE_SEASON_ID;
+        payload.endAt = SEASON_FINALE_VOTE_END_AT;
+
+        const { error: upsertError } = await supabaseClient
+          .from(GAME_STATE_TABLE)
+          .upsert({
+            id: rowId,
+            season_finale_vote_state: payload
+          }, { onConflict: "id" });
+        if (upsertError) throw upsertError;
+
+        applySeasonFinaleVotePayload(payload);
+        renderSeasonFinaleVoteMenu();
+        showMessage("Vote gesendet und synchronisiert.", 1800);
+      } catch (err) {
+        console.warn("Vote konnte nicht gespeichert werden:", err);
+        showMessage("Vote-Sync fehlgeschlagen. Bitte später erneut versuchen.", 2400);
       }
     }
 
@@ -47566,6 +47820,7 @@ let shopWishlist = [];
       setCloudHudStatus("online");
       applyCurrentAccountBanStateFromAccount(account);
       syncCloudCreatorStatusFromAccount(account);
+      loadSeasonFinaleVoteFromSupabase();
 
       const localPayload = getStoredLocalPayload() || createSavePayload();
       loadLocalOwnershipSnapshot();
@@ -50007,7 +50262,7 @@ let shopWishlist = [];
 
     function updateRiftDecisionSystem() {
       if (!isCubeWaterActive() || riftDecisionOpen) return;
-      if (inventoryOpen || helpOpen || skillOpen || craftOpen || communityEventOpen || npcOpen || shopOpen || passOpen || questOpen || lockerOpen) return;
+      if (inventoryOpen || helpOpen || skillOpen || craftOpen || communityEventOpen || seasonFinaleVoteOpen || npcOpen || shopOpen || passOpen || questOpen || lockerOpen) return;
       if (!riftDecisionState.nextAt) {
         riftDecisionState.nextAt = Date.now() + 55000;
         return;
@@ -51561,6 +51816,10 @@ let shopWishlist = [];
         } else {
           resetCommunityEventState();
           syncCommunityEventProgress(true);
+        }
+        if (data.season_finale_vote_state) {
+          applySeasonFinaleVotePayload(data.season_finale_vote_state);
+          if (seasonFinaleVoteOpen) renderSeasonFinaleVoteMenu();
         }
       }
     }
@@ -54214,7 +54473,7 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function attackWithSword() {
-      if (maintenanceMode || inventoryOpen || helpOpen || skillOpen || craftOpen || communityEventOpen || npcOpen || !gameStarted) return;
+      if (maintenanceMode || inventoryOpen || helpOpen || skillOpen || craftOpen || communityEventOpen || seasonFinaleVoteOpen || npcOpen || !gameStarted) return;
       if (isAct2MilestoneUnlocked("m2") && act2RuntimeState.contractId === "pickaxe_only" && !inLobby && currentMatchMode === "normal") {
         showMessage("Singleplayer Contract aktiv: Nur Pickaxe erlaubt.", 1800);
         return;
@@ -54457,6 +54716,7 @@ async function loadMaintenanceStateFromSupabase() {
       communityEventOpen = !communityEventOpen;
       if (communityEventMenu) communityEventMenu.classList.toggle("hidden", !communityEventOpen);
       if (communityEventOpen) renderCommunityEvent();
+      if (seasonFinaleVoteOpen) renderSeasonFinaleVoteMenu();
     }
 
     function closeMenus(except = "") {
@@ -54528,6 +54788,10 @@ async function loadMaintenanceStateFromSupabase() {
         communityEventOpen = false;
         if (communityEventMenu) communityEventMenu.classList.add("hidden");
       }
+      if (except !== "seasonFinaleVote") {
+        seasonFinaleVoteOpen = false;
+        if (seasonFinaleVoteMenu) seasonFinaleVoteMenu.classList.add("hidden");
+      }
       if (except !== "mbucksCredit") {
         mbucksCreditOpen = false;
         if (mbucksCreditMenu) mbucksCreditMenu.classList.add("hidden");
@@ -54595,6 +54859,15 @@ async function loadMaintenanceStateFromSupabase() {
         if (mbucksStoreMenu) mbucksStoreMenu.classList.toggle("hidden", !mbucksStoreOpen);
         if (mbucksStoreOpen) {
           fetchAdminCurrencyWallet().then(() => renderMBucksStoreStatus());
+        }
+      }
+      else if (name === 'seasonFinaleVote') {
+        closeMenus("seasonFinaleVote");
+        seasonFinaleVoteOpen = !seasonFinaleVoteOpen;
+        if (seasonFinaleVoteMenu) seasonFinaleVoteMenu.classList.toggle("hidden", !seasonFinaleVoteOpen);
+        if (seasonFinaleVoteOpen) {
+          renderSeasonFinaleVoteMenu();
+          loadSeasonFinaleVoteFromSupabase();
         }
       }
       else if (name === 'showdown') {
@@ -58158,7 +58431,7 @@ async function loadMaintenanceStateFromSupabase() {
         lobbyYoutubeLayer.innerHTML = "";
       }
       const hideHud = inLobby || startScreenActive;
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       if (mbucksCreditOpen) renderMBucksCreditMenu();
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
       if (hudCombo) hudCombo.style.display = (hideHud || anyMenuOpen) ? "none" : "grid";
@@ -60497,6 +60770,21 @@ async function loadMaintenanceStateFromSupabase() {
       communityEventOpen = false;
       if (communityEventMenu) communityEventMenu.classList.add("hidden");
     });
+    if (closeSeasonFinaleVoteBtn) closeSeasonFinaleVoteBtn.addEventListener("click", () => {
+      seasonFinaleVoteOpen = false;
+      if (seasonFinaleVoteMenu) seasonFinaleVoteMenu.classList.add("hidden");
+    });
+    if (seasonFinaleVoteRefreshBtn) seasonFinaleVoteRefreshBtn.addEventListener("click", async () => {
+      await loadSeasonFinaleVoteFromSupabase();
+      showMessage("Finale Vote aktualisiert.", 1500);
+    });
+    if (seasonFinaleVoteMenu) {
+      seasonFinaleVoteMenu.addEventListener("click", (event) => {
+        const optionBtn = event.target.closest("[data-finale-vote-option]");
+        if (!optionBtn) return;
+        submitSeasonFinaleVote(optionBtn.getAttribute("data-finale-vote-option") || "");
+      });
+    }
     if (closeLoreBtn) closeLoreBtn.addEventListener("click", () => {
       loreOpen = false;
       if (loreMenu) loreMenu.classList.add("hidden");
@@ -63240,7 +63528,7 @@ async function loadMaintenanceStateFromSupabase() {
 
     function updateUI() {
       const startScreenActive = !!startScreen && startScreen.style.display !== "none";
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       const hideHud = inLobby || startScreenActive || anyMenuOpen;
 
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
@@ -63263,6 +63551,7 @@ async function loadMaintenanceStateFromSupabase() {
       }
       renderCreativeHud();
       if (communityEventOpen) renderCommunityEvent();
+      if (seasonFinaleVoteOpen) renderSeasonFinaleVoteMenu();
       if (questOpen) renderQuestMenu();
       if (equipmentOpen) renderEquipmentMenu();
       const unlockedCount = Object.values(achievements).filter(a => a.unlocked).length;
@@ -63382,7 +63671,7 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     canvas.addEventListener("mousedown", (e) => {
-            if (maintenanceMode || inventoryOpen || helpOpen || skillOpen || craftOpen || communityEventOpen || npcOpen || !gameStarted) return;
+            if (maintenanceMode || inventoryOpen || helpOpen || skillOpen || craftOpen || communityEventOpen || seasonFinaleVoteOpen || npcOpen || !gameStarted) return;
 
       const pointer = getCanvasPointerPosition(e);
       mouse.x = pointer.x;
@@ -64261,7 +64550,7 @@ async function loadMaintenanceStateFromSupabase() {
         }
       }
 
-      if (gameStarted && !maintenanceMode && !inventoryOpen && !helpOpen && !skillOpen && !craftOpen && !communityEventOpen && !npcOpen && !riftDecisionOpen) {
+      if (gameStarted && !maintenanceMode && !inventoryOpen && !helpOpen && !skillOpen && !craftOpen && !communityEventOpen && !seasonFinaleVoteOpen && !npcOpen && !riftDecisionOpen) {
         updatePlayer();
         updateSlimes();
         updateMining();
