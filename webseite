@@ -126,6 +126,19 @@
       align-items: center;
     }
 
+    .account-pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.08);
+      color: #dff8ff;
+      font: 800 12px "Segoe UI", system-ui, sans-serif;
+      white-space: nowrap;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .pill {
       border: 1px solid var(--line);
       border-radius: 999px;
@@ -506,6 +519,99 @@
       backdrop-filter: blur(16px);
     }
 
+    .account-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .account-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.07);
+      padding: 20px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .account-card h3 {
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+
+    .account-note {
+      color: var(--muted);
+      font: 700 14px "Segoe UI", system-ui, sans-serif;
+      line-height: 1.4;
+    }
+
+    .account-form {
+      display: grid;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .account-input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(5,8,14,0.6);
+      color: var(--ink);
+      padding: 12px 14px;
+      font: 700 14px "Segoe UI", system-ui, sans-serif;
+      outline: none;
+    }
+
+    .account-input:focus {
+      border-color: rgba(53, 215, 255, 0.8);
+      box-shadow: 0 0 0 3px rgba(53, 215, 255, 0.14);
+    }
+
+    .account-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .account-btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      cursor: pointer;
+      font: 900 12px "Segoe UI", system-ui, sans-serif;
+      text-transform: uppercase;
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .account-btn.primary {
+      background: var(--yellow);
+      color: #061017;
+    }
+
+    .account-btn.secondary {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.12);
+      color: var(--ink);
+    }
+
+    .account-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .account-status {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(5,8,14,0.58);
+      padding: 10px 12px;
+      color: #d5e8f0;
+      font: 700 13px "Segoe UI", system-ui, sans-serif;
+      line-height: 1.4;
+    }
+
     .store-tab {
       border: 1px solid var(--line);
       border-radius: 999px;
@@ -744,6 +850,7 @@
       .hero-strip,
       .grid-4,
       .split,
+      .account-wrap,
       .news-grid,
       .store-grid,
       .command-list {
@@ -774,8 +881,9 @@
       <a href="#modes">Modi</a>
     </nav>
     <div class="top-actions">
+      <span class="account-pill" id="accountPill">Konto: Gast</span>
       <a class="pill" href="mineblock-item-shop.html">M-Bucks</a>
-      <a class="pill play" href="#play">Spielen</a>
+      <a class="pill play" href="https://timixiiiiiiii.itch.io/mineblocks?__cf_chl_tk=6oZcKcWCD6HHSIIq0VXhbfw2CNAs23IOpTZTagC.Mxk-1779834346-1.0.1.1-bjRDSAsws_kbGAt0YLeRCNinNb.CHPz6vF55x5kUR1g" target="_blank" rel="noopener noreferrer">JETZT SPIELEN</a>
     </div>
   </header>
 
@@ -784,11 +892,10 @@
       <div class="hero-copy">
         <div class="season">Chapter 3 · Season 1</div>
         <h1>Mineblock</h1>
-        <p>Baue, ueberlebe, sammle Rewards und starte das Main Game ueber deinen Mineblock Launcher.</p>
+        <p>Baue, ueberlebe, sammle Rewards und starte das Main Game direkt ueber die offizielle Play-Seite.</p>
         <div class="hero-actions" id="play">
-          <a class="big-btn primary" href="dist-main-launcher-rebuilt/Mineblock-Epic-Launcher-1.0.0-x64.exe">Launcher herunterladen</a>
-          <a class="big-btn secondary" href="#news">Updates ansehen</a>
-        </div>
+          <a class="big-btn primary" href="https://timixiiiiiiii.itch.io/mineblocks?__cf_chl_tk=6oZcKcWCD6HHSIIq0VXhbfw2CNAs23IOpTZTagC.Mxk-1779834346-1.0.1.1-bjRDSAsws_kbGAt0YLeRCNinNb.CHPz6vF55x5kUR1g" target="_blank" rel="noopener noreferrer">JETZT SPIELEN</a>
+          </div>
         <div class="hero-strip">
           <div class="hero-stat"><span>Status</span><strong>Online</strong></div>
           <div class="hero-stat"><span>Season</span><strong>Nexus</strong></div>
@@ -825,6 +932,35 @@
       </div>
     </section>
 
+    <section id="account">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Cloud Konto</div>
+          <h2>Login</h2>
+        </div>
+      </div>
+      <div class="account-wrap">
+        <article class="account-card">
+          <h3>Mit Game Konto anmelden</h3>
+          <p class="account-note">Nutze denselben Namen + PIN wie im Launcher. Wenn der Name noch nicht existiert, wird automatisch ein Konto in <code>player_accounts</code> erstellt.</p>
+          <form class="account-form" id="siteLoginForm">
+            <input class="account-input" id="sitePlayerName" type="text" maxlength="20" placeholder="Spielername" autocomplete="username" />
+            <input class="account-input" id="sitePlayerPin" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="8" placeholder="PIN (4-8 Ziffern)" autocomplete="current-password" />
+            <div class="account-row">
+              <button class="account-btn primary" type="submit" id="siteLoginBtn">Anmelden</button>
+              <button class="account-btn secondary" type="button" id="siteLogoutBtn">Abmelden</button>
+            </div>
+          </form>
+          <div class="account-status" id="siteLoginStatus">Nicht angemeldet.</div>
+        </article>
+        <article class="account-card">
+          <h3>Verknüpfung</h3>
+          <p class="account-note">Nach erfolgreichem Login bist du auf der Website mit deinem Supabase-Konto verbunden. Für den Launcher nutzt du weiterhin denselben Namen und dieselbe PIN.</p>
+          <p class="account-note">Optional: Später können wir hier direkt Creator-Status, M-Bucks und Profilwerte aus <code>player_accounts</code> anzeigen.</p>
+        </article>
+      </div>
+    </section>
+
     <section id="battlepass">
       <div class="section-head">
         <div>
@@ -836,9 +972,9 @@
         <div class="promo-copy">
           <div class="promo-badge">Chapter 3 · Season Nexus</div>
           <h3 class="promo-title">Battle Pass<br />Jetzt Live</h3>
-          <p class="promo-text">Steig direkt in die neue Season ein, sammle Battle-Pass-Rewards und starte sofort mit deinem Mineblock Launcher.</p>
+          <p class="promo-text">Steig direkt in die neue Season ein, sammle Battle-Pass-Rewards und starte sofort ueber die offizielle Play-Seite.</p>
           <div class="promo-actions">
-            <a class="big-btn primary" href="dist-main-launcher-rebuilt/Mineblock-Epic-Launcher-1.0.0-x64.exe" download>JETZT SPIELEN</a>
+            <a class="big-btn primary" href="https://timixiiiiiiii.itch.io/mineblocks?__cf_chl_tk=6oZcKcWCD6HHSIIq0VXhbfw2CNAs23IOpTZTagC.Mxk-1779834346-1.0.1.1-bjRDSAsws_kbGAt0YLeRCNinNb.CHPz6vF55x5kUR1g" target="_blank" rel="noopener noreferrer">JETZT SPIELEN</a>
             <a class="big-btn secondary" href="#store">Zum Store</a>
           </div>
         </div>
@@ -979,8 +1115,17 @@
   </footer>
   <div class="toast" id="toast">Command kopiert.</div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/data/fortnite-gg-shop.js"></script>
   <script>
+    const SUPABASE_URL = "https://bunuotplzgsikgstcpig.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_crO-8u9nYrs_ZqB-I4z8rw_pYV6DDi7";
+    const PLAYER_ACCOUNTS_TABLE = "player_accounts";
+    const SITE_SESSION_KEY = "mineblock_site_session_v1";
+    const supabaseClient = (window.supabase && typeof window.supabase.createClient === "function")
+      ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+      : null;
+
     const fallbackShopOffers = [
       { id: "premium", tab: "battlepass", name: "Battle Pass Premium", price: 1000, rarity: "legendary", badge: "Pass", symbol: "BP", command: "/buy premium", desc: "Premium-Reihe und exklusive Battle-Pass-Rewards freischalten." },
       { id: "plus25", tab: "battlepass", name: "Premium +25 Stufen", price: 2800, rarity: "mythic", badge: "+25", symbol: "25", command: "/buy 25", desc: "Premium aktivieren und direkt 25 Stufen Fortschritt sichern." },
@@ -1064,6 +1209,138 @@
       showToast.timer = setTimeout(() => toast.classList.remove("show"), 1700);
     }
 
+    function normalizePlayerName(name) {
+      return String(name || "").trim().toLowerCase();
+    }
+
+    async function hashText(text) {
+      if (!window.crypto?.subtle || !window.TextEncoder) {
+        throw new Error("Web Crypto nicht verfügbar");
+      }
+      const encoded = new TextEncoder().encode(text);
+      const hashBuffer = await window.crypto.subtle.digest("SHA-256", encoded);
+      return Array.from(new Uint8Array(hashBuffer))
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    async function createAccountPinHash(playerKey, pin) {
+      const normalizedKey = normalizePlayerName(playerKey);
+      const normalizedPin = String(pin || "").trim();
+      return hashText(`${normalizedKey}::${normalizedPin}`);
+    }
+
+    function setAccountPill(text) {
+      const el = document.getElementById("accountPill");
+      if (el) el.textContent = text;
+    }
+
+    function setLoginStatus(text) {
+      const el = document.getElementById("siteLoginStatus");
+      if (el) el.textContent = text;
+    }
+
+    async function fetchAccountRecord(normalizedName) {
+      const { data, error } = await supabaseClient
+        .from(PLAYER_ACCOUNTS_TABLE)
+        .select("player_key, player_name, pin_hash, last_login_at")
+        .eq("player_key", normalizedName)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    }
+
+    async function loginWebsiteAccount(event) {
+      event.preventDefault();
+      if (!supabaseClient) {
+        setLoginStatus("Supabase ist nicht erreichbar.");
+        return;
+      }
+      const nameInput = document.getElementById("sitePlayerName");
+      const pinInput = document.getElementById("sitePlayerPin");
+      const loginBtn = document.getElementById("siteLoginBtn");
+      const rawName = String(nameInput?.value || "").trim();
+      const pin = String(pinInput?.value || "").trim();
+      if (!rawName) {
+        setLoginStatus("Bitte Spielernamen eingeben.");
+        return;
+      }
+      if (!/^\d{4,8}$/.test(pin)) {
+        setLoginStatus("PIN muss 4-8 Ziffern haben.");
+        return;
+      }
+      const normalizedName = normalizePlayerName(rawName);
+      loginBtn.disabled = true;
+      setLoginStatus("Konto wird geprüft...");
+      try {
+        const pinHash = await createAccountPinHash(normalizedName, pin);
+        let account = await fetchAccountRecord(normalizedName);
+        if (!account) {
+          const newAccount = {
+            player_key: normalizedName,
+            player_name: rawName,
+            pin_hash: pinHash,
+            created_at: new Date().toISOString(),
+            last_login_at: new Date().toISOString()
+          };
+          const { error } = await supabaseClient.from(PLAYER_ACCOUNTS_TABLE).insert(newAccount);
+          if (error) throw error;
+          account = newAccount;
+          setLoginStatus("Neues Konto erstellt und angemeldet.");
+        } else {
+          if (!String(account.pin_hash || "").trim()) {
+            setLoginStatus("Konto hat keine PIN. Bitte im Game migrieren.");
+            return;
+          }
+          if (account.pin_hash !== pinHash) {
+            setLoginStatus("PIN falsch.");
+            return;
+          }
+          const { error: updateError } = await supabaseClient
+            .from(PLAYER_ACCOUNTS_TABLE)
+            .update({ last_login_at: new Date().toISOString(), player_name: rawName })
+            .eq("player_key", normalizedName);
+          if (updateError) throw updateError;
+          setLoginStatus("Erfolgreich angemeldet.");
+        }
+        const sessionData = {
+          playerKey: normalizedName,
+          playerName: rawName,
+          loggedAt: Date.now()
+        };
+        localStorage.setItem(SITE_SESSION_KEY, JSON.stringify(sessionData));
+        setAccountPill(`Konto: ${rawName}`);
+        showToast(`Willkommen ${rawName}`);
+      } catch (err) {
+        console.error(err);
+        setLoginStatus(`Login fehlgeschlagen: ${String(err?.message || err)}`);
+      } finally {
+        loginBtn.disabled = false;
+      }
+    }
+
+    function logoutWebsiteAccount() {
+      localStorage.removeItem(SITE_SESSION_KEY);
+      setAccountPill("Konto: Gast");
+      setLoginStatus("Abgemeldet.");
+      showToast("Du bist abgemeldet.");
+    }
+
+    function restoreWebsiteSession() {
+      try {
+        const raw = localStorage.getItem(SITE_SESSION_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        const name = String(parsed?.playerName || "").trim();
+        if (name) {
+          setAccountPill(`Konto: ${name}`);
+          setLoginStatus(`Eingeloggt als ${name}.`);
+          const nameInput = document.getElementById("sitePlayerName");
+          if (nameInput) nameInput.value = name;
+        }
+      } catch {}
+    }
+
     async function copyCommand(command) {
       if (!command.startsWith("/buy")) {
         showToast("Dieses Item ist ueber Shop-Karten oder Bundles verfuegbar.");
@@ -1086,6 +1363,11 @@
     });
 
     renderShop();
+    restoreWebsiteSession();
+    const siteLoginForm = document.getElementById("siteLoginForm");
+    const siteLogoutBtn = document.getElementById("siteLogoutBtn");
+    if (siteLoginForm) siteLoginForm.addEventListener("submit", loginWebsiteAccount);
+    if (siteLogoutBtn) siteLogoutBtn.addEventListener("click", logoutWebsiteAccount);
 
     if (livePayload?.fetchedAt) {
       const note = document.querySelector("#store .section-note");
