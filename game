@@ -35476,38 +35476,55 @@
   <div id="mbucksStoreMenu" class="inventoryMenu hidden">
     <div class="modeRulesCard mbucksStoreCard">
       <div class="modeRulesEyebrow">M-Bucks Store</div>
-      <div class="modeRulesTitle">M-BUCKS KAUFEN</div>
+      <div class="modeRulesTitle">M-BUCKS EINLÖSEN</div>
       <div class="mbucksStoreLead">
-        Kaufe M-BUCKS mit Echtgeld. Zahlungen laufen sicher über den Payment-Provider (z. B. Stripe), danach werden M-BUCKS serverseitig gutgeschrieben.
+        Tausche deine Admin-Coin direkt in M-BUCKS um. Die Einlösung läuft serverseitig über Supabase.
       </div>
       <div class="mbucksStoreGrid">
         <div class="mbucksStorePack">
           <div class="mbucksStorePackTitle">Starter</div>
           <div class="mbucksStorePackAmount">1.000</div>
-          <div class="mbucksStorePackPrice">4,99 EUR</div>
-          <button class="mbucksStoreBuyBtn" data-mbucks-pack="starter" data-pack-price-cents="499">Jetzt kaufen</button>
+          <div class="mbucksStorePackPrice">10 AC</div>
+          <button class="mbucksStoreBuyBtn" data-mbucks-pack="starter">Mit Admin-Coin einlösen</button>
         </div>
         <div class="mbucksStorePack">
           <div class="mbucksStorePackTitle">Action</div>
           <div class="mbucksStorePackAmount">2.800</div>
-          <div class="mbucksStorePackPrice">11,99 EUR</div>
-          <button class="mbucksStoreBuyBtn" data-mbucks-pack="action" data-pack-price-cents="1199">Jetzt kaufen</button>
+          <div class="mbucksStorePackPrice">28 AC</div>
+          <button class="mbucksStoreBuyBtn" data-mbucks-pack="action">Mit Admin-Coin einlösen</button>
         </div>
         <div class="mbucksStorePack">
           <div class="mbucksStorePackTitle">Pro</div>
           <div class="mbucksStorePackAmount">5.000</div>
-          <div class="mbucksStorePackPrice">19,99 EUR</div>
-          <button class="mbucksStoreBuyBtn" data-mbucks-pack="pro" data-pack-price-cents="1999">Jetzt kaufen</button>
+          <div class="mbucksStorePackPrice">50 AC</div>
+          <button class="mbucksStoreBuyBtn" data-mbucks-pack="pro">Mit Admin-Coin einlösen</button>
         </div>
         <div class="mbucksStorePack">
           <div class="mbucksStorePackTitle">Ultra</div>
           <div class="mbucksStorePackAmount">13.500</div>
-          <div class="mbucksStorePackPrice">49,99 EUR</div>
-          <button class="mbucksStoreBuyBtn" data-mbucks-pack="ultra" data-pack-price-cents="4999">Jetzt kaufen</button>
+          <div class="mbucksStorePackPrice">135 AC</div>
+          <button class="mbucksStoreBuyBtn" data-mbucks-pack="ultra">Mit Admin-Coin einlösen</button>
         </div>
       </div>
       <div id="mbucksStoreStatus" class="mbucksStoreNote">
-        Hinweis: Für Echtgeld-Käufe musst du mit Cloud-Account eingeloggt sein.
+        Hinweis: Für die Einlösung musst du mit Cloud-Account eingeloggt sein.
+      </div>
+      <div class="mbucksEconomyGrid" style="margin-top:10px;">
+        <div class="mbucksEconomyTile">
+          <div class="mbucksEconomyLabel">Admin-Coin Wallet</div>
+          <div id="adminCurrencyWalletValue" class="mbucksEconomyValue">0 AC</div>
+          <div class="mbucksEconomySub">Nur über Supabase Admin Vergabe</div>
+        </div>
+        <div class="mbucksEconomyTile">
+          <div class="mbucksEconomyLabel">Admin-Coin Kurs</div>
+          <div id="adminCurrencyRateValue" class="mbucksEconomyValue">1 AC = 100 M-Bucks</div>
+          <div class="mbucksEconomySub">Serverseitige Einlösung</div>
+        </div>
+      </div>
+      <div class="modeRulesActions mbucksCreditActions" style="margin-top:8px;">
+        <button id="redeemAdminCurrency1Btn" class="achievementCloseBtn" type="button">1 AC einlösen</button>
+        <button id="redeemAdminCurrency5Btn" class="achievementCloseBtn" type="button">5 AC einlösen</button>
+        <button id="redeemAdminCurrency10Btn" class="achievementCloseBtn" type="button">10 AC einlösen</button>
       </div>
       <div class="modeRulesActions mbucksCreditActions">
         <button id="mbucksStoreRefreshBtn" class="achievementCloseBtn" type="button">Status prüfen</button>
@@ -38460,6 +38477,11 @@
     const mbucksStoreStatus = document.getElementById("mbucksStoreStatus");
     const mbucksStoreRefreshBtn = document.getElementById("mbucksStoreRefreshBtn");
     const closeMBucksStoreBtn = document.getElementById("closeMBucksStoreBtn");
+    const adminCurrencyWalletValue = document.getElementById("adminCurrencyWalletValue");
+    const adminCurrencyRateValue = document.getElementById("adminCurrencyRateValue");
+    const redeemAdminCurrency1Btn = document.getElementById("redeemAdminCurrency1Btn");
+    const redeemAdminCurrency5Btn = document.getElementById("redeemAdminCurrency5Btn");
+    const redeemAdminCurrency10Btn = document.getElementById("redeemAdminCurrency10Btn");
     const mbucksCreditInfo = document.getElementById("mbucksCreditInfo");
     const mbucksCreditTimerWrap = document.getElementById("mbucksCreditTimerWrap");
     const mbucksCreditTimerMeta = document.getElementById("mbucksCreditTimerMeta");
@@ -42568,11 +42590,13 @@ async function resetGlobalDiscount() {
     let loreOpen = false;
     let npcOpen = false;
     const MBUCKS_PACKS = {
-      starter: { mbucks: 1000, priceCents: 499, label: "Starter" },
-      action: { mbucks: 2800, priceCents: 1199, label: "Action" },
-      pro: { mbucks: 5000, priceCents: 1999, label: "Pro" },
-      ultra: { mbucks: 13500, priceCents: 4999, label: "Ultra" }
+      starter: { mbucks: 1000, adminCost: 10, label: "Starter" },
+      action: { mbucks: 2800, adminCost: 28, label: "Action" },
+      pro: { mbucks: 5000, adminCost: 50, label: "Pro" },
+      ultra: { mbucks: 13500, adminCost: 135, label: "Ultra" }
     };
+    const ADMIN_CURRENCY_TO_MBUCKS_RATE = 100;
+    let adminCurrencyBalance = 0;
     let riftNextGlitchAt = 0;
     let riftGlitchTimer = 0;
     const riftParticles = [];
@@ -54536,7 +54560,9 @@ async function loadMaintenanceStateFromSupabase() {
         closeMenus("mbucksStore");
         mbucksStoreOpen = !mbucksStoreOpen;
         if (mbucksStoreMenu) mbucksStoreMenu.classList.toggle("hidden", !mbucksStoreOpen);
-        if (mbucksStoreOpen) renderMBucksStoreStatus();
+        if (mbucksStoreOpen) {
+          fetchAdminCurrencyWallet().then(() => renderMBucksStoreStatus());
+        }
       }
       else if (name === 'showdown') {
         const msg = "Alle acten wurden erledigt viel spaß";
@@ -54613,21 +54639,84 @@ async function loadMaintenanceStateFromSupabase() {
     function setMBucksStoreBusy(isBusy) {
       mbucksStoreBuyBtns.forEach((btn) => {
         btn.disabled = !!isBusy;
-        btn.textContent = isBusy ? "Verbinde..." : "Jetzt kaufen";
+        btn.textContent = isBusy ? "Wird eingelöst..." : "Mit Admin-Coin einlösen";
       });
       if (mbucksStoreRefreshBtn) mbucksStoreRefreshBtn.disabled = !!isBusy;
+      if (redeemAdminCurrency1Btn) redeemAdminCurrency1Btn.disabled = !!isBusy;
+      if (redeemAdminCurrency5Btn) redeemAdminCurrency5Btn.disabled = !!isBusy;
+      if (redeemAdminCurrency10Btn) redeemAdminCurrency10Btn.disabled = !!isBusy;
+    }
+
+    async function fetchAdminCurrencyWallet() {
+      if (!supabaseClient || !cloudSyncEnabled || !cloudPlayerKey) {
+        adminCurrencyBalance = 0;
+        return adminCurrencyBalance;
+      }
+      try {
+        const { data, error } = await supabaseClient
+          .from(PLAYER_ACCOUNTS_TABLE)
+          .select("admin_currency_balance")
+          .eq("player_key", cloudPlayerKey)
+          .maybeSingle();
+        if (error) throw error;
+        adminCurrencyBalance = Math.max(0, Math.floor(Number(data?.admin_currency_balance || 0)));
+      } catch (err) {
+        console.warn("Admin-Coin Wallet konnte nicht geladen werden:", err);
+        adminCurrencyBalance = 0;
+      }
+      return adminCurrencyBalance;
+    }
+
+    async function redeemAdminCurrency(amount) {
+      const redeemAmount = Math.max(0, Math.floor(Number(amount || 0)));
+      if (redeemAmount <= 0) return;
+      if (!supabaseClient || !cloudSyncEnabled || !cloudPlayerKey) {
+        showMessage("Cloud-Login erforderlich.", 2200);
+        return;
+      }
+      setMBucksStoreBusy(true);
+      try {
+        const { data, error } = await supabaseClient.rpc("redeem_admin_currency_for_mbucks", {
+          p_player_key: cloudPlayerKey,
+          p_admin_amount: redeemAmount
+        });
+        if (error) throw error;
+        const granted = Math.max(0, Math.floor(Number(data?.granted_mbucks || 0)));
+        const remaining = Math.max(0, Math.floor(Number(data?.remaining_admin_currency || 0)));
+        adminCurrencyBalance = remaining;
+        if (granted > 0) {
+          grantMBucks(granted, "Admin-Coin Redeem", { showToast: false });
+        }
+        renderMBucksStoreStatus(`Eingelöst: ${redeemAmount} AC = ${granted.toLocaleString("de-DE")} M-Bucks`);
+        showMessage(`+${granted.toLocaleString("de-DE")} M-Bucks durch Admin-Coin`, 2400);
+        updateUI();
+        saveGame();
+      } catch (err) {
+        console.error("Admin-Coin Redeem fehlgeschlagen:", err);
+        showMessage("Einlösen fehlgeschlagen.", 2200);
+      } finally {
+        setMBucksStoreBusy(false);
+        await fetchAdminCurrencyWallet();
+        renderMBucksStoreStatus();
+      }
     }
 
     function renderMBucksStoreStatus(message = "") {
       if (!mbucksStoreStatus) return;
       const wallet = Math.max(0, Math.floor(Number(inventory[7] || 0))).toLocaleString("de-DE");
+      if (adminCurrencyWalletValue) {
+        adminCurrencyWalletValue.textContent = `${Math.max(0, Math.floor(Number(adminCurrencyBalance || 0))).toLocaleString("de-DE")} AC`;
+      }
+      if (adminCurrencyRateValue) {
+        adminCurrencyRateValue.textContent = `1 AC = ${ADMIN_CURRENCY_TO_MBUCKS_RATE.toLocaleString("de-DE")} M-Bucks`;
+      }
       const base = `Wallet: ${wallet} M-Bucks`;
       if (message) {
         mbucksStoreStatus.textContent = `${base} | ${message}`;
       } else if (!cloudPlayerKey || !cloudSyncEnabled) {
-        mbucksStoreStatus.textContent = `${base} | Cloud-Login erforderlich für Echtgeld-Käufe.`;
+        mbucksStoreStatus.textContent = `${base} | Cloud-Login erforderlich für Admin-Coin Einlösung.`;
       } else {
-        mbucksStoreStatus.textContent = `${base} | Bereit für Checkout.`;
+        mbucksStoreStatus.textContent = `${base} | Bereit zur Einlösung mit Admin-Coin.`;
       }
     }
 
@@ -54642,31 +54731,8 @@ async function loadMaintenanceStateFromSupabase() {
         renderMBucksStoreStatus("Cloud-Login fehlt.");
         return;
       }
-
-      setMBucksStoreBusy(true);
-      renderMBucksStoreStatus(`Checkout wird gestartet (${pack.label})...`);
-      try {
-        const { data, error } = await supabaseClient.rpc("create_mbucks_checkout_session", {
-          p_player_key: cloudPlayerKey,
-          p_pack_id: packId,
-          p_mbucks_amount: pack.mbucks,
-          p_price_cents: pack.priceCents,
-          p_currency: "EUR"
-        });
-        if (error) throw error;
-        const checkoutUrl = data?.checkout_url || data?.url || null;
-        if (!checkoutUrl) {
-          throw new Error("CHECKOUT_URL_MISSING");
-        }
-        renderMBucksStoreStatus(`Weiterleitung zum Zahlungsanbieter (${pack.label})...`);
-        window.open(checkoutUrl, "_blank");
-      } catch (err) {
-        console.error("MBucks checkout failed:", err);
-        showMessage("Checkout konnte nicht gestartet werden.", 2600);
-        renderMBucksStoreStatus("Fehler beim Checkout-Start. Prüfe SQL/RPC + Payment Backend.");
-      } finally {
-        setMBucksStoreBusy(false);
-      }
+      renderMBucksStoreStatus(`Einlösung gestartet: ${pack.label} (${pack.adminCost} AC)...`);
+      await redeemAdminCurrency(pack.adminCost);
     }
 
     function toggleInventory() {
@@ -60400,12 +60466,17 @@ async function loadMaintenanceStateFromSupabase() {
       closeMBucksStoreMenu();
     });
     if (mbucksStoreRefreshBtn) mbucksStoreRefreshBtn.addEventListener("click", () => {
-      renderMBucksStoreStatus("Status aktualisiert.");
-      showMessage("M-Bucks Store aktualisiert.", 1600);
+      fetchAdminCurrencyWallet().then(() => {
+        renderMBucksStoreStatus("Status aktualisiert.");
+        showMessage("M-Bucks Store aktualisiert.", 1600);
+      });
     });
     mbucksStoreBuyBtns.forEach((btn) => {
       btn.addEventListener("click", () => startMBucksCheckout(btn.dataset.mbucksPack));
     });
+    if (redeemAdminCurrency1Btn) redeemAdminCurrency1Btn.addEventListener("click", () => redeemAdminCurrency(1));
+    if (redeemAdminCurrency5Btn) redeemAdminCurrency5Btn.addEventListener("click", () => redeemAdminCurrency(5));
+    if (redeemAdminCurrency10Btn) redeemAdminCurrency10Btn.addEventListener("click", () => redeemAdminCurrency(10));
     if (closeCommandPlusBtn) closeCommandPlusBtn.addEventListener("click", () => {
       commandPlusOpen = false;
       if (commandPlusMenu) commandPlusMenu.classList.add("hidden");
