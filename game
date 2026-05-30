@@ -21355,6 +21355,124 @@
       margin-top: 6px;
     }
 
+    .mbucksEconomyGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .mbucksEconomyTile {
+      border-radius: 14px;
+      border: 1px solid rgba(126, 213, 255, 0.22);
+      background: rgba(9, 22, 34, 0.78);
+      padding: 10px 12px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .mbucksEconomyLabel {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(187, 232, 255, 0.72);
+      font-weight: 900;
+    }
+
+    .mbucksEconomyValue {
+      font-size: 18px;
+      font-weight: 900;
+      color: #e9fbff;
+    }
+
+    .mbucksEconomySub {
+      font-size: 11px;
+      color: rgba(207, 240, 255, 0.75);
+      line-height: 1.4;
+    }
+
+    .mbucksAutoRow {
+      margin-top: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(117, 255, 206, 0.26);
+      background: rgba(8, 27, 24, 0.72);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mbucksAutoMeta {
+      font-size: 12px;
+      color: rgba(203, 255, 235, 0.88);
+      font-weight: 800;
+    }
+
+    .mbucksAutoToggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #d9fff0;
+    }
+
+    .mbucksAutoToggle input {
+      width: 16px;
+      height: 16px;
+      accent-color: #35d39b;
+    }
+
+    .mbucksLedger {
+      margin-top: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(126, 213, 255, 0.2);
+      background: rgba(8, 19, 30, 0.82);
+      max-height: 180px;
+      overflow: auto;
+      padding: 8px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .mbucksLedgerItem {
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      padding: 8px 10px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      color: rgba(233, 247, 255, 0.9);
+    }
+
+    .mbucksLedgerDelta {
+      font-weight: 900;
+      color: #7dffc5;
+    }
+
+    .mbucksLedgerDelta.isSpend {
+      color: #ffb1b1;
+    }
+
+    .mbucksLedgerTime {
+      color: rgba(188, 216, 238, 0.68);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 800;
+    }
+
+    @media (max-width: 760px) {
+      .mbucksEconomyGrid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .modePickerCard {
       position: relative;
       width: min(1180px, calc(100vw - 34px));
@@ -35014,6 +35132,26 @@
           <span class="mbucksCreditTierComingSoon">COMING SOON</span>
         </button>
       </div>
+      <div class="mbucksEconomyGrid">
+        <div class="mbucksEconomyTile">
+          <div class="mbucksEconomyLabel">Wallet</div>
+          <div id="mbucksEconomyWallet" class="mbucksEconomyValue">0 M-Bucks</div>
+          <div class="mbucksEconomySub">Dein aktueller Kontostand</div>
+        </div>
+        <div class="mbucksEconomyTile">
+          <div class="mbucksEconomyLabel">Heute verdient</div>
+          <div id="mbucksEconomyToday" class="mbucksEconomyValue">0 M-Bucks</div>
+          <div class="mbucksEconomySub">Auto + Quests + Events</div>
+        </div>
+      </div>
+      <div class="mbucksAutoRow">
+        <div id="mbucksAutoMeta" class="mbucksAutoMeta">Auto-M-Bucks: alle 45s +25</div>
+        <label class="mbucksAutoToggle">
+          <input id="mbucksAutoEnabledToggle" type="checkbox" />
+          Auto-System aktiv
+        </label>
+      </div>
+      <div id="mbucksLedger" class="mbucksLedger"></div>
       <div class="modeRulesActions mbucksCreditActions">
         <button id="mbucksCreditRepayBtn" class="achievementCloseBtn">Jetzt abbezahlen</button>
         <button class="achievementCloseBtn" onclick="toggleMBucksCreditMenu()">Schliessen</button>
@@ -37959,6 +38097,11 @@
     const mbucksCreditTimerMeta = document.getElementById("mbucksCreditTimerMeta");
     const mbucksCreditTimerFill = document.getElementById("mbucksCreditTimerFill");
     const mbucksCreditRepayBtn = document.getElementById("mbucksCreditRepayBtn");
+    const mbucksEconomyWallet = document.getElementById("mbucksEconomyWallet");
+    const mbucksEconomyToday = document.getElementById("mbucksEconomyToday");
+    const mbucksAutoMeta = document.getElementById("mbucksAutoMeta");
+    const mbucksAutoEnabledToggle = document.getElementById("mbucksAutoEnabledToggle");
+    const mbucksLedger = document.getElementById("mbucksLedger");
     const floodModeInline = document.getElementById("floodModeInline");
     const floodModeInlineTitle = floodModeInline?.querySelector(".floodModeInlineTitle") || null;
     const floodModeHudTimer = document.getElementById("floodModeHudTimer");
@@ -45441,6 +45584,9 @@ let shopWishlist = [];
     let portalCooldown = 0;
 
     const DEFAULT_VBUCKS = 50;
+    const MBUCKS_AUTO_REWARD_AMOUNT = 25;
+    const MBUCKS_AUTO_REWARD_INTERVAL_MS = 45 * 1000;
+    const MBUCKS_LEDGER_LIMIT = 40;
     const MBUCKS_CREDIT_INTEREST_RATE = 0.1;
     const MBUCKS_CREDIT_TERM_MS = 3 * 60 * 60 * 1000;
     const MBUCKS_CREDIT_LOCK_MS = 30 * 60 * 1000;
@@ -45454,6 +45600,14 @@ let shopWishlist = [];
       settledAt: 0,
       lockedUntil: 0
     };
+    let mbucksEconomyState = {
+      autoEnabled: true,
+      autoLastGrantAt: 0,
+      earnedToday: 0,
+      earnedTodayDateKey: "",
+      ledger: []
+    };
+    mbucksEconomyState = normalizeMBucksEconomyState(mbucksEconomyState);
     creativeState.settings = normalizeCreativeMapSettings(creativeState.settings);
 
     const inventory = {
@@ -51163,6 +51317,7 @@ async function loadMaintenanceStateFromSupabase() {
         selectedLobbyMode,
         lastPlayedLobbyMode,
         mbucksCreditState,
+        mbucksEconomyState,
         hotbarSlots,
         inventoryBlockOrder,
         weatherState,
@@ -51382,6 +51537,7 @@ async function loadMaintenanceStateFromSupabase() {
         selectedLobbyMode = getFirstAvailableLobbyMode();
       }
       mbucksCreditState = normalizeMBucksCreditState(parsed.mbucksCreditState);
+      mbucksEconomyState = normalizeMBucksEconomyState(parsed.mbucksEconomyState);
       if (parsed.lastPlayedLobbyMode === "solo" || parsed.lastPlayedLobbyMode === "creative") {
         lastPlayedLobbyMode = parsed.lastPlayedLobbyMode;
       } else {
@@ -52500,6 +52656,90 @@ async function loadMaintenanceStateFromSupabase() {
       return { active: true, amount, principal: principal || amount, takenAt, dueAt, settledAt, lockedUntil };
     }
 
+    function getDateKey() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, "0");
+      const d = String(now.getDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    function normalizeMBucksEconomyState(payload = {}) {
+      const dateKey = getDateKey();
+      const ledgerRaw = Array.isArray(payload?.ledger) ? payload.ledger : [];
+      const ledger = ledgerRaw
+        .map((entry) => ({
+          type: String(entry?.type || "earn"),
+          amount: Math.max(0, Math.floor(Number(entry?.amount || 0))),
+          source: String(entry?.source || "system"),
+          at: Math.max(0, Math.floor(Number(entry?.at || 0)))
+        }))
+        .filter((entry) => entry.amount > 0)
+        .slice(-MBUCKS_LEDGER_LIMIT);
+      const storedDateKey = String(payload?.earnedTodayDateKey || "");
+      const sameDay = storedDateKey === dateKey;
+      return {
+        autoEnabled: payload?.autoEnabled !== false,
+        autoLastGrantAt: Math.max(0, Math.floor(Number(payload?.autoLastGrantAt || 0))),
+        earnedToday: sameDay ? Math.max(0, Math.floor(Number(payload?.earnedToday || 0))) : 0,
+        earnedTodayDateKey: dateKey,
+        ledger
+      };
+    }
+
+    function pushMBucksLedger(type, amount, source = "system") {
+      const entry = {
+        type: type === "spend" ? "spend" : "earn",
+        amount: Math.max(0, Math.floor(Number(amount || 0))),
+        source: String(source || "system"),
+        at: Date.now()
+      };
+      if (entry.amount <= 0) return;
+      mbucksEconomyState.ledger.push(entry);
+      if (mbucksEconomyState.ledger.length > MBUCKS_LEDGER_LIMIT) {
+        mbucksEconomyState.ledger = mbucksEconomyState.ledger.slice(-MBUCKS_LEDGER_LIMIT);
+      }
+    }
+
+    function grantMBucks(amount, source = "system", options = {}) {
+      const value = Math.max(0, Math.floor(Number(amount || 0)));
+      if (value <= 0) return 0;
+      const dateKey = getDateKey();
+      if (mbucksEconomyState.earnedTodayDateKey !== dateKey) {
+        mbucksEconomyState.earnedTodayDateKey = dateKey;
+        mbucksEconomyState.earnedToday = 0;
+      }
+      inventory[7] = Math.max(0, Math.floor(Number(inventory[7] || 0))) + value;
+      mbucksEconomyState.earnedToday += value;
+      pushMBucksLedger("earn", value, source);
+      if (options.showToast !== false) {
+        showMessage(`+${value.toLocaleString("de-DE")} M-Bucks (${source})`, 1700);
+      }
+      return value;
+    }
+
+    function spendMBucks(amount, source = "system", options = {}) {
+      const value = Math.max(0, Math.floor(Number(amount || 0)));
+      if (value <= 0) return true;
+      const wallet = Math.max(0, Math.floor(Number(inventory[7] || 0)));
+      if (wallet < value) return false;
+      inventory[7] = wallet - value;
+      pushMBucksLedger("spend", value, source);
+      if (options.showToast !== false) {
+        showMessage(`-${value.toLocaleString("de-DE")} M-Bucks (${source})`, 1600);
+      }
+      return true;
+    }
+
+    function processMBucksAutoIncome() {
+      if (!mbucksEconomyState.autoEnabled) return;
+      const now = Date.now();
+      if (now - mbucksEconomyState.autoLastGrantAt < MBUCKS_AUTO_REWARD_INTERVAL_MS) return;
+      mbucksEconomyState.autoLastGrantAt = now;
+      grantMBucks(MBUCKS_AUTO_REWARD_AMOUNT, "Auto-Lobby", { showToast: false });
+      queueDeferredSave();
+    }
+
     function formatCreditCountdown(ms) {
       const totalSeconds = Math.max(0, Math.floor(ms / 1000));
       const hours = Math.floor(totalSeconds / 3600);
@@ -52521,7 +52761,7 @@ async function loadMaintenanceStateFromSupabase() {
       const due = Math.max(0, Math.floor(Number(mbucksCreditState.amount || 0)));
       const wallet = Math.max(0, Math.floor(Number(inventory[7] || 0)));
       const unpaid = Math.max(0, due - wallet);
-      inventory[7] = Math.max(0, wallet - due);
+      spendMBucks(Math.min(wallet, due), "Kredit-Faelligkeit", { showToast: false });
       mbucksCreditState = {
         active: false,
         amount: 0,
@@ -52547,6 +52787,7 @@ async function loadMaintenanceStateFromSupabase() {
 
     function renderMBucksCreditMenu() {
       if (!mbucksCreditInfo || !mbucksCreditRepayBtn) return;
+      mbucksEconomyState = normalizeMBucksEconomyState(mbucksEconomyState);
       settleOverdueMBucksCredit({ showToast: false });
       const wallet = Math.max(0, Math.floor(Number(inventory[7] || 0)));
       const lockRemainingMs = Math.max(0, Number(mbucksCreditState.lockedUntil || 0) - Date.now());
@@ -52580,6 +52821,7 @@ async function loadMaintenanceStateFromSupabase() {
           button.disabled = lockRemainingMs > 0;
         });
         mbucksCreditRepayBtn.disabled = true;
+        renderMBucksEconomyPanel();
         return;
       }
       const remainingMs = Math.max(0, mbucksCreditState.dueAt - Date.now());
@@ -52598,6 +52840,41 @@ async function loadMaintenanceStateFromSupabase() {
         button.disabled = true;
       });
       mbucksCreditRepayBtn.disabled = wallet < mbucksCreditState.amount;
+      renderMBucksEconomyPanel();
+    }
+
+    function renderMBucksEconomyPanel() {
+      if (mbucksEconomyWallet) {
+        mbucksEconomyWallet.textContent = `${Math.max(0, Math.floor(Number(inventory[7] || 0))).toLocaleString("de-DE")} M-Bucks`;
+      }
+      if (mbucksEconomyToday) {
+        mbucksEconomyToday.textContent = `${Math.max(0, Math.floor(Number(mbucksEconomyState.earnedToday || 0))).toLocaleString("de-DE")} M-Bucks`;
+      }
+      if (mbucksAutoMeta) {
+        const nextInMs = Math.max(0, MBUCKS_AUTO_REWARD_INTERVAL_MS - (Date.now() - Number(mbucksEconomyState.autoLastGrantAt || 0)));
+        mbucksAutoMeta.textContent = `Auto-M-Bucks: alle ${(MBUCKS_AUTO_REWARD_INTERVAL_MS / 1000).toFixed(0)}s +${MBUCKS_AUTO_REWARD_AMOUNT} (nächster in ${formatCreditCountdown(nextInMs)})`;
+      }
+      if (mbucksAutoEnabledToggle) {
+        mbucksAutoEnabledToggle.checked = mbucksEconomyState.autoEnabled !== false;
+      }
+      if (mbucksLedger) {
+        const entries = (mbucksEconomyState.ledger || []).slice().reverse().slice(0, 12);
+        if (!entries.length) {
+          mbucksLedger.innerHTML = `<div class="mbucksLedgerItem"><span class="mbucksLedgerTime">Info</span><span>Noch keine Buchungen.</span><strong class="mbucksLedgerDelta">0</strong></div>`;
+          return;
+        }
+        mbucksLedger.innerHTML = entries.map((entry) => {
+          const isSpend = entry.type === "spend";
+          const when = entry.at ? new Date(entry.at).toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit", second: "2-digit" }) : "--:--:--";
+          return `
+            <div class="mbucksLedgerItem">
+              <span class="mbucksLedgerTime">${when}</span>
+              <span>${entry.source}</span>
+              <strong class="mbucksLedgerDelta ${isSpend ? "isSpend" : ""}">${isSpend ? "-" : "+"}${entry.amount.toLocaleString("de-DE")}</strong>
+            </div>
+          `;
+        }).join("");
+      }
     }
 
     function takeMBucksCredit(principal = 2000) {
@@ -52609,7 +52886,7 @@ async function loadMaintenanceStateFromSupabase() {
       
       const amount = getMBucksCreditRepayAmount(principal);
       const now = Date.now();
-      const dueDate = new Date(now + MBUCKS_CREDIT_DEADLINE_MS);
+      const dueDate = new Date(now + MBUCKS_CREDIT_TERM_MS);
       
       // Show confirmation dialog
       const confirmed = confirm(
@@ -52632,7 +52909,7 @@ async function loadMaintenanceStateFromSupabase() {
       
       const normalizedPrincipal = MBUCKS_CREDIT_TIERS.includes(Number(principal)) ? Number(principal) : 2000;
       const repayAmount = getMBucksCreditRepayAmount(normalizedPrincipal);
-      inventory[7] = Math.max(0, Math.floor(Number(inventory[7] || 0))) + normalizedPrincipal;
+      grantMBucks(normalizedPrincipal, "Kredit-Auszahlung", { showToast: false });
       mbucksCreditState = {
         active: true,
         amount: repayAmount,
@@ -52663,7 +52940,7 @@ async function loadMaintenanceStateFromSupabase() {
         renderMBucksCreditMenu();
         return;
       }
-      inventory[7] = wallet - due;
+      spendMBucks(due, "Kredit-Rueckzahlung", { showToast: false });
       mbucksCreditState = {
         active: false,
         amount: 0,
@@ -53869,6 +54146,12 @@ async function loadMaintenanceStateFromSupabase() {
       else if (name === 'shop') toggleShopMenu();
       else if (name === 'pass') toggleBattlePass();
       else if (name === 'quest') toggleQuestMenu();
+      else if (name === 'mbucksCredit') {
+        closeMenus("mbucksCredit");
+        mbucksCreditOpen = !mbucksCreditOpen;
+        if (mbucksCreditMenu) mbucksCreditMenu.classList.toggle("hidden", !mbucksCreditOpen);
+        if (mbucksCreditOpen) renderMBucksCreditMenu();
+      }
       else if (name === 'showdown') {
         const msg = "Alle acten wurden erledigt viel spaß";
         showMessage(msg, 2800);
@@ -57009,7 +57292,7 @@ async function loadMaintenanceStateFromSupabase() {
       if (Math.abs(px - vaultState.x) <= 1 && Math.abs(py - vaultState.y) <= 1) {
         vaultState.opened = true;
         vaultState.active = false;
-        inventory[7] += 6;
+        grantMBucks(6, "Tresor");
         addXp(120);
         showMessage("Tresor geöffnet! +6 M-Bucks und Bonus-XP.", 2000);
         saveGame();
@@ -57255,6 +57538,7 @@ async function loadMaintenanceStateFromSupabase() {
       const activeBoostEntries = activeLiveEvents.filter((entry) => ["xpBoost", "passBoost", "communityBoost"].includes(entry.key));
       applyLobbyBackgroundVisual();
       settleOverdueMBucksCredit();
+      processMBucksAutoIncome();
       document.body.classList.toggle("lobbyMode", inLobby);
       document.body.classList.toggle("startScreenActive", startScreenActive);
       if (lobbyScreen) lobbyScreen.classList.toggle("hidden", !inLobby);
@@ -59583,7 +59867,7 @@ async function loadMaintenanceStateFromSupabase() {
     if (lockerBtn) lockerBtn.addEventListener("click", () => toggleLocker());
     const serverStatusBar = document.getElementById("serverStatusBar");
     if (serverStatusBar) serverStatusBar.addEventListener("click", () => {
-      window.open("https://mineblocklll.instatus.com/", "_blank");
+      window.open("https://mineblock.statuspage.io/", "_blank");
     });
     if (moreBtn) moreBtn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -61096,8 +61380,7 @@ async function loadMaintenanceStateFromSupabase() {
     });
 
     adminGiveGoldBtn.addEventListener("click", () => {
-      inventory[7] += 10;
-      showMessage("+10 M-Bucks erhalten!");
+      grantMBucks(10, "Admin-Bonus");
       saveGame();
       updateUI();
       updateAdminProgressInfo();
@@ -61172,14 +61455,14 @@ async function loadMaintenanceStateFromSupabase() {
     });
 
     adminGiveConsumablesBtn.addEventListener("click", () => {
-      inventory[7] += 25;
+      grantMBucks(25, "Admin-Bonus");
       saveGame();
       renderShop();
       renderInventory();
       renderEffects();
       updateUI();
       updateAdminProgressInfo();
-      showMessage("+25 M-Bucks-Bonus erhalten!");
+      showMessage("+25 M-Bucks-Bonus erhalten!", 1800);
     });
 
     if (adminShopType) adminShopType.addEventListener("change", refreshAdminShopItems);
@@ -61547,7 +61830,7 @@ async function loadMaintenanceStateFromSupabase() {
       s5ChainReactionState.lastDestroyed = destroyed;
       s5ChainReactionState.lastMbucks = mbucksGain;
       s5ChainReactionState.lastXp = xpGain;
-      inventory[7] += mbucksGain;
+      grantMBucks(mbucksGain, "Kettenreaktion", { showToast: false });
       addXp(xpGain);
       addBattlePassXp(Math.max(12, Math.round(destroyed * 2 + chainCount * 4)));
       showMessage(`Vermischung-Kettenreaktion x${chainCount}: +${destroyed} Blöcke, +${mbucksGain} M-Bucks`, 2200);
@@ -61577,7 +61860,7 @@ async function loadMaintenanceStateFromSupabase() {
           if (block === 7) stats.goldMined++;
           if (block === 15 || block === 16 || block === 17) {
             if (Math.random() > 0.45) addLoot("alienFragment", block === 17 ? 2 : 1);
-            if (block === 17) inventory[7] += 2;
+            if (block === 17) grantMBucks(2, "Alien-Erz", { showToast: false });
           }
 
           let xpGain = 10 + progression.skills.mining * 2;
@@ -62842,7 +63125,7 @@ async function loadMaintenanceStateFromSupabase() {
           showMessage("Upgrade: +220 XP erhalten!", 2000);
         }},
         { id: "cash", title: "Beutekasse", desc: "+260 M-Bucks sofort", apply: () => {
-          inventory[7] += 260;
+          grantMBucks(260, "Hero-Gauntlet");
           showMessage("Upgrade: +260 M-Bucks erhalten!", 2000);
         }},
         { id: "skill", title: "Heldenfokus", desc: "+1 Skillpunkt sofort", apply: () => {
@@ -62933,7 +63216,7 @@ async function loadMaintenanceStateFromSupabase() {
       heroGauntletState.active = false;
       heroGauntletState.enemiesRemaining = 0;
       updateDerivedStats();
-      inventory[7] += 1200;
+      grantMBucks(1200, "Hero-Gauntlet Finale", { showToast: false });
       addXp(1200);
       addBattlePassXp(700);
       progression.skillPoints += 2;
@@ -63100,7 +63383,7 @@ async function loadMaintenanceStateFromSupabase() {
             if (s.health <= 0) {
               const fortuneGold = rollFortuneBonus();
               if (s.type.includes("desert") && Math.random() > 0.45) inventory[7]++;
-              if (s.type.includes("alien") && Math.random() > 0.4) inventory[7] += 2;
+              if (s.type.includes("alien") && Math.random() > 0.4) grantMBucks(2, "Alien-Drop", { showToast: false });
               if (s.type.includes("fire") && Math.random() > 0.55) inventory[6]++;
               if (Math.random() > 0.6) inventory[2]++;
               if (fortuneGold) inventory[7] += 1;
@@ -63428,6 +63711,7 @@ drawRiftGlitchOverlay(cam);
       updateTwitchUi();
       updateLoreUi();
       renderLeakMenu();
+      renderMBucksCreditMenu();
       updateLobbyUi();
       updateUI();
     } catch (error) {
@@ -63450,6 +63734,16 @@ drawRiftGlitchOverlay(cam);
     if (mbucksCreditRepayBtn) {
       mbucksCreditRepayBtn.addEventListener("click", () => {
         repayMBucksCreditNow();
+      });
+    }
+    if (mbucksAutoEnabledToggle) {
+      mbucksAutoEnabledToggle.addEventListener("change", () => {
+        mbucksEconomyState.autoEnabled = !!mbucksAutoEnabledToggle.checked;
+        if (mbucksEconomyState.autoEnabled && !mbucksEconomyState.autoLastGrantAt) {
+          mbucksEconomyState.autoLastGrantAt = Date.now();
+        }
+        renderMBucksCreditMenu();
+        queueDeferredSave();
       });
     }
     window.addEventListener("beforeunload", () => {
