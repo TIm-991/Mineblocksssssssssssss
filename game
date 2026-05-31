@@ -5885,6 +5885,106 @@
       box-shadow: 0 0 14px rgba(255, 184, 96, 0.22);
     }
 
+    /* Roadmap Menu (ingame) */
+    .crewRoadmap {
+      display: grid;
+      gap: 14px;
+    }
+
+    .crewRoadmapHeader {
+      display: grid;
+      gap: 4px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(159, 198, 255, 0.22);
+      background:
+        radial-gradient(circle at top right, rgba(92, 149, 255, 0.18), transparent 34%),
+        linear-gradient(180deg, rgba(14, 24, 40, 0.92), rgba(9, 16, 28, 0.95));
+      color: #f2f8ff;
+    }
+
+    .crewRoadmapTitle {
+      font-size: 24px;
+      font-weight: 1000;
+      letter-spacing: 0.01em;
+    }
+
+    .crewRoadmapMeta {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(210, 225, 244, 0.84);
+    }
+
+    .crewRoadmapGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .crewRoadmapCard {
+      position: relative;
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(147, 182, 236, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        rgba(10, 18, 30, 0.88);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 14px 26px rgba(0,0,0,0.2);
+      color: #eaf3ff;
+    }
+
+    .crewRoadmapCard.done {
+      border-color: rgba(120, 255, 186, 0.4);
+      background:
+        radial-gradient(circle at top right, rgba(111, 255, 173, 0.18), transparent 30%),
+        linear-gradient(180deg, rgba(18, 44, 36, 0.88), rgba(10, 23, 20, 0.92));
+    }
+
+    .crewRoadmapCheck {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 1000;
+      color: #dfffee;
+      background: rgba(101, 255, 170, 0.22);
+      border: 1px solid rgba(133, 255, 189, 0.5);
+    }
+
+    .crewRoadmapLabel {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(188, 211, 240, 0.78);
+    }
+
+    .crewRoadmapItem {
+      font-size: 22px;
+      font-weight: 1000;
+      line-height: 1.05;
+      color: #f7fbff;
+    }
+
+    .crewRoadmapText {
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(226, 236, 249, 0.88);
+    }
+
+    @media (max-width: 920px) {
+      .crewRoadmapGrid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .roadmapWrap {
       width: calc(100vw - 36px);
       max-width: none;
@@ -36825,6 +36925,7 @@
             <button class="lobbyNavBtn" onclick="openMenu('pass')"><span class="lobbyNavIcon">🎫</span> Battle Pass</button>
             <button class="lobbyNavBtn" onclick="openMenu('quest')"><span class="lobbyNavIcon">📜</span> Quests</button>
             <button class="lobbyNavBtn" onclick="openMenu('skill')"><span class="lobbyNavIcon">⚡</span> Skills</button>
+            <button class="lobbyNavBtn" onclick="openMenu('roadmap')"><span class="lobbyNavIcon">🗺️</span> Roadmap</button>
             <button class="lobbyNavBtn" onclick="openMenu('mbucksStore')"><span class="lobbyNavIcon">💰</span> M-BUCKS</button>
             <button class="lobbyNavBtn" onclick="openMenu('commandPlus')"><span class="lobbyNavIcon">🛡️</span> COMMAND+</button>
             <button class="lobbyNavBtn" onclick="openMenu('creator')"><span class="lobbyNavIcon">💎</span> Creator</button>
@@ -38333,57 +38434,46 @@
       <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px;">
         <div>
           <div class="inventoryTitle">Roadmap</div>
-          <div class="inventoryLead">Chapter 3 Seasons & Themenplan.</div>
+          <div class="inventoryLead">Masterplan bis Chapter 4 · Season 3</div>
         </div>
         <button id="closeRoadmapBtn" class="achievementCloseBtn">Schließen</button>
       </div>
       <section class="crewRoadmap">
         <div class="crewRoadmapHeader">
-          <div class="crewRoadmapTitle">Chapter 3 Roadmap</div>
-          <div class="crewRoadmapMeta">Season Uebersicht & Themen-Plan</div>
+          <div class="crewRoadmapTitle">Chapter Timeline</div>
+          <div class="crewRoadmapMeta">Live-Plan: Chapter 3 Season 4 bis Chapter 4 Season 3</div>
         </div>
         <div class="crewRoadmapGrid">
           <div class="crewRoadmapCard done">
-            <div class="crewRoadmapCheck">?</div>
-            <div class="crewRoadmapLabel">Season 1</div>
-            <div class="crewRoadmapItem">Checkmaker</div>
-            <div class="crewRoadmapText">Abgeschlossen.</div>
-          </div>
-          <div class="crewRoadmapCard done">
-            <div class="crewRoadmapCheck">?</div>
-            <div class="crewRoadmapLabel">Season 4</div>
-            <div class="crewRoadmapItem">TOP SECRET</div>
-            <div class="crewRoadmapText">Abgeschlossen.</div>
+            <div class="crewRoadmapCheck">✓</div>
+            <div class="crewRoadmapLabel">Chapter 3 · Season 4</div>
+            <div class="crewRoadmapItem">Rift Stabilization</div>
+            <div class="crewRoadmapText">Wartungs-Bridge, Konto-Sync, Popup-UX, Shop 3.0 und Queue/Mode-Rework.</div>
           </div>
           <div class="crewRoadmapCard">
-            <div class="crewRoadmapLabel">Season 4</div>
-            <div class="crewRoadmapItem">Flut</div>
-            <div class="crewRoadmapText">Aktuelle Season.</div>
+            <div class="crewRoadmapLabel">Chapter 4 · Season 1</div>
+            <div class="crewRoadmapItem">New Dawn Protocol</div>
+            <div class="crewRoadmapText">Neues Hub-Layout, Battle Pass Seitenstruktur, Social/Party-Rework und Biome-Rotation.</div>
           </div>
           <div class="crewRoadmapCard">
-            <div class="crewRoadmapLabel">Season 4</div>
-            <div class="crewRoadmapItem">Superhelden</div>
-            <div class="crewRoadmapText">Hero-Skills & Speziallooks.</div>
+            <div class="crewRoadmapLabel">Chapter 4 · Season 2</div>
+            <div class="crewRoadmapItem">Fracture Wars</div>
+            <div class="crewRoadmapText">Faction-System, Territory-Wochenevents, Ranked-Lite und Creator Challenges.</div>
           </div>
           <div class="crewRoadmapCard">
-            <div class="crewRoadmapLabel">Season 4</div>
-            <div class="crewRoadmapItem">Wuerfel</div>
-            <div class="crewRoadmapText">Aktuelle Season mit Cube-Zonen, Direktiven und instabilen Welten.</div>
+            <div class="crewRoadmapLabel">Chapter 4 · Season 3</div>
+            <div class="crewRoadmapItem">Zero Point Uprising</div>
+            <div class="crewRoadmapText">3-Phasen Story-Season, Community Finale Vote, Mythic Track und World-Changes fürs nächste Chapter.</div>
           </div>
           <div class="crewRoadmapCard">
-            <div class="crewRoadmapLabel">Season 6</div>
-            <div class="crewRoadmapItem">Urzeit (Steinzeit)</div>
-            <div class="crewRoadmapText">Stein-Tools & uralte Ruinen.</div>
+            <div class="crewRoadmapLabel">Milestone</div>
+            <div class="crewRoadmapItem">Live Ops System</div>
+            <div class="crewRoadmapText">Dynamische ETA, Wartungsstatus, Rewards und Global-State direkt aus Supabase.</div>
           </div>
           <div class="crewRoadmapCard">
-            <div class="crewRoadmapLabel">Season 7</div>
-            <div class="crewRoadmapItem">Alien 2.0</div>
-            <div class="crewRoadmapText">Neue Besucher & Tech.</div>
-          </div>
-          <div class="crewRoadmapCard">
-            <div class="crewRoadmapLabel">Season 9</div>
-            <div class="crewRoadmapItem">Nachhall</div>
-            <div class="crewRoadmapText">Kommt spaeter mit Echo-Zonen und Folge-Events.</div>
+            <div class="crewRoadmapLabel">Milestone</div>
+            <div class="crewRoadmapItem">Creator Economy V2</div>
+            <div class="crewRoadmapText">Creator-Cashback, Support-Streaks, Promo-Tiers und neue Creator Missionen.</div>
           </div>
         </div>
       </section>
@@ -56687,7 +56777,7 @@ async function loadMaintenanceStateFromSupabase() {
       }
       else if (name === 'skill') toggleSkillMenu(true);
       else if (name === 'lore') toggleLoreMenu();
-      else if (name === 'roadmap') toggleLeakMenu();
+      else if (name === 'roadmap') toggleRoadmapMenu();
       else if (name === 'admin') askAdminPassword();
       else if (name === 'blog') toggleLeakMenu();
       else if (name === 'commandPlus') toggleCommandPlusMenu(true);
