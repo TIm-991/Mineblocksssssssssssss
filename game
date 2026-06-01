@@ -22087,6 +22087,37 @@
       margin: 14px 0 12px;
     }
 
+    .questBoosterGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 14px 0 12px;
+    }
+
+    .questBoosterCard {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background:
+        radial-gradient(circle at top right, rgba(120,170,255,0.14), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+      display: grid;
+      gap: 8px;
+    }
+
+    .questBoosterCardTitle {
+      font-size: 16px;
+      font-weight: 900;
+      color: #ffffff;
+    }
+
+    .questBoosterMeta {
+      font-size: 12px;
+      color: rgba(234, 242, 255, 0.82);
+      line-height: 1.45;
+    }
+
     .mbucksStorePack {
       padding: 16px;
       border-radius: 18px;
@@ -37344,6 +37375,7 @@
             <button class="lobbyNavBtn" onclick="openMenu('skill')"><span class="lobbyNavIcon">⚡</span> Skills</button>
             <button class="lobbyNavBtn" onclick="openMenu('roadmap')"><span class="lobbyNavIcon">🗺️</span> Roadmap</button>
             <button class="lobbyNavBtn" onclick="openMenu('mbucksStore')"><span class="lobbyNavIcon"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks"></span> M-BUCKS</button>
+            <button class="lobbyNavBtn" onclick="openMenu('questBooster')"><span class="lobbyNavIcon">🎟️</span> Quest Booster</button>
             <button class="lobbyNavBtn" onclick="openMenu('commandPlus')"><span class="lobbyNavIcon">🛡️</span> COMMAND+</button>
             <button class="lobbyNavBtn" onclick="openMenu('creator')"><span class="lobbyNavIcon">💎</span> Creator</button>
           </div>
@@ -37565,6 +37597,41 @@
       <div class="modeRulesActions mbucksCreditActions">
         <button id="mbucksStoreRefreshBtn" class="achievementCloseBtn" type="button">Status prüfen</button>
         <button id="closeMBucksStoreBtn" class="achievementCloseBtn" type="button">Schließen</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="questBoosterMenu" class="inventoryMenu hidden">
+    <div class="modeRulesCard mbucksStoreCard">
+      <div class="mbucksMenuHead">
+        <div class="mbucksMenuHeadIcon">🎟️</div>
+        <div class="modeRulesEyebrow">Quest Booster Tickets • BETA</div>
+      </div>
+      <div class="modeRulesTitle">ZEITLICH BEGRENZT</div>
+      <div class="mbucksStoreLead">
+        Booster wirken nur auf Quest-Rewards (Level-XP, Pass-XP, M-Bucks). Nach Ablauf endet der Boost automatisch.
+      </div>
+      <div id="questBoosterStatus" class="mbucksStoreNote">Lade Booster-Status ...</div>
+      <div class="questBoosterGrid">
+        <div class="questBoosterCard">
+          <div class="questBoosterCardTitle">Ticket S</div>
+          <div class="questBoosterMeta">+25% Quest-Rewards • 20 Minuten</div>
+          <button class="mbucksStoreBuyBtn" data-quest-booster-pack="small">Kaufen • <img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">350</button>
+        </div>
+        <div class="questBoosterCard">
+          <div class="questBoosterCardTitle">Ticket M</div>
+          <div class="questBoosterMeta">+60% Quest-Rewards • 60 Minuten</div>
+          <button class="mbucksStoreBuyBtn" data-quest-booster-pack="medium">Kaufen • <img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">900</button>
+        </div>
+        <div class="questBoosterCard">
+          <div class="questBoosterCardTitle">Ticket XL</div>
+          <div class="questBoosterMeta">+100% Quest-Rewards • 180 Minuten</div>
+          <button class="mbucksStoreBuyBtn" data-quest-booster-pack="large">Kaufen • <img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">2200</button>
+        </div>
+      </div>
+      <div class="modeRulesActions mbucksCreditActions">
+        <button id="questBoosterRefreshBtn" class="achievementCloseBtn" type="button">Status prüfen</button>
+        <button id="closeQuestBoosterBtn" class="achievementCloseBtn" type="button">Schließen</button>
       </div>
     </div>
   </div>
@@ -40706,9 +40773,14 @@
     const modeRulesStartBtn = document.getElementById("modeRulesStartBtn");
     const mbucksCreditMenu = document.getElementById("mbucksCreditMenu");
     const mbucksStoreMenu = document.getElementById("mbucksStoreMenu");
+    const questBoosterMenu = document.getElementById("questBoosterMenu");
     const mbucksStoreStatus = document.getElementById("mbucksStoreStatus");
+    const questBoosterStatus = document.getElementById("questBoosterStatus");
     const mbucksStoreRefreshBtn = document.getElementById("mbucksStoreRefreshBtn");
     const closeMBucksStoreBtn = document.getElementById("closeMBucksStoreBtn");
+    const questBoosterRefreshBtn = document.getElementById("questBoosterRefreshBtn");
+    const closeQuestBoosterBtn = document.getElementById("closeQuestBoosterBtn");
+    const questBoosterBuyBtns = Array.from(document.querySelectorAll("[data-quest-booster-pack]"));
     const adminCurrencyWalletValue = document.getElementById("adminCurrencyWalletValue");
     const adminCurrencyRateValue = document.getElementById("adminCurrencyRateValue");
     const redeemAdminCurrency1Btn = document.getElementById("redeemAdminCurrency1Btn");
@@ -41195,6 +41267,7 @@
         "#closeEquipmentBtn",
         "#closeCraftBtn",
         "#closeMBucksStoreBtn",
+        "#closeQuestBoosterBtn",
         "#closeNpcBtn",
         "#closeTwitchBtn"
       ];
@@ -41803,11 +41876,11 @@
     let gameStarted = false;
     let matchStartGraceUntil = 0;
     const SOLO_BOSS_COUNTDOWN_MS = 3 * 60 * 1000;
-    const GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT = new Date("2026-06-01T23:00:00+02:00").getTime();
+    const GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT = 0;
     const GLOBAL_EVENT_CONFIG = {
-      enabled: true,
-      startAt: new Date("2026-06-01T23:05:00+02:00").getTime(),
-      endAt: new Date("2026-06-01T23:45:00+02:00").getTime()
+      enabled: false,
+      startAt: 0,
+      endAt: 0
     };
     const GLOBAL_EVENT_LOCK_MESSAGE = "Matchmaking startet um 23:00 Uhr.";
     let soloBossState = {
@@ -43825,6 +43898,7 @@ function isGlobalEventOverNow() {
 }
 
 function isGlobalMatchmakingLocked() {
+  if (!isGlobalEventConfigured()) return false;
   return Date.now() < GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT;
 }
 
@@ -45036,6 +45110,7 @@ async function resetGlobalDiscount() {
     let moreMenuOpen = false;
     let mbucksCreditOpen = false;
     let mbucksStoreOpen = false;
+    let questBoosterOpen = false;
     let passOpen = false;
     let roadmapOpen = false;
     let blogOpen = false;
@@ -45057,6 +45132,18 @@ async function resetGlobalDiscount() {
       ultra: { mbucks: 13500, adminCost: 135, label: "Ultra" }
     };
     const ADMIN_CURRENCY_TO_MBUCKS_RATE = 100;
+    const QUEST_BOOSTER_BETA_END_AT = Date.parse("2026-06-15T23:59:59+02:00");
+    const QUEST_BOOSTER_PACKS = {
+      small: { label: "Ticket S", cost: 350, durationMs: 20 * 60 * 1000, multiplier: 1.25 },
+      medium: { label: "Ticket M", cost: 900, durationMs: 60 * 60 * 1000, multiplier: 1.6 },
+      large: { label: "Ticket XL", cost: 2200, durationMs: 180 * 60 * 1000, multiplier: 2.0 }
+    };
+    const QUEST_BOOSTER_STORAGE_KEY = "mini_minecraft_quest_booster_v1";
+    const questBoosterState = {
+      activeUntil: 0,
+      multiplier: 1
+    };
+    let questBoosterStateLoaded = false;
     let adminCurrencyBalance = 0;
     let riftNextGlitchAt = 0;
     let riftGlitchTimer = 0;
@@ -57123,12 +57210,113 @@ async function loadMaintenanceStateFromSupabase() {
       return getQuestProgress(def) >= def.target;
     }
 
+    function isQuestBoosterBetaActive() {
+      return Date.now() <= QUEST_BOOSTER_BETA_END_AT;
+    }
+
+    function isQuestBoosterActiveNow() {
+      return isQuestBoosterBetaActive() && Number(questBoosterState.activeUntil || 0) > Date.now() && Number(questBoosterState.multiplier || 1) > 1;
+    }
+
+    function getQuestBoosterMultiplier() {
+      if (!questBoosterStateLoaded) loadQuestBoosterState();
+      return isQuestBoosterActiveNow() ? Number(questBoosterState.multiplier || 1) : 1;
+    }
+
+    function loadQuestBoosterState() {
+      try {
+        const raw = localStorage.getItem(QUEST_BOOSTER_STORAGE_KEY);
+        if (!raw) {
+          questBoosterStateLoaded = true;
+          return;
+        }
+        const parsed = JSON.parse(raw);
+        const until = Number(parsed?.activeUntil || 0);
+        const mult = Number(parsed?.multiplier || 1);
+        questBoosterState.activeUntil = Number.isFinite(until) ? until : 0;
+        questBoosterState.multiplier = Number.isFinite(mult) && mult >= 1 ? mult : 1;
+      } catch {}
+      questBoosterStateLoaded = true;
+    }
+
+    function saveQuestBoosterState() {
+      questBoosterStateLoaded = true;
+      try {
+        localStorage.setItem(QUEST_BOOSTER_STORAGE_KEY, JSON.stringify({
+          activeUntil: Number(questBoosterState.activeUntil || 0),
+          multiplier: Number(questBoosterState.multiplier || 1)
+        }));
+      } catch {}
+    }
+
+    function formatQuestBoosterRemaining(ms = 0) {
+      const sec = Math.max(0, Math.floor(ms / 1000));
+      const h = Math.floor(sec / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = sec % 60;
+      if (h > 0) return `${h}h ${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
+      return `${m}m ${String(s).padStart(2, "0")}s`;
+    }
+
+    function renderQuestBoosterStatus(message = "") {
+      if (!questBoosterStatus) return;
+      if (!questBoosterStateLoaded) loadQuestBoosterState();
+      if (Number(questBoosterState.activeUntil || 0) > 0 && Number(questBoosterState.activeUntil || 0) <= Date.now()) {
+        questBoosterState.activeUntil = 0;
+        questBoosterState.multiplier = 1;
+        saveQuestBoosterState();
+      }
+      if (!isQuestBoosterBetaActive()) {
+        questBoosterStatus.textContent = "BETA beendet. Tickets sind aktuell deaktiviert.";
+        return;
+      }
+      const betaLeft = QUEST_BOOSTER_BETA_END_AT - Date.now();
+      if (isQuestBoosterActiveNow()) {
+        const left = Math.max(0, Number(questBoosterState.activeUntil || 0) - Date.now());
+        questBoosterStatus.textContent = message || `Aktiv: x${Number(questBoosterState.multiplier || 1).toFixed(2)} bis in ${formatQuestBoosterRemaining(left)} • BETA endet in ${formatQuestBoosterRemaining(betaLeft)}`;
+        return;
+      }
+      questBoosterStatus.textContent = message || `Kein Booster aktiv • BETA endet in ${formatQuestBoosterRemaining(betaLeft)}`;
+    }
+
+    function setQuestBoosterButtonsDisabled(disabled) {
+      questBoosterBuyBtns.forEach((btn) => { btn.disabled = !!disabled; });
+      if (questBoosterRefreshBtn) questBoosterRefreshBtn.disabled = !!disabled;
+    }
+
+    function buyQuestBoosterPack(packId) {
+      const pack = QUEST_BOOSTER_PACKS[packId];
+      if (!pack) return;
+      if (!isQuestBoosterBetaActive()) return showMessage("Quest Booster BETA ist beendet.", 2200);
+      const cost = Number(pack.cost || 0);
+      if (Number(inventory[7] || 0) < cost) {
+        showMessage("Nicht genug M-Bucks für dieses Ticket.", 2200);
+        return;
+      }
+      setQuestBoosterButtonsDisabled(true);
+      try {
+        inventory[7] = Number(inventory[7] || 0) - cost;
+        const now = Date.now();
+        const baseTime = Number(questBoosterState.activeUntil || 0) > now ? Number(questBoosterState.activeUntil || 0) : now;
+        questBoosterState.activeUntil = baseTime + Number(pack.durationMs || 0);
+        questBoosterState.multiplier = Number(pack.multiplier || 1);
+        saveQuestBoosterState();
+        renderInventory();
+        updateUI();
+        renderQuestBoosterStatus(`Aktiviert: ${pack.label} (x${pack.multiplier.toFixed(2)})`);
+        showMessage(`${pack.label} aktiviert. Quest-Rewards geboostet!`, 2200);
+      } finally {
+        setQuestBoosterButtonsDisabled(false);
+      }
+    }
+
     function normalizeQuestRewardPackage(reward = {}, cadence = "daily") {
       const base = reward && typeof reward === "object" ? reward : {};
       const weeklyBoost = cadence === "weekly" ? 1.2 : 1;
-      const levelXp = Math.max(0, Math.round((Number(base.levelXp || 0) || 0) * weeklyBoost));
-      const passXp = Math.max(0, Math.round((Number(base.passXp || 0) || 0) * weeklyBoost));
-      const mBucks = Math.max(0, Math.round((Number(base.mBucks || 0) || 0) * weeklyBoost));
+      const questBooster = getQuestBoosterMultiplier();
+      const levelXp = Math.max(0, Math.round((Number(base.levelXp || 0) || 0) * weeklyBoost * questBooster));
+      const passXp = Math.max(0, Math.round((Number(base.passXp || 0) || 0) * weeklyBoost * questBooster));
+      const mBucks = Math.max(0, Math.round((Number(base.mBucks || 0) || 0) * weeklyBoost * questBooster));
       const skillPoints = Math.max(0, Math.round(Number(base.skillPoints || 0) || 0));
       return { levelXp, passXp, mBucks, skillPoints };
     }
@@ -57763,6 +57951,10 @@ async function loadMaintenanceStateFromSupabase() {
         mbucksStoreOpen = false;
         if (mbucksStoreMenu) mbucksStoreMenu.classList.add("hidden");
       }
+      if (except !== "questBooster") {
+        questBoosterOpen = false;
+        if (questBoosterMenu) questBoosterMenu.classList.add("hidden");
+      }
       if (except !== "lore") {
         loreOpen = false;
         if (loreMenu) loreMenu.classList.add("hidden");
@@ -57827,6 +58019,12 @@ async function loadMaintenanceStateFromSupabase() {
           fetchAdminCurrencyWallet().then(() => renderMBucksStoreStatus());
           applyMBucksCardMouseEffects();
         }
+      }
+      else if (name === 'questBooster') {
+        closeMenus("questBooster");
+        questBoosterOpen = true;
+        if (questBoosterMenu) questBoosterMenu.classList.toggle("hidden", !questBoosterOpen);
+        renderQuestBoosterStatus();
       }
       else if (name === 'showdown') {
         const msg = "Alle acten wurden erledigt viel spaß";
@@ -57912,6 +58110,7 @@ async function loadMaintenanceStateFromSupabase() {
         shopMenu,
         passMenu,
         mbucksStoreMenu,
+        questBoosterMenu,
         questMenu,
         skillMenu,
         commandPlusMenu,
@@ -57945,6 +58144,12 @@ async function loadMaintenanceStateFromSupabase() {
     function closeMBucksStoreMenu() {
       mbucksStoreOpen = false;
       if (mbucksStoreMenu) mbucksStoreMenu.classList.add("hidden");
+      updateUI();
+    }
+
+    function closeQuestBoosterMenu() {
+      questBoosterOpen = false;
+      if (questBoosterMenu) questBoosterMenu.classList.add("hidden");
       updateUI();
     }
 
@@ -61460,8 +61665,9 @@ async function loadMaintenanceStateFromSupabase() {
         lobbyYoutubeLayer.innerHTML = "";
       }
       const hideHud = inLobby || startScreenActive;
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || questBoosterOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       if (mbucksCreditOpen) renderMBucksCreditMenu();
+      if (questBoosterOpen) renderQuestBoosterStatus();
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
       if (hudCombo) hudCombo.style.display = (hideHud || anyMenuOpen) ? "none" : "grid";
       if (xpHud) xpHud.style.display = (hideHud || anyMenuOpen) ? "none" : "grid";
@@ -63940,14 +64146,24 @@ async function loadMaintenanceStateFromSupabase() {
     if (closeMBucksStoreBtn) closeMBucksStoreBtn.addEventListener("click", () => {
       closeMBucksStoreMenu();
     });
+    if (closeQuestBoosterBtn) closeQuestBoosterBtn.addEventListener("click", () => {
+      closeQuestBoosterMenu();
+    });
     if (mbucksStoreRefreshBtn) mbucksStoreRefreshBtn.addEventListener("click", () => {
       fetchAdminCurrencyWallet().then(() => {
         renderMBucksStoreStatus("Status aktualisiert.");
         showMessage("M-Bucks Store aktualisiert.", 1600);
       });
     });
+    if (questBoosterRefreshBtn) questBoosterRefreshBtn.addEventListener("click", () => {
+      renderQuestBoosterStatus("Status aktualisiert.");
+      showMessage("Quest Booster Status aktualisiert.", 1600);
+    });
     mbucksStoreBuyBtns.forEach((btn) => {
       btn.addEventListener("click", () => startMBucksCheckout(btn.dataset.mbucksPack));
+    });
+    questBoosterBuyBtns.forEach((btn) => {
+      btn.addEventListener("click", () => buyQuestBoosterPack(btn.dataset.questBoosterPack));
     });
     if (redeemAdminCurrency1Btn) redeemAdminCurrency1Btn.addEventListener("click", () => redeemAdminCurrency(1));
     if (redeemAdminCurrency5Btn) redeemAdminCurrency5Btn.addEventListener("click", () => redeemAdminCurrency(5));
@@ -66645,7 +66861,7 @@ async function loadMaintenanceStateFromSupabase() {
 
     function updateUI() {
       const startScreenActive = !!startScreen && startScreen.style.display !== "none";
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || questBoosterOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       const hideHud = inLobby || startScreenActive || anyMenuOpen;
 
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
