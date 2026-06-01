@@ -21266,49 +21266,146 @@
     }
 
     .commandPlusCard {
-      width: min(1080px, 97vw);
-      border-radius: 26px;
-      padding: 28px;
+      width: min(1360px, calc(100vw - 28px));
+      max-height: calc(100vh - 28px);
+      overflow: auto;
+      border-radius: 34px;
+      padding: 24px;
       background:
-        radial-gradient(1200px 520px at 8% 0%, rgba(67, 147, 255, 0.22), transparent 58%),
-        radial-gradient(900px 480px at 96% 100%, rgba(255, 166, 62, 0.18), transparent 60%),
-        linear-gradient(150deg, rgba(6,14,34,0.96), rgba(6,11,24,0.95));
-      border: 1px solid rgba(138, 195, 255, 0.34);
-      box-shadow: 0 30px 60px rgba(4, 10, 26, 0.6);
+        radial-gradient(circle at 8% 10%, rgba(255, 195, 120, 0.18), transparent 28%),
+        radial-gradient(circle at 88% 12%, rgba(102, 193, 255, 0.2), transparent 30%),
+        linear-gradient(160deg, rgba(7, 15, 32, 0.985), rgba(4, 10, 24, 0.995));
+      border: 1px solid rgba(158, 210, 255, 0.26);
+      box-shadow:
+        0 42px 86px rgba(0, 0, 0, 0.54),
+        inset 0 1px 0 rgba(255,255,255,0.08);
+      display: grid;
+      gap: 16px;
     }
     .commandPlusHero {
-      padding: 12px 4px 14px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+      gap: 14px;
+      padding: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(166, 210, 255, 0.2);
+      background:
+        radial-gradient(circle at top right, rgba(255, 188, 112, 0.18), transparent 34%),
+        linear-gradient(135deg, rgba(21, 34, 61, 0.9), rgba(11, 20, 38, 0.95));
+    }
+    .commandPlusBrandRow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .commandPlusLogo {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(6, 12, 22, 0.64);
+      box-shadow: 0 16px 28px rgba(0,0,0,0.26);
+      object-fit: cover;
+      padding: 8px;
+    }
+    .commandPlusKicker {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(184, 218, 255, 0.74);
+    }
+    .commandPlusTitle {
+      margin-top: 4px;
+      font-family: "Bangers", "Arial Black", sans-serif;
+      font-size: clamp(40px, 4.2vw, 68px);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: #f7fbff;
+      text-shadow: 0 14px 26px rgba(0,0,0,0.32);
+    }
+    .commandPlusMetaBox {
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(176, 214, 255, 0.18);
+      background: rgba(255,255,255,0.04);
+      color: rgba(227, 239, 255, 0.92);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .commandPlusStatusRail {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+    .commandPlusStatusCard {
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(178, 219, 255, 0.18);
+      background:
+        radial-gradient(circle at top right, rgba(90, 166, 255, 0.16), transparent 34%),
+        linear-gradient(180deg, rgba(14, 24, 44, 0.9), rgba(10, 17, 31, 0.94));
+    }
+    .commandPlusStatusLabel {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(190, 217, 245, 0.74);
+    }
+    .commandPlusStatusValue {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 900;
+      color: #f4f9ff;
     }
     .commandPlusBenefitsGrid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
-      margin: 12px 0 18px;
+      margin: 0;
     }
     .commandPlusBenefitCard {
-      border: 1px solid rgba(153, 196, 255, 0.28);
-      border-radius: 14px;
-      padding: 14px 12px;
-      background: linear-gradient(145deg, rgba(14, 26, 56, 0.72), rgba(12, 19, 38, 0.6));
+      border: 1px solid rgba(153, 196, 255, 0.22);
+      border-radius: 18px;
+      padding: 16px 14px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        rgba(11, 20, 38, 0.88);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
     }
     .commandPlusBenefitCard .emoji {
-      font-size: 22px;
-      margin-bottom: 6px;
-      display: block;
+      font-size: 20px;
+      margin-bottom: 8px;
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
     }
     .commandPlusBenefitCard .title {
-      font-weight: 900;
-      color: #f3f8ff;
-      margin-bottom: 4px;
+      font-weight: 1000;
+      color: #f4f9ff;
+      margin-bottom: 6px;
+      font-size: 15px;
     }
     .commandPlusBenefitCard .text {
       font-size: 13px;
-      color: rgba(212, 228, 247, 0.88);
-      line-height: 1.4;
+      color: rgba(212, 228, 247, 0.9);
+      line-height: 1.48;
     }
     .commandPlusActions {
       justify-content: flex-start;
       gap: 12px;
+      flex-wrap: wrap;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 203, 255, 0.16);
+      background: rgba(255,255,255,0.025);
     }
     .commandPlusBtn {
       min-height: 54px;
@@ -21356,6 +21453,28 @@
       color: #f2f7ff;
       border-color: rgba(214, 228, 246, 0.45);
       background: linear-gradient(135deg, rgba(28,36,56,0.9), rgba(18,25,42,0.92));
+    }
+    @media (max-width: 1100px) {
+      .commandPlusHero {
+        grid-template-columns: 1fr;
+      }
+      .commandPlusBenefitsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 700px) {
+      .commandPlusCard {
+        width: calc(100vw - 10px);
+        max-height: calc(100vh - 10px);
+        border-radius: 18px;
+        padding: 14px;
+      }
+      .commandPlusBenefitsGrid {
+        grid-template-columns: 1fr;
+      }
+      .commandPlusActions .commandPlusBtn {
+        flex: 1 1 100%;
+      }
     }
     .commandPlusConfirmCard {
       width: min(560px, 94vw);
@@ -26076,7 +26195,9 @@
     }
 
     .lobbyModeCountdown {
-      display: none !important; /* Removed as requested */
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 10px 12px;
       border-radius: 12px;
       border: 1px solid rgba(120, 214, 255, 0.35);
@@ -26087,6 +26208,10 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-align: center;
+    }
+
+    .lobbyModeCountdown.hidden {
+      display: none !important;
     }
 
     .lobbyModeCountdown.isLive {
@@ -28337,7 +28462,7 @@
     }
 
     body.lobbyMode .lobbyModeCountdown.hidden {
-      display: flex !important;
+      display: none !important;
     }
 
     body.lobbyMode .lobbyModeBtn,
@@ -37264,6 +37389,7 @@
               <div class="lobbyModeCard lobbyModeCardVNext">
                 <div class="modernMeta lobbyModeMeta">Matchmaking</div>
                 <button id="lobbyReadyBtn" class="lobbyNavBtn lobbyReadyCompactBtn">Bereit</button>
+                <div id="lobbyModeCountdownPanel" class="lobbyModeCountdown hidden"></div>
                 <button id="lobbyWarningBtn" class="lobbyWarningBtn hidden" type="button"></button>
                 <button id="lobbyModePickerBtn" class="lobbyNavBtn lobbyModePickerCta">Modus wählen</button>
               </div>
@@ -39972,9 +40098,26 @@
   <div id="commandPlusMenu" class="inventoryMenu hidden">
     <div class="modeRulesCard commandPlusCard">
       <div class="commandPlusHero">
-        <div class="modeRulesEyebrow">🚀 MEMBERSHIP</div>
-        <div class="modeRulesTitle">RIFT COMMAND+</div>
-        <div id="commandPlusMeta" class="modeRulesLead">Hol dir COMMAND+ fuer 5.000 M-Bucks und sichere dir exklusive Vorteile.</div>
+        <div>
+          <div class="commandPlusBrandRow">
+            <img class="commandPlusLogo" src="assets/crew.png" alt="COMMAND+ Logo">
+            <div>
+              <div class="commandPlusKicker">Rift Membership</div>
+              <div class="commandPlusTitle">RIFT COMMAND+</div>
+            </div>
+          </div>
+          <div id="commandPlusMeta" class="commandPlusMetaBox">Hol dir COMMAND+ fuer 5.000 M-Bucks und sichere dir exklusive Vorteile.</div>
+        </div>
+        <div class="commandPlusStatusRail">
+          <div class="commandPlusStatusCard">
+            <div class="commandPlusStatusLabel">Status</div>
+            <div id="commandPlusStatusValue" class="commandPlusStatusValue">Nicht aktiv</div>
+          </div>
+          <div class="commandPlusStatusCard">
+            <div class="commandPlusStatusLabel">Vault Cooldown</div>
+            <div id="commandPlusVaultStatusValue" class="commandPlusStatusValue">7d bereit nach Kauf</div>
+          </div>
+        </div>
       </div>
       <div id="commandPlusBenefits" class="commandPlusBenefitsGrid"></div>
       <div class="modeRulesActions commandPlusActions">
@@ -40422,6 +40565,7 @@
     const CUSTOM_REWARDS_TABLE = "custom_rewards";
     const ADMIN_GRANTS_TABLE = "admin_grants";
     const PLAYER_REWARD_CLAIMS_TABLE = "player_reward_claims";
+    const REWARD_POPUP_DEDUPE_KEY = "mini_minecraft_reward_popup_dedupe_v1";
     const COMMUNITY_JACKPOT_TABLE = "community_jackpot";
     const SEASON_FINALE_VOTE_STORAGE_KEY = "mini_minecraft_season_finale_vote_v1";
     const SEASON_FINALE_VOTER_KEY_STORAGE = "mini_minecraft_season_finale_voter_key_v1";
@@ -40552,6 +40696,7 @@
     const modePickerAcceptBtn = document.getElementById("modePickerAcceptBtn");
     const modePickerAcceptBtnFort = document.getElementById("modePickerAcceptBtnFort");
     const lobbyModeCountdown = document.getElementById("lobbyModeCountdown");
+    const lobbyModeCountdownPanel = document.getElementById("lobbyModeCountdownPanel");
     const lobbyReadyBtn = document.getElementById("lobbyReadyBtn");
     const modeRulesMenu = document.getElementById("modeRulesMenu");
     const modeRulesTitle = document.getElementById("modeRulesTitle");
@@ -40965,6 +41110,8 @@
     const closeCreatorBtn = document.getElementById("closeCreatorBtn");
     const commandPlusMenu = document.getElementById("commandPlusMenu");
     const commandPlusMeta = document.getElementById("commandPlusMeta");
+    const commandPlusStatusValue = document.getElementById("commandPlusStatusValue");
+    const commandPlusVaultStatusValue = document.getElementById("commandPlusVaultStatusValue");
     const commandPlusBenefits = document.getElementById("commandPlusBenefits");
     const commandPlusBuyBtn = document.getElementById("commandPlusBuyBtn");
     const commandPlusVaultBtn = document.getElementById("commandPlusVaultBtn");
@@ -41111,6 +41258,18 @@
 
     applyUnifiedPopupMenus();
     let threeDState = null;
+
+    document.addEventListener("click", (event) => {
+      const questBtn = event.target.closest("[data-quest-id]");
+      if (questBtn && !questBtn.disabled) {
+        claimQuestReward(String(questBtn.getAttribute("data-quest-id") || ""));
+        return;
+      }
+      const creatorContractBtn = event.target.closest("[data-creator-contract-claim]");
+      if (creatorContractBtn && !creatorContractBtn.disabled) {
+        claimCreatorContract(String(creatorContractBtn.getAttribute("data-creator-contract-claim") || ""));
+      }
+    });
 
     // Friends List System
     let friendsListOpen = false;
@@ -41644,12 +41803,13 @@
     let gameStarted = false;
     let matchStartGraceUntil = 0;
     const SOLO_BOSS_COUNTDOWN_MS = 3 * 60 * 1000;
+    const GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT = new Date("2026-06-01T23:00:00+02:00").getTime();
     const GLOBAL_EVENT_CONFIG = {
       enabled: true,
-      startAt: new Date("2026-09-12T17:45:00+02:00").getTime(),
-      endAt: new Date("2026-09-12T19:02:00+02:00").getTime()
+      startAt: new Date("2026-06-01T23:05:00+02:00").getTime(),
+      endAt: new Date("2026-06-01T23:45:00+02:00").getTime()
     };
-    const GLOBAL_EVENT_LOCK_MESSAGE = "Live Event beendet: Matchmaking und Custom Games sind gesperrt.";
+    const GLOBAL_EVENT_LOCK_MESSAGE = "Matchmaking startet um 23:00 Uhr.";
     let soloBossState = {
       startedAt: 0,
       spawned: false,
@@ -42871,7 +43031,7 @@ function renderModePickerCustomGameUi() {
     modePickerCustomPlayBtn.disabled = lockedByEvent;
     modePickerCustomPlayBtn.title = lockedByEvent ? GLOBAL_EVENT_LOCK_MESSAGE : "";
     if (lockedByEvent) {
-      modePickerCustomPlayBtn.textContent = "Event vorbei - gesperrt";
+      modePickerCustomPlayBtn.textContent = "Live Event wartet - gesperrt";
     } else if (modePickerCustomPlayBtn.textContent.includes("gesperrt")) {
       modePickerCustomPlayBtn.textContent = "Start";
     }
@@ -43665,7 +43825,7 @@ function isGlobalEventOverNow() {
 }
 
 function isGlobalMatchmakingLocked() {
-  return isGlobalEventOverNow();
+  return Date.now() < GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT;
 }
 
 function isLobbyModeEnabled(mode) {
@@ -43711,34 +43871,62 @@ function isSoloOrCustomBlockedForStart() {
 }
 
 function updateLobbyModeCountdownUi() {
-  if (!lobbyModeCountdown) return;
-  lobbyModeCountdown.classList.add("hidden");
-  lobbyModeCountdown.textContent = "";
-  lobbyModeCountdown.style.display = "none";
-  return;
+  const countdownTargets = [lobbyModeCountdown, lobbyModeCountdownPanel].filter(Boolean);
+  if (!countdownTargets.length) return;
+  const setCountdown = (text, classes = []) => {
+    countdownTargets.forEach((el) => {
+      el.classList.remove("hidden", "isLive", "isCritical");
+      el.style.display = "";
+      el.textContent = text;
+      classes.forEach((cls) => el.classList.add(cls));
+    });
+  };
+  const hideCountdown = () => {
+    countdownTargets.forEach((el) => {
+      el.classList.add("hidden");
+      el.textContent = "";
+      el.style.display = "none";
+    });
+  };
+  const configured = isGlobalEventConfigured();
+  if (!configured) {
+    hideCountdown();
+    return;
+  }
 
-  const phase = getSeason4LiveEventPhase();
   const now = Date.now();
+  const unlockPending = now < GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT;
+  const warmup = now >= GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT && now < GLOBAL_EVENT_CONFIG.startAt;
+  const live = now >= GLOBAL_EVENT_CONFIG.startAt && now < GLOBAL_EVENT_CONFIG.endAt;
+  const post = now >= GLOBAL_EVENT_CONFIG.endAt;
 
-  lobbyModeCountdown.classList.remove("hidden", "isLive", "isCritical");
-
-  if (phase === "pre") {
-    const remaining = Math.max(0, SEASON4_LIVE_EVENT_START_AT - now);
-    lobbyModeCountdown.textContent = `Live Event startet in ${formatLobbyModeCountdown(remaining)}`;
-    if (remaining <= 60000) lobbyModeCountdown.classList.add("isCritical");
+  if (unlockPending) {
+    const remaining = Math.max(0, GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT - now);
+    setCountdown(
+      `Matchmaking startet in ${formatLobbyModeCountdown(remaining)} (01.06.2026 23:00)`,
+      remaining <= 60000 ? ["isCritical"] : []
+    );
     return;
   }
 
-  if (phase === "live") {
-    const remaining = Math.max(0, SEASON4_LIVE_EVENT_END_AT - now);
-    lobbyModeCountdown.textContent = `Live Event endet in ${formatLobbyModeCountdown(remaining)}`;
-    lobbyModeCountdown.classList.add("isLive");
-    if (remaining <= 60000) lobbyModeCountdown.classList.add("isCritical");
+  if (warmup) {
+    const remaining = Math.max(0, GLOBAL_EVENT_CONFIG.startAt - now);
+    setCountdown(`Matchmaking aktiv • Live Event beginnt in ${formatLobbyModeCountdown(remaining)} (23:05)`);
     return;
   }
 
-  lobbyModeCountdown.textContent = "Live Event beendet";
-  lobbyModeCountdown.classList.add("isCritical");
+  if (live) {
+    const remaining = Math.max(0, GLOBAL_EVENT_CONFIG.endAt - now);
+    setCountdown(
+      `Live Event endet in ${formatLobbyModeCountdown(remaining)}`,
+      remaining <= 60000 ? ["isLive", "isCritical"] : ["isLive"]
+    );
+    return;
+  }
+
+  if (post) {
+    setCountdown("Live Event beendet • Matchmaking gesperrt", ["isCritical"]);
+  }
 }
 
 function showSeason4ContinuationOverlay() {
@@ -43757,11 +43945,15 @@ function applySeason4LiveEventSchedule() {
     if (season4LiveEventPhase === "live") {
       season4LiveEventStartNoticeShown = false;
       season4LiveEventCueIndex = -1;
+      resetGlobalEventBossState();
       if (selectedLobbyMode !== "solo") selectedLobbyMode = "solo";
       ensureSelectedLobbyModeAvailable();
       if (inLobby) {
         renderLobbyModeSelection();
         renderLobbyScreen();
+      }
+      if (gameStarted && !inLobby && currentMatchMode === "normal") {
+        spawnGlobalEventBossIfDue();
       }
     } else if (season4LiveEventPhase === "post") {
       if (inLobby) {
@@ -44961,20 +45153,20 @@ let shopWishlist = [];
     };
     const questPools = {
       daily: [
-        { id: "d_ember_route", name: "Ember-Route", desc: "Baue 65 Blöcke in Feuer- oder Misch-Biomen ab.", type: "blocksMined", target: 65, reward: { levelXp: 170, passXp: 120, mBucks: 35 } },
-        { id: "d_wall_shift", name: "Wall Shift", desc: "Platziere 55 Blöcke für eine sichere Aufstiegsroute.", type: "blocksPlaced", target: 55, reward: { levelXp: 160, passXp: 125 } },
-        { id: "d_scout_loop", name: "Scout Loop", desc: "Laufe 28.000 Pixel in einem Einsatz.", type: "distanceWalked", target: 28000, reward: { levelXp: 185, passXp: 135 } },
-        { id: "d_gold_ping", name: "Gold Ping", desc: "Finde 10 Goldblöcke im Match.", type: "goldMined", target: 10, reward: { levelXp: 145, passXp: 110, mBucks: 90 } },
-        { id: "d_bench_sync", name: "Bench Sync", desc: "Stelle 3 Rezepte her.", type: "crafts", target: 3, reward: { levelXp: 170, passXp: 120, skillPoints: 1 } },
-        { id: "d_frag_hunt", name: "Fragment Hunt", desc: "Sammle 6 Alien-Fragmente.", type: "alienFragment", target: 6, reward: { levelXp: 150, passXp: 130, mBucks: 50 } }
+        { id: "d_rift_digger", name: "Rift-Digger", desc: "Baue 90 Blöcke in beliebigen Biomen ab.", type: "blocksMined", target: 90, reward: { levelXp: 210, passXp: 140, mBucks: 40 } },
+        { id: "d_bridge_node", name: "Bridge-Node", desc: "Platziere 70 Blöcke für Rotationen.", type: "blocksPlaced", target: 70, reward: { levelXp: 190, passXp: 145 } },
+        { id: "d_dash_vector", name: "Dash Vector", desc: "Laufe 34.000 Pixel in einem Match.", type: "distanceWalked", target: 34000, reward: { levelXp: 220, passXp: 150 } },
+        { id: "d_gold_trace", name: "Gold-Trace", desc: "Finde 14 Goldblöcke.", type: "goldMined", target: 14, reward: { levelXp: 180, passXp: 135, mBucks: 110 } },
+        { id: "d_craft_pulse", name: "Craft Pulse", desc: "Schließe 4 Crafting-Vorgänge ab.", type: "crafts", target: 4, reward: { levelXp: 200, passXp: 145, skillPoints: 1 } },
+        { id: "d_fragment_sweep", name: "Fragment Sweep", desc: "Sammle 8 Alien-Fragmente.", type: "alienFragment", target: 8, reward: { levelXp: 185, passXp: 150, mBucks: 70 } }
       ],
       weekly: [
-        { id: "w_sector_break", name: "Sector Break", desc: "Baue 340 Blöcke in dieser Woche ab.", type: "blocksMined", target: 340, reward: { levelXp: 520, passXp: 430, mBucks: 180 } },
-        { id: "w_fort_axis", name: "Fort Axis", desc: "Platziere 240 Blöcke für Team-Festungen.", type: "blocksPlaced", target: 240, reward: { levelXp: 460, passXp: 390, mBucks: 220 } },
-        { id: "w_long_run", name: "Long Run Ops", desc: "Laufe 130.000 Pixel.", type: "distanceWalked", target: 130000, reward: { levelXp: 640, passXp: 470 } },
-        { id: "w_anomaly_bank", name: "Anomaly Bank", desc: "Sammle 26 Alien-Fragmente.", type: "alienFragment", target: 26, reward: { levelXp: 420, passXp: 500, mBucks: 260 } },
-        { id: "w_craftline", name: "Craftline Prime", desc: "Stelle 14 Rezepte her.", type: "crafts", target: 14, reward: { levelXp: 510, passXp: 420, skillPoints: 1 } },
-        { id: "w_goldstorm", name: "Goldstorm", desc: "Finde 34 Goldblöcke in der Woche.", type: "goldMined", target: 34, reward: { levelXp: 480, passXp: 410, mBucks: 320 } }
+        { id: "w_core_drill", name: "Core Drill", desc: "Baue 520 Blöcke in dieser Woche ab.", type: "blocksMined", target: 520, reward: { levelXp: 760, passXp: 590, mBucks: 260 } },
+        { id: "w_fortify_mesh", name: "Fortify Mesh", desc: "Platziere 360 Blöcke für Base-Aufbau.", type: "blocksPlaced", target: 360, reward: { levelXp: 700, passXp: 560, mBucks: 300 } },
+        { id: "w_marathon_link", name: "Marathon Link", desc: "Laufe 190.000 Pixel.", type: "distanceWalked", target: 190000, reward: { levelXp: 860, passXp: 620 } },
+        { id: "w_fragment_vault", name: "Fragment Vault", desc: "Sammle 40 Alien-Fragmente.", type: "alienFragment", target: 40, reward: { levelXp: 640, passXp: 680, mBucks: 360 } },
+        { id: "w_industry_loop", name: "Industry Loop", desc: "Schließe 20 Crafting-Vorgänge ab.", type: "crafts", target: 20, reward: { levelXp: 720, passXp: 570, skillPoints: 2 } },
+        { id: "w_gold_pressure", name: "Gold Pressure", desc: "Finde 52 Goldblöcke in der Woche.", type: "goldMined", target: 52, reward: { levelXp: 690, passXp: 560, mBucks: 420 } }
       ]
     };
     const questState = {
@@ -49880,6 +50072,26 @@ let shopWishlist = [];
       if (error) throw error;
     }
 
+    function loadRewardPopupDedupeState() {
+      try {
+        const raw = localStorage.getItem(REWARD_POPUP_DEDUPE_KEY);
+        const parsed = raw ? JSON.parse(raw) : {};
+        return {
+          customRewardKeys: Array.isArray(parsed?.customRewardKeys) ? parsed.customRewardKeys.map((v) => String(v)) : [],
+          adminGrantKeys: Array.isArray(parsed?.adminGrantKeys) ? parsed.adminGrantKeys.map((v) => String(v)) : []
+        };
+      } catch {
+        return { customRewardKeys: [], adminGrantKeys: [] };
+      }
+    }
+
+    function saveRewardPopupDedupeState(state) {
+      localStorage.setItem(REWARD_POPUP_DEDUPE_KEY, JSON.stringify({
+        customRewardKeys: Array.from(new Set(state?.customRewardKeys || [])).slice(-600),
+        adminGrantKeys: Array.from(new Set(state?.adminGrantKeys || [])).slice(-600)
+      }));
+    }
+
     async function createCreatorPayoutGrant(playerKey, amount, note = "") {
       if (!supabaseClient || !playerKey) return false;
       const payoutAmount = Math.max(0, Math.floor(Number(amount) || 0));
@@ -49929,6 +50141,9 @@ let shopWishlist = [];
       if (!supabaseClient || !playerKey) return 0;
 
       let appliedCount = 0;
+      const dedupeState = loadRewardPopupDedupeState();
+      const localCustomSeen = new Set(dedupeState.customRewardKeys || []);
+      const localGrantSeen = new Set(dedupeState.adminGrantKeys || []);
 
       try {
         const [account, customRewards, claimedRewardIds, adminGrants] = await Promise.all([
@@ -49955,8 +50170,9 @@ let shopWishlist = [];
 
         for (const reward of customRewards) {
           const rewardKey = String(reward.reward_key || reward.id || "");
-          if (!rewardKey || claimedSet.has(rewardKey)) continue;
+          if (!rewardKey || claimedSet.has(rewardKey) || localCustomSeen.has(rewardKey)) continue;
           if (!isSupabaseRewardTargetMatch(reward, playerKey, rewardPlayerName)) continue;
+          localCustomSeen.add(rewardKey);
           const summaryLines = applySupabaseRewardPayload(buildSupabaseRewardPayloadFromRow(reward));
           const popupText = reward.popup_text || reward.reward_payload?.popup_text || "";
           const title = reward.title || reward.reward_payload?.title || "Custom Reward";
@@ -49966,6 +50182,9 @@ let shopWishlist = [];
         }
 
         for (const grant of adminGrants) {
+          const grantKey = String(grant?.id ?? "");
+          if (!grantKey || localGrantSeen.has(grantKey)) continue;
+          localGrantSeen.add(grantKey);
           const summaryLines = applySupabaseRewardPayload(buildSupabaseRewardPayloadFromRow(grant));
           const title = grant.grant_type
             ? `Admin Grant: ${grant.grant_type}`
@@ -49974,6 +50193,11 @@ let shopWishlist = [];
           queueSupabaseRewardModal(title, summaryLines, grant.note || "");
           await markAdminGrantClaimed(grant.id);
         }
+
+        saveRewardPopupDedupeState({
+          customRewardKeys: Array.from(localCustomSeen),
+          adminGrantKeys: Array.from(localGrantSeen)
+        });
 
         if (appliedCount > 0) {
           refreshAfterSupabaseRewardGrant();
@@ -55333,33 +55557,38 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function claimCreatorContract(contractId) {
-      const list = getCreatorContractsCatalog();
-      const contract = list.find((item) => item.id === contractId);
-      if (!contract) return;
-      if (creatorContractsState.claimed[contractId]) {
-        showMessage("Contract wurde bereits eingelöst.", 1800);
-        return;
-      }
-      if ((contract.current || 0) < (contract.target || 0)) {
-        showMessage("Contract noch nicht abgeschlossen.", 1800);
-        return;
-      }
+      try {
+        const list = getCreatorContractsCatalog();
+        const contract = list.find((item) => item.id === contractId);
+        if (!contract) return;
+        if (creatorContractsState.claimed[contractId]) {
+          showMessage("Contract wurde bereits eingelöst.", 1800);
+          return;
+        }
+        if ((contract.current || 0) < (contract.target || 0)) {
+          showMessage("Contract noch nicht abgeschlossen.", 1800);
+          return;
+        }
 
-      const reward = contract.rewards || {};
-      if (reward.mBucks) inventory[7] = Number(inventory[7] || 0) + Number(reward.mBucks || 0);
-      if (reward.levelXp) grantXp(Number(reward.levelXp || 0));
-      if (reward.passXp) grantBattlePassXp(Number(reward.passXp || 0));
-      if (reward.skillPoints) skillPoints = Number(skillPoints || 0) + Number(reward.skillPoints || 0);
+        const reward = contract.rewards || {};
+        if (reward.mBucks) inventory[7] = Number(inventory[7] || 0) + Number(reward.mBucks || 0);
+        if (reward.levelXp) addXp(Number(reward.levelXp || 0));
+        if (reward.passXp) addBattlePassXp(Number(reward.passXp || 0));
+        if (reward.skillPoints) progression.skillPoints = Number(progression.skillPoints || 0) + Number(reward.skillPoints || 0);
 
-      creatorContractsState.claimed[contractId] = {
-        at: Date.now(),
-        rewards: reward
-      };
-      saveCreatorContractsState();
-      updateUI();
-      renderCreatorContracts();
-      saveGame();
-      showMessage(`Contract "${contract.title}" eingelöst!`, 2200);
+        creatorContractsState.claimed[contractId] = {
+          at: Date.now(),
+          rewards: reward
+        };
+        saveCreatorContractsState();
+        updateUI();
+        renderCreatorContracts();
+        saveGame();
+        showMessage(`Contract "${contract.title}" eingelöst!`, 2200);
+      } catch (err) {
+        console.error("Creator Contract Claim Fehler:", err);
+        showMessage("Claim fehlgeschlagen. Siehe Konsole.", 2200);
+      }
     }
 
     function renderCreatorContracts() {
@@ -55401,11 +55630,6 @@ async function loadMaintenanceStateFromSupabase() {
       if (creatorContractsDoneValue) creatorContractsDoneValue.textContent = `${done} / ${total}`;
       if (creatorContractsClaimedValue) creatorContractsClaimedValue.textContent = fmt(claimed);
 
-      creatorContractsList.querySelectorAll("[data-creator-contract-claim]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          claimCreatorContract(btn.getAttribute("data-creator-contract-claim") || "");
-        });
-      });
     }
 
     async function applyCreatorCode() {
@@ -56926,26 +57150,31 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function claimQuestReward(id) {
-      const didReset = ensureQuestCadenceState();
-      const activeList = Array.isArray(questRuntimeState.activeDefinitions) && questRuntimeState.activeDefinitions.length
-        ? questRuntimeState.activeDefinitions
-        : getActiveQuestDefinitions();
-      const def = activeList.find((entry) => entry.id === id);
-      if (!def) return;
-      if (isQuestClaimed(id, def.cadence)) return showMessage("Quest schon abgeholt!", 1800);
-      if (!isQuestComplete(def)) return showMessage("Quest noch nicht fertig!", 1800);
-      const rewardPack = normalizeQuestRewardPackage(def.reward, def.cadence);
-      applyQuestRewardPackage(rewardPack);
-      if (def.cadence === "weekly") {
-        questState.claimedWeekly.push(id);
-      } else {
-        questState.claimedDaily.push(id);
+      try {
+        ensureQuestCadenceState();
+        const activeList = Array.isArray(questRuntimeState.activeDefinitions) && questRuntimeState.activeDefinitions.length
+          ? questRuntimeState.activeDefinitions
+          : getActiveQuestDefinitions();
+        const def = activeList.find((entry) => entry.id === id);
+        if (!def) return showMessage("Quest nicht gefunden. Bitte Menü neu öffnen.", 2000);
+        if (isQuestClaimed(id, def.cadence)) return showMessage("Quest schon abgeholt!", 1800);
+        if (!isQuestComplete(def)) return showMessage("Quest noch nicht fertig!", 1800);
+        const rewardPack = normalizeQuestRewardPackage(def.reward, def.cadence);
+        applyQuestRewardPackage(rewardPack);
+        if (def.cadence === "weekly") {
+          questState.claimedWeekly.push(id);
+        } else {
+          questState.claimedDaily.push(id);
+        }
+        renderQuestMenu();
+        renderInventory();
+        updateUI();
+        queueDeferredSave();
+        showMessage(`Quest abgeschlossen: ${def.name} Rewards gutgeschrieben.`, 2200);
+      } catch (err) {
+        console.error("Quest Claim Fehler:", err);
+        showMessage("Quest-Claim fehlgeschlagen. Siehe Konsole.", 2200);
       }
-      renderQuestMenu();
-      renderInventory();
-      updateUI();
-      queueDeferredSave();
-      showMessage(`Quest abgeschlossen: ${def.name} Rewards gutgeschrieben.`, 2200);
     }
 
     function renderQuestMenu() {
@@ -56998,7 +57227,7 @@ async function loadMaintenanceStateFromSupabase() {
               <div class="xpBar" style="width:${pct}%;"></div>
             </div>
             <div class="questRewardRow">${rewardsMarkup}</div>
-            <button class="questTrackAction" data-quest-id="${def.id}" ${(!complete || claimed) ? "disabled" : ""}>${claimed ? "Abgeholt" : (complete ? "Rewards abholen" : "In Arbeit")}</button>
+            <button type="button" class="questTrackAction" data-quest-id="${def.id}" ${(!complete || claimed) ? "disabled" : ""}>${claimed ? "Abgeholt" : (complete ? "Rewards abholen" : "In Arbeit")}</button>
           </div>
         `;
       }).join("");
@@ -57008,12 +57237,12 @@ async function loadMaintenanceStateFromSupabase() {
 
       const totalSkillLevel = Object.values(progression.skills || {}).reduce((sum, value) => sum + (value || 0), 0);
       const milestoneDefs = [
-        { id: "milestone_level_25", name: "Einsatzleiter", desc: "Erreiche Level 25.", current: progression.level || 0, target: 25, reward: "+400 XP" },
-        { id: "milestone_skill_24", name: "Taktiknetz", desc: "Investiere insgesamt 24 Skillpunkte.", current: totalSkillLevel, target: 24, reward: "+2 Skillpunkte" },
-        { id: "milestone_mine_900", name: "Bohrkommando", desc: "Baue 900 Blöcke ab.", current: stats.blocksMined || 0, target: 900, reward: "+420 M-Bucks" },
-        { id: "milestone_build_700", name: "Bastionsarchitekt", desc: "Platziere 700 Blöcke.", current: stats.blocksPlaced || 0, target: 700, reward: "+420 M-Bucks" },
-        { id: "milestone_walk_160000", name: "Langmarsch", desc: "Laufe 160.000 Pixel.", current: stats.distanceWalked || 0, target: 160000, reward: "+650 XP" },
-        { id: "milestone_crafts_40", name: "Master-Mechanik", desc: "Schließe 40 Crafting-Vorgaenge ab.", current: craftedState.totalCrafts || 0, target: 40, reward: "Titel: Werkbank-Legende" }
+        { id: "milestone_level_40", name: "Rift-Kommandant", desc: "Erreiche Level 40.", current: progression.level || 0, target: 40, reward: "+900 XP" },
+        { id: "milestone_skill_36", name: "Talentnetz", desc: "Investiere insgesamt 36 Skillpunkte.", current: totalSkillLevel, target: 36, reward: "+3 Skillpunkte" },
+        { id: "milestone_mine_1800", name: "Tiefkern-Bohrer", desc: "Baue 1.800 Blöcke ab.", current: stats.blocksMined || 0, target: 1800, reward: "+900 M-Bucks" },
+        { id: "milestone_build_1400", name: "Mega-Architekt", desc: "Platziere 1.400 Blöcke.", current: stats.blocksPlaced || 0, target: 1400, reward: "+900 M-Bucks" },
+        { id: "milestone_walk_300000", name: "Hyper-Langstrecke", desc: "Laufe 300.000 Pixel.", current: stats.distanceWalked || 0, target: 300000, reward: "+1.200 XP" },
+        { id: "milestone_crafts_80", name: "Forge-Master", desc: "Schließe 80 Crafting-Vorgänge ab.", current: craftedState.totalCrafts || 0, target: 80, reward: "Titel: Rift Forge Master" }
       ];
       const milestoneDone = milestoneDefs.filter((def) => def.current >= def.target).length;
       if (questMilestoneInfo) questMilestoneInfo.textContent = `${milestoneDone} / ${milestoneDefs.length} erledigt`;
@@ -57040,10 +57269,6 @@ async function loadMaintenanceStateFromSupabase() {
           </div>
         `;
       }).join("");
-
-      questMenu.querySelectorAll("button[data-quest-id]").forEach((button) => {
-        button.addEventListener("click", () => claimQuestReward(button.dataset.questId));
-      });
 
       if (didReset) queueDeferredSave();
     }
@@ -58452,18 +58677,26 @@ async function loadMaintenanceStateFromSupabase() {
       const h = Math.floor(remainingMs / 3600000);
       const m = Math.floor((remainingMs % 3600000) / 60000);
       commandPlusMeta.textContent = owned
-        ? `Aktiv seit ${commandPlusState.purchasedAt ? new Date(commandPlusState.purchasedAt).toLocaleDateString("de-DE") : "heute"} • Premium Pass dauerhaft freigeschaltet`
+        ? `Aktiv seit ${commandPlusState.purchasedAt ? new Date(commandPlusState.purchasedAt).toLocaleDateString("de-DE") : "heute"} • Premium Pass dauerhaft freigeschaltet • COMMAND+ Status live synchronisiert`
         : "Hol dir COMMAND+ fuer 5.000 M-Bucks und sichere dir exklusive Vorteile.";
+      if (commandPlusStatusValue) {
+        commandPlusStatusValue.textContent = owned ? "Aktiv" : "Nicht aktiv";
+      }
+      if (commandPlusVaultStatusValue) {
+        commandPlusVaultStatusValue.textContent = owned
+          ? (canClaimVault ? "Jetzt bereit" : `Bereit in ${h}h ${m}m`)
+          : "7d bereit nach Kauf";
+      }
       commandPlusBenefits.innerHTML = `
         <div class="commandPlusBenefitCard">
           <span class="emoji">🎫</span>
           <div class="title">Premium Pass Unlock</div>
-          <div class="text">Battle Pass Premium wird sofort aktiviert. Standardpreis liegt jetzt bei 950 M-Bucks.</div>
+          <div class="text">Battle Pass Premium wird sofort aktiviert. Standardpreis liegt bei 950 M-Bucks.</div>
         </div>
         <div class="commandPlusBenefitCard">
           <span class="emoji">🖼️</span>
-          <div class="title">Exklusiver Lobby Hintergrund</div>
-          <div class="text">Zero Strike Command (${owned ? "bereits freigeschaltet" : "im Paket enthalten"}).</div>
+          <div class="title">Exklusiver Lobby-Hintergrund</div>
+          <div class="text">Zero Strike Command ist ${owned ? "bereits freigeschaltet" : "im Paket enthalten"}.</div>
         </div>
         <div class="commandPlusBenefitCard">
           <span class="emoji">🏦</span>
@@ -60189,7 +60422,7 @@ async function loadMaintenanceStateFromSupabase() {
           : ((ended)
           ? "Season vorbei"
           : (lockedByGlobalEvent
-            ? "Event vorbei - Matchmaking gesperrt"
+            ? "Live Event Countdown - Matchmaking gesperrt"
           : (selectedModeBlockedByLock
             ? "Singleplayer/Custom gesperrt"
           : (!anyModeEnabled
@@ -60320,7 +60553,7 @@ async function loadMaintenanceStateFromSupabase() {
         lobbyReadyBtn.disabled = !selectedModeAvailable;
         lobbyReadyBtn.textContent = selectedModeAvailable
           ? "Bereit"
-          : (ended ? "Season vorbei" : (lockedByGlobalEvent ? "Event vorbei" : (selectedModeBlockedByLock ? "Singleplayer/Custom gesperrt" : "Modus gesperrt")));
+          : (ended ? "Season vorbei" : (lockedByGlobalEvent ? "Live Event Countdown" : (selectedModeBlockedByLock ? "Singleplayer/Custom gesperrt" : "Modus gesperrt")));
       }
       if (modePickerAcceptBtn) {
         modePickerAcceptBtn.textContent = hasActiveCustomGamePreset()
@@ -66693,7 +66926,7 @@ async function loadMaintenanceStateFromSupabase() {
         showMessage("Live Event vorbei - alle werden in die Lobby zurueckgesetzt.", 3400);
         openLobby();
       } else {
-        showMessage(GLOBAL_EVENT_LOCK_MESSAGE, 3200);
+        showMessage("Live Event beendet. Matchmaking bleibt aktiv.", 3200);
       }
       updateLobbyUi();
     }
