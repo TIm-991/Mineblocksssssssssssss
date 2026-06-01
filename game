@@ -16157,7 +16157,12 @@
         linear-gradient(180deg, rgba(16, 24, 38, 0.98), rgba(10, 16, 26, 0.98));
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow: 0 28px 60px rgba(0,0,0,0.34);
-      max-height: 94vh;
+      width: calc(100vw - 24px);
+      max-width: none;
+      height: calc(100vh - 24px);
+      max-height: none;
+      border-radius: 24px;
+      overflow: auto;
     }
 
     .adminHero {
@@ -16364,6 +16369,21 @@
       margin-top: 10px;
     }
 
+    .adminInlineInputRow--dual {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .adminFieldLabel {
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(194, 216, 252, 0.84);
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+
     .adminBanList {
       margin-top: 12px;
       font-size: 12px;
@@ -16377,6 +16397,12 @@
       margin-top: 20px;
     }
 
+    #adminPanel.inventoryMenu {
+      padding: 12px;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
     @media (max-width: 980px) {
       .adminHero {
         flex-direction: column;
@@ -16387,6 +16413,10 @@
       }
 
       .adminInlineInputRow {
+        grid-template-columns: 1fr;
+      }
+
+      .adminInlineInputRow--dual {
         grid-template-columns: 1fr;
       }
 
@@ -21612,6 +21642,37 @@
       box-shadow: 0 28px 60px rgba(0,0,0,0.42), inset 0 1px 0 rgba(255,255,255,0.06);
     }
 
+    .mbucksMenuHead {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .mbucksMenuHeadIcon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .mbucksMenuHeadIcon img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+    }
+
+    .mbucksStorePackAmount {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .mbucksCreditInfo {
       margin-top: 8px;
       padding: 14px 16px;
@@ -21847,6 +21908,49 @@
       margin-top: 6px;
     }
 
+    #mbucksStoreMenu .mbucksCreditActions .achievementCloseBtn {
+      min-height: 52px;
+      border-radius: 16px;
+      border: 1px solid rgba(170, 214, 255, 0.32);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03)),
+        linear-gradient(135deg, rgba(36, 76, 146, 0.96), rgba(26, 44, 92, 0.96));
+      color: #ecf6ff;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow:
+        0 14px 26px rgba(0,0,0,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    #mbucksStoreMenu .mbucksCreditActions .achievementCloseBtn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+      border-color: rgba(194, 232, 255, 0.55);
+      box-shadow:
+        0 18px 30px rgba(0,0,0,0.3),
+        0 0 20px rgba(92, 178, 255, 0.26),
+        inset 0 1px 0 rgba(255,255,255,0.14);
+    }
+
+    #mbucksStoreMenu #mbucksStoreRefreshBtn,
+    #mbucksStoreMenu #closeMBucksStoreBtn {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03)),
+        linear-gradient(135deg, rgba(70, 88, 122, 0.96), rgba(34, 46, 70, 0.96));
+      border-color: rgba(198, 220, 255, 0.28);
+    }
+
+    #mbucksStoreMenu #mbucksStoreRefreshBtn:hover,
+    #mbucksStoreMenu #closeMBucksStoreBtn:hover {
+      box-shadow:
+        0 16px 28px rgba(0,0,0,0.28),
+        0 0 16px rgba(150, 189, 255, 0.2),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
     .mbucksStoreCard {
       max-width: 980px;
     }
@@ -21874,6 +21978,19 @@
       box-shadow: 0 12px 28px rgba(0,0,0,0.22);
       display: grid;
       gap: 8px;
+      transform-style: preserve-3d;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mbucksStorePack::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.14), transparent 45%);
+      opacity: 0.8;
     }
 
     .mbucksStorePackTitle {
@@ -36659,6 +36776,181 @@
       }
     }
 
+    /* Crew-Style Fullscreen Purchase + Rewards Popup */
+    #shopPurchaseMenu.inventoryMenu {
+      align-items: stretch !important;
+      justify-content: stretch !important;
+      padding: 0 !important;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(168, 205, 255, 0.34), transparent 48%),
+        radial-gradient(circle at 12% 90%, rgba(129, 82, 255, 0.3), transparent 42%),
+        linear-gradient(170deg, #3a2f86 0%, #2a2471 34%, #181848 65%, #12163d 100%) !important;
+    }
+
+    #shopPurchaseMenu .shopPurchaseModal {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-height: none !important;
+      border-radius: 0 !important;
+      padding: clamp(16px, 2.2vw, 36px) !important;
+      display: grid !important;
+      grid-template-rows: auto 1fr auto auto !important;
+      gap: 16px !important;
+      overflow: hidden !important;
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+
+    #shopPurchaseMenu .shopPurchaseHeader {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0;
+    }
+
+    #shopPurchaseMenu .shopPurchaseKicker {
+      font-size: 14px !important;
+      letter-spacing: 0.12em !important;
+      color: rgba(217, 229, 255, 0.88) !important;
+    }
+
+    #shopPurchaseMenu .shopPurchaseTitle {
+      font-family: "Bangers", "Arial Black", sans-serif !important;
+      font-size: clamp(50px, 8vw, 124px) !important;
+      line-height: 0.86 !important;
+      color: #f8fbff !important;
+      text-shadow: 0 12px 40px rgba(0, 0, 0, 0.35) !important;
+      margin-top: 10px;
+    }
+
+    #shopPurchaseMenu .shopPurchaseVisual {
+      width: min(38vw, 520px) !important;
+      height: min(46vh, 540px) !important;
+      margin: 0 auto !important;
+      display: grid;
+      place-items: center;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at top, rgba(168, 190, 255, 0.22), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid rgba(211, 225, 255, 0.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 24px 54px rgba(0,0,0,0.3);
+    }
+
+    #shopPurchaseMenu .shopPurchaseIcon {
+      font-size: clamp(84px, 12vw, 160px) !important;
+      filter: drop-shadow(0 14px 28px rgba(0,0,0,0.3));
+    }
+
+    #shopPurchaseMenu .shopPurchaseContent {
+      text-align: center;
+      margin-top: -6px;
+    }
+
+    #shopPurchaseMenu .shopPurchaseLead {
+      font-size: clamp(18px, 2vw, 30px) !important;
+      color: rgba(245, 249, 255, 0.95) !important;
+      margin: 0 auto !important;
+      max-width: 80ch;
+    }
+
+    #shopPurchaseMenu .shopPurchaseRewards {
+      display: flex !important;
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 12px 2px 4px !important;
+      scrollbar-width: thin;
+      justify-content: flex-start;
+      max-width: 100%;
+    }
+
+    #shopPurchaseMenu .shopPurchaseReward {
+      min-width: 160px;
+      min-height: 126px;
+      display: grid;
+      align-content: end;
+      gap: 8px;
+      text-align: left;
+      padding: 12px !important;
+      border-radius: 18px !important;
+      background:
+        radial-gradient(circle at top right, rgba(177, 200, 255, 0.26), transparent 44%),
+        linear-gradient(180deg, rgba(117, 142, 227, 0.46), rgba(68, 92, 170, 0.52)) !important;
+      border: 1px solid rgba(225, 235, 255, 0.28) !important;
+      color: #fff !important;
+      font-size: 14px !important;
+      font-weight: 900 !important;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    #shopPurchaseMenu .shopPurchaseReward::before {
+      content: "REWARD";
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: rgba(238, 246, 255, 0.76);
+    }
+
+    #shopPurchaseMenu .shopPurchaseInfo {
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+      border-top: none !important;
+      background: transparent !important;
+    }
+
+    #shopPurchaseMenu .shopPurchaseActions {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding-bottom: 8px;
+    }
+
+    #shopPurchaseMenu .shopActionBtn {
+      min-width: 280px;
+      min-height: 72px;
+      border-radius: 22px !important;
+      font-size: 34px;
+      font-weight: 1000 !important;
+      letter-spacing: 0.03em !important;
+      text-transform: uppercase;
+    }
+
+    #shopPurchaseMenu .shopActionBtn.primary {
+      background: linear-gradient(180deg, #f4f7ff, #e0e7ff) !important;
+      color: #1a1f4b !important;
+      border: 1px solid rgba(255,255,255,0.8);
+    }
+
+    #shopPurchaseMenu .shopActionBtn.secondary {
+      background: linear-gradient(180deg, #ecefff, #d6ddff) !important;
+      color: #1e245f !important;
+      border: 1px solid rgba(255,255,255,0.74);
+    }
+
+    @media (max-width: 980px) {
+      #shopPurchaseMenu .shopPurchaseModal {
+        grid-template-rows: auto auto auto auto !important;
+        overflow-y: auto !important;
+      }
+      #shopPurchaseMenu .shopPurchaseVisual {
+        width: min(86vw, 420px) !important;
+        height: min(40vh, 380px) !important;
+      }
+      #shopPurchaseMenu .shopActionBtn {
+        min-width: 0;
+        width: 100%;
+        font-size: 24px;
+      }
+      #shopPurchaseMenu .shopPurchaseActions {
+        flex-direction: column;
+      }
+    }
+
     @media (max-width: 1240px) {
       #lobbyScreen.lobbyReborn .lobbyMainGridVNext {
         grid-template-columns: minmax(220px, 248px) minmax(0, 1fr) !important;
@@ -36926,7 +37218,7 @@
             <button class="lobbyNavBtn" onclick="openMenu('quest')"><span class="lobbyNavIcon">📜</span> Quests</button>
             <button class="lobbyNavBtn" onclick="openMenu('skill')"><span class="lobbyNavIcon">⚡</span> Skills</button>
             <button class="lobbyNavBtn" onclick="openMenu('roadmap')"><span class="lobbyNavIcon">🗺️</span> Roadmap</button>
-            <button class="lobbyNavBtn" onclick="openMenu('mbucksStore')"><span class="lobbyNavIcon">💰</span> M-BUCKS</button>
+            <button class="lobbyNavBtn" onclick="openMenu('mbucksStore')"><span class="lobbyNavIcon"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks"></span> M-BUCKS</button>
             <button class="lobbyNavBtn" onclick="openMenu('commandPlus')"><span class="lobbyNavIcon">🛡️</span> COMMAND+</button>
             <button class="lobbyNavBtn" onclick="openMenu('creator')"><span class="lobbyNavIcon">💎</span> Creator</button>
           </div>
@@ -37008,7 +37300,10 @@
 
   <div id="mbucksCreditMenu" class="inventoryMenu hidden">
     <div class="modeRulesCard mbucksCreditCard">
-      <div class="modeRulesEyebrow">Lobby Banking</div>
+      <div class="mbucksMenuHead">
+        <div class="mbucksMenuHeadIcon"><img src="assets/K8NlPp.png" alt="M-Bucks"></div>
+        <div class="modeRulesEyebrow">Lobby Banking</div>
+      </div>
       <div class="modeRulesTitle">M-Bucks Kredit</div>
       <div class="modeRulesLead">
         Nimm einen Lobby-Kredit auf und zahle ihn innerhalb von 3 Stunden zurueck.
@@ -37087,7 +37382,10 @@
 
   <div id="mbucksStoreMenu" class="inventoryMenu hidden">
     <div class="modeRulesCard mbucksStoreCard">
-      <div class="modeRulesEyebrow">M-Bucks Store</div>
+      <div class="mbucksMenuHead">
+        <div class="mbucksMenuHeadIcon"><img src="assets/K8NlPp.png" alt="M-Bucks"></div>
+        <div class="modeRulesEyebrow">M-Bucks Store</div>
+      </div>
       <div class="modeRulesTitle">M-BUCKS EINLÖSEN</div>
       <div class="mbucksStoreLead">
         Tausche deine Admin-Coin direkt in M-BUCKS um. Die Einlösung läuft serverseitig über Supabase.
@@ -37095,25 +37393,25 @@
       <div class="mbucksStoreGrid">
         <div class="mbucksStorePack">
           <div class="mbucksStorePackTitle">Starter</div>
-          <div class="mbucksStorePackAmount">1.000</div>
+          <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">1.000</div>
           <div class="mbucksStorePackPrice">10 AC</div>
           <button class="mbucksStoreBuyBtn" data-mbucks-pack="starter">Mit Admin-Coin einlösen</button>
         </div>
         <div class="mbucksStorePack">
           <div class="mbucksStorePackTitle">Action</div>
-          <div class="mbucksStorePackAmount">2.800</div>
+          <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">2.800</div>
           <div class="mbucksStorePackPrice">28 AC</div>
           <button class="mbucksStoreBuyBtn" data-mbucks-pack="action">Mit Admin-Coin einlösen</button>
         </div>
         <div class="mbucksStorePack">
           <div class="mbucksStorePackTitle">Pro</div>
-          <div class="mbucksStorePackAmount">5.000</div>
+          <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">5.000</div>
           <div class="mbucksStorePackPrice">50 AC</div>
           <button class="mbucksStoreBuyBtn" data-mbucks-pack="pro">Mit Admin-Coin einlösen</button>
         </div>
         <div class="mbucksStorePack">
           <div class="mbucksStorePackTitle">Ultra</div>
-          <div class="mbucksStorePackAmount">13.500</div>
+          <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">13.500</div>
           <div class="mbucksStorePackPrice">135 AC</div>
           <button class="mbucksStoreBuyBtn" data-mbucks-pack="ultra">Mit Admin-Coin einlösen</button>
         </div>
@@ -37804,6 +38102,116 @@
             </div>
             <div id="adminBanInfo" class="smallInfo"></div>
             <div id="adminBanListInfo" class="adminBanList"></div>
+          </div>
+
+          <div class="adminControlCard">
+            <div class="adminSectionEyebrow">Custom Rewards (Supabase)</div>
+            <label class="adminFieldLabel" for="adminCustomRewardScope">Scope & Zielspieler</label>
+            <div class="adminInlineInputRow adminInlineInputRow--dual">
+              <select id="adminCustomRewardScope" class="startInput">
+                <option value="player">Nur Zielspieler</option>
+                <option value="global">Global (alle)</option>
+              </select>
+              <input
+                id="adminCustomRewardTargetKey"
+                class="startInput"
+                type="text"
+                maxlength="32"
+                placeholder="target_key (z. B. timadmin)"
+              />
+            </div>
+            <label class="adminFieldLabel" for="adminCustomRewardTitle">Popup Inhalt</label>
+            <div class="adminInlineInputRow adminInlineInputRow--dual">
+              <input
+                id="adminCustomRewardTitle"
+                class="startInput"
+                type="text"
+                maxlength="80"
+                placeholder="Titel im Reward-Popup"
+              />
+              <input
+                id="adminCustomRewardPopupText"
+                class="startInput"
+                type="text"
+                maxlength="180"
+                placeholder="Zusatztext im Reward-Popup"
+              />
+            </div>
+            <label class="adminFieldLabel" for="adminCustomRewardMBucks">M-Bucks & Eyes</label>
+            <div class="adminInlineInputRow adminInlineInputRow--dual">
+              <input
+                id="adminCustomRewardMBucks"
+                class="startInput"
+                type="number"
+                min="0"
+                step="1"
+                placeholder="M-Bucks (z. B. 1500) - WICHTIG"
+              />
+              <input
+                id="adminCustomRewardEyes"
+                class="startInput"
+                type="text"
+                placeholder="Eyes IDs (comma getrennt)"
+              />
+            </div>
+            <label class="adminFieldLabel" for="adminCustomRewardBodies">Bodies & Specials</label>
+            <div class="adminInlineInputRow adminInlineInputRow--dual">
+              <input
+                id="adminCustomRewardBodies"
+                class="startInput"
+                type="text"
+                placeholder="Bodies IDs (comma getrennt)"
+              />
+              <input
+                id="adminCustomRewardSpecials"
+                class="startInput"
+                type="text"
+                placeholder="Special IDs (comma getrennt)"
+              />
+            </div>
+            <label class="adminFieldLabel" for="adminCustomRewardRains">Rainfarben & Outfits</label>
+            <div class="adminInlineInputRow adminInlineInputRow--dual">
+              <input
+                id="adminCustomRewardRains"
+                class="startInput"
+                type="text"
+                placeholder="Rain IDs (comma getrennt)"
+              />
+              <input
+                id="adminCustomRewardOutfits"
+                class="startInput"
+                type="text"
+                placeholder="Outfit IDs (comma getrennt)"
+              />
+            </div>
+            <label class="adminFieldLabel" for="adminCustomRewardLobbyBackgrounds">Lobby Hintergründe & Start</label>
+            <div class="adminInlineInputRow adminInlineInputRow--dual">
+              <input
+                id="adminCustomRewardLobbyBackgrounds"
+                class="startInput"
+                type="text"
+                placeholder="Lobby BG IDs (comma getrennt)"
+              />
+              <input
+                id="adminCustomRewardStartsAt"
+                class="startInput"
+                type="datetime-local"
+                placeholder="Start (optional)"
+              />
+            </div>
+            <label class="adminFieldLabel" for="adminCustomRewardEndsAt">Ende & Speichern</label>
+            <div class="adminInlineInputRow adminInlineInputRow--dual">
+              <input
+                id="adminCustomRewardEndsAt"
+                class="startInput"
+                type="datetime-local"
+                placeholder="Ende (optional)"
+              />
+              <div class="adminToggleRow">
+                <button id="adminCustomRewardCreateBtn" class="achievementCloseBtn">Reward speichern</button>
+              </div>
+            </div>
+            <div id="adminCustomRewardInfo" class="smallInfo"></div>
           </div>
 
           <div class="adminButtonGrid">
@@ -38626,8 +39034,11 @@
   <div id="shopPurchaseMenu" class="inventoryMenu hidden">
     <div class="shopPurchaseModal shopPurchaseOverhaul">
       <div class="shopPurchaseHeader">
-        <div class="shopPurchaseKicker" id="shopPurchaseKicker">Einkauf erfolgreich</div>
-        <div class="shopPurchaseTitle" id="shopPurchaseTitle">Item erhalten</div>
+        <div>
+          <div class="shopPurchaseKicker" id="shopPurchaseKicker">Einkauf erfolgreich</div>
+          <div class="shopPurchaseTitle" id="shopPurchaseTitle">Item erhalten</div>
+        </div>
+        <button id="shopPurchaseCloseBtn" class="achievementCloseBtn" type="button">Schließen</button>
       </div>
       
       <div class="shopPurchaseVisual" id="shopPurchaseVisual">
@@ -39300,6 +39711,7 @@
         <button class="creatorTabBtn" type="button" data-creator-tab="analytics">Analytics</button>
         <button class="creatorTabBtn" type="button" data-creator-tab="donations">Donations</button>
         <button class="creatorTabBtn" type="button" data-creator-tab="customize">Customize</button>
+        <button class="creatorTabBtn" type="button" data-creator-tab="contracts">Contracts 2.0</button>
       </div>
 
       <div class="creatorGrid creatorThemeGrid">
@@ -39455,6 +39867,22 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div class="creatorPanel creatorThemePanel creatorTabPanel hiddenByTab" data-creator-panel="contracts">
+            <div class="creatorSectionTitle">Creator Contracts 2.0</div>
+            <div class="creatorThemeText">Schließe Creator-Aufträge durch Gameplay und Support-Aktionen ab. Jeder Contract kann genau einmal eingelöst werden.</div>
+            <div class="creatorSummaryGrid">
+              <div class="creatorInfoCard creatorThemeCard">
+                <div class="creatorInfoLabel">Abgeschlossen</div>
+                <div id="creatorContractsDoneValue" class="creatorInfoValue">0 / 0</div>
+              </div>
+              <div class="creatorInfoCard creatorThemeCard">
+                <div class="creatorInfoLabel">Claimed</div>
+                <div id="creatorContractsClaimedValue" class="creatorInfoValue">0</div>
+              </div>
+            </div>
+            <div id="creatorContractsList" class="creatorStreakCard" style="margin-top:14px; display:grid; gap:12px;"></div>
           </div>
         </div>
 
@@ -40241,6 +40669,21 @@
     const adminBanDurationInput = document.getElementById("adminBanDurationInput");
     const adminBanInfo = document.getElementById("adminBanInfo");
     const adminBanListInfo = document.getElementById("adminBanListInfo");
+    const adminCustomRewardScope = document.getElementById("adminCustomRewardScope");
+    const adminCustomRewardTargetKey = document.getElementById("adminCustomRewardTargetKey");
+    const adminCustomRewardTitle = document.getElementById("adminCustomRewardTitle");
+    const adminCustomRewardPopupText = document.getElementById("adminCustomRewardPopupText");
+    const adminCustomRewardMBucks = document.getElementById("adminCustomRewardMBucks");
+    const adminCustomRewardEyes = document.getElementById("adminCustomRewardEyes");
+    const adminCustomRewardBodies = document.getElementById("adminCustomRewardBodies");
+    const adminCustomRewardSpecials = document.getElementById("adminCustomRewardSpecials");
+    const adminCustomRewardRains = document.getElementById("adminCustomRewardRains");
+    const adminCustomRewardOutfits = document.getElementById("adminCustomRewardOutfits");
+    const adminCustomRewardLobbyBackgrounds = document.getElementById("adminCustomRewardLobbyBackgrounds");
+    const adminCustomRewardStartsAt = document.getElementById("adminCustomRewardStartsAt");
+    const adminCustomRewardEndsAt = document.getElementById("adminCustomRewardEndsAt");
+    const adminCustomRewardCreateBtn = document.getElementById("adminCustomRewardCreateBtn");
+    const adminCustomRewardInfo = document.getElementById("adminCustomRewardInfo");
     const adminProgressInfo = document.getElementById("adminProgressInfo");
     const adminCloseBtn = document.getElementById("adminCloseBtn");
     const adminMaintenanceOnBtn = document.getElementById("adminMaintenanceOnBtn");
@@ -40578,6 +41021,9 @@
     const creatorStreakNextGoalValue = document.getElementById("creatorStreakNextGoalValue");
     const creatorStreakInfo = document.getElementById("creatorStreakInfo");
     const creatorStreakProgressBar = document.getElementById("creatorStreakProgressBar");
+    const creatorContractsList = document.getElementById("creatorContractsList");
+    const creatorContractsDoneValue = document.getElementById("creatorContractsDoneValue");
+    const creatorContractsClaimedValue = document.getElementById("creatorContractsClaimedValue");
         const npcMenu = document.getElementById("npcMenu");
     const npcTitle = document.getElementById("npcTitle");
     const npcDialog = document.getElementById("npcDialog");
@@ -41198,10 +41644,21 @@
     let gameStarted = false;
     let matchStartGraceUntil = 0;
     const SOLO_BOSS_COUNTDOWN_MS = 3 * 60 * 1000;
+    const GLOBAL_EVENT_CONFIG = {
+      enabled: true,
+      startAt: new Date("2026-09-12T17:45:00+02:00").getTime(),
+      endAt: new Date("2026-09-12T19:02:00+02:00").getTime()
+    };
+    const GLOBAL_EVENT_LOCK_MESSAGE = "Live Event beendet: Matchmaking und Custom Games sind gesperrt.";
     let soloBossState = {
       startedAt: 0,
       spawned: false,
       defeated: false
+    };
+    let globalEventBossState = {
+      spawned: false,
+      defeated: false,
+      announcedEnded: false
     };
     let inLobby = false;
     let lobbyMiniEventIndex = 0;
@@ -41228,6 +41685,7 @@
     let adminSessionName = "";
     let lobbyFriendCloudSyncTimer = null;
     let pendingSupabaseRewardModal = null;
+    let supabaseRewardPopupQueue = [];
     let loginLoadingProgressTimer = null;
     let loginLoadingStepTimer = null;
     let lobbyLoginEntryTimer = null;
@@ -42251,6 +42709,11 @@ async function publishCustomGamePresetFromMenu() {
 }
 
 function startCustomMatchFromPanel() {
+  if (isGlobalMatchmakingLocked()) {
+    showMessage(GLOBAL_EVENT_LOCK_MESSAGE, 3200);
+    updateLobbyUi();
+    return;
+  }
   if (isDowntimeAccessBlocked()) {
     showMessage("Server ist in Wartung. Match-Start ist gesperrt.", 2600);
     if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
@@ -42402,6 +42865,16 @@ function renderModePickerCustomGameUi() {
   if (modePickerCustomPublishBtn) {
     modePickerCustomPublishBtn.disabled = false;
     modePickerCustomPublishBtn.style.opacity = "1";
+  }
+  if (modePickerCustomPlayBtn) {
+    const lockedByEvent = isGlobalMatchmakingLocked();
+    modePickerCustomPlayBtn.disabled = lockedByEvent;
+    modePickerCustomPlayBtn.title = lockedByEvent ? GLOBAL_EVENT_LOCK_MESSAGE : "";
+    if (lockedByEvent) {
+      modePickerCustomPlayBtn.textContent = "Event vorbei - gesperrt";
+    } else if (modePickerCustomPlayBtn.textContent.includes("gesperrt")) {
+      modePickerCustomPlayBtn.textContent = "Start";
+    }
   }
   renderQuickCustomPresetDeck();
 }
@@ -43173,6 +43646,28 @@ function isSeason4LiveEventActive() {
   return getSeason4LiveEventPhase() === "live";
 }
 
+function isGlobalEventConfigured() {
+  return !!GLOBAL_EVENT_CONFIG.enabled
+    && Number.isFinite(GLOBAL_EVENT_CONFIG.startAt)
+    && Number.isFinite(GLOBAL_EVENT_CONFIG.endAt)
+    && GLOBAL_EVENT_CONFIG.endAt > GLOBAL_EVENT_CONFIG.startAt;
+}
+
+function isGlobalEventLiveNow() {
+  if (!isGlobalEventConfigured()) return false;
+  const now = Date.now();
+  return now >= GLOBAL_EVENT_CONFIG.startAt && now < GLOBAL_EVENT_CONFIG.endAt;
+}
+
+function isGlobalEventOverNow() {
+  if (!isGlobalEventConfigured()) return false;
+  return Date.now() >= GLOBAL_EVENT_CONFIG.endAt;
+}
+
+function isGlobalMatchmakingLocked() {
+  return isGlobalEventOverNow();
+}
+
 function isLobbyModeEnabled(mode) {
   if (mode === "datamine") return false;
   if (mode === "creative") return false;
@@ -43211,6 +43706,7 @@ function formatLockCountdown(ms) {
 }
 
 function isSoloOrCustomBlockedForStart() {
+  if (isGlobalMatchmakingLocked()) return true;
   return isSoloCustomLocked() && (selectedLobbyMode === "solo" || hasActiveCustomGamePreset());
 }
 
@@ -44433,6 +44929,10 @@ let shopWishlist = [];
       streakBest: 0,
       streakLastCode: ""
     };
+    const CREATOR_CONTRACTS_CLAIM_KEY = "mini_minecraft_creator_contracts_v2_claimed";
+    const creatorContractsState = {
+      claimed: {}
+    };
     const shopPurchaseState = {
       lead: "",
       rewards: [],
@@ -44483,6 +44983,9 @@ let shopWishlist = [];
       lastDailyKey: "",
       lastWeeklyKey: "",
       version: "ops_board_rework_2026_05_29"
+    };
+    const questRuntimeState = {
+      activeDefinitions: []
     };
     let questUiSelectedWeek = 1;
 
@@ -44967,7 +45470,7 @@ let shopWishlist = [];
     const BATTLE_PASS_PREMIUM_PRICE = 950;
     const PASS_SUPPORT_PACKAGE_PRICE = 750;
     const CURRENCY_NAME = "M-Bucks";
-    const CURRENCY_ICON_PATH = "assets/ui/vbucks-icon.png";
+    const CURRENCY_ICON_PATH = "assets/K8NlPp.png";
     const BATTLE_PASS_TIER_XP = 10000;
     const BATTLE_PASS_SINGLE_TIER_PRICE = 150;
     const BATTLE_PASS_25_PACKAGE_PRICE = 2800;
@@ -49053,17 +49556,43 @@ let shopWishlist = [];
         .map((line) => String(line || "").trim())
         .filter(Boolean);
       const cleanedPopup = String(popupText || "").trim();
-      if (!cleanedLines.length && !cleanedPopup) return;
-      if (!pendingSupabaseRewardModal) {
-        pendingSupabaseRewardModal = {
-          lead: "Neue Kontobelohnungen wurden aus Supabase geladen.",
-          reasons: [],
-          rewards: []
-        };
-      }
-      if (title) pendingSupabaseRewardModal.reasons.push(String(title));
-      if (cleanedPopup) pendingSupabaseRewardModal.reasons.push(cleanedPopup);
-      pendingSupabaseRewardModal.rewards.push(...cleanedLines);
+      const cleanedTitle = String(title || "").trim();
+      if (!cleanedLines.length && !cleanedPopup && !cleanedTitle) return;
+
+      const entry = {
+        lead: "Neue Kontobelohnung aus Supabase.",
+        reasons: [],
+        rewards: cleanedLines.slice(),
+        title: cleanedTitle || "Custom Reward",
+        kicker: "Belohnung erhalten",
+        icon: "🎁",
+        rarity: "epic"
+      };
+      if (cleanedTitle) entry.reasons.push(cleanedTitle);
+      if (cleanedPopup) entry.reasons.push(cleanedPopup);
+      if (!entry.reasons.length) entry.reasons.push("Neue Belohnung wurde deinem Konto zugestellt.");
+      if (!entry.rewards.length) entry.rewards.push("Belohnungspaket wurde registriert.");
+
+      pendingSupabaseRewardModal = entry;
+      supabaseRewardPopupQueue.push(entry);
+    }
+
+    function showNextSupabaseRewardPopup() {
+      if (shopPurchaseOpen) return false;
+      const next = supabaseRewardPopupQueue.shift();
+      if (!next) return false;
+      openShopPurchaseModal({
+        lead: next.lead || "Neue Kontobelohnung.",
+        reasons: Array.isArray(next.reasons) ? next.reasons : [],
+        rewards: Array.isArray(next.rewards) ? next.rewards : [],
+        equipAction: null,
+        equipLabel: "Weiter",
+        icon: next.icon || "🎁",
+        title: next.title || "Reward",
+        kicker: next.kicker || "Belohnung erhalten",
+        rarity: next.rarity || "epic"
+      });
+      return true;
     }
 
     function grantRewardCosmetic(type, id) {
@@ -49130,7 +49659,7 @@ let shopWishlist = [];
 
       if (typeof row?.premium_unlock === "boolean") payload.premium_unlock = row.premium_unlock;
 
-      const arrayFields = ["special_skins", "eye_skins", "body_skins", "rain_colors"];
+      const arrayFields = ["special_skins", "eye_skins", "body_skins", "rain_colors", "lobby_backgrounds", "outfits"];
       arrayFields.forEach((key) => {
         const normalized = normalizeRewardArrayValue(row?.[key]);
         if (normalized.length) payload[key] = normalized;
@@ -49232,6 +49761,27 @@ let shopWishlist = [];
         });
       }
 
+      if (Array.isArray(reward.outfits)) {
+        reward.outfits.forEach((id) => {
+          const key = String(id || "").trim();
+          if (!key) return;
+          if (!playerSkin.ownedOutfits.includes(key)) playerSkin.ownedOutfits.push(key);
+          const outfitName = getThreeDOutfitData(key)?.name || key;
+          summary.push(`Outfit: ${outfitName}`);
+        });
+      }
+
+      if (Array.isArray(reward.lobby_backgrounds)) {
+        reward.lobby_backgrounds.forEach((id) => {
+          const key = String(id || "").trim();
+          if (!key) return;
+          if (!Array.isArray(playerSkin.ownedLobbyBackgrounds)) playerSkin.ownedLobbyBackgrounds = [];
+          if (!playerSkin.ownedLobbyBackgrounds.includes(key)) playerSkin.ownedLobbyBackgrounds.push(key);
+          const bg = lobbyBackgrounds.find((entry) => entry && entry.id === key);
+          summary.push(`Lobby-Hintergrund: ${bg?.name || key}`);
+        });
+      }
+
       if (reward.loot && typeof reward.loot === "object") {
         Object.entries(reward.loot).forEach(([lootId, amount]) => {
           const numericAmount = Number(amount) || 0;
@@ -49276,7 +49826,7 @@ let shopWishlist = [];
       if (!supabaseClient) return [];
       const { data, error } = await supabaseClient
         .from(CUSTOM_REWARDS_TABLE)
-        .select("id, reward_key, reward_payload, scope, target_key, created_at, title, popup_text, starts_at, ends_at, vbucks, currency, xp, skill_points, battle_pass_xp, battle_pass_tiers, premium_unlock, community_pass_percent, special_skins, eye_skins, body_skins, rain_colors, loot, inventory_blocks")
+        .select("*")
         .order("created_at", { ascending: true });
 
       if (error) throw error;
@@ -49311,7 +49861,7 @@ let shopWishlist = [];
       if (!supabaseClient || !playerKey) return [];
       const { data, error } = await supabaseClient
         .from(ADMIN_GRANTS_TABLE)
-        .select("id, grant_type, grant_payload, note, created_at, claimed_at, vbucks, currency, xp, skill_points, battle_pass_xp, battle_pass_tiers, premium_unlock, community_pass_percent, special_skins, eye_skins, body_skins, rain_colors, loot, inventory_blocks")
+        .select("*")
         .eq("player_key", playerKey)
         .is("claimed_at", null)
         .order("created_at", { ascending: true });
@@ -49410,10 +49960,8 @@ let shopWishlist = [];
           const summaryLines = applySupabaseRewardPayload(buildSupabaseRewardPayloadFromRow(reward));
           const popupText = reward.popup_text || reward.reward_payload?.popup_text || "";
           const title = reward.title || reward.reward_payload?.title || "Custom Reward";
-          if (summaryLines.length || popupText) {
-            appliedCount += 1;
-            queueSupabaseRewardModal(title, summaryLines, popupText);
-          }
+          appliedCount += 1;
+          queueSupabaseRewardModal(title, summaryLines, popupText);
           await markCustomRewardClaimed(playerKey, rewardKey);
         }
 
@@ -49422,10 +49970,8 @@ let shopWishlist = [];
           const title = grant.grant_type
             ? `Admin Grant: ${grant.grant_type}`
             : "Admin Grant";
-          if (summaryLines.length || grant.note) {
-            appliedCount += 1;
-            queueSupabaseRewardModal(title, summaryLines, grant.note || "");
-          }
+          appliedCount += 1;
+          queueSupabaseRewardModal(title, summaryLines, grant.note || "");
           await markAdminGrantClaimed(grant.id);
         }
 
@@ -49761,22 +50307,14 @@ let shopWishlist = [];
             openBanPopup();
           }, 320);
         }
-        if (pendingSupabaseRewardModal && Array.isArray(pendingSupabaseRewardModal.rewards) && pendingSupabaseRewardModal.rewards.length) {
-          const modalPayload = {
-            lead: pendingSupabaseRewardModal.lead || "Neue Kontobelohnungen wurden geladen.",
-            reasons: Array.isArray(pendingSupabaseRewardModal.reasons) ? pendingSupabaseRewardModal.reasons.slice() : [],
-            rewards: pendingSupabaseRewardModal.rewards.slice(),
-            equipAction: null,
-            equipLabel: "Weiter"
-          };
-          pendingSupabaseRewardModal = null;
-          setTimeout(() => {
-            openShopPurchaseModal(modalPayload);
-          }, 900);
-        }
         updateUI();
       } finally {
         hideLoginLoadingOverlay();
+        if (supabaseRewardPopupQueue.length > 0) {
+          setTimeout(() => {
+            showNextSupabaseRewardPopup();
+          }, 340);
+        }
       }
     }
 
@@ -50473,7 +51011,21 @@ let shopWishlist = [];
       if (adminBanNameInput) adminBanNameInput.value = "";
       if (adminBanReasonInput) adminBanReasonInput.value = "";
       if (adminBanDurationInput) adminBanDurationInput.value = "0";
+      if (adminCustomRewardScope) adminCustomRewardScope.value = "player";
+      if (adminCustomRewardTargetKey) adminCustomRewardTargetKey.value = cloudPlayerKey || "";
+      if (adminCustomRewardTitle) adminCustomRewardTitle.value = "";
+      if (adminCustomRewardPopupText) adminCustomRewardPopupText.value = "";
+      if (adminCustomRewardMBucks) adminCustomRewardMBucks.value = "";
+      if (adminCustomRewardEyes) adminCustomRewardEyes.value = "";
+      if (adminCustomRewardBodies) adminCustomRewardBodies.value = "";
+      if (adminCustomRewardSpecials) adminCustomRewardSpecials.value = "";
+      if (adminCustomRewardRains) adminCustomRewardRains.value = "";
+      if (adminCustomRewardOutfits) adminCustomRewardOutfits.value = "";
+      if (adminCustomRewardLobbyBackgrounds) adminCustomRewardLobbyBackgrounds.value = "";
+      if (adminCustomRewardStartsAt) adminCustomRewardStartsAt.value = "";
+      if (adminCustomRewardEndsAt) adminCustomRewardEndsAt.value = "";
       updateAdminBanInfo("");
+      updateAdminCustomRewardInfo("");
       loadBannedPlayersFromSupabase().then((loaded) => {
         if (loaded) updateAdminBanInfo("");
       });
@@ -50493,6 +51045,119 @@ let shopWishlist = [];
     function updateAdminProgressInfo() {
       if (!adminProgressInfo) return;
       adminProgressInfo.textContent = `Level ${progression.level} • XP ${progression.xp}/${getXpNeeded()} • Skillpunkte ${progression.skillPoints}`;
+    }
+
+    function updateAdminCustomRewardInfo(text = "") {
+      if (!adminCustomRewardInfo) return;
+      adminCustomRewardInfo.textContent = text;
+    }
+
+    function parseAdminCsvInput(value) {
+      return String(value || "")
+        .split(",")
+        .map((entry) => String(entry || "").trim())
+        .filter(Boolean);
+    }
+
+    function parseAdminDateTimeLocalToIso(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return null;
+      const parsed = new Date(raw);
+      const time = parsed.getTime();
+      if (!Number.isFinite(time)) return null;
+      return new Date(time).toISOString();
+    }
+
+    async function createCustomRewardFromAdmin() {
+      if (!supabaseClient) {
+        updateAdminCustomRewardInfo("Supabase nicht verbunden.");
+        return;
+      }
+
+      const scope = String(adminCustomRewardScope?.value || "player");
+      const targetKeyRaw = String(adminCustomRewardTargetKey?.value || "").trim();
+      const normalizedTargetKey = normalizePlayerName(targetKeyRaw);
+      if (scope !== "global" && !normalizedTargetKey) {
+        updateAdminCustomRewardInfo("Bitte target_key setzen oder Scope auf Global stellen.");
+        return;
+      }
+
+      const title = String(adminCustomRewardTitle?.value || "").trim() || "Custom Reward";
+      const popupText = String(adminCustomRewardPopupText?.value || "").trim();
+      const mBucks = Math.max(0, Math.floor(Number(adminCustomRewardMBucks?.value) || 0));
+      const eyes = parseAdminCsvInput(adminCustomRewardEyes?.value);
+      const bodies = parseAdminCsvInput(adminCustomRewardBodies?.value);
+      const specials = parseAdminCsvInput(adminCustomRewardSpecials?.value);
+      const rains = parseAdminCsvInput(adminCustomRewardRains?.value);
+      const outfits = parseAdminCsvInput(adminCustomRewardOutfits?.value);
+      const lobbyBackgrounds = parseAdminCsvInput(adminCustomRewardLobbyBackgrounds?.value);
+      const startsAt = parseAdminDateTimeLocalToIso(adminCustomRewardStartsAt?.value);
+      const endsAt = parseAdminDateTimeLocalToIso(adminCustomRewardEndsAt?.value);
+      const nowIso = new Date().toISOString();
+
+      if (startsAt && endsAt && Date.parse(endsAt) <= Date.parse(startsAt)) {
+        updateAdminCustomRewardInfo("Ende muss nach dem Start liegen.");
+        return;
+      }
+
+      const payload = {};
+      if (mBucks > 0) payload.vbucks = mBucks;
+      if (eyes.length) payload.eyes = eyes;
+      if (bodies.length) payload.bodies = bodies;
+      if (specials.length) payload.specials = specials;
+      if (rains.length) payload.rains = rains;
+      if (outfits.length) payload.outfits = outfits;
+      if (lobbyBackgrounds.length) payload.lobby_backgrounds = lobbyBackgrounds;
+      if (title) payload.title = title;
+      if (popupText) payload.popup_text = popupText;
+      if (startsAt) payload.starts_at = startsAt;
+      if (endsAt) payload.ends_at = endsAt;
+
+      if (!Object.keys(payload).length) {
+        updateAdminCustomRewardInfo("Bitte mindestens 1 Reward-Wert eintragen.");
+        return;
+      }
+
+      const insertRow = {
+        reward_key: `admin_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+        scope,
+        target_key: scope === "global" ? null : normalizedTargetKey,
+        title,
+        popup_text: popupText || null,
+        starts_at: startsAt || nowIso,
+        ends_at: endsAt || null,
+        vbucks: mBucks || 0,
+        eyes,
+        bodies,
+        specials,
+        rains,
+        outfits,
+        lobby_backgrounds: lobbyBackgrounds,
+        reward_payload: payload
+      };
+
+      updateAdminCustomRewardInfo("Speichere Reward ...");
+      const { error } = await supabaseClient.from(CUSTOM_REWARDS_TABLE).insert(insertRow);
+      if (error) {
+        updateAdminCustomRewardInfo(`Fehler: ${formatSupabaseError(error, "Reward konnte nicht erstellt werden.")}`);
+        return;
+      }
+
+      updateAdminCustomRewardInfo(`Reward gespeichert: ${title}${scope === "global" ? " (global)" : ` -> ${normalizedTargetKey}`}`);
+      showMessage("Custom Reward gespeichert.", 1800);
+
+      const affectsCurrentPlayer = isSupabaseRewardTargetMatch(
+        insertRow,
+        cloudPlayerKey || normalizePlayerName(playerName || ""),
+        cloudAccountName || playerName || ""
+      );
+      if (affectsCurrentPlayer) {
+        const previewLines = applySupabaseRewardPayload(buildSupabaseRewardPayloadFromRow(insertRow));
+        queueSupabaseRewardModal(title, previewLines, popupText || "Direktvorschau: Reward wurde deinem Konto hinzugefügt.");
+        setTimeout(() => {
+          showNextSupabaseRewardPopup();
+        }, 220);
+      }
     }
 
     function askAdminPassword() {
@@ -54602,6 +55267,147 @@ async function loadMaintenanceStateFromSupabase() {
       return val.toLocaleString("de-DE");
     }
 
+    function loadCreatorContractsState() {
+      try {
+        const raw = localStorage.getItem(CREATOR_CONTRACTS_CLAIM_KEY);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object" && parsed.claimed && typeof parsed.claimed === "object") {
+          creatorContractsState.claimed = parsed.claimed;
+        }
+      } catch (err) {
+        console.warn("Creator Contracts konnten nicht geladen werden:", err);
+      }
+    }
+
+    function saveCreatorContractsState() {
+      localStorage.setItem(CREATOR_CONTRACTS_CLAIM_KEY, JSON.stringify({
+        claimed: creatorContractsState.claimed || {}
+      }));
+    }
+
+    function getCreatorContractsCatalog() {
+      return [
+        {
+          id: "contract_miner_350",
+          title: "Rift Miner",
+          description: "Baue 350 Blöcke ab.",
+          current: Number(stats.blocksMined || 0),
+          target: 350,
+          rewards: { mBucks: 380, levelXp: 420 }
+        },
+        {
+          id: "contract_builder_220",
+          title: "Grid Architect",
+          description: "Platziere 220 Blöcke.",
+          current: Number(stats.blocksPlaced || 0),
+          target: 220,
+          rewards: { mBucks: 320, passXp: 260 }
+        },
+        {
+          id: "contract_shop_10",
+          title: "Support Operator",
+          description: "Kaufe 10 Items im Shop.",
+          current: Number(stats.shopPurchases || 0),
+          target: 10,
+          rewards: { mBucks: 520, levelXp: 250, passXp: 180 }
+        },
+        {
+          id: "contract_slime_35",
+          title: "Slime Sweep",
+          description: "Besiege 35 Slimes.",
+          current: Number(stats.slimesKilled || 0),
+          target: 35,
+          rewards: { mBucks: 260, skillPoints: 1 }
+        }
+      ];
+    }
+
+    function formatCreatorContractRewards(reward) {
+      const chips = [];
+      if (reward.mBucks) chips.push(`${fmt(Number(reward.mBucks || 0))} M-Bucks`);
+      if (reward.levelXp) chips.push(`+${fmt(Number(reward.levelXp || 0))} Level-XP`);
+      if (reward.passXp) chips.push(`+${fmt(Number(reward.passXp || 0))} Pass-XP`);
+      if (reward.skillPoints) chips.push(`+${fmt(Number(reward.skillPoints || 0))} Skillpunkt`);
+      return chips.join(" • ");
+    }
+
+    function claimCreatorContract(contractId) {
+      const list = getCreatorContractsCatalog();
+      const contract = list.find((item) => item.id === contractId);
+      if (!contract) return;
+      if (creatorContractsState.claimed[contractId]) {
+        showMessage("Contract wurde bereits eingelöst.", 1800);
+        return;
+      }
+      if ((contract.current || 0) < (contract.target || 0)) {
+        showMessage("Contract noch nicht abgeschlossen.", 1800);
+        return;
+      }
+
+      const reward = contract.rewards || {};
+      if (reward.mBucks) inventory[7] = Number(inventory[7] || 0) + Number(reward.mBucks || 0);
+      if (reward.levelXp) grantXp(Number(reward.levelXp || 0));
+      if (reward.passXp) grantBattlePassXp(Number(reward.passXp || 0));
+      if (reward.skillPoints) skillPoints = Number(skillPoints || 0) + Number(reward.skillPoints || 0);
+
+      creatorContractsState.claimed[contractId] = {
+        at: Date.now(),
+        rewards: reward
+      };
+      saveCreatorContractsState();
+      updateUI();
+      renderCreatorContracts();
+      saveGame();
+      showMessage(`Contract "${contract.title}" eingelöst!`, 2200);
+    }
+
+    function renderCreatorContracts() {
+      if (!creatorContractsList) return;
+      const list = getCreatorContractsCatalog();
+      const total = list.length;
+      let done = 0;
+      let claimed = 0;
+
+      creatorContractsList.innerHTML = list.map((contract) => {
+        const current = Math.max(0, Number(contract.current || 0));
+        const target = Math.max(1, Number(contract.target || 1));
+        const progress = Math.min(100, Math.floor((current / target) * 100));
+        const isDone = current >= target;
+        const isClaimed = !!creatorContractsState.claimed[contract.id];
+        if (isDone) done += 1;
+        if (isClaimed) claimed += 1;
+        const btnText = isClaimed ? "Eingelöst" : (isDone ? "Reward abholen" : "In Arbeit");
+        return `
+          <div class="creatorInfoCard creatorThemeCard" style="padding:14px 16px;">
+            <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap;">
+              <div>
+                <div class="creatorSubTitle" style="font-size:16px;">${contract.title}</div>
+                <div class="creatorHintText" style="font-size:13px;margin-top:4px;">${contract.description}</div>
+              </div>
+              <div class="creatorPill ${isDone ? "isLive" : ""}" style="margin:0;">${fmt(current)} / ${fmt(target)}</div>
+            </div>
+            <div class="creatorProgressTrack" style="margin-top:10px;">
+              <div class="creatorProgressBar" style="width:${progress}%;"></div>
+            </div>
+            <div class="creatorHintText" style="font-size:12px;margin-top:8px;">Reward: ${formatCreatorContractRewards(contract.rewards || {})}</div>
+            <div style="display:flex;justify-content:flex-end;margin-top:10px;">
+              <button class="achievementCloseBtn creatorThemeBtn" type="button" data-creator-contract-claim="${contract.id}" ${(!isDone || isClaimed) ? "disabled" : ""}>${btnText}</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      if (creatorContractsDoneValue) creatorContractsDoneValue.textContent = `${done} / ${total}`;
+      if (creatorContractsClaimedValue) creatorContractsClaimedValue.textContent = fmt(claimed);
+
+      creatorContractsList.querySelectorAll("[data-creator-contract-claim]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          claimCreatorContract(btn.getAttribute("data-creator-contract-claim") || "");
+        });
+      });
+    }
+
     async function applyCreatorCode() {
       const inputValue = creatorCodeInput?.value || "";
       const rawCode = inputValue.trim().toLowerCase();
@@ -55068,24 +55874,36 @@ async function loadMaintenanceStateFromSupabase() {
       if (shopPurchaseKicker) shopPurchaseKicker.textContent = kicker;
       if (shopPurchaseIcon) shopPurchaseIcon.textContent = icon;
 
+      const normalizedRewards = Array.isArray(rewards)
+        ? rewards.map((reward) => String(reward || "").trim()).filter(Boolean)
+        : (String(rewards || "").trim() ? [String(rewards || "").trim()] : []);
+      const normalizedReasonsInput = Array.isArray(reasons)
+        ? reasons
+        : (String(reasons || "").trim() ? [String(reasons || "").trim()] : []);
+
       shopPurchaseState.lead = lead;
-      shopPurchaseState.reasons = reasons;
-      shopPurchaseState.rewards = rewards;
+      shopPurchaseState.reasons = normalizedReasonsInput;
+      shopPurchaseState.rewards = normalizedRewards;
       shopPurchaseState.equipAction = equipAction;
       shopPurchaseState.equipLabel = equipLabel;
       
       shopPurchaseLead.textContent = localizeCurrencyText(lead);
       
-      const normalizedReasons = Array.isArray(reasons)
-        ? reasons.map((reason) => localizeCurrencyText(String(reason || "").trim())).filter(Boolean)
-        : [];
+      const normalizedReasons = normalizedReasonsInput
+        .map((reason) => localizeCurrencyText(String(reason || "").trim()))
+        .filter(Boolean);
         
       if (shopPurchaseReasonsWrap && shopPurchaseReasons) {
         shopPurchaseReasonsWrap.classList.toggle("hidden", normalizedReasons.length <= 0);
         shopPurchaseReasons.innerHTML = normalizedReasons.map((reason) => `<div class="shopPurchaseReason">${reason}</div>`).join("");
       }
       
-      shopPurchaseRewards.innerHTML = rewards.map((reward) => `<div class="shopPurchaseReward">${localizeCurrencyText(reward)}</div>`).join("");
+      shopPurchaseRewards.innerHTML = normalizedRewards
+        .map((reward, index) => `<div class="shopPurchaseReward"><span>#${index + 1}</span><span>${localizeCurrencyText(reward)}</span></div>`)
+        .join("");
+      if (!shopPurchaseRewards.innerHTML) {
+        shopPurchaseRewards.innerHTML = `<div class="shopPurchaseReward"><span>#1</span><span>Kauf abgeschlossen</span></div>`;
+      }
       
       if (shopPurchaseEquipBtn) {
         shopPurchaseEquipBtn.textContent = equipLabel;
@@ -55105,12 +55923,21 @@ async function loadMaintenanceStateFromSupabase() {
 
       shopPurchaseOpen = true;
       shopPurchaseMenu.classList.remove("hidden");
+      shopPurchaseMenu.style.display = "flex";
       triggerTransactionPopupHooks({ rarity: popupRarity, title, lead });
     }
 
     function closeShopPurchaseModal() {
       shopPurchaseOpen = false;
-      if (shopPurchaseMenu) shopPurchaseMenu.classList.add("hidden");
+      if (shopPurchaseMenu) {
+        shopPurchaseMenu.classList.add("hidden");
+        shopPurchaseMenu.style.display = "";
+      }
+      if (supabaseRewardPopupQueue.length > 0) {
+        setTimeout(() => {
+          showNextSupabaseRewardPopup();
+        }, 220);
+      }
     }
 
     function getBattlePassOfferConfig(offerType) {
@@ -55403,7 +56230,7 @@ async function loadMaintenanceStateFromSupabase() {
           `;
         } else {
           const tierText = MBUCKS_CREDIT_TIERS
-            .map((tier) => `${tier.toLocaleString("de-DE")} -> ${getMBucksCreditRepayAmount(tier).toLocaleString("de-DE")}`)
+            .map((tier) => `${formatCurrencyMarkup(tier)} -> ${formatCurrencyMarkup(getMBucksCreditRepayAmount(tier))}`)
             .join(" | ");
           mbucksCreditInfo.innerHTML = `
             Kein aktiver Kredit.<br>
@@ -55422,10 +56249,10 @@ async function loadMaintenanceStateFromSupabase() {
       const totalMs = Math.max(1, Number(MBUCKS_CREDIT_TERM_MS || 1));
       const progress = Math.max(0, Math.min(1, (totalMs - remainingMs) / totalMs));
       mbucksCreditInfo.innerHTML = `
-        Kredit aktiv: <strong>${mbucksCreditState.principal.toLocaleString("de-DE")} M-Bucks</strong><br>
-        Rueckzahlung: <strong>${mbucksCreditState.amount.toLocaleString("de-DE")} M-Bucks</strong><br>
+        Kredit aktiv: <strong>${formatCurrencyMarkup(mbucksCreditState.principal)}</strong><br>
+        Rueckzahlung: <strong>${formatCurrencyMarkup(mbucksCreditState.amount)}</strong><br>
         Restzeit: <strong>${formatCreditCountdown(remainingMs)}</strong><br>
-        Dein Kontostand: <strong>${wallet.toLocaleString("de-DE")} M-Bucks</strong>
+        Dein Kontostand: <strong>${formatCurrencyMarkup(wallet)}</strong>
       `;
       if (mbucksCreditTimerWrap) mbucksCreditTimerWrap.classList.remove("hidden");
       if (mbucksCreditTimerMeta) mbucksCreditTimerMeta.textContent = `Laufzeit: ${Math.round(progress * 100)}%`;
@@ -55439,14 +56266,14 @@ async function loadMaintenanceStateFromSupabase() {
 
     function renderMBucksEconomyPanel() {
       if (mbucksEconomyWallet) {
-        mbucksEconomyWallet.textContent = `${Math.max(0, Math.floor(Number(inventory[7] || 0))).toLocaleString("de-DE")} M-Bucks`;
+        mbucksEconomyWallet.innerHTML = formatCurrencyMarkup(Math.max(0, Math.floor(Number(inventory[7] || 0))));
       }
       if (mbucksEconomyToday) {
-        mbucksEconomyToday.textContent = `${Math.max(0, Math.floor(Number(mbucksEconomyState.earnedToday || 0))).toLocaleString("de-DE")} M-Bucks`;
+        mbucksEconomyToday.innerHTML = formatCurrencyMarkup(Math.max(0, Math.floor(Number(mbucksEconomyState.earnedToday || 0))));
       }
       if (mbucksAutoMeta) {
         const nextInMs = Math.max(0, MBUCKS_AUTO_REWARD_INTERVAL_MS - (Date.now() - Number(mbucksEconomyState.autoLastGrantAt || 0)));
-        mbucksAutoMeta.textContent = `Auto-M-Bucks: alle ${(MBUCKS_AUTO_REWARD_INTERVAL_MS / 1000).toFixed(0)}s +${MBUCKS_AUTO_REWARD_AMOUNT} (nächster in ${formatCreditCountdown(nextInMs)})`;
+        mbucksAutoMeta.innerHTML = `Auto-M-Bucks: alle ${(MBUCKS_AUTO_REWARD_INTERVAL_MS / 1000).toFixed(0)}s +${formatCurrencyMarkup(MBUCKS_AUTO_REWARD_AMOUNT)} (nächster in ${formatCreditCountdown(nextInMs)})`;
       }
       if (mbucksAutoEnabledToggle) {
         mbucksAutoEnabledToggle.checked = mbucksEconomyState.autoEnabled !== false;
@@ -56100,7 +56927,10 @@ async function loadMaintenanceStateFromSupabase() {
 
     function claimQuestReward(id) {
       const didReset = ensureQuestCadenceState();
-      const def = getActiveQuestDefinitions().find((entry) => entry.id === id);
+      const activeList = Array.isArray(questRuntimeState.activeDefinitions) && questRuntimeState.activeDefinitions.length
+        ? questRuntimeState.activeDefinitions
+        : getActiveQuestDefinitions();
+      const def = activeList.find((entry) => entry.id === id);
       if (!def) return;
       if (isQuestClaimed(id, def.cadence)) return showMessage("Quest schon abgeholt!", 1800);
       if (!isQuestComplete(def)) return showMessage("Quest noch nicht fertig!", 1800);
@@ -56122,6 +56952,7 @@ async function loadMaintenanceStateFromSupabase() {
       if (!questDailyGrid || !questWeeklyGrid || !questMilestoneGrid) return;
       const didReset = ensureQuestCadenceState();
       const activeQuests = getActiveQuestDefinitions();
+      questRuntimeState.activeDefinitions = activeQuests.map((def) => ({ ...def }));
       const dailyQuests = activeQuests.filter((def) => def.cadence !== "weekly");
       const weeklyQuests = activeQuests.filter((def) => def.cadence === "weekly");
       const claimedCount = activeQuests.filter((def) => isQuestClaimed(def.id, def.cadence)).length;
@@ -56758,7 +57589,10 @@ async function loadMaintenanceStateFromSupabase() {
         closeMenus("mbucksCredit");
         mbucksCreditOpen = true;
         if (mbucksCreditMenu) mbucksCreditMenu.classList.toggle("hidden", !mbucksCreditOpen);
-        if (mbucksCreditOpen) renderMBucksCreditMenu();
+        if (mbucksCreditOpen) {
+          renderMBucksCreditMenu();
+          applyMBucksCardMouseEffects();
+        }
       }
       else if (name === 'mbucksStore') {
         closeMenus("mbucksStore");
@@ -56766,6 +57600,7 @@ async function loadMaintenanceStateFromSupabase() {
         if (mbucksStoreMenu) mbucksStoreMenu.classList.toggle("hidden", !mbucksStoreOpen);
         if (mbucksStoreOpen) {
           fetchAdminCurrencyWallet().then(() => renderMBucksStoreStatus());
+          applyMBucksCardMouseEffects();
         }
       }
       else if (name === 'showdown') {
@@ -56960,15 +57795,15 @@ async function loadMaintenanceStateFromSupabase() {
         adminCurrencyWalletValue.textContent = `${Math.max(0, Math.floor(Number(adminCurrencyBalance || 0))).toLocaleString("de-DE")} AC`;
       }
       if (adminCurrencyRateValue) {
-        adminCurrencyRateValue.textContent = `1 AC = ${ADMIN_CURRENCY_TO_MBUCKS_RATE.toLocaleString("de-DE")} M-Bucks`;
+        adminCurrencyRateValue.innerHTML = `1 AC = ${formatCurrencyMarkup(ADMIN_CURRENCY_TO_MBUCKS_RATE)}`;
       }
-      const base = `Wallet: ${wallet} M-Bucks`;
+      const base = `Wallet: <span class="currencyInline"><img class="currencyIcon" src="${CURRENCY_ICON_PATH}" alt="${CURRENCY_NAME}">${wallet} ${CURRENCY_NAME}</span>`;
       if (message) {
-        mbucksStoreStatus.textContent = `${base} | ${message}`;
+        mbucksStoreStatus.innerHTML = `${base} | ${localizeCurrencyText(message)}`;
       } else if (!cloudPlayerKey || !cloudSyncEnabled) {
-        mbucksStoreStatus.textContent = `${base} | Cloud-Login erforderlich für Admin-Coin Einlösung.`;
+        mbucksStoreStatus.innerHTML = `${base} | Cloud-Login erforderlich für Admin-Coin Einlösung.`;
       } else {
-        mbucksStoreStatus.textContent = `${base} | Bereit zur Einlösung mit Admin-Coin.`;
+        mbucksStoreStatus.innerHTML = `${base} | Bereit zur Einlösung mit Admin-Coin.`;
       }
     }
 
@@ -57566,7 +58401,7 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function applyCreatorTab(tab = "hub") {
-      const validTabs = new Set(["hub", "analytics", "donations", "customize"]);
+      const validTabs = new Set(["hub", "analytics", "donations", "customize", "contracts"]);
       const nextTab = validTabs.has(tab) ? tab : "hub";
       const tabButtons = creatorMenu ? creatorMenu.querySelectorAll(".creatorTabBtn[data-creator-tab]") : [];
       const panels = creatorMenu ? creatorMenu.querySelectorAll(".creatorTabPanel[data-creator-panel]") : [];
@@ -57578,6 +58413,9 @@ async function loadMaintenanceStateFromSupabase() {
         const panelTab = panel.getAttribute("data-creator-panel");
         panel.classList.toggle("hiddenByTab", panelTab !== nextTab);
       });
+      if (nextTab === "contracts") {
+        renderCreatorContracts();
+      }
     }
 
     function bindCreatorTabs() {
@@ -59321,10 +60159,11 @@ async function loadMaintenanceStateFromSupabase() {
     function renderLobbyModeSelection() {
       const ended = isBattlePassExpired();
       const soloCustomLocked = isSoloCustomLocked();
+      const lockedByGlobalEvent = isGlobalMatchmakingLocked();
       ensureSelectedLobbyModeAvailable();
       const selectedModeEnabled = isLobbyModeEnabled(selectedLobbyMode);
       const selectedModeBlockedByLock = soloCustomLocked && (selectedLobbyMode === "solo" || hasActiveCustomGamePreset());
-      const selectedModeAvailable = selectedModeEnabled && !ended && !selectedModeBlockedByLock;
+      const selectedModeAvailable = selectedModeEnabled && !ended && !selectedModeBlockedByLock && !lockedByGlobalEvent;
       const enabledModes = ["solo"].filter((mode) => isLobbyModeEnabled(mode));
       const modeLabel = getLobbyModeLabel(selectedLobbyMode);
       const recommendedMode = enabledModes.includes("solo") ? "solo" : (enabledModes[0] || "solo");
@@ -59349,11 +60188,13 @@ async function loadMaintenanceStateFromSupabase() {
           ? "Live Event aktiv"
           : ((ended)
           ? "Season vorbei"
+          : (lockedByGlobalEvent
+            ? "Event vorbei - Matchmaking gesperrt"
           : (selectedModeBlockedByLock
             ? "Singleplayer/Custom gesperrt"
           : (!anyModeEnabled
             ? "Modus gesperrt"
-            : (selectedModeAvailable ? "Lobby bereit" : `${modeLabel} eingeschraenkt`))));
+            : (selectedModeAvailable ? "Lobby bereit" : `${modeLabel} eingeschraenkt`)))));
         modeStatusChip.textContent = statusLabel;
         modeStatusChip.classList.toggle("isBlocked", !selectedModeAvailable || ended || !anyModeEnabled);
         modeStatusChip.classList.toggle("isLimited", !ended && anyModeEnabled && !selectedModeAvailable);
@@ -59479,19 +60320,19 @@ async function loadMaintenanceStateFromSupabase() {
         lobbyReadyBtn.disabled = !selectedModeAvailable;
         lobbyReadyBtn.textContent = selectedModeAvailable
           ? "Bereit"
-          : (ended ? "Season vorbei" : (selectedModeBlockedByLock ? "Singleplayer/Custom gesperrt" : "Modus gesperrt"));
+          : (ended ? "Season vorbei" : (lockedByGlobalEvent ? "Event vorbei" : (selectedModeBlockedByLock ? "Singleplayer/Custom gesperrt" : "Modus gesperrt")));
       }
       if (modePickerAcceptBtn) {
         modePickerAcceptBtn.textContent = hasActiveCustomGamePreset()
           ? `Custom Game ${customGameState.activeCode} starten`
           : "Diesen Modus spielen";
-        modePickerAcceptBtn.disabled = selectedModeBlockedByLock;
+        modePickerAcceptBtn.disabled = selectedModeBlockedByLock || lockedByGlobalEvent;
       }
       if (modePickerAcceptBtnFort) {
         modePickerAcceptBtnFort.textContent = hasActiveCustomGamePreset()
           ? `CUSTOM ${customGameState.activeCode} STARTEN`
           : "ANNEHMEN";
-        modePickerAcceptBtnFort.disabled = selectedModeBlockedByLock || !selectedModeEnabled;
+        modePickerAcceptBtnFort.disabled = selectedModeBlockedByLock || !selectedModeEnabled || lockedByGlobalEvent;
       }
     }
 
@@ -60560,6 +61401,7 @@ async function loadMaintenanceStateFromSupabase() {
       soloBossState.startedAt = 0;
       soloBossState.spawned = false;
       soloBossState.defeated = false;
+      resetGlobalEventBossState();
       soloDirectiveState.active = false;
       resetCommunityMeteorEvent();
       closeMenus();
@@ -60633,6 +61475,7 @@ async function loadMaintenanceStateFromSupabase() {
       resetRiftDecisionRun();
       slimes.length = 0;
       resetSoloBossState();
+      resetGlobalEventBossState();
       resetSoloDirectiveRun();
       updateDerivedStats();
       if (creativeStart) {
@@ -60706,6 +61549,11 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function showCountdownAndStart() {
+      if (isGlobalMatchmakingLocked()) {
+        showMessage(GLOBAL_EVENT_LOCK_MESSAGE, 3200);
+        updateLobbyUi();
+        return;
+      }
       if (isDowntimeAccessBlocked()) {
         showMessage("Server ist in Wartung. Start ist gesperrt.", 2600);
         if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
@@ -61122,6 +61970,29 @@ async function loadMaintenanceStateFromSupabase() {
         });
         card.addEventListener("mouseleave", () => {
           card.style.transform = "";
+        });
+      });
+    }
+
+    function applyMBucksCardMouseEffects() {
+      const cards = document.querySelectorAll(".mbucksStorePack, .mbucksCreditTierBtn");
+      cards.forEach((card) => {
+        if (!card || card.dataset.mouseFxBound === "1") return;
+        card.dataset.mouseFxBound = "1";
+        card.addEventListener("mousemove", (event) => {
+          const rect = card.getBoundingClientRect();
+          const px = (event.clientX - rect.left) / Math.max(1, rect.width);
+          const py = (event.clientY - rect.top) / Math.max(1, rect.height);
+          const rx = (0.5 - py) * 7;
+          const ry = (px - 0.5) * 8;
+          card.style.setProperty("--mx", `${(px * 100).toFixed(2)}%`);
+          card.style.setProperty("--my", `${(py * 100).toFixed(2)}%`);
+          card.style.transform = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-3px) scale(1.01)`;
+        });
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "";
+          card.style.removeProperty("--mx");
+          card.style.removeProperty("--my");
         });
       });
     }
@@ -64353,6 +65224,9 @@ async function loadMaintenanceStateFromSupabase() {
       const changed = await setPlayerBanState(target, false);
       if (changed) showMessage(`${target} wurde entbannt.`, 2000);
     });
+    if (adminCustomRewardCreateBtn) adminCustomRewardCreateBtn.addEventListener("click", async () => {
+      await createCustomRewardFromAdmin();
+    });
 
     adminGiveGoldBtn.addEventListener("click", () => {
       grantMBucks(10, "Admin-Bonus");
@@ -65771,6 +66645,12 @@ async function loadMaintenanceStateFromSupabase() {
       soloBossState.defeated = false;
     }
 
+    function resetGlobalEventBossState() {
+      globalEventBossState.spawned = false;
+      globalEventBossState.defeated = false;
+      globalEventBossState.announcedEnded = false;
+    }
+
     function getSoloBossCountdownMs() {
       if (!soloBossState.startedAt || soloBossState.spawned || soloBossState.defeated) return 0;
       return Math.max(0, SOLO_BOSS_COUNTDOWN_MS - (Date.now() - soloBossState.startedAt));
@@ -65792,6 +66672,30 @@ async function loadMaintenanceStateFromSupabase() {
       createSlime(targetTile * TILE, spawnY, "overlord_boss");
       soloBossState.spawned = true;
       showMessage("BOSS ERSCHIENEN: Rift Overlord!", 3200);
+    }
+
+    function spawnGlobalEventBossIfDue() {
+      if (!gameStarted || inLobby || currentMatchMode !== "normal") return;
+      if (!isGlobalEventLiveNow()) return;
+      if (globalEventBossState.spawned || globalEventBossState.defeated) return;
+      const targetTile = Math.max(4, Math.min(WORLD_WIDTH - 4, Math.floor(player.x / TILE) + 12));
+      const spawnY = findOpenGroundYForTile(targetTile);
+      createSlime(targetTile * TILE, spawnY, "overlord_boss");
+      globalEventBossState.spawned = true;
+      showMessage("EVENT ENTITY GESPawnt: Rift Titan!", 3400);
+    }
+
+    function enforceGlobalEventPostEndLock() {
+      if (!isGlobalEventOverNow()) return;
+      if (globalEventBossState.announcedEnded) return;
+      globalEventBossState.announcedEnded = true;
+      if (gameStarted && !inLobby) {
+        showMessage("Live Event vorbei - alle werden in die Lobby zurueckgesetzt.", 3400);
+        openLobby();
+      } else {
+        showMessage(GLOBAL_EVENT_LOCK_MESSAGE, 3200);
+      }
+      updateLobbyUi();
     }
 
     function createSlime(x, y, type = "normal") {
@@ -66570,6 +67474,8 @@ async function loadMaintenanceStateFromSupabase() {
         updateCubeWaterMode();
         updateDataMineMode();
         spawnSoloBossIfDue();
+        spawnGlobalEventBossIfDue();
+        enforceGlobalEventPostEndLock();
         if (currentMatchMode === "creative") {
           player.health = player.maxHealth;
           player.invincibleTimer = Math.max(player.invincibleTimer || 0, 8);
@@ -66662,6 +67568,7 @@ drawRiftGlitchOverlay(cam);
       loadAdminToolsState();
       loadCrewMembership();
       loadSeason2TeamState();
+      loadCreatorContractsState();
       
       loadGame();
       syncCommandPlusEntitlements();
