@@ -1083,6 +1083,347 @@
       margin-left: 4px;
     }
 
+    .dailyLoginCard {
+      width: min(1080px, calc(100vw - 30px));
+      max-height: calc(100vh - 30px);
+      overflow: auto;
+      padding: 28px;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 212, 112, 0.22), transparent 26%),
+        radial-gradient(circle at left center, rgba(110, 196, 255, 0.16), transparent 24%),
+        linear-gradient(165deg, rgba(18, 24, 40, 0.985), rgba(8, 12, 24, 0.995));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 34px 84px rgba(0,0,0,0.42);
+      color: #f6fbff;
+      display: grid;
+      gap: 18px;
+    }
+
+    .dailyLoginHero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 24px 26px;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 214, 120, 0.2), transparent 28%),
+        linear-gradient(135deg, rgba(61, 84, 128, 0.44), rgba(20, 28, 46, 0.96));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .dailyLoginEyebrow {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(205, 228, 255, 0.78);
+      margin-bottom: 10px;
+    }
+
+    .dailyLoginTitle {
+      font-size: clamp(34px, 5vw, 62px);
+      font-weight: 1000;
+      line-height: 0.92;
+      color: #fff9ef;
+      margin: 0;
+    }
+
+    .dailyLoginLead {
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(230, 239, 252, 0.88);
+      max-width: 60ch;
+    }
+
+    .dailyLoginHeroStatus {
+      display: grid;
+      gap: 10px;
+      min-width: 240px;
+    }
+
+    .dailyLoginPill,
+    .dailyLoginStat {
+      padding: 14px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+
+    .dailyLoginPill {
+      background: linear-gradient(135deg, rgba(255, 213, 116, 0.96), rgba(111, 194, 255, 0.9));
+      color: #112338;
+      font-weight: 1000;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 13px;
+    }
+
+    .dailyLoginStatLabel {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(219, 232, 251, 0.68);
+      margin-bottom: 8px;
+    }
+
+    .dailyLoginStatValue {
+      font-size: 25px;
+      font-weight: 1000;
+      color: #ffffff;
+    }
+
+    .dailyLoginSummaryGrid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .dailyLoginSummaryCard {
+      padding: 18px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)),
+        rgba(12, 18, 31, 0.9);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .dailyLoginSummaryValue {
+      margin-top: 8px;
+      font-size: 28px;
+      font-weight: 1000;
+      color: #fff8e8;
+      line-height: 1;
+    }
+
+    .dailyLoginSummaryHint {
+      margin-top: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(227, 237, 250, 0.82);
+    }
+
+    .dailyLoginBoard {
+      display: grid;
+      gap: 16px;
+    }
+
+    .dailyLoginBoardHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .dailyLoginBoardTitle {
+      font-size: 22px;
+      font-weight: 1000;
+      color: #fff6de;
+    }
+
+    .dailyLoginBoardMeta {
+      font-size: 13px;
+      color: rgba(224, 236, 251, 0.76);
+    }
+
+    .dailyLoginGrid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .dailyLoginRewardCard {
+      position: relative;
+      overflow: hidden;
+      min-height: 250px;
+      padding: 18px 16px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.09), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)),
+        rgba(11, 18, 30, 0.92);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: grid;
+      align-content: start;
+      gap: 10px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 18px 30px rgba(0,0,0,0.18);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .dailyLoginRewardCard.current {
+      border-color: rgba(255, 218, 120, 0.58);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 0 0 1px rgba(255, 218, 120, 0.12),
+        0 22px 38px rgba(0,0,0,0.24),
+        0 0 30px rgba(255, 198, 112, 0.12);
+      transform: translateY(-3px);
+    }
+
+    .dailyLoginRewardCard.claimed {
+      border-color: rgba(112, 255, 179, 0.34);
+      background:
+        radial-gradient(circle at top right, rgba(112,255,179,0.14), transparent 26%),
+        linear-gradient(180deg, rgba(18, 46, 38, 0.9), rgba(10, 22, 20, 0.96));
+    }
+
+    .dailyLoginRewardCard.future {
+      opacity: 0.88;
+    }
+
+    .dailyLoginRewardCard::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent 30%);
+    }
+
+    .dailyLoginRewardTop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .dailyLoginRewardDay {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(214, 228, 248, 0.72);
+    }
+
+    .dailyLoginRewardState {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      color: #eef6ff;
+    }
+
+    .dailyLoginRewardCard.current .dailyLoginRewardState {
+      background: rgba(255, 219, 128, 0.18);
+      border-color: rgba(255, 219, 128, 0.34);
+      color: #fff4d2;
+    }
+
+    .dailyLoginRewardCard.claimed .dailyLoginRewardState {
+      background: rgba(112,255,179,0.18);
+      border-color: rgba(112,255,179,0.34);
+      color: #dcffea;
+    }
+
+    .dailyLoginRewardIcon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      background: linear-gradient(135deg, rgba(255, 219, 128, 0.26), rgba(97, 193, 255, 0.18));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 14px 24px rgba(0,0,0,0.18);
+    }
+
+    .dailyLoginRewardTitle {
+      font-size: 20px;
+      font-weight: 1000;
+      color: #ffffff;
+      line-height: 1.08;
+    }
+
+    .dailyLoginRewardDesc {
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(225, 236, 249, 0.84);
+    }
+
+    .dailyLoginRewardMeta {
+      display: grid;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .dailyLoginRewardLine {
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      font-weight: 800;
+      color: rgba(244, 248, 255, 0.92);
+    }
+
+    .dailyLoginActions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .dailyLoginClaimBtn {
+      min-width: 220px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), transparent),
+        linear-gradient(135deg, rgba(255, 213, 112, 0.96), rgba(94, 190, 255, 0.96));
+      color: #102338;
+      border-color: rgba(255,255,255,0.26);
+      box-shadow: 0 16px 28px rgba(0,0,0,0.22);
+    }
+
+    .dailyLoginClaimBtn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    @media (max-width: 1100px) {
+      .dailyLoginHero,
+      .dailyLoginSummaryGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .dailyLoginGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .dailyLoginCard {
+        width: calc(100vw - 14px);
+        max-height: calc(100vh - 14px);
+        padding: 18px;
+        border-radius: 22px;
+      }
+
+      .dailyLoginGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .dailyLoginActions {
+        justify-content: stretch;
+      }
+
+      .dailyLoginActions .achievementCloseBtn,
+      .dailyLoginClaimBtn {
+        width: 100%;
+      }
+    }
+
     /* Shop Purchase Overhaul UI */
     .shopPurchaseOverhaul {
       background: radial-gradient(circle at top, rgba(99, 102, 241, 0.15), transparent), 
@@ -22087,36 +22428,6 @@
       margin: 14px 0 12px;
     }
 
-    .questBoosterGrid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 12px;
-      margin: 14px 0 12px;
-    }
-
-    .questBoosterCard {
-      padding: 14px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background:
-        radial-gradient(circle at top right, rgba(120,170,255,0.14), transparent 28%),
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
-      display: grid;
-      gap: 8px;
-    }
-
-    .questBoosterCardTitle {
-      font-size: 16px;
-      font-weight: 900;
-      color: #ffffff;
-    }
-
-    .questBoosterMeta {
-      font-size: 12px;
-      color: rgba(234, 242, 255, 0.82);
-      line-height: 1.45;
-    }
 
     .mbucksStorePack {
       padding: 16px;
@@ -37372,10 +37683,10 @@
             <button class="lobbyNavBtn" onclick="openMenu('shop')"><span class="lobbyNavIcon">🛒</span> Shop</button>
             <button class="lobbyNavBtn" onclick="openMenu('pass')"><span class="lobbyNavIcon">🎫</span> Battle Pass</button>
             <button class="lobbyNavBtn" onclick="openMenu('quest')"><span class="lobbyNavIcon">📜</span> Quests</button>
+            <button class="lobbyNavBtn" onclick="openMenu('dailyLogin')"><span class="lobbyNavIcon">🎁</span> Daily</button>
             <button class="lobbyNavBtn" onclick="openMenu('skill')"><span class="lobbyNavIcon">⚡</span> Skills</button>
             <button class="lobbyNavBtn" onclick="openMenu('roadmap')"><span class="lobbyNavIcon">🗺️</span> Roadmap</button>
             <button class="lobbyNavBtn" onclick="openMenu('mbucksStore')"><span class="lobbyNavIcon"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks"></span> M-BUCKS</button>
-            <button class="lobbyNavBtn" onclick="openMenu('questBooster')"><span class="lobbyNavIcon">🎟️</span> Quest Booster</button>
             <button class="lobbyNavBtn" onclick="openMenu('commandPlus')"><span class="lobbyNavIcon">🛡️</span> COMMAND+</button>
             <button class="lobbyNavBtn" onclick="openMenu('creator')"><span class="lobbyNavIcon">💎</span> Creator</button>
           </div>
@@ -37601,37 +37912,54 @@
     </div>
   </div>
 
-  <div id="questBoosterMenu" class="inventoryMenu hidden">
-    <div class="modeRulesCard mbucksStoreCard">
-      <div class="mbucksMenuHead">
-        <div class="mbucksMenuHeadIcon">🎟️</div>
-        <div class="modeRulesEyebrow">Quest Booster Tickets • BETA</div>
-      </div>
-      <div class="modeRulesTitle">ZEITLICH BEGRENZT</div>
-      <div class="mbucksStoreLead">
-        Booster wirken nur auf Quest-Rewards (Level-XP, Pass-XP, M-Bucks). Nach Ablauf endet der Boost automatisch.
-      </div>
-      <div id="questBoosterStatus" class="mbucksStoreNote">Lade Booster-Status ...</div>
-      <div class="questBoosterGrid">
-        <div class="questBoosterCard">
-          <div class="questBoosterCardTitle">Ticket S</div>
-          <div class="questBoosterMeta">+25% Quest-Rewards • 20 Minuten</div>
-          <button class="mbucksStoreBuyBtn" data-quest-booster-pack="small">Kaufen • <img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">350</button>
+  <div id="dailyLoginMenu" class="inventoryMenu hidden">
+    <div class="dailyLoginCard modeRulesCard">
+      <div class="dailyLoginHero">
+        <div>
+          <div class="dailyLoginEyebrow">Daily Login Rework</div>
+          <h2 class="dailyLoginTitle">TÄGLICHE REWARD-KARTEN</h2>
+          <div id="dailyLoginLead" class="dailyLoginLead">
+            Logge dich täglich ein und sichere dir steigende Rewards.
+          </div>
         </div>
-        <div class="questBoosterCard">
-          <div class="questBoosterCardTitle">Ticket M</div>
-          <div class="questBoosterMeta">+60% Quest-Rewards • 60 Minuten</div>
-          <button class="mbucksStoreBuyBtn" data-quest-booster-pack="medium">Kaufen • <img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">900</button>
-        </div>
-        <div class="questBoosterCard">
-          <div class="questBoosterCardTitle">Ticket XL</div>
-          <div class="questBoosterMeta">+100% Quest-Rewards • 180 Minuten</div>
-          <button class="mbucksStoreBuyBtn" data-quest-booster-pack="large">Kaufen • <img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">2200</button>
+        <div class="dailyLoginHeroStatus">
+          <div id="dailyLoginStatusPill" class="dailyLoginPill">Heute bereit</div>
+          <div class="dailyLoginStat">
+            <div class="dailyLoginStatLabel">Aktuelle Serie</div>
+            <div id="dailyLoginStreakValue" class="dailyLoginStatValue">0 Tage</div>
+          </div>
         </div>
       </div>
-      <div class="modeRulesActions mbucksCreditActions">
-        <button id="questBoosterRefreshBtn" class="achievementCloseBtn" type="button">Status prüfen</button>
-        <button id="closeQuestBoosterBtn" class="achievementCloseBtn" type="button">Schließen</button>
+
+      <div class="dailyLoginSummaryGrid">
+        <div class="dailyLoginSummaryCard">
+          <div class="dailyLoginStatLabel">Heute</div>
+          <div id="dailyLoginTodayValue" class="dailyLoginSummaryValue">Tag 1</div>
+          <div id="dailyLoginTodayHint" class="dailyLoginSummaryHint">Erster Login-Bonus wartet.</div>
+        </div>
+        <div class="dailyLoginSummaryCard">
+          <div class="dailyLoginStatLabel">Bestmarke</div>
+          <div id="dailyLoginBestValue" class="dailyLoginSummaryValue">0 Tage</div>
+          <div class="dailyLoginSummaryHint">Deine längste Login-Serie in dieser Version.</div>
+        </div>
+        <div class="dailyLoginSummaryCard">
+          <div class="dailyLoginStatLabel">Nächstes Highlight</div>
+          <div id="dailyLoginNextValue" class="dailyLoginSummaryValue">Tag 3</div>
+          <div id="dailyLoginNextHint" class="dailyLoginSummaryHint">Mehr M-Bucks und stärkerer XP-Drop.</div>
+        </div>
+      </div>
+
+      <div class="dailyLoginBoard">
+        <div class="dailyLoginBoardHeader">
+          <div class="dailyLoginBoardTitle">7-Tage Reward-Karten</div>
+          <div id="dailyLoginBoardMeta" class="dailyLoginBoardMeta">Jeder neue Login schiebt dich einen Tag weiter.</div>
+        </div>
+        <div id="dailyLoginGrid" class="dailyLoginGrid"></div>
+      </div>
+
+      <div class="dailyLoginActions">
+        <button id="dailyLoginLaterBtn" class="achievementCloseBtn" type="button">Später</button>
+        <button id="dailyLoginClaimBtn" class="achievementCloseBtn dailyLoginClaimBtn" type="button">Heute claimen</button>
       </div>
     </div>
   </div>
@@ -40694,6 +41022,7 @@
     const lobbyWarningBtn = document.getElementById("lobbyWarningBtn");
     const lobbyLoginRewardCard = document.getElementById("lobbyLoginRewardCard");
     const lobbyDailyPanel = document.getElementById("lobbyDailyPanel");
+    const dailyLoginMenu = document.getElementById("dailyLoginMenu");
     const lobbyFriendsPanel = document.getElementById("lobbyFriendsPanel");
     const lobbyRightTabs = document.getElementById("lobbyRightTabs");
     const lobbyRightTabButtons = Array.from(document.querySelectorAll("[data-lobby-right-tab]"));
@@ -40773,14 +41102,9 @@
     const modeRulesStartBtn = document.getElementById("modeRulesStartBtn");
     const mbucksCreditMenu = document.getElementById("mbucksCreditMenu");
     const mbucksStoreMenu = document.getElementById("mbucksStoreMenu");
-    const questBoosterMenu = document.getElementById("questBoosterMenu");
     const mbucksStoreStatus = document.getElementById("mbucksStoreStatus");
-    const questBoosterStatus = document.getElementById("questBoosterStatus");
     const mbucksStoreRefreshBtn = document.getElementById("mbucksStoreRefreshBtn");
     const closeMBucksStoreBtn = document.getElementById("closeMBucksStoreBtn");
-    const questBoosterRefreshBtn = document.getElementById("questBoosterRefreshBtn");
-    const closeQuestBoosterBtn = document.getElementById("closeQuestBoosterBtn");
-    const questBoosterBuyBtns = Array.from(document.querySelectorAll("[data-quest-booster-pack]"));
     const adminCurrencyWalletValue = document.getElementById("adminCurrencyWalletValue");
     const adminCurrencyRateValue = document.getElementById("adminCurrencyRateValue");
     const redeemAdminCurrency1Btn = document.getElementById("redeemAdminCurrency1Btn");
@@ -41179,6 +41503,18 @@
     const seasonFinaleVoteRefreshBtn = document.getElementById("seasonFinaleVoteRefreshBtn");
     const closeSeasonFinaleVoteBtn = document.getElementById("closeSeasonFinaleVoteBtn");
     const creatorMenu = document.getElementById("creatorMenu");
+    const dailyLoginGrid = document.getElementById("dailyLoginGrid");
+    const dailyLoginLead = document.getElementById("dailyLoginLead");
+    const dailyLoginStatusPill = document.getElementById("dailyLoginStatusPill");
+    const dailyLoginStreakValue = document.getElementById("dailyLoginStreakValue");
+    const dailyLoginTodayValue = document.getElementById("dailyLoginTodayValue");
+    const dailyLoginTodayHint = document.getElementById("dailyLoginTodayHint");
+    const dailyLoginBestValue = document.getElementById("dailyLoginBestValue");
+    const dailyLoginNextValue = document.getElementById("dailyLoginNextValue");
+    const dailyLoginNextHint = document.getElementById("dailyLoginNextHint");
+    const dailyLoginBoardMeta = document.getElementById("dailyLoginBoardMeta");
+    const dailyLoginClaimBtn = document.getElementById("dailyLoginClaimBtn");
+    const dailyLoginLaterBtn = document.getElementById("dailyLoginLaterBtn");
     const closeCreatorBtn = document.getElementById("closeCreatorBtn");
     const commandPlusMenu = document.getElementById("commandPlusMenu");
     const commandPlusMeta = document.getElementById("commandPlusMeta");
@@ -41267,7 +41603,6 @@
         "#closeEquipmentBtn",
         "#closeCraftBtn",
         "#closeMBucksStoreBtn",
-        "#closeQuestBoosterBtn",
         "#closeNpcBtn",
         "#closeTwitchBtn"
       ];
@@ -41290,6 +41625,7 @@
         "shopMenu",
         "passMenu",
         "questMenu",
+        "dailyLoginMenu",
         "skillMenu",
         "lockerMenu",
         "creatorMenu",
@@ -45110,7 +45446,7 @@ async function resetGlobalDiscount() {
     let moreMenuOpen = false;
     let mbucksCreditOpen = false;
     let mbucksStoreOpen = false;
-    let questBoosterOpen = false;
+    let dailyLoginOpen = false;
     let passOpen = false;
     let roadmapOpen = false;
     let blogOpen = false;
@@ -45132,18 +45468,6 @@ async function resetGlobalDiscount() {
       ultra: { mbucks: 13500, adminCost: 135, label: "Ultra" }
     };
     const ADMIN_CURRENCY_TO_MBUCKS_RATE = 100;
-    const QUEST_BOOSTER_BETA_END_AT = Date.parse("2026-06-15T23:59:59+02:00");
-    const QUEST_BOOSTER_PACKS = {
-      small: { label: "Ticket S", cost: 350, durationMs: 20 * 60 * 1000, multiplier: 1.25 },
-      medium: { label: "Ticket M", cost: 900, durationMs: 60 * 60 * 1000, multiplier: 1.6 },
-      large: { label: "Ticket XL", cost: 2200, durationMs: 180 * 60 * 1000, multiplier: 2.0 }
-    };
-    const QUEST_BOOSTER_STORAGE_KEY = "mini_minecraft_quest_booster_v1";
-    const questBoosterState = {
-      activeUntil: 0,
-      multiplier: 1
-    };
-    let questBoosterStateLoaded = false;
     let adminCurrencyBalance = 0;
     let riftNextGlitchAt = 0;
     let riftGlitchTimer = 0;
@@ -45202,11 +45526,26 @@ let shopWishlist = [];
     ];
     const creatorCodes = {};
     const creatorAccountProfiles = {};
+    const DAILY_LOGIN_REWARDS = [
+      { day: 1, title: "Warm-Up Drop", icon: "🎁", desc: "Ein solider Start für deinen ersten Tages-Login.", mBucks: 120, levelXp: 90, passXp: 55 },
+      { day: 2, title: "Turbo Cyan Unlock", icon: "🎨", desc: "Ein echter Locker-Reward direkt in Woche 1.", mBucks: 160, levelXp: 140, passXp: 80, cosmeticReward: { type: "countdowns", id: "go_turbo_cyan", label: "3-2-1 GO: Turbo Cyan" } },
+      { day: 3, title: "Streak Spark", icon: "🔥", desc: "Die Serie wird sichtbar besser belohnt.", mBucks: 240, levelXp: 180, passXp: 110 },
+      { day: 4, title: "Frostblick Drop", icon: "👁️", desc: "Ein seltener Augen-Skin für Daily-Spieler.", mBucks: 320, levelXp: 220, passXp: 135, cosmeticReward: { type: "eyes", id: "alienglow", label: "Frostblick" } },
+      { day: 5, title: "Hero Supply", icon: "🛡️", desc: "Ein stärkerer Zwischen-Meilenstein.", mBucks: 420, levelXp: 280, passXp: 170, skillPoints: 1 },
+      { day: 6, title: "Command Background", icon: "🖼️", desc: "Exklusiver Lobby-Hintergrund als echter Fortschrittsreward.", mBucks: 560, levelXp: 360, passXp: 220, cosmeticReward: { type: "lobbyBackgrounds", id: "zero_strike_command_bg", label: "Zero Strike Command" } },
+      { day: 7, title: "Mega Payday", icon: "👑", desc: "Wöchentlicher Hauptreward mit richtig viel Value und echtem Outfit.", mBucks: 900, levelXp: 520, passXp: 320, skillPoints: 2, cosmeticReward: { type: "outfits", id: "drift", label: "Neon Drift Outfit" } }
+    ];
     const creatorCodeState = {
       activeCode: "",
       streakCurrent: 0,
       streakBest: 0,
       streakLastCode: ""
+    };
+    const dailyLoginState = {
+      streak: 0,
+      best: 0,
+      lastClaimDateKey: "",
+      lastPopupDateKey: ""
     };
     const CREATOR_CONTRACTS_CLAIM_KEY = "mini_minecraft_creator_contracts_v2_claimed";
     const creatorContractsState = {
@@ -54829,6 +55168,7 @@ async function loadMaintenanceStateFromSupabase() {
         consumables,
         playerSkin,
         creatorCodeState,
+        dailyLoginState,
         customGameState,
         craftedState,
         progression,
@@ -54988,6 +55328,7 @@ async function loadMaintenanceStateFromSupabase() {
       inventory[7] = getSavedMBucksFromPayload(parsed);
       if (parsed.creatorCodeState) Object.assign(creatorCodeState, parsed.creatorCodeState);
       normalizeCreatorCodeState();
+      if (parsed.dailyLoginState) Object.assign(dailyLoginState, normalizeDailyLoginState(parsed.dailyLoginState));
       if (parsed.customGameState) {
         const normalizedPreset = normalizeCustomGamePresetRow({
           preset_code: parsed.customGameState.activeCode,
@@ -56388,12 +56729,275 @@ async function loadMaintenanceStateFromSupabase() {
       return { active: true, amount, principal: principal || amount, takenAt, dueAt, settledAt, lockedUntil };
     }
 
+    function normalizeDailyLoginState(payload = {}) {
+      return {
+        streak: Math.max(0, Math.floor(Number(payload?.streak || 0))),
+        best: Math.max(0, Math.floor(Number(payload?.best || 0))),
+        lastClaimDateKey: typeof payload?.lastClaimDateKey === "string" ? payload.lastClaimDateKey : "",
+        lastPopupDateKey: typeof payload?.lastPopupDateKey === "string" ? payload.lastPopupDateKey : ""
+      };
+    }
+
     function getDateKey() {
       const now = new Date();
       const y = now.getFullYear();
       const m = String(now.getMonth() + 1).padStart(2, "0");
       const d = String(now.getDate()).padStart(2, "0");
       return `${y}-${m}-${d}`;
+    }
+
+    function parseDateKeyToLocalDate(dateKey = "") {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(dateKey || ""));
+      if (!match) return null;
+      const year = Number(match[1]);
+      const monthIndex = Number(match[2]) - 1;
+      const day = Number(match[3]);
+      const value = new Date(year, monthIndex, day, 12, 0, 0, 0);
+      return Number.isNaN(value.getTime()) ? null : value;
+    }
+
+    function getDateDiffFromKeys(previousKey = "", nextKey = "") {
+      const start = parseDateKeyToLocalDate(previousKey);
+      const end = parseDateKeyToLocalDate(nextKey);
+      if (!start || !end) return null;
+      return Math.round((end.getTime() - start.getTime()) / 86400000);
+    }
+
+    function getDailyLoginRewardByDay(dayNumber = 1) {
+      const safeDay = Math.max(1, Math.floor(Number(dayNumber || 1)));
+      return DAILY_LOGIN_REWARDS[(safeDay - 1) % DAILY_LOGIN_REWARDS.length];
+    }
+
+    function getDailyLoginStatus() {
+      const todayKey = getDateKey();
+      const lastClaimKey = String(dailyLoginState.lastClaimDateKey || "");
+      const diff = getDateDiffFromKeys(lastClaimKey, todayKey);
+      const claimedToday = !!lastClaimKey && diff === 0;
+      const continuedYesterday = !!lastClaimKey && diff === 1;
+      const resetNeeded = !!lastClaimKey && diff !== null && diff > 1;
+      const nextDay = claimedToday
+        ? ((Math.max(0, dailyLoginState.streak) % DAILY_LOGIN_REWARDS.length) || DAILY_LOGIN_REWARDS.length)
+        : (continuedYesterday ? ((dailyLoginState.streak % DAILY_LOGIN_REWARDS.length) + 1) : 1);
+      return {
+        todayKey,
+        claimedToday,
+        continuedYesterday,
+        resetNeeded,
+        nextDay,
+        reward: getDailyLoginRewardByDay(nextDay),
+        currentStreak: Math.max(0, Number(dailyLoginState.streak || 0)),
+        bestStreak: Math.max(0, Number(dailyLoginState.best || 0))
+      };
+    }
+
+    function formatDailyLoginRewardLines(reward = {}) {
+      const lines = [];
+      if (reward.mBucks) lines.push(`+${Number(reward.mBucks).toLocaleString("de-DE")} M-Bucks`);
+      if (reward.levelXp) lines.push(`+${Number(reward.levelXp).toLocaleString("de-DE")} Level-XP`);
+      if (reward.passXp) lines.push(`+${Number(reward.passXp).toLocaleString("de-DE")} Pass-XP`);
+      if (reward.skillPoints) lines.push(`+${Number(reward.skillPoints).toLocaleString("de-DE")} Skillpunkte`);
+      if (reward.cosmeticReward?.label) lines.push(`+${reward.cosmeticReward.label}`);
+      return lines;
+    }
+
+    function grantDailyLoginCosmeticReward(reward = {}) {
+      const cosmetic = reward?.cosmeticReward;
+      if (!cosmetic || !cosmetic.type || !cosmetic.id) return "";
+      const type = String(cosmetic.type);
+      const id = String(cosmetic.id);
+      const label = String(cosmetic.label || id);
+
+      if (type === "countdowns") {
+        if (!playerSkin.ownedCountdownThemes.includes(id)) playerSkin.ownedCountdownThemes.push(id);
+        if (!playerSkin.activeCountdownTheme || playerSkin.activeCountdownTheme === "rift_blue") {
+          playerSkin.activeCountdownTheme = id;
+        }
+        return label;
+      }
+
+      if (type === "eyes") {
+        if (!playerSkin.ownedEyes.includes(id)) playerSkin.ownedEyes.push(id);
+        ensureSkinStored("eyes", id);
+        return label;
+      }
+
+      if (type === "outfits") {
+        if (!playerSkin.ownedOutfits.includes(id)) playerSkin.ownedOutfits.push(id);
+        return label;
+      }
+
+      if (type === "lobbyBackgrounds") {
+        if (!Array.isArray(playerSkin.ownedLobbyBackgrounds)) playerSkin.ownedLobbyBackgrounds = [];
+        if (!playerSkin.ownedLobbyBackgrounds.includes(id)) playerSkin.ownedLobbyBackgrounds.push(id);
+        if (!playerSkin.activeLobbyBackground || playerSkin.activeLobbyBackground === "season8_standard") {
+          playerSkin.activeLobbyBackground = id;
+          applyLobbyBackgroundVisual();
+        }
+        return label;
+      }
+
+      return "";
+    }
+
+    function getDailyLoginNextHighlight(dayNumber = 1) {
+      const safeDay = Math.max(1, Math.floor(Number(dayNumber || 1)));
+      if (safeDay <= 3) return DAILY_LOGIN_REWARDS[2];
+      if (safeDay <= 5) return DAILY_LOGIN_REWARDS[4];
+      return DAILY_LOGIN_REWARDS[6];
+    }
+
+    function renderDailyLoginMenu() {
+      if (!dailyLoginGrid) return;
+      const status = getDailyLoginStatus();
+      const nextHighlight = getDailyLoginNextHighlight(status.nextDay);
+      if (dailyLoginStatusPill) {
+        dailyLoginStatusPill.textContent = status.claimedToday
+          ? "Heute schon geclaimt"
+          : (status.resetNeeded ? "Serie neu gestartet" : "Heute bereit");
+      }
+      if (dailyLoginLead) {
+        dailyLoginLead.textContent = status.claimedToday
+          ? "Dein heutiger Reward ist gesichert. Schau dir direkt die nächsten Karten an."
+          : (status.resetNeeded
+            ? "Du hast einen Tag ausgelassen, deshalb startet die Daily-Serie wieder bei Tag 1."
+            : "Claim deinen heutigen Reward und schiebe deine Login-Serie einen Tag weiter.");
+      }
+      if (dailyLoginStreakValue) dailyLoginStreakValue.textContent = `${status.currentStreak.toLocaleString("de-DE")} Tage`;
+      if (dailyLoginTodayValue) dailyLoginTodayValue.textContent = `Tag ${status.nextDay}`;
+      if (dailyLoginTodayHint) dailyLoginTodayHint.textContent = status.reward?.title || "Heute wartet ein Reward.";
+      if (dailyLoginBestValue) dailyLoginBestValue.textContent = `${status.bestStreak.toLocaleString("de-DE")} Tage`;
+      if (dailyLoginNextValue) dailyLoginNextValue.textContent = `Tag ${nextHighlight.day}`;
+      if (dailyLoginNextHint) dailyLoginNextHint.textContent = nextHighlight.title;
+      if (dailyLoginBoardMeta) {
+        dailyLoginBoardMeta.textContent = status.claimedToday
+          ? `Nächster Claim ab morgen. Letzter Login: ${dailyLoginState.lastClaimDateKey || "--"}`
+          : `Heute wartest du auf ${status.reward?.title || "deinen Reward"} auf Tag ${status.nextDay}.`;
+      }
+
+      const cards = [];
+      for (let day = 1; day <= DAILY_LOGIN_REWARDS.length; day++) {
+        const reward = getDailyLoginRewardByDay(day);
+        let stateClass = "future";
+        let stateLabel = "Demnächst";
+        if (status.claimedToday) {
+          if (day < status.nextDay) {
+            stateClass = "claimed";
+            stateLabel = "Gesichert";
+          } else if (day === status.nextDay) {
+            stateClass = "current";
+            stateLabel = "Morgen";
+          }
+        } else {
+          if (day < status.nextDay) {
+            stateClass = "claimed";
+            stateLabel = "Serie";
+          } else if (day === status.nextDay) {
+            stateClass = "current";
+            stateLabel = "Heute";
+          }
+        }
+
+        const lines = formatDailyLoginRewardLines(reward)
+          .map((line) => `<div class="dailyLoginRewardLine">${line}</div>`)
+          .join("");
+
+        cards.push(`
+          <div class="dailyLoginRewardCard ${stateClass}">
+            <div class="dailyLoginRewardTop">
+              <div class="dailyLoginRewardDay">Tag ${day}</div>
+              <div class="dailyLoginRewardState">${stateLabel}</div>
+            </div>
+            <div class="dailyLoginRewardIcon">${reward.icon || "🎁"}</div>
+            <div class="dailyLoginRewardTitle">${reward.title || `Tag ${day}`}</div>
+            <div class="dailyLoginRewardDesc">${reward.desc || "Reward verfügbar."}</div>
+            <div class="dailyLoginRewardMeta">${lines}</div>
+          </div>
+        `);
+      }
+      dailyLoginGrid.innerHTML = cards.join("");
+
+      if (dailyLoginClaimBtn) {
+        dailyLoginClaimBtn.disabled = status.claimedToday;
+        dailyLoginClaimBtn.textContent = status.claimedToday
+          ? "Heute bereits geclaimt"
+          : `Tag ${status.nextDay} claimen`;
+      }
+    }
+
+    function claimDailyLoginReward() {
+      const status = getDailyLoginStatus();
+      if (status.claimedToday) {
+        showMessage("Den heutigen Login-Reward hast du schon geclaimt.", 2000);
+        return;
+      }
+      const reward = status.reward || {};
+      const previousStreak = Math.max(0, Number(dailyLoginState.streak || 0));
+      const nextStreak = status.continuedYesterday ? previousStreak + 1 : 1;
+
+      if (reward.mBucks) grantMBucks(Number(reward.mBucks || 0), "Daily Login", { showToast: false });
+      if (reward.levelXp) addXp(Number(reward.levelXp || 0));
+      if (reward.passXp) addBattlePassXp(Number(reward.passXp || 0), { showToast: false });
+      if (reward.skillPoints) progression.skillPoints = Math.max(0, Number(progression.skillPoints || 0)) + Number(reward.skillPoints || 0);
+      const cosmeticLabel = grantDailyLoginCosmeticReward(reward);
+
+      dailyLoginState.streak = nextStreak;
+      dailyLoginState.best = Math.max(Number(dailyLoginState.best || 0), nextStreak);
+      dailyLoginState.lastClaimDateKey = status.todayKey;
+      dailyLoginState.lastPopupDateKey = status.todayKey;
+
+      ensureOwnedSkinsStored();
+      syncLockerNewItemsFromOwnership();
+      renderLocker();
+      renderShop();
+      renderSkills();
+      renderBattlePass();
+      updateLobbyUi();
+      renderDailyLoginMenu();
+      updateUI();
+      saveGame();
+      if (cloudSyncEnabled && cloudPlayerKey && supabaseClient) {
+        if (cloudSyncTimer) {
+          clearTimeout(cloudSyncTimer);
+          cloudSyncTimer = null;
+        }
+        uploadCloudSave(createSavePayload()).catch((err) => {
+          console.warn("Daily Login Cloud-Sync fehlgeschlagen:", err);
+        });
+      }
+
+      const rewardSummaryParts = formatDailyLoginRewardLines(reward);
+      if (cosmeticLabel && !rewardSummaryParts.includes(`+${cosmeticLabel}`)) rewardSummaryParts.push(`+${cosmeticLabel}`);
+      const rewardSummary = rewardSummaryParts.join(" • ");
+      showMessage(`Daily Login Tag ${status.nextDay}: ${rewardSummary}`, 3000);
+    }
+
+    function toggleDailyLoginMenu(forceOpen = null) {
+      if (isDowntimeAccessBlocked()) {
+        showMessage("Server ist in Wartung. Daily Rewards sind gesperrt.", 2400);
+        if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+        return;
+      }
+      const nextOpen = typeof forceOpen === "boolean" ? forceOpen : !dailyLoginOpen;
+      if (nextOpen) {
+        closeMenus("dailyLogin");
+      }
+      dailyLoginOpen = nextOpen;
+      if (dailyLoginMenu) dailyLoginMenu.classList.toggle("hidden", !dailyLoginOpen);
+      if (dailyLoginOpen) {
+        renderDailyLoginMenu();
+        dailyLoginState.lastPopupDateKey = getDateKey();
+        queueDeferredSave();
+      }
+      setLobbyNavActive(dailyLoginOpen ? "dailyLogin" : "overview");
+      updateUI();
+      updateLobbyUi();
+    }
+
+    function maybeOpenDailyLoginReward() {
+      const status = getDailyLoginStatus();
+      if (status.claimedToday) return;
+      if (dailyLoginState.lastPopupDateKey === status.todayKey) return;
+      toggleDailyLoginMenu(true);
     }
 
     function normalizeMBucksEconomyState(payload = {}) {
@@ -57210,113 +57814,12 @@ async function loadMaintenanceStateFromSupabase() {
       return getQuestProgress(def) >= def.target;
     }
 
-    function isQuestBoosterBetaActive() {
-      return Date.now() <= QUEST_BOOSTER_BETA_END_AT;
-    }
-
-    function isQuestBoosterActiveNow() {
-      return isQuestBoosterBetaActive() && Number(questBoosterState.activeUntil || 0) > Date.now() && Number(questBoosterState.multiplier || 1) > 1;
-    }
-
-    function getQuestBoosterMultiplier() {
-      if (!questBoosterStateLoaded) loadQuestBoosterState();
-      return isQuestBoosterActiveNow() ? Number(questBoosterState.multiplier || 1) : 1;
-    }
-
-    function loadQuestBoosterState() {
-      try {
-        const raw = localStorage.getItem(QUEST_BOOSTER_STORAGE_KEY);
-        if (!raw) {
-          questBoosterStateLoaded = true;
-          return;
-        }
-        const parsed = JSON.parse(raw);
-        const until = Number(parsed?.activeUntil || 0);
-        const mult = Number(parsed?.multiplier || 1);
-        questBoosterState.activeUntil = Number.isFinite(until) ? until : 0;
-        questBoosterState.multiplier = Number.isFinite(mult) && mult >= 1 ? mult : 1;
-      } catch {}
-      questBoosterStateLoaded = true;
-    }
-
-    function saveQuestBoosterState() {
-      questBoosterStateLoaded = true;
-      try {
-        localStorage.setItem(QUEST_BOOSTER_STORAGE_KEY, JSON.stringify({
-          activeUntil: Number(questBoosterState.activeUntil || 0),
-          multiplier: Number(questBoosterState.multiplier || 1)
-        }));
-      } catch {}
-    }
-
-    function formatQuestBoosterRemaining(ms = 0) {
-      const sec = Math.max(0, Math.floor(ms / 1000));
-      const h = Math.floor(sec / 3600);
-      const m = Math.floor((sec % 3600) / 60);
-      const s = sec % 60;
-      if (h > 0) return `${h}h ${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
-      return `${m}m ${String(s).padStart(2, "0")}s`;
-    }
-
-    function renderQuestBoosterStatus(message = "") {
-      if (!questBoosterStatus) return;
-      if (!questBoosterStateLoaded) loadQuestBoosterState();
-      if (Number(questBoosterState.activeUntil || 0) > 0 && Number(questBoosterState.activeUntil || 0) <= Date.now()) {
-        questBoosterState.activeUntil = 0;
-        questBoosterState.multiplier = 1;
-        saveQuestBoosterState();
-      }
-      if (!isQuestBoosterBetaActive()) {
-        questBoosterStatus.textContent = "BETA beendet. Tickets sind aktuell deaktiviert.";
-        return;
-      }
-      const betaLeft = QUEST_BOOSTER_BETA_END_AT - Date.now();
-      if (isQuestBoosterActiveNow()) {
-        const left = Math.max(0, Number(questBoosterState.activeUntil || 0) - Date.now());
-        questBoosterStatus.textContent = message || `Aktiv: x${Number(questBoosterState.multiplier || 1).toFixed(2)} bis in ${formatQuestBoosterRemaining(left)} • BETA endet in ${formatQuestBoosterRemaining(betaLeft)}`;
-        return;
-      }
-      questBoosterStatus.textContent = message || `Kein Booster aktiv • BETA endet in ${formatQuestBoosterRemaining(betaLeft)}`;
-    }
-
-    function setQuestBoosterButtonsDisabled(disabled) {
-      questBoosterBuyBtns.forEach((btn) => { btn.disabled = !!disabled; });
-      if (questBoosterRefreshBtn) questBoosterRefreshBtn.disabled = !!disabled;
-    }
-
-    function buyQuestBoosterPack(packId) {
-      const pack = QUEST_BOOSTER_PACKS[packId];
-      if (!pack) return;
-      if (!isQuestBoosterBetaActive()) return showMessage("Quest Booster BETA ist beendet.", 2200);
-      const cost = Number(pack.cost || 0);
-      if (Number(inventory[7] || 0) < cost) {
-        showMessage("Nicht genug M-Bucks für dieses Ticket.", 2200);
-        return;
-      }
-      setQuestBoosterButtonsDisabled(true);
-      try {
-        inventory[7] = Number(inventory[7] || 0) - cost;
-        const now = Date.now();
-        const baseTime = Number(questBoosterState.activeUntil || 0) > now ? Number(questBoosterState.activeUntil || 0) : now;
-        questBoosterState.activeUntil = baseTime + Number(pack.durationMs || 0);
-        questBoosterState.multiplier = Number(pack.multiplier || 1);
-        saveQuestBoosterState();
-        renderInventory();
-        updateUI();
-        renderQuestBoosterStatus(`Aktiviert: ${pack.label} (x${pack.multiplier.toFixed(2)})`);
-        showMessage(`${pack.label} aktiviert. Quest-Rewards geboostet!`, 2200);
-      } finally {
-        setQuestBoosterButtonsDisabled(false);
-      }
-    }
-
     function normalizeQuestRewardPackage(reward = {}, cadence = "daily") {
       const base = reward && typeof reward === "object" ? reward : {};
       const weeklyBoost = cadence === "weekly" ? 1.2 : 1;
-      const questBooster = getQuestBoosterMultiplier();
-      const levelXp = Math.max(0, Math.round((Number(base.levelXp || 0) || 0) * weeklyBoost * questBooster));
-      const passXp = Math.max(0, Math.round((Number(base.passXp || 0) || 0) * weeklyBoost * questBooster));
-      const mBucks = Math.max(0, Math.round((Number(base.mBucks || 0) || 0) * weeklyBoost * questBooster));
+      const levelXp = Math.max(0, Math.round((Number(base.levelXp || 0) || 0) * weeklyBoost));
+      const passXp = Math.max(0, Math.round((Number(base.passXp || 0) || 0) * weeklyBoost));
+      const mBucks = Math.max(0, Math.round((Number(base.mBucks || 0) || 0) * weeklyBoost));
       const skillPoints = Math.max(0, Math.round(Number(base.skillPoints || 0) || 0));
       return { levelXp, passXp, mBucks, skillPoints };
     }
@@ -57901,6 +58404,10 @@ async function loadMaintenanceStateFromSupabase() {
         questOpen = false;
         if (questMenu) questMenu.classList.add("hidden");
       }
+      if (except !== "dailyLogin") {
+        dailyLoginOpen = false;
+        if (dailyLoginMenu) dailyLoginMenu.classList.add("hidden");
+      }
       if (except !== "showdown") {
         showdownOpen = false;
         if (showdownMenu) showdownMenu.classList.add("hidden");
@@ -57951,10 +58458,6 @@ async function loadMaintenanceStateFromSupabase() {
         mbucksStoreOpen = false;
         if (mbucksStoreMenu) mbucksStoreMenu.classList.add("hidden");
       }
-      if (except !== "questBooster") {
-        questBoosterOpen = false;
-        if (questBoosterMenu) questBoosterMenu.classList.add("hidden");
-      }
       if (except !== "lore") {
         loreOpen = false;
         if (loreMenu) loreMenu.classList.add("hidden");
@@ -58002,6 +58505,7 @@ async function loadMaintenanceStateFromSupabase() {
       else if (name === 'shop') toggleShopMenu(true);
       else if (name === 'pass') toggleBattlePass(true);
       else if (name === 'quest') toggleQuestMenu(true);
+      else if (name === 'dailyLogin') toggleDailyLoginMenu(true);
       else if (name === 'mbucksCredit') {
         closeMenus("mbucksCredit");
         mbucksCreditOpen = true;
@@ -58019,12 +58523,6 @@ async function loadMaintenanceStateFromSupabase() {
           fetchAdminCurrencyWallet().then(() => renderMBucksStoreStatus());
           applyMBucksCardMouseEffects();
         }
-      }
-      else if (name === 'questBooster') {
-        closeMenus("questBooster");
-        questBoosterOpen = true;
-        if (questBoosterMenu) questBoosterMenu.classList.toggle("hidden", !questBoosterOpen);
-        renderQuestBoosterStatus();
       }
       else if (name === 'showdown') {
         const msg = "Alle acten wurden erledigt viel spaß";
@@ -58110,7 +58608,6 @@ async function loadMaintenanceStateFromSupabase() {
         shopMenu,
         passMenu,
         mbucksStoreMenu,
-        questBoosterMenu,
         questMenu,
         skillMenu,
         commandPlusMenu,
@@ -58144,12 +58641,6 @@ async function loadMaintenanceStateFromSupabase() {
     function closeMBucksStoreMenu() {
       mbucksStoreOpen = false;
       if (mbucksStoreMenu) mbucksStoreMenu.classList.add("hidden");
-      updateUI();
-    }
-
-    function closeQuestBoosterMenu() {
-      questBoosterOpen = false;
-      if (questBoosterMenu) questBoosterMenu.classList.add("hidden");
       updateUI();
     }
 
@@ -61665,9 +62156,8 @@ async function loadMaintenanceStateFromSupabase() {
         lobbyYoutubeLayer.innerHTML = "";
       }
       const hideHud = inLobby || startScreenActive;
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || questBoosterOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || dailyLoginOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       if (mbucksCreditOpen) renderMBucksCreditMenu();
-      if (questBoosterOpen) renderQuestBoosterStatus();
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
       if (hudCombo) hudCombo.style.display = (hideHud || anyMenuOpen) ? "none" : "grid";
       if (xpHud) xpHud.style.display = (hideHud || anyMenuOpen) ? "none" : "grid";
@@ -61855,6 +62345,9 @@ async function loadMaintenanceStateFromSupabase() {
       startLobbyAmbientAudio();
       updateLobbyUi();
       updateUI();
+      setTimeout(() => {
+        try { maybeOpenDailyLoginReward(); } catch {}
+      }, 220);
     }
 
     function finalizeEnterGameWorld() {
@@ -64146,24 +64639,14 @@ async function loadMaintenanceStateFromSupabase() {
     if (closeMBucksStoreBtn) closeMBucksStoreBtn.addEventListener("click", () => {
       closeMBucksStoreMenu();
     });
-    if (closeQuestBoosterBtn) closeQuestBoosterBtn.addEventListener("click", () => {
-      closeQuestBoosterMenu();
-    });
     if (mbucksStoreRefreshBtn) mbucksStoreRefreshBtn.addEventListener("click", () => {
       fetchAdminCurrencyWallet().then(() => {
         renderMBucksStoreStatus("Status aktualisiert.");
         showMessage("M-Bucks Store aktualisiert.", 1600);
       });
     });
-    if (questBoosterRefreshBtn) questBoosterRefreshBtn.addEventListener("click", () => {
-      renderQuestBoosterStatus("Status aktualisiert.");
-      showMessage("Quest Booster Status aktualisiert.", 1600);
-    });
     mbucksStoreBuyBtns.forEach((btn) => {
       btn.addEventListener("click", () => startMBucksCheckout(btn.dataset.mbucksPack));
-    });
-    questBoosterBuyBtns.forEach((btn) => {
-      btn.addEventListener("click", () => buyQuestBoosterPack(btn.dataset.questBoosterPack));
     });
     if (redeemAdminCurrency1Btn) redeemAdminCurrency1Btn.addEventListener("click", () => redeemAdminCurrency(1));
     if (redeemAdminCurrency5Btn) redeemAdminCurrency5Btn.addEventListener("click", () => redeemAdminCurrency(5));
@@ -66861,7 +67344,7 @@ async function loadMaintenanceStateFromSupabase() {
 
     function updateUI() {
       const startScreenActive = !!startScreen && startScreen.style.display !== "none";
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || questBoosterOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || dailyLoginOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       const hideHud = inLobby || startScreenActive || anyMenuOpen;
 
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
@@ -68044,6 +68527,7 @@ drawRiftGlitchOverlay(cam);
       updateLoreUi();
       renderLeakMenu();
       renderMBucksCreditMenu();
+      renderDailyLoginMenu();
       updateLobbyUi();
       updateUI();
     } catch (error) {
@@ -68076,6 +68560,16 @@ drawRiftGlitchOverlay(cam);
         }
         renderMBucksCreditMenu();
         queueDeferredSave();
+      });
+    }
+    if (dailyLoginClaimBtn) {
+      dailyLoginClaimBtn.addEventListener("click", () => {
+        claimDailyLoginReward();
+      });
+    }
+    if (dailyLoginLaterBtn) {
+      dailyLoginLaterBtn.addEventListener("click", () => {
+        toggleDailyLoginMenu(false);
       });
     }
     window.addEventListener("beforeunload", () => {
