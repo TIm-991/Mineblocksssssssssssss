@@ -5562,6 +5562,19 @@
         width: 100%;
         justify-content: center;
       }
+
+      .lobbyBetaCardMetaRow {
+        grid-template-columns: 1fr;
+      }
+
+      .lobbyBetaCardLoadoutLine {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .lobbyBetaCardLoadoutLine strong {
+        text-align: left;
+      }
     }
 
     .inventoryMenu {
@@ -23110,6 +23123,90 @@
       gap: 10px;
     }
 
+    .mbucksStoreReverseWrap {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mbucksStoreReverseHead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .mbucksStoreReverseTitle {
+      font-size: 22px;
+      font-weight: 1000;
+      color: #fff8ef;
+    }
+
+    .mbucksStoreReverseLead {
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(234, 241, 252, 0.82);
+      max-width: 70ch;
+    }
+
+    .mbucksStoreReverseMeta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      color: #f4f8ff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mbucksStoreReverseMeta img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+    }
+
+    .mbucksStoreReverseGrid {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px);
+      justify-content: start;
+    }
+
+    .mbucksStoreReverseGrid .mbucksStorePack {
+      min-height: 520px;
+    }
+
+    .mbucksStoreReverseGrid .mbucksStorePack.packReverse {
+      background:
+        radial-gradient(circle at top right, rgba(255, 225, 131, 0.2), transparent 26%),
+        linear-gradient(180deg, rgba(34, 69, 148, 0.96), rgba(20, 34, 84, 0.98));
+    }
+
+    .mbucksStoreReverseGrid .mbucksStorePackTitle {
+      font-size: 24px;
+    }
+
+    .mbucksStoreReverseGrid .mbucksStorePackMeta {
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .mbucksReverseBuyBtn {
+      background: linear-gradient(135deg, #ffd56a, #ff9c3f);
+      color: #201404;
+      box-shadow: 0 12px 28px rgba(255, 179, 72, 0.34);
+    }
+
+    .mbucksReverseBuyBtn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
     .mbucksStoreQuickRedeem .achievementCloseBtn {
       min-width: 150px;
     }
@@ -34015,6 +34112,171 @@
       color: var(--text-dim);
     }
 
+    .lobbyBetaCard {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 18px;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(159, 202, 255, 0.22);
+      background:
+        radial-gradient(circle at top right, rgba(108, 172, 255, 0.18), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(165, 112, 255, 0.14), transparent 30%),
+        linear-gradient(180deg, rgba(16, 26, 44, 0.94), rgba(8, 14, 26, 0.96));
+      box-shadow:
+        0 18px 30px rgba(0,0,0,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .lobbyBetaCard::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 28%);
+    }
+
+    .lobbyBetaCardHead,
+    .lobbyBetaCardTop,
+    .lobbyBetaCardMetaRow,
+    .lobbyBetaCardLoadout {
+      position: relative;
+      z-index: 1;
+    }
+
+    .lobbyBetaCardHead {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .lobbyBetaCardEyebrow {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(183, 214, 255, 0.72);
+      margin-bottom: 6px;
+    }
+
+    .lobbyBetaCardTitle {
+      font-size: 26px;
+      font-weight: 1000;
+      line-height: 0.95;
+      color: #ffffff;
+    }
+
+    .lobbyBetaCardBadge {
+      flex-shrink: 0;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(117, 206, 255, 0.95), rgba(101, 126, 255, 0.95));
+      color: #091626;
+      font-size: 10px;
+      font-weight: 1000;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 20px rgba(74, 125, 255, 0.24);
+    }
+
+    .lobbyBetaCardTop {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .lobbyBetaCardAvatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(111, 190, 255, 0.28), rgba(148, 101, 255, 0.28));
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #f7fbff;
+      font-size: 22px;
+      font-weight: 1000;
+      box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+    }
+
+    .lobbyBetaCardName {
+      font-size: 18px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .lobbyBetaCardSub {
+      margin-top: 4px;
+      font-size: 12px;
+      color: rgba(225, 236, 251, 0.76);
+      line-height: 1.45;
+    }
+
+    .lobbyBetaCardMetaRow {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .lobbyBetaCardMeta {
+      padding: 10px 11px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .lobbyBetaCardMetaLabel {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(186, 210, 241, 0.64);
+      margin-bottom: 4px;
+    }
+
+    .lobbyBetaCardMetaValue {
+      font-size: 13px;
+      font-weight: 900;
+      color: #f7fbff;
+      line-height: 1.3;
+      word-break: break-word;
+    }
+
+    .lobbyBetaCardLoadout {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(5, 11, 20, 0.34);
+    }
+
+    .lobbyBetaCardLoadoutLine {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+      color: rgba(229, 239, 251, 0.84);
+    }
+
+    .lobbyBetaCardLoadoutLine strong {
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 900;
+      text-align: right;
+    }
+
     /* Lobby Footer - Hidden as requested */
     .lobbyFooter {
       display: none;
@@ -34950,7 +35212,7 @@
     #shopMenu .storeRebootSections .shopSection[data-store-section="items"]:nth-of-type(2) { order: 2; }
     #shopMenu .storeRebootSections .shopSection[data-store-section="items"]:nth-of-type(3) { order: 3; }
     #shopMenu .storeRebootSections .shopSection[data-store-section="bundles"] { order: 4; }
-    #shopMenu .storeRebootSections .shopSection[data-store-section="owned"] { order: 5; }
+    #shopMenu .storeRebootSections .shopSection[data-store-section="owned"] { order: 6; }
     @media (max-width: 1060px) {
       #shopMenu .storeUtilityBar {
         grid-template-columns: 1fr;
@@ -37302,7 +37564,7 @@
 
     #lobbyScreen.lobbyReborn .lobbyRightTabs {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 8px;
     }
 
@@ -38542,6 +38804,7 @@
             <button class="lobbyRightTab active" type="button" data-lobby-right-tab="stats">Stats</button>
             <button class="lobbyRightTab" type="button" data-lobby-right-tab="social">Social</button>
             <button class="lobbyRightTab" type="button" data-lobby-right-tab="matchmaking">Matchmaking</button>
+            <button class="lobbyRightTab" type="button" data-lobby-right-tab="card">Lobby Card</button>
           </div>
           <div class="lobbyRightPanelStack">
             <div class="lobbyRightPanel active" data-lobby-right-panel="stats">
@@ -38561,6 +38824,11 @@
                 <div id="lobbyModeCountdownPanel" class="lobbyModeCountdown hidden"></div>
                 <button id="lobbyWarningBtn" class="lobbyWarningBtn hidden" type="button"></button>
                 <button id="lobbyModePickerBtn" class="lobbyNavBtn lobbyModePickerCta">Modus wählen</button>
+              </div>
+            </div>
+            <div class="lobbyRightPanel" data-lobby-right-panel="card">
+              <div id="lobbyBetaPanel" class="lobbyModeCard lobbyModeCardVNext">
+                <!-- Dynamically filled by renderLobbyCardPanel -->
               </div>
             </div>
           </div>
@@ -38780,7 +39048,7 @@
           <div class="mbucksEconomyTile">
             <div class="mbucksEconomyLabel">Admin-Coin Wallet</div>
             <div id="adminCurrencyWalletValue" class="mbucksEconomyValue">0 AC</div>
-            <div class="mbucksEconomySub">Nur über Supabase Admin Vergabe</div>
+            <div class="mbucksEconomySub">Cloud-AC plus lokal gekaufte AC-Karten</div>
           </div>
           <div class="mbucksEconomyTile">
             <div class="mbucksEconomyLabel">Admin-Coin Kurs</div>
@@ -38794,6 +39062,36 @@
         <button id="redeemAdminCurrency1Btn" class="achievementCloseBtn" type="button">1 AC einlösen</button>
         <button id="redeemAdminCurrency5Btn" class="achievementCloseBtn" type="button">5 AC einlösen</button>
         <button id="redeemAdminCurrency10Btn" class="achievementCloseBtn" type="button">10 AC einlösen</button>
+      </div>
+
+      <div class="mbucksStoreReverseWrap">
+        <div class="mbucksStoreReverseHead">
+          <div>
+            <div class="mbucksStoreReverseTitle">ADMIN-COIN KAUFEN</div>
+            <div class="mbucksStoreReverseLead">Nutze deine vorhandenen M-Bucks, um dir direkt 1 AC Coin als Extra-Guthaben zu holen. Dieser Coin kann danach sofort wieder in diesem Menü eingelöst werden.</div>
+          </div>
+          <div class="mbucksStoreReverseMeta"><img src="assets/K8NlPp.png" alt="M-Bucks"> 1.000 M-Bucks = 1 AC Coin</div>
+        </div>
+        <div class="mbucksStoreReverseGrid">
+          <div class="mbucksStorePack packReverse">
+            <div class="mbucksStorePackBadge">
+              <span class="mbucksStorePackBadgeValue">1 AC</span>
+              <span class="mbucksStorePackBadgeLabel">Exchange</span>
+            </div>
+            <div class="mbucksStorePackTitle">Admin Coin Card</div>
+            <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">1.000 M-Bucks</div>
+            <div class="mbucksStorePackMeta">Direkter Reverse-Trade für dein AC-Guthaben. Perfekt, wenn du M-Bucks gezielt wieder in Admin-Coin zurücklegen willst.</div>
+            <div class="mbucksStoreCoinPile">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+            </div>
+            <div class="mbucksStorePackPrice">+1 AC Coin</div>
+            <button id="buyAdminCoinFromMBucksBtn" class="achievementCloseBtn mbucksReverseBuyBtn" type="button">Für 1.000 M-Bucks kaufen</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -41995,6 +42293,7 @@
     const lobbyDailyPanel = document.getElementById("lobbyDailyPanel");
     const dailyLoginMenu = document.getElementById("dailyLoginMenu");
     const lobbyFriendsPanel = document.getElementById("lobbyFriendsPanel");
+    const lobbyBetaPanel = document.getElementById("lobbyBetaPanel");
     const lobbyRightTabs = document.getElementById("lobbyRightTabs");
     const lobbyRightTabButtons = Array.from(document.querySelectorAll("[data-lobby-right-tab]"));
     const lobbyRightPanels = Array.from(document.querySelectorAll("[data-lobby-right-panel]"));
@@ -42092,6 +42391,7 @@
     const mbucksAutoEnabledToggle = document.getElementById("mbucksAutoEnabledToggle");
     const mbucksLedger = document.getElementById("mbucksLedger");
     const mbucksStoreBuyBtns = Array.from(document.querySelectorAll(".mbucksStoreBuyBtn"));
+    const buyAdminCoinFromMBucksBtn = document.getElementById("buyAdminCoinFromMBucksBtn");
     const floodModeInline = document.getElementById("floodModeInline");
     const floodModeInlineTitle = floodModeInline?.querySelector(".floodModeInlineTitle") || null;
     const floodModeHudTimer = document.getElementById("floodModeHudTimer");
@@ -46445,6 +46745,7 @@ async function resetGlobalDiscount() {
     };
     const ADMIN_CURRENCY_TO_MBUCKS_RATE = 100;
     let adminCurrencyBalance = 0;
+    let localAdminCurrencyBalance = 0;
     let riftNextGlitchAt = 0;
     let riftGlitchTimer = 0;
     const riftParticles = [];
@@ -50186,9 +50487,11 @@ let shopWishlist = [];
       autoLastGrantAt: 0,
       earnedToday: 0,
       earnedTodayDateKey: "",
-      ledger: []
+      ledger: [],
+      localAdminCoins: 0
     };
     mbucksEconomyState = normalizeMBucksEconomyState(mbucksEconomyState);
+    localAdminCurrencyBalance = Math.max(0, Math.floor(Number(mbucksEconomyState.localAdminCoins || 0)));
     creativeState.settings = normalizeCreativeMapSettings(creativeState.settings);
 
     const inventory = {
@@ -56413,6 +56716,7 @@ async function loadMaintenanceStateFromSupabase() {
       }
       mbucksCreditState = normalizeMBucksCreditState(parsed.mbucksCreditState);
       mbucksEconomyState = normalizeMBucksEconomyState(parsed.mbucksEconomyState);
+      localAdminCurrencyBalance = Math.max(0, Math.floor(Number(mbucksEconomyState.localAdminCoins || 0)));
       Object.assign(commandPlusState, normalizeCommandPlusState(parsed.commandPlusState));
       if (parsed.lastPlayedLobbyMode === "solo" || parsed.lastPlayedLobbyMode === "creative") {
         lastPlayedLobbyMode = parsed.lastPlayedLobbyMode;
@@ -58117,7 +58421,8 @@ async function loadMaintenanceStateFromSupabase() {
         autoLastGrantAt: Math.max(0, Math.floor(Number(payload?.autoLastGrantAt || 0))),
         earnedToday: sameDay ? Math.max(0, Math.floor(Number(payload?.earnedToday || 0))) : 0,
         earnedTodayDateKey: dateKey,
-        ledger
+        ledger,
+        localAdminCoins: Math.max(0, Math.floor(Number(payload?.localAdminCoins || 0)))
       };
     }
 
@@ -59658,7 +59963,7 @@ async function loadMaintenanceStateFromSupabase() {
 
     let lobbyRightTabTransitionTimer = null;
     function setLobbyRightTab(tab = "stats") {
-      const allowed = ["stats", "social", "matchmaking"];
+      const allowed = ["stats", "social", "matchmaking", "card"];
       const next = allowed.includes(tab) ? tab : "stats";
       const current = lobbyRightPanels.find((panel) => panel.classList.contains("active"));
       const currentName = current?.getAttribute("data-lobby-right-panel") || "";
@@ -59752,6 +60057,7 @@ async function loadMaintenanceStateFromSupabase() {
         btn.disabled = !!isBusy;
         btn.textContent = isBusy ? "Wird eingelöst..." : "Mit Admin-Coin einlösen";
       });
+      if (buyAdminCoinFromMBucksBtn) buyAdminCoinFromMBucksBtn.disabled = !!isBusy;
       if (mbucksStoreRefreshBtn) mbucksStoreRefreshBtn.disabled = !!isBusy;
       if (redeemAdminCurrency1Btn) redeemAdminCurrency1Btn.disabled = !!isBusy;
       if (redeemAdminCurrency5Btn) redeemAdminCurrency5Btn.disabled = !!isBusy;
@@ -59781,20 +60087,38 @@ async function loadMaintenanceStateFromSupabase() {
     async function redeemAdminCurrency(amount) {
       const redeemAmount = Math.max(0, Math.floor(Number(amount || 0)));
       if (redeemAmount <= 0) return;
-      if (!supabaseClient || !cloudSyncEnabled || !cloudPlayerKey) {
-        showMessage("Cloud-Login erforderlich.", 2200);
+      const totalAvailable = Math.max(0, Math.floor(Number(adminCurrencyBalance || 0))) + Math.max(0, Math.floor(Number(localAdminCurrencyBalance || 0)));
+      if (totalAvailable < redeemAmount) {
+        showMessage("Nicht genug Admin-Coin.", 2200);
         return;
       }
       setMBucksStoreBusy(true);
       try {
-        const { data, error } = await supabaseClient.rpc("redeem_admin_currency_for_mbucks", {
-          p_player_key: cloudPlayerKey,
-          p_admin_amount: redeemAmount
-        });
-        if (error) throw error;
-        const granted = Math.max(0, Math.floor(Number(data?.granted_mbucks || 0)));
-        const remaining = Math.max(0, Math.floor(Number(data?.remaining_admin_currency || 0)));
-        adminCurrencyBalance = remaining;
+        const localSpend = Math.min(Math.max(0, Math.floor(Number(localAdminCurrencyBalance || 0))), redeemAmount);
+        const remoteSpend = Math.max(0, redeemAmount - localSpend);
+        let granted = 0;
+
+        if (localSpend > 0) {
+          localAdminCurrencyBalance = Math.max(0, localAdminCurrencyBalance - localSpend);
+          mbucksEconomyState.localAdminCoins = localAdminCurrencyBalance;
+          granted += localSpend * ADMIN_CURRENCY_TO_MBUCKS_RATE;
+        }
+
+        if (remoteSpend > 0) {
+          if (!supabaseClient || !cloudSyncEnabled || !cloudPlayerKey) {
+            throw new Error("Cloud-Login erforderlich.");
+          }
+          const { data, error } = await supabaseClient.rpc("redeem_admin_currency_for_mbucks", {
+            p_player_key: cloudPlayerKey,
+            p_admin_amount: remoteSpend
+          });
+          if (error) throw error;
+          const remoteGranted = Math.max(0, Math.floor(Number(data?.granted_mbucks || 0)));
+          const remaining = Math.max(0, Math.floor(Number(data?.remaining_admin_currency || 0)));
+          adminCurrencyBalance = remaining;
+          granted += remoteGranted;
+        }
+
         if (granted > 0) {
           grantMBucks(granted, "Admin-Coin Redeem", { showToast: false });
         }
@@ -59815,8 +60139,9 @@ async function loadMaintenanceStateFromSupabase() {
     function renderMBucksStoreStatus(message = "") {
       if (!mbucksStoreStatus) return;
       const wallet = Math.max(0, Math.floor(Number(inventory[7] || 0))).toLocaleString("de-DE");
+      const totalAdminCoins = Math.max(0, Math.floor(Number(adminCurrencyBalance || 0))) + Math.max(0, Math.floor(Number(localAdminCurrencyBalance || 0)));
       if (adminCurrencyWalletValue) {
-        adminCurrencyWalletValue.textContent = `${Math.max(0, Math.floor(Number(adminCurrencyBalance || 0))).toLocaleString("de-DE")} AC`;
+        adminCurrencyWalletValue.textContent = `${totalAdminCoins.toLocaleString("de-DE")} AC`;
       }
       if (adminCurrencyRateValue) {
         adminCurrencyRateValue.innerHTML = `1 AC = ${formatCurrencyMarkup(ADMIN_CURRENCY_TO_MBUCKS_RATE)}`;
@@ -59825,10 +60150,27 @@ async function loadMaintenanceStateFromSupabase() {
       if (message) {
         mbucksStoreStatus.innerHTML = `${base} | ${localizeCurrencyText(message)}`;
       } else if (!cloudPlayerKey || !cloudSyncEnabled) {
-        mbucksStoreStatus.innerHTML = `${base} | Cloud-Login erforderlich für Admin-Coin Einlösung.`;
+        mbucksStoreStatus.innerHTML = `${base} | Lokale AC-Käufe funktionieren, Cloud wird nur für serverseitige AC-Einlösung benötigt.`;
       } else {
         mbucksStoreStatus.innerHTML = `${base} | Bereit zur Einlösung mit Admin-Coin.`;
       }
+    }
+
+    function buyAdminCoinFromMBucks(amount = 1) {
+      const coinAmount = Math.max(0, Math.floor(Number(amount || 0)));
+      if (coinAmount <= 0) return;
+      const mbucksCost = coinAmount * 1000;
+      if (!spendMBucks(mbucksCost, "Admin-Coin Kauf", { showToast: false })) {
+        showMessage("Nicht genug M-Bucks für den AC-Kauf.", 2200);
+        renderMBucksStoreStatus("Zu wenig M-Bucks für den AC-Kauf.");
+        return;
+      }
+      localAdminCurrencyBalance += coinAmount;
+      mbucksEconomyState.localAdminCoins = localAdminCurrencyBalance;
+      renderMBucksStoreStatus(`Gekauft: ${coinAmount} AC fuer ${mbucksCost.toLocaleString("de-DE")} M-Bucks`);
+      showMessage(`+${coinAmount} AC Coin gekauft`, 2200);
+      updateUI();
+      saveGame();
     }
 
     async function startMBucksCheckout(packId) {
@@ -60547,15 +60889,39 @@ async function loadMaintenanceStateFromSupabase() {
         commandPlusLabMeta.textContent = !owned
           ? "Nur fuer aktive COMMAND+ Mitglieder verfuegbar."
           : (testLabEnabled
-            ? "Test Lab ist aktiv. Beta-Features duerfen sich schneller aendern als normale Inhalte."
+            ? "Test Lab ist aktiv. Du kannst die Beta jederzeit wieder ausschalten."
             : "Aktiviere das Test Lab, um fruehe Menues, Reward-Konzepte und Premium-Prototypen vorab zu sehen.");
       }
       if (commandPlusLabToggleBtn) {
-        commandPlusLabToggleBtn.disabled = !owned || testLabEnabled;
+        commandPlusLabToggleBtn.disabled = !owned;
         commandPlusLabToggleBtn.textContent = !owned
           ? "🧪 Test Lab erst nach Kauf verfuegbar"
-          : (testLabEnabled ? "🧪 Test Lab aktiviert" : "🧪 Test Lab aktivieren");
+          : (testLabEnabled ? "🧪 Test Lab deaktivieren" : "🧪 Test Lab aktivieren");
       }
+    }
+
+    function toggleCommandPlusTestLab() {
+      if (!commandPlusState.owned) {
+        showMessage("COMMAND+ zuerst kaufen.", 1800);
+        renderCommandPlusMenu();
+        return;
+      }
+      if (commandPlusState.testLabEnabled) {
+        commandPlusState.testLabEnabled = false;
+        saveGame();
+        renderCommandPlusMenu();
+        if (inLobby) renderLobbyScreen();
+        showMessage("Command+ Test Lab deaktiviert.", 2200);
+        return;
+      }
+      commandPlusState.testLabEnabled = true;
+      if (!commandPlusState.testLabJoinedAt) {
+        commandPlusState.testLabJoinedAt = Date.now();
+      }
+      saveGame();
+      renderCommandPlusMenu();
+      if (inLobby) renderLobbyScreen();
+      showMessage("Command+ Test Lab aktiviert! Du bist jetzt im Beta-Kreis.", 2600);
     }
 
     function enableCommandPlusTestLab() {
@@ -60564,16 +60930,11 @@ async function loadMaintenanceStateFromSupabase() {
         renderCommandPlusMenu();
         return;
       }
-      if (commandPlusState.testLabEnabled) {
-        showMessage("Test Lab ist bereits aktiv.", 1800);
-        renderCommandPlusMenu();
+      if (!commandPlusState.testLabEnabled) {
+        toggleCommandPlusTestLab();
         return;
       }
-      commandPlusState.testLabEnabled = true;
-      commandPlusState.testLabJoinedAt = Date.now();
-      saveGame();
-      renderCommandPlusMenu();
-      showMessage("Command+ Test Lab aktiviert! Du bist jetzt im Beta-Kreis.", 2600);
+      showMessage("Test Lab ist bereits aktiv.", 1800);
     }
 
     function openCommandPlusConfirmPopup() {
@@ -63163,6 +63524,57 @@ async function loadMaintenanceStateFromSupabase() {
       }
     }
 
+    function renderLobbyCardPanel() {
+      if (!lobbyBetaPanel) return;
+      const preview = getLockerPreviewData();
+      const activeBackgroundName = getActiveLobbyBackground()?.name || "Season 4 Standard";
+      const activeMiningEffectName = getMiningEffectData(playerSkin.activeMiningEffect)?.name || "Classic Chip";
+      const cardDisplayName = (cloudAccountName || playerName || "Spieler").trim() || "Spieler";
+      const cardAccountState = cloudSyncEnabled && cloudPlayerKey ? "Cloud verbunden" : "Lokaler Spielstand";
+      const walletValue = Math.max(0, Math.floor(Number(inventory[7] || 0))).toLocaleString("de-DE");
+      const currentTier = getBattlePassCurrentTier();
+      const totalTiers = battlePassRewards.length;
+
+      lobbyBetaPanel.innerHTML = `
+        <div class="modernMeta lobbyModeMeta">Lobby Card</div>
+        <div class="lobbyBetaCard">
+          <div class="lobbyBetaCardHead">
+            <div>
+              <div class="lobbyBetaCardEyebrow">Spielerprofil</div>
+              <div class="lobbyBetaCardTitle">Lobby Card</div>
+            </div>
+            <div class="lobbyBetaCardBadge">Live</div>
+          </div>
+          <div class="lobbyBetaCardTop">
+            <div class="lobbyBetaCardAvatar">${cardDisplayName.charAt(0).toUpperCase()}</div>
+            <div>
+              <div class="lobbyBetaCardName">${cardDisplayName}</div>
+              <div class="lobbyBetaCardSub">${cardAccountState} • Dein aktuelles Profil, Loadout und Fortschritt auf einen Blick</div>
+            </div>
+          </div>
+          <div class="lobbyBetaCardMetaRow">
+            <div class="lobbyBetaCardMeta">
+              <div class="lobbyBetaCardMetaLabel">Level</div>
+              <div class="lobbyBetaCardMetaValue">${progression.level}</div>
+            </div>
+            <div class="lobbyBetaCardMeta">
+              <div class="lobbyBetaCardMetaLabel">Wallet</div>
+              <div class="lobbyBetaCardMetaValue">${walletValue} M-Bucks</div>
+            </div>
+            <div class="lobbyBetaCardMeta">
+              <div class="lobbyBetaCardMetaLabel">Pass</div>
+              <div class="lobbyBetaCardMetaValue">${Math.min(currentTier, totalTiers)} / ${totalTiers}</div>
+            </div>
+          </div>
+          <div class="lobbyBetaCardLoadout">
+            <div class="lobbyBetaCardLoadoutLine"><span>Aktiver Build</span><strong>${preview.bodyName} / ${preview.eyeName}</strong></div>
+            <div class="lobbyBetaCardLoadoutLine"><span>Lobby-Hintergrund</span><strong>${activeBackgroundName}</strong></div>
+            <div class="lobbyBetaCardLoadoutLine"><span>Abbau-Effekt</span><strong>${activeMiningEffectName}</strong></div>
+          </div>
+        </div>
+      `;
+    }
+
     function renderLobbyScreen() {
       if (!lobbyAvatarStage) return;
       const lobbyCenterPanel = document.querySelector("#lobbyScreen .lobbyCenterVNext");
@@ -63301,6 +63713,7 @@ async function loadMaintenanceStateFromSupabase() {
       }
 
       renderLobbyMiniEvent();
+      renderLobbyCardPanel();
       renderLobbyFriendsPanel();
       renderLobbyModeSelection();
 
@@ -64848,6 +65261,9 @@ async function loadMaintenanceStateFromSupabase() {
         const hidden = newShopActiveView !== "all" && sectionView !== newShopActiveView;
         section.classList.toggle("storeSectionHidden", hidden);
       });
+      if (storeRebootScrollSurface) {
+        storeRebootScrollSurface.scrollTo({ top: 0, behavior: "smooth" });
+      }
     }
 
     function getStorePreviewFallback() {
@@ -65951,6 +66367,9 @@ async function loadMaintenanceStateFromSupabase() {
     mbucksStoreBuyBtns.forEach((btn) => {
       btn.addEventListener("click", () => startMBucksCheckout(btn.dataset.mbucksPack));
     });
+    if (buyAdminCoinFromMBucksBtn) {
+      buyAdminCoinFromMBucksBtn.addEventListener("click", () => buyAdminCoinFromMBucks(1));
+    }
     if (redeemAdminCurrency1Btn) redeemAdminCurrency1Btn.addEventListener("click", () => redeemAdminCurrency(1));
     if (redeemAdminCurrency5Btn) redeemAdminCurrency5Btn.addEventListener("click", () => redeemAdminCurrency(5));
     if (redeemAdminCurrency10Btn) redeemAdminCurrency10Btn.addEventListener("click", () => redeemAdminCurrency(10));
@@ -65965,7 +66384,7 @@ async function loadMaintenanceStateFromSupabase() {
       claimCommandPlusVault();
     });
     if (commandPlusLabToggleBtn) commandPlusLabToggleBtn.addEventListener("click", () => {
-      enableCommandPlusTestLab();
+      toggleCommandPlusTestLab();
     });
     if (commandPlusConfirmBuyBtn) commandPlusConfirmBuyBtn.addEventListener("click", () => {
       buyCommandPlus();
