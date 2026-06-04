@@ -41700,9 +41700,9 @@
               <div class="commandPlusTitle">RIFT COMMAND+</div>
             </div>
           </div>
-          <div class="commandPlusRecurringBadge">Recurring Membership • 5.000 M-Bucks</div>
+          <div class="commandPlusRecurringBadge">Recurring Membership • 3 Pakete</div>
           <div class="commandPlusLead">Das ist euer All-in Membership Track im Crew-Stil: Premium Pass direkt frei, exklusive COMMAND+ Freischaltungen, ein woechentlicher Tresor und Account-Sync ueber euren bestehenden Save-Flow.</div>
-          <div id="commandPlusMeta" class="commandPlusMetaBox">Hol dir COMMAND+ fuer 5.000 M-Bucks und sichere dir exklusive Vorteile.</div>
+          <div id="commandPlusMeta" class="commandPlusMetaBox">Waehle dein COMMAND+ Paket und sichere dir Weekly M-Bucks, Battle-Pass-Premium und je nach Stufe XP oder Beta-Zugang.</div>
           <div class="commandPlusIncludeRow">
             <div class="commandPlusIncludeChip"><strong>Pass</strong> sofort aktiv</div>
             <div class="commandPlusIncludeChip"><strong>Vault</strong> jede Woche</div>
@@ -41753,8 +41753,8 @@
         </div>
       </div>
       <div class="modeRulesActions commandPlusActions">
-        <button id="commandPlusBuyBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnBuy">💳 COMMAND+ kaufen (5.000 M-Bucks)</button>
-        <button id="commandPlusVaultBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnVault">🏦 Woechentlichen Tresor holen (+450)</button>
+        <button id="commandPlusBuyBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnBuy">💳 Paket unten waehlen</button>
+        <button id="commandPlusVaultBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnVault">🏦 Tresor erst nach Kauf verfuegbar</button>
         <button id="closeCommandPlusBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnClose">✖ Schliessen</button>
       </div>
       <div class="commandPlusLabPanel">
@@ -41796,7 +41796,7 @@
     <div class="modeRulesCard commandPlusConfirmCard">
       <div class="modeRulesEyebrow">🧾 Kaufbestaetigung</div>
       <div class="modeRulesTitle">COMMAND+ freischalten?</div>
-      <div id="commandPlusConfirmMeta" class="modeRulesLead">Du kaufst COMMAND+ fuer 5.000 M-Bucks. Dieser Kauf wird sofort ausgefuehrt.</div>
+      <div id="commandPlusConfirmMeta" class="modeRulesLead">Du kaufst ein COMMAND+ Paket. Dieser Kauf wird sofort ausgefuehrt.</div>
       <div class="modeRulesActions">
         <button id="commandPlusConfirmBuyBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnBuy">✅ Ja, jetzt kaufen</button>
         <button id="commandPlusConfirmCancelBtn" class="achievementCloseBtn commandPlusBtn commandPlusBtnClose">↩ Abbrechen</button>
@@ -46764,17 +46764,54 @@ async function resetGlobalDiscount() {
     };
     let season2FactionChoice = "";
     let activeNpc = null;
-    const COMMAND_PLUS_PRICE = 5000;
-    const COMMAND_PLUS_WEEKLY_VAULT = 450;
+    const COMMAND_PLUS_PACKAGES = {
+      core: {
+        id: "core",
+        name: "Core",
+        price: 1000,
+        weeklyVault: 450,
+        levelXp: 0,
+        premium: true,
+        betaAccess: false,
+        includedReward: "Premium Pass",
+        accent: "rgba(111, 190, 255, 0.22)"
+      },
+      plus: {
+        id: "plus",
+        name: "Plus",
+        price: 2350,
+        weeklyVault: 800,
+        levelXp: 750,
+        premium: true,
+        betaAccess: false,
+        includedReward: "Premium + 750 XP",
+        accent: "rgba(170, 120, 255, 0.22)"
+      },
+      ultimate: {
+        id: "ultimate",
+        name: "Ultimate",
+        price: 5000,
+        weeklyVault: 1000,
+        levelXp: 1200,
+        premium: true,
+        betaAccess: true,
+        includedReward: "Premium + 1.200 XP + Beta",
+        accent: "rgba(255, 198, 112, 0.24)"
+      }
+    };
+    const COMMAND_PLUS_PRICE = COMMAND_PLUS_PACKAGES.ultimate.price;
+    const COMMAND_PLUS_WEEKLY_VAULT = COMMAND_PLUS_PACKAGES.core.weeklyVault;
     const COMMAND_PLUS_VAULT_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
     const commandPlusState = {
       owned: false,
+      packageId: "",
       purchasedAt: 0,
       lastVaultClaimAt: 0,
       testLabEnabled: false,
       testLabJoinedAt: 0
     };
     let startNewsConfirmed = false;
+    let pendingCommandPlusPackageId = "ultimate";
     let shopSpotlightSelection = { type: "pass", id: "premium" };
 let shopPreviewSelection = { type: "bundle", id: "starter_packet" };
 let shopFilter = "all";
@@ -50779,6 +50816,7 @@ let shopWishlist = [];
           questLastDailyKey: String(questState.lastDailyKey || ""),
           questLastWeeklyKey: String(questState.lastWeeklyKey || ""),
           commandPlusOwned: !!commandPlusState.owned,
+          commandPlusPackageId: String(commandPlusState.packageId || ""),
           commandPlusPurchasedAt: Number(commandPlusState.purchasedAt || 0),
           commandPlusLastVaultClaimAt: Number(commandPlusState.lastVaultClaimAt || 0),
           commandPlusTestLabEnabled: !!commandPlusState.testLabEnabled,
@@ -50835,6 +50873,11 @@ let shopWishlist = [];
           }
         }
         if (snapshot.claims.commandPlusOwned) commandPlusState.owned = true;
+        if (snapshot.claims.commandPlusPackageId && COMMAND_PLUS_PACKAGES[String(snapshot.claims.commandPlusPackageId)]) {
+          commandPlusState.packageId = String(snapshot.claims.commandPlusPackageId);
+        } else if (snapshot.claims.commandPlusOwned && !commandPlusState.packageId) {
+          commandPlusState.packageId = "ultimate";
+        }
         commandPlusState.purchasedAt = Math.max(Number(commandPlusState.purchasedAt || 0), Number(snapshot.claims.commandPlusPurchasedAt || 0));
         commandPlusState.lastVaultClaimAt = Math.max(Number(commandPlusState.lastVaultClaimAt || 0), Number(snapshot.claims.commandPlusLastVaultClaimAt || 0));
         commandPlusState.testLabEnabled = commandPlusState.testLabEnabled || snapshot.claims.commandPlusTestLabEnabled === true;
@@ -58045,8 +58088,13 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function normalizeCommandPlusState(payload = {}) {
+      const rawPackageId = String(payload?.packageId || "").trim().toLowerCase();
+      const packageId = COMMAND_PLUS_PACKAGES[rawPackageId]
+        ? rawPackageId
+        : (payload?.owned === true ? "ultimate" : "");
       return {
         owned: payload?.owned === true,
+        packageId,
         purchasedAt: Math.max(0, Math.floor(Number(payload?.purchasedAt || 0))),
         lastVaultClaimAt: Math.max(0, Math.floor(Number(payload?.lastVaultClaimAt || 0))),
         testLabEnabled: payload?.testLabEnabled === true,
@@ -60801,9 +60849,24 @@ async function loadMaintenanceStateFromSupabase() {
       return Math.max(0, nextAt - Date.now());
     }
 
+    function getCommandPlusPackage(packageId = "") {
+      const normalized = String(packageId || "").trim().toLowerCase();
+      if (COMMAND_PLUS_PACKAGES[normalized]) return COMMAND_PLUS_PACKAGES[normalized];
+      return COMMAND_PLUS_PACKAGES.ultimate;
+    }
+
+    function getActiveCommandPlusPackage() {
+      if (!commandPlusState.owned) return null;
+      return getCommandPlusPackage(commandPlusState.packageId || "ultimate");
+    }
+
     function syncCommandPlusEntitlements() {
       if (!commandPlusState.owned) return;
-      battlePassState.premiumUnlocked = true;
+      const activePackage = getActiveCommandPlusPackage();
+      if (activePackage?.premium) battlePassState.premiumUnlocked = true;
+      if (!activePackage?.betaAccess && commandPlusState.testLabEnabled) {
+        commandPlusState.testLabEnabled = false;
+      }
       if (!playerSkin.ownedLobbyBackgrounds.includes("zero_strike_command_bg")) {
         playerSkin.ownedLobbyBackgrounds.push("zero_strike_command_bg");
       }
@@ -60813,16 +60876,20 @@ async function loadMaintenanceStateFromSupabase() {
       if (!commandPlusBenefits) return;
       syncCommandPlusEntitlements();
       const owned = !!commandPlusState.owned;
+      const activePackage = owned ? getActiveCommandPlusPackage() : null;
+      const packagePrice = Number(activePackage?.price || COMMAND_PLUS_PRICE);
+      const weeklyVaultReward = Number(activePackage?.weeklyVault || COMMAND_PLUS_WEEKLY_VAULT);
       const testLabEnabled = owned && commandPlusState.testLabEnabled === true;
+      const betaAccessIncluded = owned && !!activePackage?.betaAccess;
       const remainingMs = getCommandPlusVaultRemainingMs();
       const canClaimVault = owned && remainingMs <= 0;
       const h = Math.floor(remainingMs / 3600000);
       const m = Math.floor((remainingMs % 3600000) / 60000);
       commandPlusMeta.textContent = owned
-        ? `Aktiv seit ${commandPlusState.purchasedAt ? new Date(commandPlusState.purchasedAt).toLocaleDateString("de-DE") : "heute"} • Premium Pass dauerhaft freigeschaltet • COMMAND+ Status live synchronisiert`
-        : "Hol dir COMMAND+ fuer 5.000 M-Bucks und sichere dir exklusive Vorteile.";
+        ? `${activePackage?.name || "Command+"} seit ${commandPlusState.purchasedAt ? new Date(commandPlusState.purchasedAt).toLocaleDateString("de-DE") : "heute"} • Premium Pass aktiv • ${weeklyVaultReward.toLocaleString("de-DE")} M-Bucks alle 7 Tage`
+        : "Waehle eines von drei COMMAND+ Paketen und sichere dir Premium, Weekly Vault und je nach Stufe XP oder Beta-Zugang.";
       if (commandPlusStatusValue) {
-        commandPlusStatusValue.textContent = owned ? "Aktiv" : "Nicht aktiv";
+        commandPlusStatusValue.textContent = owned ? `${activePackage?.name || "Aktiv"}` : "Nicht aktiv";
       }
       if (commandPlusVaultStatusValue) {
         commandPlusVaultStatusValue.textContent = owned
@@ -60830,6 +60897,24 @@ async function loadMaintenanceStateFromSupabase() {
           : "7d bereit nach Kauf";
       }
       commandPlusBenefits.innerHTML = `
+        <div class="commandPlusBenefitCard" style="grid-column:1 / -1; background:linear-gradient(180deg, rgba(14, 24, 40, 0.96), rgba(8, 13, 24, 0.98));">
+          <span class="emoji">🧾</span>
+          <div class="tag">Packages</div>
+          <div class="title">Waehle dein COMMAND+ Paket</div>
+          <div class="text">Jede Stufe schaltet den Premium Pass frei. Hoehere Stufen geben dir mehr Weekly M-Bucks, mehr XP und im Ultimate-Paket Zugang zu neuen Beta-Inhalten.</div>
+          <div class="commandPlusPackageGrid" style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; margin-top:14px;">
+            ${Object.values(COMMAND_PLUS_PACKAGES).map((pkg) => `
+              <div class="commandPlusBenefitCard" style="margin:0; background:radial-gradient(circle at top right, ${pkg.accent}, transparent 34%), linear-gradient(180deg, rgba(17, 26, 42, 0.94), rgba(9, 14, 24, 0.98)); border-color:${owned && commandPlusState.packageId === pkg.id ? "rgba(255, 212, 132, 0.62)" : "rgba(148, 181, 238, 0.1)"};">
+                <span class="emoji">${pkg.id === "core" ? "🎫" : pkg.id === "plus" ? "⚡" : "👑"}</span>
+                <div class="tag">${pkg.name}</div>
+                <div class="title">${pkg.price.toLocaleString("de-DE")} M-Bucks</div>
+                <div class="text">+${pkg.weeklyVault.toLocaleString("de-DE")} M-Bucks alle 7 Tage • Premium Battle Pass${pkg.levelXp > 0 ? ` • ${pkg.levelXp.toLocaleString("de-DE")} XP` : ""}${pkg.betaAccess ? " • Beta Zugang" : ""}</div>
+                <div class="accent">${owned && commandPlusState.packageId === pkg.id ? "Aktives Paket" : pkg.includedReward}</div>
+                <button class="achievementCloseBtn commandPlusBtn commandPlusBtnBuy" type="button" data-command-plus-package="${pkg.id}" ${owned ? "disabled" : ""}>${owned ? (commandPlusState.packageId === pkg.id ? "Aktiv" : "Nicht verfuegbar") : `${pkg.name} kaufen`}</button>
+              </div>
+            `).join("")}
+          </div>
+        </div>
         <div class="commandPlusBenefitCard">
           <span class="emoji">🎫</span>
           <div class="tag">Included Access</div>
@@ -60849,7 +60934,7 @@ async function loadMaintenanceStateFromSupabase() {
           <div class="tag">Weekly Payout</div>
           <div class="title">Woechentlicher COMMAND+ Vault</div>
           <div class="text">Alle 7 Tage landet ein voller Tresor direkt in deiner Wallet. Kein Extra-Menue, kein Code, einfach claimen sobald der Cooldown endet.</div>
-          <div class="accent">+${COMMAND_PLUS_WEEKLY_VAULT} M-Bucks pro Claim</div>
+          <div class="accent">+${weeklyVaultReward.toLocaleString("de-DE")} M-Bucks pro Claim</div>
         </div>
         <div class="commandPlusBenefitCard">
           <span class="emoji">☁️</span>
@@ -60859,50 +60944,63 @@ async function loadMaintenanceStateFromSupabase() {
           <div class="accent">${owned ? "Live aktiv auf diesem Account" : "Wird nach Kauf automatisch gespeichert"}</div>
         </div>
       `;
+      commandPlusBenefits.querySelectorAll("[data-command-plus-package]").forEach((button) => {
+        button.addEventListener("click", () => openCommandPlusConfirmPopup(button.getAttribute("data-command-plus-package") || "ultimate"));
+      });
       if (commandPlusBuyBtn) {
-        commandPlusBuyBtn.disabled = owned;
+        commandPlusBuyBtn.disabled = true;
         commandPlusBuyBtn.classList.toggle("isBought", owned);
         commandPlusBuyBtn.innerHTML = owned
-          ? `💳 COMMAND+ <span class="boughtStamp">GEKAUFT</span>`
-          : "💳 COMMAND+ kaufen (5.000 M-Bucks)";
+          ? `💳 ${activePackage?.name || "COMMAND+"} <span class="boughtStamp">AKTIV</span>`
+          : "💳 Paket unten waehlen";
       }
       if (commandPlusVaultBtn) {
         commandPlusVaultBtn.disabled = !canClaimVault;
         commandPlusVaultBtn.textContent = canClaimVault
-          ? `Woechentlichen Tresor holen (+${COMMAND_PLUS_WEEKLY_VAULT})`
+          ? `Woechentlichen Tresor holen (+${weeklyVaultReward.toLocaleString("de-DE")})`
           : (owned ? `Tresor bereit in ${h}h ${m}m` : "Tresor erst nach Kauf verfuegbar");
       }
       if (commandPlusLabStatus) {
         commandPlusLabStatus.textContent = !owned
           ? "Geschlossen"
-          : (testLabEnabled ? "Beta Aktiv" : "Bereit");
-        commandPlusLabStatus.classList.toggle("isEnabled", testLabEnabled);
+          : (!betaAccessIncluded ? "Nicht enthalten" : (testLabEnabled ? "Beta Aktiv" : "Bereit"));
+        commandPlusLabStatus.classList.toggle("isEnabled", testLabEnabled || betaAccessIncluded);
       }
       if (commandPlusLabLead) {
         commandPlusLabLead.textContent = !owned
           ? "Mitglieder koennen experimentelle Features frueher aktivieren und im Test Lab vorab sehen, was als Naechstes live gehen koennte."
-          : (testLabEnabled
-            ? `Test Lab ist aktiv${commandPlusState.testLabJoinedAt ? ` seit ${new Date(commandPlusState.testLabJoinedAt).toLocaleDateString("de-DE")}` : ""}. Du bist im Premium-Beta-Kreis und siehst neue Membership-Ideen frueher als normale Spieler.`
-            : "Du kannst das Test Lab jetzt freischalten und kommende Premium-Features als Beta frueher erleben.");
+          : (!betaAccessIncluded
+            ? "Beta-Zugang ist nur im 5.000 M-Bucks Ultimate-Paket enthalten."
+            : (testLabEnabled
+              ? `Test Lab ist aktiv${commandPlusState.testLabJoinedAt ? ` seit ${new Date(commandPlusState.testLabJoinedAt).toLocaleDateString("de-DE")}` : ""}. Du bist im Premium-Beta-Kreis und siehst neue Membership-Ideen frueher als normale Spieler.`
+              : "Du kannst das Test Lab jetzt freischalten und kommende Premium-Features als Beta frueher erleben."))
       }
       if (commandPlusLabMeta) {
         commandPlusLabMeta.textContent = !owned
           ? "Nur fuer aktive COMMAND+ Mitglieder verfuegbar."
-          : (testLabEnabled
+          : (!betaAccessIncluded
+            ? "Nur das Ultimate-Paket enthaelt den Beta-Zugang zu neuen Inhalten."
+            : (testLabEnabled
             ? "Test Lab ist aktiv. Du kannst die Beta jederzeit wieder ausschalten."
-            : "Aktiviere das Test Lab, um fruehe Menues, Reward-Konzepte und Premium-Prototypen vorab zu sehen.");
+            : "Aktiviere das Test Lab, um fruehe Menues, Reward-Konzepte und Premium-Prototypen vorab zu sehen."));
       }
       if (commandPlusLabToggleBtn) {
-        commandPlusLabToggleBtn.disabled = !owned;
+        commandPlusLabToggleBtn.disabled = !owned || !betaAccessIncluded;
         commandPlusLabToggleBtn.textContent = !owned
           ? "🧪 Test Lab erst nach Kauf verfuegbar"
-          : (testLabEnabled ? "🧪 Test Lab deaktivieren" : "🧪 Test Lab aktivieren");
+          : (!betaAccessIncluded ? "🧪 Nur im Ultimate-Paket" : (testLabEnabled ? "🧪 Test Lab deaktivieren" : "🧪 Test Lab aktivieren"));
       }
     }
 
     function toggleCommandPlusTestLab() {
+      const activePackage = getActiveCommandPlusPackage();
       if (!commandPlusState.owned) {
         showMessage("COMMAND+ zuerst kaufen.", 1800);
+        renderCommandPlusMenu();
+        return;
+      }
+      if (!activePackage?.betaAccess) {
+        showMessage("Beta-Zugang ist nur im Ultimate-Paket enthalten.", 2200);
         renderCommandPlusMenu();
         return;
       }
@@ -60925,8 +61023,14 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function enableCommandPlusTestLab() {
+      const activePackage = getActiveCommandPlusPackage();
       if (!commandPlusState.owned) {
         showMessage("COMMAND+ zuerst kaufen.", 1800);
+        renderCommandPlusMenu();
+        return;
+      }
+      if (!activePackage?.betaAccess) {
+        showMessage("Beta-Zugang ist nur im Ultimate-Paket enthalten.", 2200);
         renderCommandPlusMenu();
         return;
       }
@@ -60937,10 +61041,15 @@ async function loadMaintenanceStateFromSupabase() {
       showMessage("Test Lab ist bereits aktiv.", 1800);
     }
 
-    function openCommandPlusConfirmPopup() {
+    function openCommandPlusConfirmPopup(packageId = "ultimate") {
       if (!commandPlusConfirmMenu) return;
+      pendingCommandPlusPackageId = COMMAND_PLUS_PACKAGES[String(packageId || "").toLowerCase()]
+        ? String(packageId || "").toLowerCase()
+        : "ultimate";
+      const selectedPackage = getCommandPlusPackage(pendingCommandPlusPackageId);
       if (commandPlusConfirmMeta) {
-        commandPlusConfirmMeta.textContent = `Du kaufst COMMAND+ fuer ${COMMAND_PLUS_PRICE.toLocaleString("de-DE")} M-Bucks und bekommst Premium Pass + exklusive Rewards sofort.`;
+        commandPlusConfirmMeta.textContent =
+          `Du kaufst das COMMAND+ ${selectedPackage.name}-Paket fuer ${selectedPackage.price.toLocaleString("de-DE")} M-Bucks und bekommst Premium Pass${selectedPackage.levelXp ? ` + ${selectedPackage.levelXp.toLocaleString("de-DE")} XP` : ""}${selectedPackage.betaAccess ? " + Beta-Zugang" : ""} sofort.`;
       }
       commandPlusConfirmMenu.classList.remove("hidden");
     }
@@ -60961,22 +61070,35 @@ async function loadMaintenanceStateFromSupabase() {
       if (commandPlusSuccessMenu) commandPlusSuccessMenu.classList.add("hidden");
     }
 
-    function buyCommandPlus() {
+    function buyCommandPlus(packageId = pendingCommandPlusPackageId || "ultimate") {
+      const selectedPackage = getCommandPlusPackage(packageId);
       if (commandPlusState.owned) {
         closeCommandPlusConfirmPopup();
         showMessage("COMMAND+ ist bereits aktiv.", 1800);
         renderCommandPlusMenu();
         return;
       }
-      if ((inventory[7] || 0) < COMMAND_PLUS_PRICE) {
+      if ((inventory[7] || 0) < selectedPackage.price) {
         closeCommandPlusConfirmPopup();
-        showMessage(`Nicht genug M-Bucks. Benoetigt: ${COMMAND_PLUS_PRICE.toLocaleString("de-DE")}`, 2200);
+        showMessage(`Nicht genug M-Bucks. Benoetigt: ${selectedPackage.price.toLocaleString("de-DE")}`, 2200);
         return;
       }
-      inventory[7] -= COMMAND_PLUS_PRICE;
+      inventory[7] -= selectedPackage.price;
       battlePassState.premiumUnlocked = true;
       commandPlusState.owned = true;
+      commandPlusState.packageId = selectedPackage.id;
       commandPlusState.purchasedAt = Date.now();
+      if (selectedPackage.levelXp > 0) {
+        addXp(selectedPackage.levelXp);
+      }
+      if (selectedPackage.betaAccess) {
+        commandPlusState.testLabEnabled = true;
+        if (!commandPlusState.testLabJoinedAt) {
+          commandPlusState.testLabJoinedAt = Date.now();
+        }
+      } else {
+        commandPlusState.testLabEnabled = false;
+      }
       if (!playerSkin.ownedLobbyBackgrounds.includes("zero_strike_command_bg")) playerSkin.ownedLobbyBackgrounds.push("zero_strike_command_bg");
       if (!playerSkin.activeLobbyBackground || playerSkin.activeLobbyBackground === "season8_standard") {
         playerSkin.activeLobbyBackground = "zero_strike_command_bg";
@@ -60989,7 +61111,7 @@ async function loadMaintenanceStateFromSupabase() {
       updateLobbyUi();
       closeCommandPlusConfirmPopup();
       openCommandPlusSuccessPopup();
-      showMessage("COMMAND+ aktiviert! Premium freigeschaltet + Command Plus Horizon erhalten.", 3200);
+      showMessage(`COMMAND+ ${selectedPackage.name} aktiviert!`, 3200);
     }
 
     function claimCommandPlusVault() {
@@ -60997,18 +61119,20 @@ async function loadMaintenanceStateFromSupabase() {
         showMessage("COMMAND+ zuerst kaufen.", 1800);
         return;
       }
+      const activePackage = getActiveCommandPlusPackage();
+      const weeklyVaultReward = Number(activePackage?.weeklyVault || COMMAND_PLUS_WEEKLY_VAULT);
       const remainingMs = getCommandPlusVaultRemainingMs();
       if (remainingMs > 0) {
         showMessage("Tresor noch im Cooldown.", 1800);
         renderCommandPlusMenu();
         return;
       }
-      inventory[7] = (inventory[7] || 0) + COMMAND_PLUS_WEEKLY_VAULT;
+      inventory[7] = (inventory[7] || 0) + weeklyVaultReward;
       commandPlusState.lastVaultClaimAt = Date.now();
       saveGame();
       renderCommandPlusMenu();
       updateUI();
-      showMessage(`Tresor geclaimt: +${COMMAND_PLUS_WEEKLY_VAULT} M-Bucks`, 2400);
+      showMessage(`Tresor geclaimt: +${weeklyVaultReward.toLocaleString("de-DE")} M-Bucks`, 2400);
     }
 
     function toggleCommandPlusMenu(forceOpen = false) {
