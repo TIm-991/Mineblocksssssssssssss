@@ -21924,6 +21924,119 @@
       font-size: 12px;
       font-weight: 900;
     }
+    .commandPlusPackageGrid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .commandPlusPackageGrid .mbucksStorePack {
+      min-height: 420px;
+      padding: 20px;
+      align-content: start;
+    }
+    .commandPlusPackVisual {
+      position: relative;
+      height: 138px;
+      margin: 4px 0 4px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        radial-gradient(circle at 50% 24%, rgba(255,255,255,0.18), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02)),
+        rgba(9, 14, 24, 0.72);
+    }
+    .commandPlusPackVisual::after {
+      content: "";
+      position: absolute;
+      inset: auto 18px 14px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.18), rgba(255,255,255,0.04));
+      opacity: 0.7;
+    }
+    .commandPlusPackLogo {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      object-fit: cover;
+      padding: 8px;
+      border-radius: 20px;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.16), transparent 40%),
+        rgba(20, 18, 34, 0.86);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 16px 28px rgba(0,0,0,0.22);
+    }
+    .commandPlusPackLogo.logoMain {
+      left: 50%;
+      top: 20px;
+      transform: translateX(-50%) scale(1.06);
+      z-index: 2;
+    }
+    .commandPlusPackLogo.logoLeft {
+      left: 14%;
+      bottom: 18px;
+      transform: rotate(-10deg) scale(0.92);
+      opacity: 0.88;
+    }
+    .commandPlusPackLogo.logoRight {
+      right: 14%;
+      bottom: 18px;
+      transform: rotate(10deg) scale(0.92);
+      opacity: 0.88;
+    }
+    .commandPlusPackPerks {
+      display: grid;
+      gap: 7px;
+      margin: 4px 0 6px;
+    }
+    .commandPlusPackPerk {
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(243, 247, 255, 0.92);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+    .commandPlusPackState {
+      margin-top: auto;
+      color: rgba(255, 241, 200, 0.94);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .commandPlusPackageBuyBtn {
+      width: 100%;
+      min-height: 52px;
+      border: none;
+      border-radius: 18px;
+      padding: 0 18px;
+      background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      box-shadow: 0 14px 28px rgba(79, 70, 229, 0.28);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+    }
+    .commandPlusPackageBuyBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(79, 70, 229, 0.34);
+      filter: brightness(1.04);
+    }
+    .commandPlusPackageBuyBtn:disabled {
+      opacity: 0.58;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+      filter: saturate(0.8);
+    }
     .commandPlusLabPanel {
       padding: 22px;
       border-radius: 28px;
@@ -34126,6 +34239,7 @@
       box-shadow:
         0 18px 30px rgba(0,0,0,0.24),
         inset 0 1px 0 rgba(255,255,255,0.06);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     }
 
     .lobbyBetaCard::before {
@@ -34134,6 +34248,88 @@
       inset: 0;
       pointer-events: none;
       background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 28%);
+    }
+    .lobbyBetaCard.isAnimated::after {
+      content: "";
+      position: absolute;
+      inset: -30% -10%;
+      background:
+        linear-gradient(90deg, transparent 0%, rgba(125, 220, 255, 0.06) 22%, transparent 48%),
+        linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+      animation: lobbyCardScanSweep 7.5s linear infinite;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+    .lobbyBetaCardGlow {
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(124, 203, 255, 0.22), transparent 65%);
+      filter: blur(4px);
+      animation: lobbyCardGlowPulse 3.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .lobbyBetaCardSignalRow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      color: rgba(206, 231, 255, 0.82);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .lobbyBetaCardSignalDot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #83f5d2;
+      box-shadow: 0 0 12px rgba(131, 245, 210, 0.75);
+      animation: lobbyCardSignalBlink 1.7s ease-in-out infinite;
+      flex: 0 0 auto;
+    }
+    .lobbyBetaCardStatusLine {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(171, 221, 255, 0.16);
+      overflow: hidden;
+      margin: 4px 0 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .lobbyBetaCardStatusFill {
+      width: 48%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(108, 196, 255, 0.9), rgba(136, 120, 255, 0.95), rgba(129, 251, 214, 0.9));
+      box-shadow: 0 0 18px rgba(112, 195, 255, 0.35);
+      animation: lobbyCardStatusTravel 4.8s ease-in-out infinite;
+    }
+    .lobbyBetaCardBadge.betaAnimated {
+      background: linear-gradient(135deg, rgba(135, 243, 210, 0.96), rgba(108, 170, 255, 0.96));
+      box-shadow: 0 0 0 1px rgba(180, 245, 255, 0.16), 0 10px 24px rgba(74, 125, 255, 0.28);
+    }
+    @keyframes lobbyCardGlowPulse {
+      0%, 100% { transform: scale(0.95); opacity: 0.55; }
+      50% { transform: scale(1.08); opacity: 0.95; }
+    }
+    @keyframes lobbyCardSignalBlink {
+      0%, 100% { transform: scale(0.9); opacity: 0.72; }
+      50% { transform: scale(1.18); opacity: 1; }
+    }
+    @keyframes lobbyCardStatusTravel {
+      0% { width: 32%; transform: translateX(0%); }
+      50% { width: 68%; transform: translateX(22%); }
+      100% { width: 32%; transform: translateX(0%); }
+    }
+    @keyframes lobbyCardScanSweep {
+      0% { transform: translate3d(-12%, -8%, 0) rotate(0deg); }
+      100% { transform: translate3d(12%, 8%, 0) rotate(0deg); }
     }
 
     .lobbyBetaCardHead,
@@ -37428,6 +37624,30 @@
       letter-spacing: 0.2em !important;
       color: rgba(184, 224, 255, 0.9) !important;
     }
+    #lobbyScreen.lobbyReborn .lobbyCommandRail {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    #lobbyScreen.lobbyReborn .lobbyCommandChip {
+      min-height: 28px;
+      padding: 0 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(176, 219, 255, 0.22);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(26, 47, 80, 0.94), rgba(13, 23, 42, 0.96));
+      color: #dff2ff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
 
     #lobbyScreen.lobbyReborn .lobbyMainGridVNext {
       grid-template-columns: 228px minmax(0, 1fr) minmax(320px, 360px) !important;
@@ -37527,6 +37747,31 @@
       border: 1px solid rgba(178, 228, 255, 0.22) !important;
       background: rgba(5, 10, 20, 0.56) !important;
     }
+    #lobbyScreen.lobbyReborn .lobbyCenterCommandStrip {
+      min-height: 52px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(176, 219, 255, 0.18);
+      background:
+        radial-gradient(circle at 80% 50%, rgba(110, 145, 255, 0.14), transparent 28%),
+        linear-gradient(180deg, rgba(8, 14, 25, 0.7), rgba(5, 10, 18, 0.74));
+      display: grid;
+      gap: 4px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    #lobbyScreen.lobbyReborn .lobbyCenterCommandStripTitle {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(180, 218, 255, 0.72);
+    }
+    #lobbyScreen.lobbyReborn .lobbyCenterCommandStripText {
+      color: #edf6ff;
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
 
     #lobbyScreen.lobbyReborn .lobbyCenterKicker {
       font-family: "Bangers", sans-serif !important;
@@ -37553,6 +37798,42 @@
       background:
         linear-gradient(160deg, rgba(6,10,20,0.24), rgba(6,10,20,0.44)),
         var(--lobby-bg-image) center/cover no-repeat !important;
+    }
+    #lobbyScreen.lobbyReborn .lobbyCenterStatusGrid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    #lobbyScreen.lobbyReborn .lobbyCenterStatusCard {
+      min-height: 84px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(176, 219, 255, 0.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        linear-gradient(180deg, rgba(8, 14, 25, 0.72), rgba(5, 10, 18, 0.8));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+      display: grid;
+      gap: 6px;
+      align-content: start;
+    }
+    #lobbyScreen.lobbyReborn .lobbyCenterStatusLabel {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(180, 218, 255, 0.68);
+    }
+    #lobbyScreen.lobbyReborn .lobbyCenterStatusValue {
+      font-size: 20px;
+      font-weight: 1000;
+      color: #ffffff;
+      line-height: 1;
+    }
+    #lobbyScreen.lobbyReborn .lobbyCenterStatusMeta {
+      font-size: 12px;
+      line-height: 1.4;
+      color: rgba(222, 234, 247, 0.8);
     }
 
     #lobbyScreen.lobbyReborn .lobbyRightVNext {
@@ -38752,6 +39033,11 @@
         <div class="lobbyBranding">
           <div class="modernMeta lobbySeasonMeta">ARENA NETWORK • Season 4</div>
           <div class="modernTitle lobbyHubTitle">MINEBLOCK COMMAND LOBBY</div>
+          <div class="lobbyCommandRail">
+            <span class="lobbyCommandChip">HQ Online</span>
+            <span class="lobbyCommandChip">Solo Node aktiv</span>
+            <span class="lobbyCommandChip">Live Operations</span>
+          </div>
         </div>
         <div class="lobbyTopActions lobbyTopActionsVNext">
           <button id="lobbySidebarToggleBtn" class="lobbyNavBtn lobbySidebarToggleBtn" type="button">
@@ -38786,7 +39072,9 @@
             <div class="lobbyCenterKicker">MATCH STAGE</div>
             <div id="lobbyModeCountdown" class="lobbyModeCountdown hidden"></div>
           </div>
+          <div id="lobbyCenterCommandStrip" class="lobbyCenterCommandStrip"></div>
           <div id="lobbyAvatarStage" class="lobbyAvatarStage"></div>
+          <div id="lobbyCenterStatusGrid" class="lobbyCenterStatusGrid"></div>
           <div class="lobbyCenterActions">
           </div>
         </section>
@@ -39179,6 +39467,10 @@
             <button class="modeFortTile active" id="modeCardSolo" data-pick-mode="solo" data-category="solo">
               <div class="modeFortTileBg modeFortBgSolo"></div>
               <div class="modeFortTileBar"><strong>SINGLEPLAYER</strong></div>
+            </button>
+            <button class="modeFortTile" id="modeCardFinaleOperation" data-pick-mode="finale_operation" data-category="event">
+              <div class="modeFortTileBg modeFortBgWorkshop"></div>
+              <div class="modeFortTileBar"><strong>FINALE OPERATION</strong></div>
             </button>
             <button class="modeFortTile" id="modeCardCustomGamesBtn" data-category="custom" type="button">
               <div class="modeFortTileBg modeFortBgWorkshop"></div>
@@ -40324,6 +40616,14 @@
       <div class="season4ContinuationKicker">Season 4 Wuerfel</div>
       <h1 class="season4ContinuationTitle">FORTSETZUNG FOLGT</h1>
       <p class="season4ContinuationMeta">Das Event ist abgeschlossen. Danke fuers Zuschauen. Die naechste Phase startet bald.</p>
+    </div>
+  </div>
+
+  <div id="finaleOperationOverlay" class="season4ContinuationOverlay hidden">
+    <div class="season4ContinuationBox">
+      <div id="finaleOperationKicker" class="season4ContinuationKicker">Finale Operation</div>
+      <h1 id="finaleOperationTitle" class="season4ContinuationTitle">SYNC WARTET</h1>
+      <p id="finaleOperationMeta" class="season4ContinuationMeta">Der Live-Countdown endet am 05.06.2026 um 15:30 Uhr. Alle Spieler starten gleichzeitig in New Dawn Protocol.</p>
     </div>
   </div>
 
@@ -41702,7 +42002,7 @@
           </div>
           <div class="commandPlusRecurringBadge">Recurring Membership • 3 Pakete</div>
           <div class="commandPlusLead">Das ist euer All-in Membership Track im Crew-Stil: Premium Pass direkt frei, exklusive COMMAND+ Freischaltungen, ein woechentlicher Tresor und Account-Sync ueber euren bestehenden Save-Flow.</div>
-          <div id="commandPlusMeta" class="commandPlusMetaBox">Waehle dein COMMAND+ Paket und sichere dir Weekly M-Bucks, Battle-Pass-Premium und je nach Stufe XP oder Beta-Zugang.</div>
+          <div id="commandPlusMeta" class="commandPlusMetaBox">Waehle dein COMMAND+ Paket. Der Membership-Reset ist live, deshalb muessen alle Spieler COMMAND+ jetzt neu kaufen.</div>
           <div class="commandPlusIncludeRow">
             <div class="commandPlusIncludeChip"><strong>Pass</strong> sofort aktiv</div>
             <div class="commandPlusIncludeChip"><strong>Vault</strong> jede Woche</div>
@@ -42565,6 +42865,10 @@
     const achBtn = document.getElementById("achBtn");
     const maintenanceOverlay = document.getElementById("maintenanceOverlay");
     const season4ContinuationOverlay = document.getElementById("season4ContinuationOverlay");
+    const finaleOperationOverlay = document.getElementById("finaleOperationOverlay");
+    const finaleOperationKicker = document.getElementById("finaleOperationKicker");
+    const finaleOperationTitle = document.getElementById("finaleOperationTitle");
+    const finaleOperationMeta = document.getElementById("finaleOperationMeta");
     const achMenu = document.getElementById("achMenu");
     const achContent = document.getElementById("achContent");
     const closeAchBtn = document.getElementById("closeAchBtn");
@@ -43487,6 +43791,11 @@
     let gameStarted = false;
     let matchStartGraceUntil = 0;
     const SOLO_BOSS_COUNTDOWN_MS = 3 * 60 * 1000;
+    const FINALE_OPERATION_START_AT = new Date("2026-06-05T15:30:00+02:00").getTime();
+    const FINALE_OPERATION_DURATION_MS = 6 * 60 * 1000;
+    const FINALE_OPERATION_END_AT = FINALE_OPERATION_START_AT + FINALE_OPERATION_DURATION_MS;
+    const FINALE_OPERATION_LABEL = "05.06.2026 15:30";
+    const FINALE_OPERATION_END_LABEL = "05.06.2026 15:36";
     const GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT = 0;
     const GLOBAL_EVENT_CONFIG = {
       enabled: false,
@@ -43499,6 +43808,9 @@
       spawned: false,
       defeated: false
     };
+    let finaleOperationSyncShown = false;
+    let finaleOperationStartToastShown = false;
+    let finaleOperationEndHandled = false;
     let globalEventBossState = {
       spawned: false,
       defeated: false,
@@ -45465,18 +45777,36 @@ function renderCreativeHud() {
 }
 
 function getFirstAvailableLobbyMode() {
+  if (isLobbyModeEnabled("finale_operation") && getFinaleOperationPhase() !== "post") return "finale_operation";
   if (isLobbyModeEnabled("solo")) return "solo";
   return "solo";
 }
 
 function ensureSelectedLobbyModeAvailable() {
-  if (selectedLobbyMode !== "solo" || !isLobbyModeEnabled(selectedLobbyMode)) selectedLobbyMode = "solo";
+  if (
+    !["solo", "finale_operation"].includes(selectedLobbyMode)
+    || !isLobbyModeEnabled(selectedLobbyMode)
+    || (selectedLobbyMode === "finale_operation" && getFinaleOperationPhase() === "post")
+  ) {
+    selectedLobbyMode = getFirstAvailableLobbyMode();
+  }
 }
 
 function getLobbyModeLabel(mode) {
+  if (mode === "finale_operation") return "Finale Operation";
   if (mode === "datamine") return "Data-Mine: Extraction";
   if (mode === "creative") return "Custom Games";
   return "Singleplayer";
+}
+
+function getFinaleOperationPhase(now = Date.now()) {
+  if (now >= FINALE_OPERATION_END_AT) return "post";
+  if (now >= FINALE_OPERATION_START_AT) return "live";
+  return "pre";
+}
+
+function isFinaleOperationModeSelected() {
+  return selectedLobbyMode === "finale_operation";
 }
 
 function getSeason4LiveEventPhase() {
@@ -45514,6 +45844,7 @@ function isGlobalMatchmakingLocked() {
 }
 
 function isLobbyModeEnabled(mode) {
+  if (mode === "finale_operation") return true;
   if (mode === "datamine") return false;
   if (mode === "creative") return false;
   return mode === "solo" && !!modeAccessState.solo;
@@ -45551,6 +45882,7 @@ function formatLockCountdown(ms) {
 }
 
 function isSoloOrCustomBlockedForStart() {
+  if (isFinaleOperationModeSelected()) return false;
   if (isGlobalMatchmakingLocked()) return true;
   return isSoloCustomLocked() && (selectedLobbyMode === "solo" || hasActiveCustomGamePreset());
 }
@@ -45573,6 +45905,28 @@ function updateLobbyModeCountdownUi() {
       el.style.display = "none";
     });
   };
+  if (isFinaleOperationModeSelected()) {
+    const now = Date.now();
+    const finalePhase = getFinaleOperationPhase(now);
+    if (finalePhase === "pre") {
+      const remaining = Math.max(0, FINALE_OPERATION_START_AT - now);
+      setCountdown(
+        `Finale Operation startet in ${formatLobbyModeCountdown(remaining)} (${FINALE_OPERATION_LABEL} Uhr)`,
+        remaining <= 60000 ? ["isCritical"] : []
+      );
+      return;
+    }
+    if (finalePhase === "live") {
+      const remaining = Math.max(0, FINALE_OPERATION_END_AT - now);
+      setCountdown(
+        `Finale Operation endet in ${formatLobbyModeCountdown(remaining)} (${FINALE_OPERATION_END_LABEL} Uhr)`,
+        remaining <= 60000 ? ["isLive", "isCritical"] : ["isLive"]
+      );
+      return;
+    }
+    setCountdown("Finale Operation beendet • FORTSETZUNG FOLGT", ["isCritical"]);
+    return;
+  }
   const configured = isGlobalEventConfigured();
   if (!configured) {
     hideCountdown();
@@ -45621,6 +45975,72 @@ function showSeason4ContinuationOverlay() {
   if (modeRulesMenu) modeRulesMenu.classList.add("hidden");
   if (lobbyModePickerMenu) lobbyModePickerMenu.classList.add("hidden");
   requestFullscreenForSeasonEvent();
+}
+
+function updateFinaleOperationOverlay() {
+  if (!finaleOperationOverlay || !finaleOperationTitle || !finaleOperationMeta || !finaleOperationKicker) return;
+  if (currentMatchMode !== "finale_operation" || !gameStarted || inLobby) {
+    finaleOperationOverlay.classList.add("hidden");
+    return;
+  }
+  const phase = getFinaleOperationPhase();
+  if (phase === "pre") {
+    const remaining = Math.max(0, FINALE_OPERATION_START_AT - Date.now());
+    finaleOperationKicker.textContent = "Finale Operation";
+    finaleOperationTitle.textContent = "COUNTDOWN LAEUFT";
+    finaleOperationMeta.textContent = `Sync beginnt in ${formatLobbyModeCountdown(remaining)}. Start fuer alle Spieler gleichzeitig am 05.06.2026 um 15:30 Uhr.`;
+    finaleOperationOverlay.classList.remove("hidden");
+    return;
+  }
+  finaleOperationOverlay.classList.add("hidden");
+}
+
+function handleFinaleOperationPhase() {
+  if (currentMatchMode !== "finale_operation" || !gameStarted || inLobby) return { freezeGameplay: false };
+  const now = Date.now();
+  const phase = getFinaleOperationPhase(now);
+
+  if (phase === "pre") {
+    updateFinaleOperationOverlay();
+    return { freezeGameplay: true };
+  }
+
+  if (phase === "live") {
+    if (!finaleOperationSyncShown) {
+      finaleOperationSyncShown = true;
+      if (finaleOperationKicker) finaleOperationKicker.textContent = "Finale Operation";
+      if (finaleOperationTitle) finaleOperationTitle.textContent = "SYNC BEGINN";
+      if (finaleOperationMeta) finaleOperationMeta.textContent = "Alle Spieler werden jetzt gleichzeitig in die Finale Operation eingespeist.";
+      if (finaleOperationOverlay) finaleOperationOverlay.classList.remove("hidden");
+      showMessage("SYNC BEGINN - Finale Operation ist jetzt live!", 3200);
+      setTimeout(() => {
+        if (finaleOperationOverlay && currentMatchMode === "finale_operation" && getFinaleOperationPhase() === "live") {
+          finaleOperationOverlay.classList.add("hidden");
+        }
+      }, 2200);
+    }
+    if (!finaleOperationStartToastShown) {
+      finaleOperationStartToastShown = true;
+      showMessage(`Finale Operation live bis ${FINALE_OPERATION_END_LABEL} Uhr.`, 2600);
+    }
+    return { freezeGameplay: false };
+  }
+
+  if (!finaleOperationEndHandled) {
+    finaleOperationEndHandled = true;
+    if (finaleOperationOverlay) finaleOperationOverlay.classList.add("hidden");
+    if (season4ContinuationOverlay) {
+      const kicker = season4ContinuationOverlay.querySelector(".season4ContinuationKicker");
+      const title = season4ContinuationOverlay.querySelector(".season4ContinuationTitle");
+      const meta = season4ContinuationOverlay.querySelector(".season4ContinuationMeta");
+      if (kicker) kicker.textContent = "Finale Operation";
+      if (title) title.textContent = "FORTSETZUNG FOLGT";
+      if (meta) meta.textContent = "Chapter 4 Season 1 • New Dawn Protocol beginnt bald. Danke, dass du beim Live-Event dabei warst.";
+    }
+    showSeason4ContinuationOverlay();
+    showMessage("Finale Operation beendet. Fortsetzung folgt.", 3200);
+  }
+  return { freezeGameplay: true };
 }
 
 function applySeason4LiveEventSchedule() {
@@ -46799,10 +47219,14 @@ async function resetGlobalDiscount() {
         accent: "rgba(255, 198, 112, 0.24)"
       }
     };
+    const COMMAND_PLUS_RESET_VERSION = 2;
+    const COMMAND_PLUS_RESET_ID = "command_plus_relaunch_2026_06_04_v2";
     const COMMAND_PLUS_PRICE = COMMAND_PLUS_PACKAGES.ultimate.price;
     const COMMAND_PLUS_WEEKLY_VAULT = COMMAND_PLUS_PACKAGES.core.weeklyVault;
     const COMMAND_PLUS_VAULT_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
     const commandPlusState = {
+      version: COMMAND_PLUS_RESET_VERSION,
+      resetId: COMMAND_PLUS_RESET_ID,
       owned: false,
       packageId: "",
       purchasedAt: 0,
@@ -50815,6 +51239,8 @@ let shopWishlist = [];
           questClaimedWeekly: uniqueStringList(questState.claimedWeekly || []),
           questLastDailyKey: String(questState.lastDailyKey || ""),
           questLastWeeklyKey: String(questState.lastWeeklyKey || ""),
+          commandPlusVersion: Number(commandPlusState.version || COMMAND_PLUS_RESET_VERSION),
+          commandPlusResetId: String(commandPlusState.resetId || COMMAND_PLUS_RESET_ID),
           commandPlusOwned: !!commandPlusState.owned,
           commandPlusPackageId: String(commandPlusState.packageId || ""),
           commandPlusPurchasedAt: Number(commandPlusState.purchasedAt || 0),
@@ -50872,16 +51298,23 @@ let shopWishlist = [];
             questState.lastWeeklyKey = String(snapshot.claims.questLastWeeklyKey);
           }
         }
-        if (snapshot.claims.commandPlusOwned) commandPlusState.owned = true;
-        if (snapshot.claims.commandPlusPackageId && COMMAND_PLUS_PACKAGES[String(snapshot.claims.commandPlusPackageId)]) {
-          commandPlusState.packageId = String(snapshot.claims.commandPlusPackageId);
-        } else if (snapshot.claims.commandPlusOwned && !commandPlusState.packageId) {
-          commandPlusState.packageId = "ultimate";
+        if (
+          Number(snapshot.claims.commandPlusVersion || 0) === COMMAND_PLUS_RESET_VERSION &&
+          String(snapshot.claims.commandPlusResetId || "") === COMMAND_PLUS_RESET_ID
+        ) {
+          commandPlusState.version = COMMAND_PLUS_RESET_VERSION;
+          commandPlusState.resetId = COMMAND_PLUS_RESET_ID;
+          if (snapshot.claims.commandPlusOwned) commandPlusState.owned = true;
+          if (snapshot.claims.commandPlusPackageId && COMMAND_PLUS_PACKAGES[String(snapshot.claims.commandPlusPackageId)]) {
+            commandPlusState.packageId = String(snapshot.claims.commandPlusPackageId);
+          } else if (snapshot.claims.commandPlusOwned && !commandPlusState.packageId) {
+            commandPlusState.packageId = "ultimate";
+          }
+          commandPlusState.purchasedAt = Math.max(Number(commandPlusState.purchasedAt || 0), Number(snapshot.claims.commandPlusPurchasedAt || 0));
+          commandPlusState.lastVaultClaimAt = Math.max(Number(commandPlusState.lastVaultClaimAt || 0), Number(snapshot.claims.commandPlusLastVaultClaimAt || 0));
+          commandPlusState.testLabEnabled = commandPlusState.testLabEnabled || snapshot.claims.commandPlusTestLabEnabled === true;
+          commandPlusState.testLabJoinedAt = Math.max(Number(commandPlusState.testLabJoinedAt || 0), Number(snapshot.claims.commandPlusTestLabJoinedAt || 0));
         }
-        commandPlusState.purchasedAt = Math.max(Number(commandPlusState.purchasedAt || 0), Number(snapshot.claims.commandPlusPurchasedAt || 0));
-        commandPlusState.lastVaultClaimAt = Math.max(Number(commandPlusState.lastVaultClaimAt || 0), Number(snapshot.claims.commandPlusLastVaultClaimAt || 0));
-        commandPlusState.testLabEnabled = commandPlusState.testLabEnabled || snapshot.claims.commandPlusTestLabEnabled === true;
-        commandPlusState.testLabJoinedAt = Math.max(Number(commandPlusState.testLabJoinedAt || 0), Number(snapshot.claims.commandPlusTestLabJoinedAt || 0));
       }
     }
 
@@ -56655,6 +57088,7 @@ async function loadMaintenanceStateFromSupabase() {
     function applySavePayload(parsed) {
       if (!parsed) return;
       const seasonResetTokenOk = parsed.seasonHardResetToken === SEASON_HARD_RESET_TOKEN;
+      const commandPlusRequiresResave = parsed.commandPlusState && !hasValidCommandPlusState(parsed.commandPlusState);
 
       if (parsed.stats) Object.assign(stats, parsed.stats);
 
@@ -56751,7 +57185,7 @@ async function loadMaintenanceStateFromSupabase() {
         };
         enforceLobbyPartyLimit();
       }
-      if (parsed.selectedLobbyMode === "solo" || parsed.selectedLobbyMode === "creative") {
+      if (parsed.selectedLobbyMode === "solo" || parsed.selectedLobbyMode === "creative" || parsed.selectedLobbyMode === "finale_operation") {
         selectedLobbyMode = parsed.selectedLobbyMode;
         ensureSelectedLobbyModeAvailable();
       } else {
@@ -56761,7 +57195,7 @@ async function loadMaintenanceStateFromSupabase() {
       mbucksEconomyState = normalizeMBucksEconomyState(parsed.mbucksEconomyState);
       localAdminCurrencyBalance = Math.max(0, Math.floor(Number(mbucksEconomyState.localAdminCoins || 0)));
       Object.assign(commandPlusState, normalizeCommandPlusState(parsed.commandPlusState));
-      if (parsed.lastPlayedLobbyMode === "solo" || parsed.lastPlayedLobbyMode === "creative") {
+      if (parsed.lastPlayedLobbyMode === "solo" || parsed.lastPlayedLobbyMode === "creative" || parsed.lastPlayedLobbyMode === "finale_operation") {
         lastPlayedLobbyMode = parsed.lastPlayedLobbyMode;
       } else {
         lastPlayedLobbyMode = "";
@@ -56920,6 +57354,11 @@ async function loadMaintenanceStateFromSupabase() {
       normalizeLockerOwnershipState();
       ensureOwnedSkinsStored();
       showdownLastTrackedBlocks = Math.max(0, Math.floor(Number(stats.blocksMined || 0)));
+      if (commandPlusRequiresResave) {
+        setTimeout(() => {
+          try { saveGame(); } catch {}
+        }, 0);
+      }
     }
 
     function saveGame(options = {}) {
@@ -58088,11 +58527,27 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function normalizeCommandPlusState(payload = {}) {
+      const version = Number(payload?.version || 0);
+      const resetId = String(payload?.resetId || "");
+      if (version !== COMMAND_PLUS_RESET_VERSION || resetId !== COMMAND_PLUS_RESET_ID) {
+        return {
+          version: COMMAND_PLUS_RESET_VERSION,
+          resetId: COMMAND_PLUS_RESET_ID,
+          owned: false,
+          packageId: "",
+          purchasedAt: 0,
+          lastVaultClaimAt: 0,
+          testLabEnabled: false,
+          testLabJoinedAt: 0
+        };
+      }
       const rawPackageId = String(payload?.packageId || "").trim().toLowerCase();
       const packageId = COMMAND_PLUS_PACKAGES[rawPackageId]
         ? rawPackageId
         : (payload?.owned === true ? "ultimate" : "");
       return {
+        version: COMMAND_PLUS_RESET_VERSION,
+        resetId: COMMAND_PLUS_RESET_ID,
         owned: payload?.owned === true,
         packageId,
         purchasedAt: Math.max(0, Math.floor(Number(payload?.purchasedAt || 0))),
@@ -58100,6 +58555,11 @@ async function loadMaintenanceStateFromSupabase() {
         testLabEnabled: payload?.testLabEnabled === true,
         testLabJoinedAt: Math.max(0, Math.floor(Number(payload?.testLabJoinedAt || 0)))
       };
+    }
+
+    function hasValidCommandPlusState(payload = {}) {
+      return Number(payload?.version || 0) === COMMAND_PLUS_RESET_VERSION
+        && String(payload?.resetId || "") === COMMAND_PLUS_RESET_ID;
     }
 
     function getDateKey() {
@@ -60887,7 +61347,7 @@ async function loadMaintenanceStateFromSupabase() {
       const m = Math.floor((remainingMs % 3600000) / 60000);
       commandPlusMeta.textContent = owned
         ? `${activePackage?.name || "Command+"} seit ${commandPlusState.purchasedAt ? new Date(commandPlusState.purchasedAt).toLocaleDateString("de-DE") : "heute"} • Premium Pass aktiv • ${weeklyVaultReward.toLocaleString("de-DE")} M-Bucks alle 7 Tage`
-        : "Waehle eines von drei COMMAND+ Paketen und sichere dir Premium, Weekly Vault und je nach Stufe XP oder Beta-Zugang.";
+        : "Membership-Reset aktiv: Alle Spieler muessen COMMAND+ neu kaufen. Waehle eines von drei Paketen fuer Premium, Weekly Vault und je nach Stufe XP oder Beta-Zugang.";
       if (commandPlusStatusValue) {
         commandPlusStatusValue.textContent = owned ? `${activePackage?.name || "Aktiv"}` : "Nicht aktiv";
       }
@@ -60904,13 +61364,28 @@ async function loadMaintenanceStateFromSupabase() {
           <div class="text">Jede Stufe schaltet den Premium Pass frei. Hoehere Stufen geben dir mehr Weekly M-Bucks, mehr XP und im Ultimate-Paket Zugang zu neuen Beta-Inhalten.</div>
           <div class="commandPlusPackageGrid" style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px; margin-top:14px;">
             ${Object.values(COMMAND_PLUS_PACKAGES).map((pkg) => `
-              <div class="commandPlusBenefitCard" style="margin:0; background:radial-gradient(circle at top right, ${pkg.accent}, transparent 34%), linear-gradient(180deg, rgba(17, 26, 42, 0.94), rgba(9, 14, 24, 0.98)); border-color:${owned && commandPlusState.packageId === pkg.id ? "rgba(255, 212, 132, 0.62)" : "rgba(148, 181, 238, 0.1)"};">
-                <span class="emoji">${pkg.id === "core" ? "🎫" : pkg.id === "plus" ? "⚡" : "👑"}</span>
-                <div class="tag">${pkg.name}</div>
-                <div class="title">${pkg.price.toLocaleString("de-DE")} M-Bucks</div>
-                <div class="text">+${pkg.weeklyVault.toLocaleString("de-DE")} M-Bucks alle 7 Tage • Premium Battle Pass${pkg.levelXp > 0 ? ` • ${pkg.levelXp.toLocaleString("de-DE")} XP` : ""}${pkg.betaAccess ? " • Beta Zugang" : ""}</div>
-                <div class="accent">${owned && commandPlusState.packageId === pkg.id ? "Aktives Paket" : pkg.includedReward}</div>
-                <button class="achievementCloseBtn commandPlusBtn commandPlusBtnBuy" type="button" data-command-plus-package="${pkg.id}" ${owned ? "disabled" : ""}>${owned ? (commandPlusState.packageId === pkg.id ? "Aktiv" : "Nicht verfuegbar") : `${pkg.name} kaufen`}</button>
+              <div class="mbucksStorePack ${pkg.id === "core" ? "packStarter" : (pkg.id === "plus" ? "packPro" : "packUltra")}" style="background:radial-gradient(circle at top right, ${pkg.accent}, transparent 30%), linear-gradient(180deg, rgba(17, 26, 42, 0.94), rgba(9, 14, 24, 0.98)); border-color:${owned && commandPlusState.packageId === pkg.id ? "rgba(255, 212, 132, 0.62)" : "rgba(148, 181, 238, 0.1)"};">
+                <div class="mbucksStorePackBadge">
+                  <span class="mbucksStorePackBadgeValue">${pkg.id === "core" ? "ENTRY" : (pkg.id === "plus" ? "BOOST" : "BETA")}</span>
+                  <span class="mbucksStorePackBadgeLabel">${pkg.name}</span>
+                </div>
+                <div class="mbucksStorePackTitle">COMMAND+ ${pkg.name}</div>
+                <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">${pkg.price.toLocaleString("de-DE")} M-Bucks</div>
+                <div class="mbucksStorePackMeta">${pkg.weeklyVault.toLocaleString("de-DE")} M-Bucks alle 7 Tage und sofortige Freischaltung fuer dein Premium-System.</div>
+                <div class="commandPlusPackVisual">
+                  <img class="commandPlusPackLogo logoLeft" src="assets/crew.png" alt="COMMAND+ Logo">
+                  <img class="commandPlusPackLogo logoMain" src="assets/crew.png" alt="COMMAND+ Logo">
+                  <img class="commandPlusPackLogo logoRight" src="assets/crew.png" alt="COMMAND+ Logo">
+                </div>
+                <div class="commandPlusPackPerks">
+                  <div class="commandPlusPackPerk">Premium fuer Battle Pass</div>
+                  <div class="commandPlusPackPerk">+${pkg.weeklyVault.toLocaleString("de-DE")} M-Bucks alle 7 Tage</div>
+                  ${pkg.levelXp > 0 ? `<div class="commandPlusPackPerk">+${pkg.levelXp.toLocaleString("de-DE")} XP direkt beim Kauf</div>` : ""}
+                  ${pkg.betaAccess ? `<div class="commandPlusPackPerk">Beta Zugang zu neuen Inhalten</div>` : ""}
+                </div>
+                <div class="commandPlusPackState">${owned && commandPlusState.packageId === pkg.id ? "Aktives Paket" : pkg.includedReward}</div>
+                <div class="mbucksStorePackPrice">${pkg.id === "core" ? "Starter Tier" : (pkg.id === "plus" ? "Power Tier" : "Ultimate Tier")}</div>
+                <button class="commandPlusPackageBuyBtn" type="button" data-command-plus-package="${pkg.id}" ${owned ? "disabled" : ""}>${owned ? (commandPlusState.packageId === pkg.id ? "Aktiv" : "Nicht verfuegbar") : `${pkg.name} kaufen`}</button>
               </div>
             `).join("")}
           </div>
@@ -60990,6 +61465,7 @@ async function loadMaintenanceStateFromSupabase() {
           ? "🧪 Test Lab erst nach Kauf verfuegbar"
           : (!betaAccessIncluded ? "🧪 Nur im Ultimate-Paket" : (testLabEnabled ? "🧪 Test Lab deaktivieren" : "🧪 Test Lab aktivieren"));
       }
+      applyMBucksCardMouseEffects();
     }
 
     function toggleCommandPlusTestLab() {
@@ -61085,6 +61561,8 @@ async function loadMaintenanceStateFromSupabase() {
       }
       inventory[7] -= selectedPackage.price;
       battlePassState.premiumUnlocked = true;
+      commandPlusState.version = COMMAND_PLUS_RESET_VERSION;
+      commandPlusState.resetId = COMMAND_PLUS_RESET_ID;
       commandPlusState.owned = true;
       commandPlusState.packageId = selectedPackage.id;
       commandPlusState.purchasedAt = Date.now();
@@ -62732,6 +63210,11 @@ async function loadMaintenanceStateFromSupabase() {
       if (!button) return;
       const mode = button.getAttribute("data-pick-mode") || button.getAttribute("data-mode") || "solo";
       const fallbackConfig = {
+        finale_operation: {
+          title: "FINALE OPERATION",
+          desc: "Live Event Modus mit globalem Countdown, synchronem Start und gemeinsamem Finale fuer New Dawn Protocol.",
+          list: ["Start exakt am 05.06.2026 um 15:30.", "Alle Spieler beginnen gleichzeitig.", "Gemeinsames Ende mit FORTSETZUNG FOLGT."]
+        },
         solo: {
           title: "SINGLEPLAYER",
           desc: "Überlebe allein und sichere deinen Fortschritt im Run.",
@@ -62774,10 +63257,22 @@ async function loadMaintenanceStateFromSupabase() {
       ensureSelectedLobbyModeAvailable();
       const selectedModeEnabled = isLobbyModeEnabled(selectedLobbyMode);
       const selectedModeBlockedByLock = soloCustomLocked && (selectedLobbyMode === "solo" || hasActiveCustomGamePreset());
-      const selectedModeAvailable = selectedModeEnabled && !ended && !selectedModeBlockedByLock && !lockedByGlobalEvent;
-      const enabledModes = ["solo"].filter((mode) => isLobbyModeEnabled(mode));
+      const finalePhase = getFinaleOperationPhase();
+      const finalePlayable = finalePhase !== "post";
+      const selectedModeAvailable = selectedModeEnabled
+        && !ended
+        && !selectedModeBlockedByLock
+        && (selectedLobbyMode === "finale_operation" || !lockedByGlobalEvent)
+        && !(selectedLobbyMode === "finale_operation" && finalePhase === "post");
+      const enabledModes = ["solo", "finale_operation"].filter((mode) => {
+        if (!isLobbyModeEnabled(mode)) return false;
+        if (mode === "finale_operation") return finalePlayable;
+        return true;
+      });
       const modeLabel = getLobbyModeLabel(selectedLobbyMode);
-      const recommendedMode = enabledModes.includes("solo") ? "solo" : (enabledModes[0] || "solo");
+      const recommendedMode = enabledModes.includes("finale_operation")
+        ? "finale_operation"
+        : (enabledModes.includes("solo") ? "solo" : (enabledModes[0] || "solo"));
 
       if (lobbyModeCurrentValue) {
         lobbyModeCurrentValue.textContent = modeLabel;
@@ -62795,7 +63290,13 @@ async function loadMaintenanceStateFromSupabase() {
       const modeStatusChip = document.querySelector(".lobbyModeStatusChip");
       if (modeStatusChip) {
         const anyModeEnabled = enabledModes.length > 0;
-        const statusLabel = isSeason4LiveEventActive()
+        const statusLabel = isFinaleOperationModeSelected()
+          ? (finalePhase === "pre"
+            ? `Finale Operation wartet bis ${FINALE_OPERATION_LABEL}`
+            : (finalePhase === "live"
+              ? "Finale Operation live"
+              : "Finale Operation beendet"))
+          : (isSeason4LiveEventActive()
           ? "Live Event aktiv"
           : ((ended)
           ? "Season vorbei"
@@ -62805,9 +63306,9 @@ async function loadMaintenanceStateFromSupabase() {
             ? "Singleplayer/Custom gesperrt"
           : (!anyModeEnabled
             ? "Modus gesperrt"
-            : (selectedModeAvailable ? "Lobby bereit" : `${modeLabel} eingeschraenkt`)))));
+            : (selectedModeAvailable ? "Lobby bereit" : `${modeLabel} eingeschraenkt`))))));
         modeStatusChip.textContent = statusLabel;
-        modeStatusChip.classList.toggle("isBlocked", !selectedModeAvailable || ended || !anyModeEnabled);
+        modeStatusChip.classList.toggle("isBlocked", (!selectedModeAvailable && !isFinaleOperationModeSelected()) || ended || !anyModeEnabled || (isFinaleOperationModeSelected() && finalePhase === "post"));
         modeStatusChip.classList.toggle("isLimited", !ended && anyModeEnabled && !selectedModeAvailable);
       }
 
@@ -62825,7 +63326,9 @@ async function loadMaintenanceStateFromSupabase() {
       }
       if (modePickerRecommendedValue) modePickerRecommendedValue.textContent = getLobbyModeLabel(recommendedMode);
       if (modePickerRecommendedMeta) {
-        modePickerRecommendedMeta.textContent = "Singleplayer ist ideal fuer freies Erkunden und entspanntes Farmen.";
+        modePickerRecommendedMeta.textContent = recommendedMode === "finale_operation"
+          ? `Live Event mit globalem Sync-Start am ${FINALE_OPERATION_LABEL} Uhr und gemeinsamem Ende.`
+          : "Singleplayer ist ideal fuer freies Erkunden und entspanntes Farmen.";
       }
       if (modePickerLastPlayedValue) modePickerLastPlayedValue.textContent = lastPlayedLobbyMode ? getLobbyModeLabel(lastPlayedLobbyMode) : "Noch keiner";
       if (modePickerLastPlayedMeta) {
@@ -62841,15 +63344,15 @@ async function loadMaintenanceStateFromSupabase() {
       if (lobbyModePickerMenu) {
         lobbyModePickerMenu.querySelectorAll("[data-pick-mode]").forEach((button) => {
           const mode = button.getAttribute("data-pick-mode");
-          if (mode !== "solo") return;
           const badge = button.querySelector("[data-mode-badge]");
           const footer = button.querySelector(".modePickerModeStateText");
           const isSelected = mode === selectedLobbyMode;
           const isRecommended = mode === recommendedMode;
-          const isPlayableMode = mode === "solo";
+          const isPlayableMode = mode === "solo" || mode === "finale_operation";
           const isModeEnabled = isLobbyModeEnabled(mode);
           const lockByCountdown = soloCustomLocked && mode === "solo";
-          const isLocked = (ended || !isModeEnabled || !isPlayableMode || lockByCountdown);
+          const modeEnded = mode === "finale_operation" && finalePhase === "post";
+          const isLocked = (ended || !isModeEnabled || !isPlayableMode || lockByCountdown || modeEnded);
 
           button.classList.toggle("active", isSelected);
           button.classList.toggle("expiring", false);
@@ -62907,6 +63410,12 @@ async function loadMaintenanceStateFromSupabase() {
           if (footer) {
             if (ended) {
               footer.textContent = "Season derzeit beendet";
+            } else if (modeEnded) {
+              footer.textContent = "Event abgeschlossen";
+            } else if (mode === "finale_operation" && finalePhase === "pre") {
+              footer.textContent = `Sync-Start am ${FINALE_OPERATION_LABEL}`;
+            } else if (mode === "finale_operation" && finalePhase === "live") {
+              footer.textContent = `Live bis ${FINALE_OPERATION_END_LABEL}`;
             } else if (lockByCountdown) {
               footer.textContent = "Ab 21.05.2026 23:00 gesperrt";
             } else if (!isModeEnabled) {
@@ -62928,22 +63437,32 @@ async function loadMaintenanceStateFromSupabase() {
       }
 
       if (lobbyReadyBtn) {
-        lobbyReadyBtn.disabled = !selectedModeAvailable;
-        lobbyReadyBtn.textContent = selectedModeAvailable
-          ? "Bereit"
-          : (ended ? "Season vorbei" : (lockedByGlobalEvent ? "Live Event Countdown" : (selectedModeBlockedByLock ? "Singleplayer/Custom gesperrt" : "Modus gesperrt")));
+        const finaleModeBlocked = selectedLobbyMode === "finale_operation" && finalePhase === "post";
+        lobbyReadyBtn.disabled = !selectedModeAvailable || finaleModeBlocked;
+        lobbyReadyBtn.textContent = selectedLobbyMode === "finale_operation"
+          ? (finalePhase === "post" ? "Event beendet" : "Event betreten")
+          : (selectedModeAvailable
+            ? "Bereit"
+            : (ended ? "Season vorbei" : (lockedByGlobalEvent ? "Live Event Countdown" : (selectedModeBlockedByLock ? "Singleplayer/Custom gesperrt" : "Modus gesperrt"))));
       }
       if (modePickerAcceptBtn) {
         modePickerAcceptBtn.textContent = hasActiveCustomGamePreset()
           ? `Custom Game ${customGameState.activeCode} starten`
-          : "Diesen Modus spielen";
-        modePickerAcceptBtn.disabled = selectedModeBlockedByLock || lockedByGlobalEvent;
+          : (selectedLobbyMode === "finale_operation" ? "Finale Operation spielen" : "Diesen Modus spielen");
+        modePickerAcceptBtn.disabled = selectedModeBlockedByLock
+          || (selectedLobbyMode !== "finale_operation" && lockedByGlobalEvent)
+          || (selectedLobbyMode === "finale_operation" && finalePhase === "post");
       }
       if (modePickerAcceptBtnFort) {
-        modePickerAcceptBtnFort.textContent = hasActiveCustomGamePreset()
-          ? `CUSTOM ${customGameState.activeCode} STARTEN`
-          : "ANNEHMEN";
-        modePickerAcceptBtnFort.disabled = selectedModeBlockedByLock || !selectedModeEnabled || lockedByGlobalEvent;
+        modePickerAcceptBtnFort.textContent = selectedLobbyMode === "finale_operation"
+          ? (finalePhase === "post" ? "EVENT BEENDET" : "EVENT AUSWAEHLEN")
+          : (hasActiveCustomGamePreset()
+            ? `CUSTOM ${customGameState.activeCode} STARTEN`
+            : "ANNEHMEN");
+        modePickerAcceptBtnFort.disabled = (selectedLobbyMode === "finale_operation" && finalePhase === "post")
+          || selectedModeBlockedByLock
+          || !selectedModeEnabled
+          || (selectedLobbyMode !== "finale_operation" && lockedByGlobalEvent);
       }
     }
 
@@ -62953,6 +63472,10 @@ async function loadMaintenanceStateFromSupabase() {
         return;
       }
       const targetMode = mode || "solo";
+      if (targetMode === "finale_operation" && getFinaleOperationPhase() === "post") {
+        showMessage(`Finale Operation ist seit ${FINALE_OPERATION_END_LABEL} beendet.`, 2600);
+        return;
+      }
       if (isSoloCustomLocked() && targetMode === "solo") {
         showMessage("Singleplayer ist seit 21.05.2026, 23:00 gesperrt.", 2600);
         return;
@@ -63666,6 +64189,7 @@ async function loadMaintenanceStateFromSupabase() {
             <div>
               <div class="lobbyBetaCardEyebrow">Spielerprofil</div>
               <div class="lobbyBetaCardTitle">Lobby Card</div>
+              <div class="lobbyBetaCardSub" style="margin-top:8px;">Command Center Profilansicht</div>
             </div>
             <div class="lobbyBetaCardBadge">Live</div>
           </div>
@@ -63702,6 +64226,8 @@ async function loadMaintenanceStateFromSupabase() {
     function renderLobbyScreen() {
       if (!lobbyAvatarStage) return;
       const lobbyCenterPanel = document.querySelector("#lobbyScreen .lobbyCenterVNext");
+      const lobbyCenterCommandStrip = document.getElementById("lobbyCenterCommandStrip");
+      const lobbyCenterStatusGrid = document.getElementById("lobbyCenterStatusGrid");
       if (lobbyScreen) {
         lobbyScreen.classList.remove("isSkyMode");
       }
@@ -63729,10 +64255,24 @@ async function loadMaintenanceStateFromSupabase() {
       }
       const preview = getLockerPreviewData();
       const modeLabel = `${getLobbyModeLabel(selectedLobbyMode)} Queue`;
+      const walletValue = Math.max(0, Math.floor(Number(inventory[7] || 0))).toLocaleString("de-DE");
+      const activeBoostEntries = getActiveLiveEventEntries().filter((entry) => ["xpBoost", "passBoost", "communityBoost"].includes(entry.key));
       
-      const stageKicker = "RISS-ZEIT KOMMANDO";
-      const stageTitle = "RISS-HUB";
-      const stageLead = "Chapter 3 Season 4 startet im Bruch der Zeit.";
+      const stageKicker = "COMMAND CENTER";
+      const stageTitle = "OPERATIONS HUB";
+      const stageLead = "Steuere Queue, Build, Progress und Live-Systeme aus einer zentralen Einsatzlobby.";
+
+      if (lobbyCenterCommandStrip) {
+        const finaleCommandText = getFinaleOperationPhase() === "pre"
+          ? `Finale Operation wartet auf den globalen Sync-Start am ${FINALE_OPERATION_LABEL} Uhr.`
+          : (getFinaleOperationPhase() === "live"
+            ? `Finale Operation laeuft live bis ${FINALE_OPERATION_END_LABEL} Uhr.`
+            : "Finale Operation ist beendet. Fortsetzung folgt.");
+        lobbyCenterCommandStrip.innerHTML = `
+          <div class="lobbyCenterCommandStripTitle">Operations Feed</div>
+          <div class="lobbyCenterCommandStripText">${selectedLobbyMode === "finale_operation" ? finaleCommandText : (activeBoostEntries.length ? `Live aktiv: ${activeBoostEntries.map((entry) => entry.label).join(" + ")}` : `${getLobbyModeLabel(selectedLobbyMode)} ist online. Alle Systeme bereit fuer den naechsten Run.`)}</div>
+        `;
+      }
 
       lobbyAvatarStage.innerHTML = `
         <div class="lobbyStageHeroHead" style="top: 20px;">
@@ -63762,6 +64302,26 @@ async function loadMaintenanceStateFromSupabase() {
         </div>
       `
 
+      if (lobbyCenterStatusGrid) {
+        lobbyCenterStatusGrid.innerHTML = `
+          <div class="lobbyCenterStatusCard">
+            <div class="lobbyCenterStatusLabel">Queue State</div>
+            <div class="lobbyCenterStatusValue">${getLobbyModeLabel(selectedLobbyMode)}</div>
+            <div class="lobbyCenterStatusMeta">${selectedLobbyMode === "finale_operation" ? "Global synchronisiertes Live Event mit festem Start und Ende." : "Aktiver Einsatzmodus fuer den naechsten Start."}</div>
+          </div>
+          <div class="lobbyCenterStatusCard">
+            <div class="lobbyCenterStatusLabel">Wallet</div>
+            <div class="lobbyCenterStatusValue">${walletValue}</div>
+            <div class="lobbyCenterStatusMeta">M-Bucks stehen fuer Shop, Pass und Command+ bereit.</div>
+          </div>
+          <div class="lobbyCenterStatusCard">
+            <div class="lobbyCenterStatusLabel">Build Focus</div>
+            <div class="lobbyCenterStatusValue">${preview.bodyName}</div>
+            <div class="lobbyCenterStatusMeta">${preview.eyeName} aktiv • ${activeBoostEntries.length ? "Live Boosts laufen" : "Keine globale Boost-Welle aktiv"}</div>
+          </div>
+        `;
+      }
+
       if (lobbyStatsPanel) {
         const currentTier = getBattlePassCurrentTier();
         const totalTiers = battlePassRewards.length;
@@ -63770,8 +64330,6 @@ async function loadMaintenanceStateFromSupabase() {
         const passXpToNext = Math.max(0, BATTLE_PASS_TIER_XP - passTierXp);
         
         // Active Boosts
-        const activeLiveEvents = getActiveLiveEventEntries();
-        const activeBoostEntries = activeLiveEvents.filter((entry) => ["xpBoost", "passBoost", "communityBoost"].includes(entry.key));
         let boostCardsMarkup = "";
         
         activeBoostEntries.forEach(entry => {
@@ -63850,6 +64408,10 @@ async function loadMaintenanceStateFromSupabase() {
           if (isDowntimeAccessBlocked()) {
             showMessage("Server ist in Wartung. Start ist gesperrt.", 2600);
             if (maintenanceOverlay) maintenanceOverlay.classList.remove("hidden");
+            return;
+          }
+          if (selectedLobbyMode === "finale_operation") {
+            finalizeEnterGameWorld();
             return;
           }
           if (selectedLobbyMode === "datamine") {
@@ -64069,6 +64631,12 @@ async function loadMaintenanceStateFromSupabase() {
       resetCommunityMeteorEvent();
       closeMenus();
       cancelMining();
+      finaleOperationSyncShown = false;
+      finaleOperationStartToastShown = false;
+      finaleOperationEndHandled = false;
+      if (finaleOperationOverlay) finaleOperationOverlay.classList.add("hidden");
+      season4ContinuationOverlayShown = false;
+      if (season4ContinuationOverlay) season4ContinuationOverlay.classList.add("hidden");
       if (lobbyScreen) lobbyScreen.classList.remove("isLaunching");
       if (lobbyReadyBtn) {
         lobbyReadyBtn.classList.remove("isLaunching");
@@ -64121,12 +64689,19 @@ async function loadMaintenanceStateFromSupabase() {
       if (lobbyPortalBtn) lobbyPortalBtn.classList.remove("isLaunching");
 
       const creativeStart = isCreativeModeSelected();
-      currentMatchMode = creativeStart ? "creative" : "normal";
+      currentMatchMode = selectedLobbyMode === "finale_operation"
+        ? "finale_operation"
+        : (creativeStart ? "creative" : "normal");
       isThreeDMode = false;
       lastPlayedLobbyMode = selectedLobbyMode;
       inLobby = false;
       gameStarted = true;
       matchStartGraceUntil = Date.now() + 5000;
+      finaleOperationSyncShown = false;
+      finaleOperationStartToastShown = false;
+      finaleOperationEndHandled = false;
+      season4ContinuationOverlayShown = false;
+      if (season4ContinuationOverlay) season4ContinuationOverlay.classList.add("hidden");
 
       // Matrix View for Data-Mine Mode
       if (selectedLobbyMode === "datamine") {
@@ -64185,6 +64760,10 @@ async function loadMaintenanceStateFromSupabase() {
         }
         clearSlimesNearPlayer(240);
         player.invincibleTimer = Math.max(Number(player.invincibleTimer || 0), 240);
+      }
+      if (currentMatchMode === "finale_operation") {
+        updateFinaleOperationOverlay();
+        showMessage(`Finale Operation wartet auf Sync-Start um ${FINALE_OPERATION_LABEL} Uhr.`, 2600);
       }
       if (isSeason4LiveEventActive()) {
         showMessage(`Live Event Modus aktiv! Finale um ${BATTLE_PASS_END_LABEL_SHORT}.`, 2400);
@@ -64727,7 +65306,7 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function applyMBucksCardMouseEffects() {
-      const cards = document.querySelectorAll(".mbucksStorePack, .mbucksCreditTierBtn");
+      const cards = document.querySelectorAll(".mbucksStorePack, .mbucksCreditTierBtn, .commandPlusPackageGrid .mbucksStorePack");
       cards.forEach((card) => {
         if (!card || card.dataset.mouseFxBound === "1") return;
         card.dataset.mouseFxBound = "1";
@@ -70246,7 +70825,9 @@ async function loadMaintenanceStateFromSupabase() {
         }
       }
 
-      if (gameStarted && !maintenanceMode && !inventoryOpen && !helpOpen && !skillOpen && !craftOpen && !communityEventOpen && !seasonFinaleVoteOpen && !npcOpen && !riftDecisionOpen) {
+      const finaleOperationRuntime = handleFinaleOperationPhase();
+
+      if (gameStarted && !maintenanceMode && !inventoryOpen && !helpOpen && !skillOpen && !craftOpen && !communityEventOpen && !seasonFinaleVoteOpen && !npcOpen && !riftDecisionOpen && !finaleOperationRuntime.freezeGameplay) {
         updatePlayer();
         updateSlimes();
         updateMining();
