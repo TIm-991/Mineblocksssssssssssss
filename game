@@ -48991,20 +48991,20 @@ let shopWishlist = [];
       totalClaims: 0
     };
 
-    const BATTLE_PASS_PREMIUM_PRICE = 950;
+    const BATTLE_PASS_PREMIUM_PRICE = 750;
     const PASS_SUPPORT_PACKAGE_PRICE = 750;
     const CURRENCY_NAME = "M-Bucks";
     const CURRENCY_ICON_PATH = "assets/K8NlPp.png";
-    const BATTLE_PASS_TIER_XP = 100000000;
+    const BATTLE_PASS_TIER_XP = 15000;
     const DAILY_XP_RUSH_START_HOUR = 15;
     const DAILY_XP_RUSH_END_HOUR = 16;
-    const DAILY_XP_RUSH_MULTIPLIER = 10;
+    const DAILY_XP_RUSH_MULTIPLIER = 3;
     const DAILY_XP_RUSH_SPECIAL_START_AT = new Date(2026, 5, 6, 0, 0, 0, 0).getTime();
     const DAILY_XP_RUSH_SPECIAL_END_AT = new Date(2026, 5, 6, 20, 0, 0, 0).getTime();
     const DAILY_XP_RUSH_DAILY_START_DATE = new Date(2026, 5, 7, 15, 0, 0, 0).getTime();
     const BATTLE_PASS_SINGLE_TIER_PRICE = 150;
-    const BATTLE_PASS_25_PACKAGE_PRICE = 2800;
-    const BATTLE_PASS_25_PACKAGE_TIERS = 25;
+    const BATTLE_PASS_25_PACKAGE_PRICE = 2500;
+    const BATTLE_PASS_25_PACKAGE_TIERS = 27;
     const NUDEL_PASS_PRICE = 0;
     const NUDEL_PASS_PAGE_SIZE = 4;
     const STARTER_PACKET_DISABLED = false;
