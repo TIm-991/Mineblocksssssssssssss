@@ -11234,10 +11234,76 @@
     .bpFortProgressBar { height: 14px; border: 1px solid rgba(173,209,255,0.42); background: rgba(19,32,61,0.8); border-radius: 2px; overflow: hidden; }
     .bpFortProgressFill { height: 100%; background: linear-gradient(90deg, #f3c24b, #ffe48e); }
     .bpFortTrack { display: grid; gap: 6px; }
+    .bpFortPageHero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: end;
+      padding: 16px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(191, 230, 255, 0.34);
+      background:
+        radial-gradient(circle at top right, rgba(255, 205, 124, 0.18), transparent 26%),
+        radial-gradient(circle at left center, rgba(112, 212, 255, 0.12), transparent 24%),
+        linear-gradient(135deg, rgba(18, 43, 84, 0.96), rgba(8, 24, 52, 0.98));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .bpFortPageEyebrow {
+      color: rgba(185, 224, 255, 0.74);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .bpFortPageTitle {
+      color: #fff8ef;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 1000;
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .bpFortPageMeta {
+      margin-top: 10px;
+      max-width: 58ch;
+      color: rgba(230, 240, 255, 0.84);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .bpFortPageProgress {
+      align-self: start;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 230, 178, 0.2);
+      background: rgba(255,255,255,0.08);
+      color: #fff0d2;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
     .bpFortTierStrip, .bpFortLaneRow {
       display: grid;
-      grid-template-columns: repeat(8, minmax(0, 1fr));
+      grid-template-columns: repeat(6, minmax(0, 1fr));
       gap: 6px;
+    }
+    .bpFortLaneLabel {
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(176, 214, 255, 0.3);
+      background: rgba(12, 29, 57, 0.72);
+      color: #ecf6ff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .bpFortLaneLabel.premium {
+      border-color: rgba(255, 221, 151, 0.34);
+      background: rgba(76, 56, 21, 0.54);
+      color: #fff3cf;
     }
     .bpFortTierHead {
       height: 34px;
@@ -11277,6 +11343,19 @@
     .bpFortTileIcon { font-size: 34px; line-height: 1; }
     .bpFortTileLabel { font-size: 12px; color: #f3f8ff; font-weight: 700; }
     .bpFortTileMeta { font-size: 11px; color: #d1e4fb; font-weight: 700; }
+    @media (max-width: 1180px) {
+      .bpFortPageHero {
+        grid-template-columns: 1fr;
+      }
+      .bpFortTierStrip, .bpFortLaneRow {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 700px) {
+      .bpFortTierStrip, .bpFortLaneRow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
     .bpFortBottom {
       margin-top: 6px;
       display: flex;
@@ -20091,9 +20170,9 @@
       width: 220px;
       height: 220px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 237, 172, 0.78) 0%, rgba(171, 210, 118, 0.38) 44%, rgba(255, 182, 72, 0) 74%);
-      filter: blur(2px);
-      opacity: 0.72;
+      background: radial-gradient(circle, rgba(204, 232, 255, 0.88) 0%, rgba(124, 186, 255, 0.44) 42%, rgba(112, 115, 255, 0) 74%);
+      filter: blur(4px);
+      opacity: 0.78;
     }
 
 
@@ -20133,8 +20212,8 @@
       bottom: -12vh;
       height: 34vh;
       background:
-        linear-gradient(180deg, rgba(109, 129, 84, 0.22), rgba(58, 72, 48, 0.8)),
-        linear-gradient(90deg, rgba(117, 91, 58, 0.14), rgba(49, 38, 26, 0.18));
+        linear-gradient(180deg, rgba(58, 93, 142, 0.2), rgba(22, 34, 58, 0.86)),
+        linear-gradient(90deg, rgba(98, 121, 255, 0.12), rgba(48, 92, 173, 0.14));
       border-radius: 50% 50% 0 0;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
     }
@@ -20154,8 +20233,8 @@
       width: 90px;
       height: 118vh;
       transform: rotate(24deg);
-      background: linear-gradient(180deg, rgba(182, 218, 151, 0.14), rgba(255, 220, 160, 0.02));
-      opacity: 0.48;
+      background: linear-gradient(180deg, rgba(132, 214, 255, 0.14), rgba(156, 128, 255, 0.03));
+      opacity: 0.46;
     }
 
     .lobbyBackdropDecor::after {
@@ -20163,8 +20242,10 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: linear-gradient(180deg, rgba(6, 10, 18, 0.06), rgba(4, 8, 16, 0.42));
-      opacity: 0.8;
+      background:
+        radial-gradient(circle at 50% 16%, rgba(119, 209, 255, 0.08), transparent 24%),
+        linear-gradient(180deg, rgba(6, 10, 18, 0.04), rgba(4, 8, 16, 0.52));
+      opacity: 0.86;
     }
 
     .lobbySunOrb,
@@ -23285,8 +23366,9 @@
 
     .mbucksStoreReverseGrid {
       display: grid;
-      grid-template-columns: minmax(280px, 360px);
-      justify-content: start;
+      grid-template-columns: repeat(4, minmax(250px, 1fr));
+      gap: 16px;
+      justify-content: stretch;
     }
 
     .mbucksStoreReverseGrid .mbucksStorePack {
@@ -23297,6 +23379,30 @@
       background:
         radial-gradient(circle at top right, rgba(255, 225, 131, 0.2), transparent 26%),
         linear-gradient(180deg, rgba(34, 69, 148, 0.96), rgba(20, 34, 84, 0.98));
+    }
+
+    .mbucksStoreReverseGrid .mbucksStorePack.packReverseSingle {
+      background:
+        radial-gradient(circle at top right, rgba(255, 225, 131, 0.18), transparent 26%),
+        linear-gradient(180deg, rgba(34, 69, 148, 0.96), rgba(20, 34, 84, 0.98));
+    }
+
+    .mbucksStoreReverseGrid .mbucksStorePack.packReverseBoost {
+      background:
+        radial-gradient(circle at top right, rgba(123, 237, 255, 0.2), transparent 28%),
+        linear-gradient(180deg, rgba(22, 82, 140, 0.96), rgba(15, 42, 96, 0.98));
+    }
+
+    .mbucksStoreReverseGrid .mbucksStorePack.packReversePro {
+      background:
+        radial-gradient(circle at top right, rgba(157, 255, 202, 0.2), transparent 28%),
+        linear-gradient(180deg, rgba(24, 98, 104, 0.96), rgba(13, 54, 76, 0.98));
+    }
+
+    .mbucksStoreReverseGrid .mbucksStorePack.packReverseVault {
+      background:
+        radial-gradient(circle at top right, rgba(196, 155, 255, 0.24), transparent 28%),
+        linear-gradient(180deg, rgba(67, 52, 132, 0.96), rgba(29, 22, 84, 0.98));
     }
 
     .mbucksStoreReverseGrid .mbucksStorePackTitle {
@@ -23320,8 +23426,395 @@
       box-shadow: none;
     }
 
+    @media (max-width: 1280px) {
+      .mbucksStoreReverseGrid {
+        grid-template-columns: repeat(2, minmax(250px, 1fr));
+      }
+    }
+
     .mbucksStoreQuickRedeem .achievementCloseBtn {
       min-width: 150px;
+    }
+
+    .refundCenterOverlayCloseBtn {
+      position: fixed;
+      top: 34px;
+      right: 34px;
+      z-index: 1002;
+      min-height: 58px;
+      padding: 14px 28px;
+      border-radius: 22px;
+      border: 2px solid rgba(255,255,255,0.88);
+      background:
+        linear-gradient(180deg, rgba(34, 62, 130, 0.98), rgba(16, 34, 88, 0.99)),
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 1000;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow:
+        0 18px 34px rgba(0,0,0,0.32),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+      cursor: pointer;
+    }
+
+    .refundCenterOverlayCloseBtn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .refundCenterShell {
+      position: relative;
+      width: min(1840px, calc(100vw - 34px));
+      height: calc(100vh - 34px);
+      padding: 28px 30px 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+      background: linear-gradient(180deg, #0f49b8 0%, #1b65d4 100%);
+      color: #ffffff;
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr);
+      gap: 18px;
+      box-shadow: 0 34px 80px rgba(0,0,0,0.42);
+    }
+
+    .refundCenterTopbar {
+      display: block;
+      min-height: 88px;
+      padding-right: 340px;
+    }
+
+    .refundCenterTopbarRight {
+      position: absolute;
+      top: 28px;
+      right: 30px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+      flex-shrink: 0;
+    }
+
+    .refundCenterTitle {
+      margin: 0;
+      font-family: "Bangers", "Arial Black", sans-serif;
+      font-size: clamp(44px, 6vw, 76px);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #fff9f0;
+      text-shadow: 0 10px 20px rgba(0,0,0,0.18);
+      max-width: 100%;
+    }
+
+    .refundCenterWallet {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: linear-gradient(180deg, rgba(22, 54, 201, 0.98), rgba(7, 28, 152, 0.98));
+      border: 3px solid rgba(74, 221, 255, 0.5);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+      font-size: 18px;
+      font-weight: 1000;
+      color: #54e2ff;
+    }
+
+    .refundCenterWallet img {
+      width: 28px;
+      height: 28px;
+    }
+
+    #closeRefundCenterTopBtn {
+      min-height: 52px;
+      margin-top: 0;
+      white-space: nowrap;
+      border-color: rgba(255,255,255,0.9);
+      background:
+        linear-gradient(180deg, rgba(36, 66, 138, 0.98), rgba(20, 39, 94, 0.98)),
+        linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+      box-shadow:
+        0 16px 28px rgba(0,0,0,0.24),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+      color: #ffffff;
+    }
+
+    .refundCenterIntro {
+      padding: 14px 20px;
+      background: rgba(12, 30, 125, 0.82);
+      border: 3px solid rgba(0, 18, 96, 0.4);
+      color: #4fe7ff;
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 1200px) {
+      .refundCenterTopbar {
+        min-height: 0;
+        padding-right: 0;
+      }
+
+      .refundCenterTopbarRight {
+        position: static;
+        margin-top: 14px;
+        justify-content: space-between;
+      }
+
+      .refundCenterOverlayCloseBtn {
+        top: 18px;
+        right: 18px;
+        min-height: 48px;
+        padding: 10px 18px;
+        border-radius: 16px;
+        font-size: 13px;
+      }
+    }
+
+    .refundCenterLayout {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(420px, 0.72fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .refundCenterList,
+    .refundCenterInfoPanel {
+      min-height: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .refundCenterList {
+      overflow: auto;
+      padding-right: 6px;
+    }
+
+    .refundCenterEntry {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      min-height: 132px;
+      padding: 16px 18px;
+      background: rgba(14, 40, 126, 0.76);
+      border: 3px solid rgba(4, 23, 94, 0.52);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .refundCenterEntry.isRefunded {
+      background: rgba(29, 101, 231, 0.78);
+    }
+
+    .refundEntryPreview {
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, rgba(14, 55, 183, 0.94), rgba(39, 133, 255, 0.72));
+      border: 2px solid rgba(104, 237, 255, 0.34);
+      overflow: hidden;
+      font-size: 15px;
+      font-weight: 1000;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .refundEntryPreview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .refundEntryMeta {
+      min-width: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .refundEntryTitleRow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .refundEntryTitle {
+      font-family: "Bangers", "Arial Black", sans-serif;
+      font-size: clamp(28px, 3vw, 42px);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #f8f4ff;
+    }
+
+    .refundEntryStatus {
+      font-size: 13px;
+      font-weight: 1000;
+      font-style: italic;
+      text-transform: uppercase;
+      color: #ff5f9e;
+    }
+
+    .refundEntryStatus.isEligible {
+      color: #62f5ff;
+    }
+
+    .refundEntryStatus.isRefunded {
+      color: #6de7ff;
+    }
+
+    .refundEntryPurchase {
+      color: #d5f5ff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .refundEntryActionWrap {
+      display: grid;
+      justify-items: end;
+      gap: 8px;
+      min-width: 320px;
+    }
+
+    .refundEntryDate {
+      color: #dff8ff;
+      font-size: 14px;
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .refundEntryBtn {
+      min-width: 320px;
+      min-height: 54px;
+      border: 0;
+      background: linear-gradient(180deg, rgba(208, 212, 218, 0.98), rgba(165, 169, 174, 0.98));
+      color: rgba(16, 22, 33, 0.72);
+      font-size: 20px;
+      font-weight: 1000;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: filter 0.18s ease, transform 0.18s ease;
+    }
+
+    .refundEntryBtn.isPrimary {
+      background: linear-gradient(180deg, rgba(105, 255, 236, 0.98), rgba(54, 205, 255, 0.98));
+      color: #083253;
+    }
+
+    .refundEntryBtn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+    }
+
+    .refundEntryBtn:disabled {
+      opacity: 0.68;
+      cursor: not-allowed;
+    }
+
+    .refundCenterInfoPanel {
+      padding: 18px 18px 22px;
+      background: linear-gradient(180deg, rgba(47, 148, 249, 0.98), rgba(19, 108, 220, 0.98));
+      border: 3px solid rgba(7, 58, 148, 0.44);
+      overflow: auto;
+    }
+
+    .refundInfoTitle {
+      font-family: "Bangers", "Arial Black", sans-serif;
+      font-size: 34px;
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #54eefc;
+      margin-bottom: 12px;
+    }
+
+    .refundInfoText {
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .refundTicketGrid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 20px 0 10px;
+    }
+
+    .refundTicketCard {
+      padding: 16px 12px 14px;
+      background: linear-gradient(180deg, rgba(10, 76, 193, 0.82), rgba(11, 52, 160, 0.92));
+      border: 2px solid rgba(129, 255, 255, 0.16);
+      text-align: center;
+      color: #f5ffff;
+    }
+
+    .refundTicketVisual {
+      width: 112px;
+      height: 62px;
+      margin: 0 auto 10px;
+      border-radius: 18px;
+      background: radial-gradient(circle at center, rgba(117, 255, 245, 0.55), transparent 58%), linear-gradient(145deg, rgba(17, 82, 214, 0.98), rgba(8, 35, 118, 0.98));
+      box-shadow: 0 0 26px rgba(117, 255, 245, 0.28);
+      position: relative;
+      transform: rotate(-16deg);
+    }
+
+    .refundTicketVisual::before {
+      content: "";
+      position: absolute;
+      inset: 14px 22px;
+      border-radius: 10px;
+      border: 3px solid rgba(9, 40, 133, 0.92);
+    }
+
+    .refundTicketDate {
+      font-size: 12px;
+      font-weight: 1000;
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
+    .refundTicketAvailableCount {
+      margin-top: 12px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 58px;
+      line-height: 1;
+      font-weight: 1000;
+      font-style: italic;
+    }
+
+    .refundTicketAvailableLabel {
+      text-align: center;
+      color: #4ff0ff;
+      font-size: 24px;
+      font-weight: 1000;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .refundCenterBackRow {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: auto;
+      padding-top: 14px;
+    }
+
+    .refundCenterEmpty {
+      padding: 26px 22px;
+      background: rgba(13, 40, 122, 0.72);
+      border: 3px solid rgba(4, 23, 94, 0.52);
+      color: #d8f8ff;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.5;
     }
 
     @media (max-width: 1320px) {
@@ -23344,6 +23837,9 @@
         font-size: clamp(40px, 12vw, 64px);
       }
       .mbucksStoreGrid {
+        grid-template-columns: 1fr;
+      }
+      .mbucksStoreReverseGrid {
         grid-template-columns: 1fr;
       }
       .mbucksStorePack {
@@ -25423,20 +25919,24 @@
     }
 
     .lobbyBackdropDecor {
-      background: none;
-      opacity: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(90, 210, 255, 0.12), transparent 24%),
+        radial-gradient(circle at 84% 16%, rgba(122, 110, 255, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(3, 8, 18, 0.24), rgba(2, 5, 12, 0.58));
+      opacity: 1;
     }
 
     .lobbySunOrb {
-      width: 600px;
-      height: 600px;
-      top: 50%;
-      left: 50%;
+      width: 760px;
+      height: 760px;
+      top: 44%;
+      left: 72%;
       transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, rgba(59, 130, 246, 0.2) 40%, transparent 70%);
-      filter: blur(60px);
-      opacity: 0.6;
-      animation: floatOrb 20s ease-in-out infinite;
+      background:
+        radial-gradient(circle, rgba(121, 114, 255, 0.34) 0%, rgba(69, 164, 255, 0.18) 34%, rgba(72, 221, 255, 0.08) 52%, transparent 74%);
+      filter: blur(74px);
+      opacity: 0.82;
+      animation: floatOrb 22s ease-in-out infinite;
     }
 
     @keyframes floatOrb {
@@ -25447,7 +25947,7 @@
     .lobbyDune,
     .lobbyDune.back,
     .lobbySandRibbon {
-      display: none;
+      display: block;
     }
 
     .lobbyLayout {
@@ -36406,11 +36906,11 @@
     }
     /* === SOLO HUD REBUILD V4: command neon === */
     .hudRack {
-      top: 18px;
-      left: 18px;
-      right: 18px;
-      grid-template-columns: minmax(320px, 420px) minmax(260px, 360px);
-      gap: 18px;
+      top: 14px;
+      left: 14px;
+      right: 14px;
+      grid-template-columns: minmax(280px, 360px) minmax(220px, 310px);
+      gap: 14px;
       align-items: start;
     }
 
@@ -36419,8 +36919,8 @@
         linear-gradient(180deg, rgba(16, 21, 36, 0.95), rgba(9, 12, 24, 0.92)),
         repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 28px);
       border: 1px solid rgba(249, 168, 90, 0.42);
-      border-radius: 12px;
-      padding: 14px;
+      border-radius: 10px;
+      padding: 10px;
       box-shadow:
         0 20px 40px rgba(0, 0, 0, 0.44),
         inset 0 0 0 1px rgba(255, 220, 182, 0.08);
@@ -36429,13 +36929,13 @@
     .heartsHud {
       background: linear-gradient(180deg, rgba(28, 18, 25, 0.9), rgba(16, 10, 14, 0.84));
       border: 1px solid rgba(255, 126, 126, 0.46);
-      border-radius: 10px;
-      padding: 12px;
+      border-radius: 9px;
+      padding: 9px;
     }
 
     .heartChip {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       border-radius: 5px;
       border: 1px solid rgba(255, 255, 255, 0.14);
       background: rgba(255, 255, 255, 0.06);
@@ -36452,8 +36952,8 @@
         linear-gradient(180deg, rgba(12, 28, 22, 0.9), rgba(7, 17, 13, 0.86)),
         radial-gradient(100% 120% at 100% 0%, rgba(76, 255, 177, 0.16), transparent 55%);
       border: 1px solid rgba(117, 242, 183, 0.44);
-      border-radius: 10px;
-      padding: 12px;
+      border-radius: 9px;
+      padding: 9px;
       box-shadow: inset 0 0 0 1px rgba(188, 255, 226, 0.07);
     }
 
@@ -36469,18 +36969,18 @@
       box-shadow: 0 0 16px rgba(103, 240, 196, 0.52);
     }
     .questMiniHud {
-      margin-top: 10px;
-      padding-top: 10px;
+      margin-top: 8px;
+      padding-top: 8px;
       border-top: 1px solid rgba(180, 255, 219, 0.2);
       display: grid;
-      gap: 6px;
+      gap: 5px;
     }
     .questMiniTop {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      font-size: 11px;
+      font-size: 10px;
       color: rgba(220, 255, 241, 0.9);
     }
     .questMiniTitle {
@@ -36489,7 +36989,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 220px;
+      max-width: 190px;
     }
     .questMiniMeta {
       font-weight: 700;
@@ -36512,7 +37012,7 @@
       box-shadow: 0 0 10px rgba(255, 183, 67, 0.34);
     }
     .questMiniBarWrap {
-      height: 7px;
+      height: 6px;
       border-radius: 999px;
       border: 1px solid rgba(175, 255, 223, 0.24);
       background: rgba(255, 255, 255, 0.08);
@@ -36525,9 +37025,101 @@
       box-shadow: 0 0 12px rgba(94, 240, 182, 0.38);
     }
     .questMiniDesc {
-      font-size: 10px;
+      font-size: 9px;
       color: rgba(198, 240, 222, 0.76);
       line-height: 1.35;
+    }
+
+    .xpSeasonStrip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(116, 214, 255, 0.14), rgba(255, 190, 120, 0.12));
+      border: 1px solid rgba(178, 234, 255, 0.18);
+      color: rgba(235, 247, 255, 0.92);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .xpSeasonStrip strong {
+      color: #fff0ca;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+
+    .xpStatRail {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .xpStatChip {
+      padding: 6px 8px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(190, 242, 222, 0.14);
+    }
+
+    .xpStatChipLabel {
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(193, 244, 223, 0.62);
+    }
+
+    .xpStatChipValue {
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #efffff;
+    }
+
+    .heartsMetaRow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .heartsMetaTag {
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(242, 232, 239, 0.86);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hotbarHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 2px;
+      color: rgba(225, 235, 252, 0.85);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hotbarHeader strong {
+      color: #fff6dd;
+      font-size: 11px;
+      letter-spacing: 0.08em;
     }
 
     .soloDirectiveHud,
@@ -36537,6 +37129,8 @@
       background:
         linear-gradient(145deg, rgba(9, 16, 30, 0.94), rgba(7, 11, 24, 0.9)) !important;
       box-shadow: 0 14px 28px rgba(0, 0, 0, 0.4);
+      padding: 8px !important;
+      gap: 5px !important;
     }
 
     .chainReactionHud {
@@ -36785,9 +37379,10 @@
       place-items: center;
       padding: 24px;
       background:
-        radial-gradient(circle at 14% 18%, rgba(102, 210, 255, 0.24), transparent 34%),
-        radial-gradient(circle at 86% 84%, rgba(255, 177, 102, 0.22), transparent 38%),
-        linear-gradient(160deg, rgba(4, 8, 18, 0.94), rgba(2, 4, 10, 0.98));
+        radial-gradient(circle at 16% 22%, rgba(102, 210, 255, 0.22), transparent 30%),
+        radial-gradient(circle at 84% 18%, rgba(123, 110, 255, 0.2), transparent 34%),
+        radial-gradient(circle at 70% 82%, rgba(255, 177, 102, 0.18), transparent 36%),
+        linear-gradient(160deg, rgba(2, 6, 14, 0.96), rgba(2, 5, 12, 0.995));
       opacity: 0;
       pointer-events: none;
       transition: opacity 260ms ease;
@@ -36807,9 +37402,9 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      opacity: 0.48;
-      transform: scale(1.06);
-      filter: saturate(1.08) brightness(0.64);
+      opacity: 0.42;
+      transform: scale(1.08);
+      filter: saturate(1.12) brightness(0.48) blur(1px);
     }
 
     .loginLoadingOverlay::after {
@@ -36817,29 +37412,33 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 50% 36%, rgba(95, 195, 255, 0.22), transparent 38%),
-        linear-gradient(180deg, rgba(3, 7, 14, 0.64), rgba(3, 7, 14, 0.92));
-      backdrop-filter: blur(3px);
+        radial-gradient(circle at 50% 34%, rgba(95, 195, 255, 0.22), transparent 34%),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(3, 7, 14, 0.52), rgba(3, 7, 14, 0.9));
+      background-size: auto, 34px 34px, 34px 34px, auto;
+      backdrop-filter: blur(4px);
     }
 
     .loginLoadingShell {
       position: relative;
       z-index: 2;
-      width: min(1140px, calc(100vw - 32px));
-      min-height: min(560px, calc(100vh - 32px));
-      padding: clamp(28px, 4vw, 46px);
-      border-radius: 34px;
-      border: 1px solid rgba(174, 219, 255, 0.24);
+      width: min(1180px, calc(100vw - 32px));
+      min-height: min(620px, calc(100vh - 32px));
+      padding: clamp(28px, 4vw, 48px);
+      border-radius: 36px;
+      border: 1px solid rgba(174, 219, 255, 0.28);
       background:
-        radial-gradient(circle at top right, rgba(132, 121, 255, 0.22), transparent 34%),
-        radial-gradient(circle at left bottom, rgba(102, 215, 255, 0.16), transparent 28%),
-        linear-gradient(160deg, rgba(8, 16, 30, 0.84), rgba(5, 10, 20, 0.92));
-      backdrop-filter: blur(14px);
+        radial-gradient(circle at top right, rgba(132, 121, 255, 0.24), transparent 30%),
+        radial-gradient(circle at left bottom, rgba(102, 215, 255, 0.16), transparent 26%),
+        linear-gradient(160deg, rgba(8, 16, 30, 0.8), rgba(5, 10, 20, 0.9));
+      backdrop-filter: blur(16px);
       box-shadow:
         0 42px 98px rgba(0, 0, 0, 0.58),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 0 1px rgba(255,255,255,0.02);
       display: grid;
-      gap: 22px;
+      gap: 24px;
       align-content: center;
       overflow: hidden;
     }
@@ -36862,6 +37461,18 @@
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
+    }
+
+    .loginLoadingHeroRow {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .loginLoadingHeroText {
+      display: grid;
+      gap: 10px;
     }
 
     .loginLoadingChip {
@@ -36900,6 +37511,14 @@
       text-shadow: 0 20px 44px rgba(0, 0, 0, 0.56);
     }
 
+    .loginLoadingKicker {
+      font-size: 12px;
+      font-weight: 1000;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(208, 227, 248, 0.74);
+    }
+
     .loginLoadingText {
       margin: 0;
       font-size: clamp(18px, 2.8vw, 36px);
@@ -36910,12 +37529,23 @@
       text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
+    .loginLoadingSpinnerWrap {
+      min-width: 180px;
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(173, 222, 255, 0.18);
+      background: rgba(8, 14, 24, 0.42);
+    }
+
     .loginLoadingSpinner {
-      width: 58px;
-      height: 58px;
+      width: 72px;
+      height: 72px;
       margin: 0;
       border-radius: 50%;
-      border: 5px solid rgba(255, 255, 255, 0.2);
+      border: 6px solid rgba(255, 255, 255, 0.16);
       border-top-color: #6de5ff;
       border-right-color: #92ffc3;
       animation: loginLoadingSpin 0.85s linear infinite;
@@ -36923,20 +37553,28 @@
       box-shadow: 0 0 26px rgba(109, 229, 255, 0.28);
     }
 
+    .loginLoadingSpinnerLabel {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(214, 232, 250, 0.82);
+    }
+
     .loginLoadingProgressWrap {
       width: 100%;
       margin: 0;
       display: grid;
       gap: 10px;
-      padding: 18px;
-      border-radius: 22px;
+      padding: 18px 18px 16px;
+      border-radius: 24px;
       border: 1px solid rgba(170, 221, 255, 0.18);
-      background: rgba(4, 9, 18, 0.58);
+      background: linear-gradient(180deg, rgba(4, 9, 18, 0.68), rgba(6, 13, 24, 0.46));
     }
 
     .loginLoadingProgressBar {
       width: 100%;
-      height: 18px;
+      height: 20px;
       border-radius: 999px;
       overflow: hidden;
       background: rgba(255, 255, 255, 0.14);
@@ -36948,7 +37586,7 @@
       width: 0%;
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, #5dd4ff, #7fffb7);
+      background: linear-gradient(90deg, #62d6ff, #81eaff 40%, #8dffbc 100%);
       box-shadow: 0 0 18px rgba(93, 212, 255, 0.58);
       transition: width 180ms linear;
     }
@@ -36976,6 +37614,12 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .loginLoadingHeroRow {
+        grid-template-columns: 1fr;
+      }
     }
 
     @keyframes loginLoadingPulse {
@@ -37094,11 +37738,31 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
+      gap: 18px;
+      padding: 12px 16px;
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(8, 14, 24, 0.55);
+    }
+
+    #startScreen .startLogoSection,
+    #startScreen .startTopBarRight,
+    #startScreen .startLogoMeta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #startScreen .startTopBarRight {
+      margin-left: auto;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    #startScreen .startLogoMeta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
     }
 
     #startScreen .startLogo {
@@ -37119,6 +37783,31 @@
       font-size: 38px;
       letter-spacing: 0.08em;
       color: #fffaf0;
+    }
+
+    #startScreen .startBrandSubline {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(177, 214, 255, 0.72);
+    }
+
+    #startScreen .startEventTopChip {
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff0d8;
+      border: 1px solid rgba(255, 196, 129, 0.34);
+      background: linear-gradient(135deg, rgba(84, 42, 24, 0.76), rgba(20, 52, 84, 0.72));
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
     }
 
     #startScreen .startStatusPing {
@@ -37159,8 +37848,106 @@
     #startScreen .startRailSection {
       padding: 18px;
       display: grid;
-      gap: 10px;
+      gap: 12px;
       align-content: start;
+    }
+
+    #startScreen .startOpsCountdownCard,
+    #startScreen .startOpsStoryCard {
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        radial-gradient(circle at top right, rgba(255, 189, 119, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        rgba(13, 20, 34, 0.72);
+      padding: 16px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    #startScreen .startOpsCountdownLabel,
+    #startScreen .startOpsStoryEyebrow {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(169, 245, 255, 0.74);
+    }
+
+    #startScreen .startOpsCountdownValue {
+      margin-top: 10px;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 1000;
+      color: #fffaf2;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    #startScreen .startOpsCountdownMeta {
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: rgba(234, 241, 250, 0.82);
+      line-height: 1.45;
+    }
+
+    #startScreen .startOpsStoryLead {
+      margin-top: 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(231, 239, 249, 0.86);
+    }
+
+    #startScreen .startEventTimeline {
+      display: grid;
+      gap: 10px;
+    }
+
+    #startScreen .startEventStep {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        rgba(8, 14, 25, 0.76);
+    }
+
+    #startScreen .startEventStepIndex {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 1000;
+      color: #0a1628;
+      background: linear-gradient(135deg, #ffc27b, #73d8ff);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22);
+    }
+
+    #startScreen .startEventStepPhase {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(170, 244, 255, 0.72);
+      margin-bottom: 4px;
+    }
+
+    #startScreen .startEventStepTitle {
+      font-size: 15px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    #startScreen .startEventStepText {
+      font-size: 12px;
+      line-height: 1.5;
+      color: rgba(225, 234, 246, 0.82);
     }
 
     #startScreen .startRailTitle {
@@ -37212,6 +37999,25 @@
       margin-bottom: 10px;
     }
 
+    #startScreen .startHeroPillRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    #startScreen .startHeroPill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(240, 246, 255, 0.88);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
     #startScreen .startHeroTitle {
       margin: 0;
       font-size: clamp(42px, 5.2vw, 84px);
@@ -37236,6 +38042,32 @@
     #startScreen .startFeatures {
       display: grid;
       gap: 10px;
+    }
+
+    #startScreen .startHeroNarrative {
+      margin-top: 4px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      background:
+        radial-gradient(circle at top right, rgba(110, 209, 255, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+        rgba(10, 18, 31, 0.74);
+    }
+
+    #startScreen .startHeroNarrativeTitle {
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 221, 176, 0.86);
+      margin-bottom: 8px;
+    }
+
+    #startScreen .startHeroNarrativeText {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(232, 240, 250, 0.88);
     }
 
     #startScreen .startFeature {
@@ -37284,6 +38116,44 @@
       align-content: start;
       gap: 12px;
       position: relative;
+    }
+
+    #startScreen .startAccessIntro {
+      display: grid;
+      gap: 8px;
+      padding: 4px 0 2px;
+    }
+
+    #startScreen .startAccessEyebrow {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(162, 245, 229, 0.84);
+    }
+
+    #startScreen .startAccessLead {
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(230, 239, 250, 0.84);
+    }
+
+    #startScreen .startQuickStatusRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #startScreen .startQuickStatusChip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: rgba(237, 244, 255, 0.86);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     #startScreen .startFormSection::before {
@@ -37474,6 +38344,10 @@
       #startScreen .startRailSection {
         order: 3;
       }
+
+      #startScreen .startTopBar {
+        align-items: flex-start;
+      }
     }
 
     @media (max-width: 760px) {
@@ -37486,6 +38360,17 @@
 
       #startScreen .startBrandName {
         font-size: 28px;
+      }
+
+      #startScreen .startTopBar,
+      #startScreen .startLogoSection,
+      #startScreen .startTopBarRight {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      #startScreen .startTopBarRight {
+        margin-left: 0;
       }
 
       #startScreen .startHeroTitle {
@@ -38859,7 +39744,6 @@
           <div class="startRailCard">Tipp: Nutze 4-8 Ziffern für PIN und sichere deinen Zugang.</div>
         </aside>
 
-        <!-- Left: Hero Section -->
         <div class="startHeroSection">
           <div class="startHeroContent">
             <div class="startHeroTagline">Bereit für den Einsatz</div>
@@ -38873,7 +39757,6 @@
               <span class="startVersion">v2.4 | Command Season Active</span>
             </p>
 
-            <!-- Feature Highlights -->
             <div class="startFeatures">
               <div class="startFeature">
                 <div class="startFeatureIcon">☁️</div>
@@ -38900,15 +39783,12 @@
           </div>
         </div>
 
-        <!-- Right: Login Form -->
         <div class="startFormSection">
-          <!-- Login Tabs -->
           <div class="startLoginTabs">
             <button class="startTab startTabActive" data-tab="login">LOGIN</button>
             <button class="startTab" data-tab="create">CREATE</button>
           </div>
 
-          <!-- Login Form -->
           <div class="startTabContent startTabContentActive" data-content="login">
             <div class="startFormTitle">Zugang freischalten</div>
             <form class="startLoginForm" onsubmit="event.preventDefault(); loginWithPinAction();">
@@ -38993,12 +39873,18 @@
     <div class="loginLoadingShell">
       <div class="loginLoadingTopline">
         <span class="loginLoadingChip isLive">Cloud Sync aktiv</span>
-        <span class="loginLoadingChip">Chapter 3 • Season 4</span>
+        <span class="loginLoadingChip">Chapter 4 • Season 1</span>
       </div>
-      <h2 class="loginLoadingTitle">MINEBLOCK</h2>
-      <p id="loginLoadingText" class="loginLoadingText">Anmeldung läuft ...</p>
-      <div style="display:flex;justify-content:center;">
-        <div class="loginLoadingSpinner" aria-hidden="true"></div>
+      <div class="loginLoadingHeroRow">
+        <div class="loginLoadingHeroText">
+          <h2 class="loginLoadingTitle">MINEBLOCK</h2>
+          <div class="loginLoadingKicker">Arena Network • New Dawn Access</div>
+          <p id="loginLoadingText" class="loginLoadingText">Anmeldung läuft ...</p>
+        </div>
+        <div class="loginLoadingSpinnerWrap">
+          <div class="loginLoadingSpinner" aria-hidden="true"></div>
+          <div class="loginLoadingSpinnerLabel">Session Sync</div>
+        </div>
       </div>
       <div class="loginLoadingProgressWrap">
         <div class="loginLoadingProgressBar">
@@ -39031,7 +39917,7 @@
     <div class="lobbyHub">
       <header class="lobbyHeader lobbyVNextHeader">
         <div class="lobbyBranding">
-          <div class="modernMeta lobbySeasonMeta">ARENA NETWORK • Season 4</div>
+          <div class="modernMeta lobbySeasonMeta">ARENA NETWORK • Chapter 4 Season 1</div>
           <div class="modernTitle lobbyHubTitle">MINEBLOCK COMMAND LOBBY</div>
           <div class="lobbyCommandRail">
             <span class="lobbyCommandChip">HQ Online</span>
@@ -39239,6 +40125,7 @@
           <span class="mbucksStoreEpicTag"><img src="assets/K8NlPp.png" alt="M-Bucks"> M-Bucks Shop</span>
         </div>
         <div class="mbucksStoreActionRail">
+          <button id="openRefundCenterBtn" class="achievementCloseBtn" type="button">Rueckerstattung</button>
           <button id="mbucksStoreRefreshBtn" class="achievementCloseBtn" type="button">Status prüfen</button>
           <button id="closeMBucksStoreBtn" class="achievementCloseBtn" type="button">Schließen</button>
         </div>
@@ -39356,17 +40243,17 @@
         <div class="mbucksStoreReverseHead">
           <div>
             <div class="mbucksStoreReverseTitle">ADMIN-COIN KAUFEN</div>
-            <div class="mbucksStoreReverseLead">Nutze deine vorhandenen M-Bucks, um dir direkt 1 AC Coin als Extra-Guthaben zu holen. Dieser Coin kann danach sofort wieder in diesem Menü eingelöst werden.</div>
+            <div class="mbucksStoreReverseLead">Nutze deine vorhandenen M-Bucks, um dir direkt neues AC-Guthaben zu sichern. Alle Karten bleiben im selben Wallet-System und lassen sich danach sofort wieder hier einlösen.</div>
           </div>
-          <div class="mbucksStoreReverseMeta"><img src="assets/K8NlPp.png" alt="M-Bucks"> 1.000 M-Bucks = 1 AC Coin</div>
+          <div class="mbucksStoreReverseMeta"><img src="assets/K8NlPp.png" alt="M-Bucks"> Reverse Exchange • M-Bucks → Admin-Coin</div>
         </div>
         <div class="mbucksStoreReverseGrid">
-          <div class="mbucksStorePack packReverse">
+          <div class="mbucksStorePack packReverse packReverseSingle">
             <div class="mbucksStorePackBadge">
               <span class="mbucksStorePackBadgeValue">1 AC</span>
               <span class="mbucksStorePackBadgeLabel">Exchange</span>
             </div>
-            <div class="mbucksStorePackTitle">Admin Coin Card</div>
+            <div class="mbucksStorePackTitle">Solo Card</div>
             <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">1.000 M-Bucks</div>
             <div class="mbucksStorePackMeta">Direkter Reverse-Trade für dein AC-Guthaben. Perfekt, wenn du M-Bucks gezielt wieder in Admin-Coin zurücklegen willst.</div>
             <div class="mbucksStoreCoinPile">
@@ -39377,7 +40264,95 @@
               <img src="assets/K8NlPp.png" alt="M-Bucks">
             </div>
             <div class="mbucksStorePackPrice">+1 AC Coin</div>
-            <button id="buyAdminCoinFromMBucksBtn" class="achievementCloseBtn mbucksReverseBuyBtn" type="button">Für 1.000 M-Bucks kaufen</button>
+            <button id="buyAdminCoinFromMBucksBtn" class="achievementCloseBtn mbucksReverseBuyBtn" data-admin-coin-pack="single" type="button">Für 1.000 M-Bucks kaufen</button>
+          </div>
+          <div class="mbucksStorePack packReverse packReverseBoost">
+            <div class="mbucksStorePackBadge">
+              <span class="mbucksStorePackBadgeValue">3 AC</span>
+              <span class="mbucksStorePackBadgeLabel">Popular</span>
+            </div>
+            <div class="mbucksStorePackTitle">Boost Card</div>
+            <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">2.800 M-Bucks</div>
+            <div class="mbucksStorePackMeta">Schneller Mehrfach-Kauf für Shop- und Premium-Pläne. Etwas besserer Gegenwert als die Solo Card.</div>
+            <div class="mbucksStoreCoinPile">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+            </div>
+            <div class="mbucksStorePackPrice">+3 AC Coin</div>
+            <button class="achievementCloseBtn mbucksReverseBuyBtn" data-admin-coin-pack="boost" type="button">Für 2.800 M-Bucks kaufen</button>
+          </div>
+          <div class="mbucksStorePack packReverse packReversePro">
+            <div class="mbucksStorePackBadge">
+              <span class="mbucksStorePackBadgeValue">5 AC</span>
+              <span class="mbucksStorePackBadgeLabel">Value</span>
+            </div>
+            <div class="mbucksStorePackTitle">Pro Card</div>
+            <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">4.500 M-Bucks</div>
+            <div class="mbucksStorePackMeta">Der starke Mid-Tier für größere Vorhaben. Ideal, wenn du konstant mit AC arbeiten willst.</div>
+            <div class="mbucksStoreCoinPile">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+            </div>
+            <div class="mbucksStorePackPrice">+5 AC Coin</div>
+            <button class="achievementCloseBtn mbucksReverseBuyBtn" data-admin-coin-pack="pro" type="button">Für 4.500 M-Bucks kaufen</button>
+          </div>
+          <div class="mbucksStorePack packReverse packReverseVault">
+            <div class="mbucksStorePackBadge">
+              <span class="mbucksStorePackBadgeValue">10 AC</span>
+              <span class="mbucksStorePackBadgeLabel">Best Deal</span>
+            </div>
+            <div class="mbucksStorePackTitle">Vault Card</div>
+            <div class="mbucksStorePackAmount"><img class="currencyIcon" src="assets/K8NlPp.png" alt="M-Bucks">8.500 M-Bucks</div>
+            <div class="mbucksStorePackMeta">Großes Reservepaket mit dem stärksten Gegenwert. Perfekt, wenn du dir AC-Vorrat sichern willst.</div>
+            <div class="mbucksStoreCoinPile">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+              <img src="assets/K8NlPp.png" alt="M-Bucks">
+            </div>
+            <div class="mbucksStorePackPrice">+10 AC Coin</div>
+            <button class="achievementCloseBtn mbucksReverseBuyBtn" data-admin-coin-pack="vault" type="button">Für 8.500 M-Bucks kaufen</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="refundCenterMenu" class="inventoryMenu hidden">
+    <button id="closeRefundCenterOverlayBtn" class="refundCenterOverlayCloseBtn" type="button">Schliessen</button>
+    <div class="refundCenterShell">
+      <div class="refundCenterTopbar">
+        <h1 class="refundCenterTitle">Zurueckgeben oder Kauf rueckgaengig machen</h1>
+        <div class="refundCenterTopbarRight">
+          <div id="refundCenterWallet" class="refundCenterWallet"><img src="assets/K8NlPp.png" alt="M-Bucks">0</div>
+          <button id="closeRefundCenterTopBtn" class="achievementCloseBtn" type="button">Schliessen</button>
+        </div>
+      </div>
+      <div class="refundCenterIntro">
+        Ausschliesslich M-Bucks-Kaeufe aus dem Item-Shop koennen hier rueckgaengig gemacht werden. Innerhalb von 24 Stunden kannst du unbenutzte Kosmetik direkt stornieren. Bis zu 30 Tage lang kannst du stattdessen ein Rueckgabeticket einsetzen.
+      </div>
+      <div class="refundCenterLayout">
+        <div id="refundCenterList" class="refundCenterList"></div>
+        <div class="refundCenterInfoPanel">
+          <div class="refundInfoTitle">Kauf rueckgaengig machen</div>
+          <div class="refundInfoText">
+            Du kannst unbeabsichtigte M-Bucks-Kaeufe rueckgaengig machen. Solange ein Kauf nicht aktiv ausgeruestet ist und noch innerhalb des 24h-Fensters liegt, brauchst du kein Ticket. Danach bleibt ein 30-Tage-Fenster fuer Rueckgabetickets.
+          </div>
+          <div id="refundTicketGrid" class="refundTicketGrid"></div>
+          <div id="refundTicketAvailableCount" class="refundTicketAvailableCount">0</div>
+          <div class="refundTicketAvailableLabel">Rueckgabeticket(s) verfuegbar</div>
+          <div id="refundInfoFooter" class="refundInfoText" style="margin-top:16px;">
+            Sobald ein Ticket verwendet wurde, laedt sich derselbe Slot 365 Tage spaeter wieder auf. Maximal 3 Tickets gleichzeitig.
+          </div>
+          <div class="refundCenterBackRow">
+            <button id="closeRefundCenterBtn" class="achievementCloseBtn" type="button">Zurueck</button>
           </div>
         </div>
       </div>
@@ -39468,7 +40443,7 @@
               <div class="modeFortTileBg modeFortBgSolo"></div>
               <div class="modeFortTileBar"><strong>SINGLEPLAYER</strong></div>
             </button>
-            <button class="modeFortTile" id="modeCardFinaleOperation" data-pick-mode="finale_operation" data-category="event">
+            <button class="modeFortTile hidden" id="modeCardFinaleOperation" data-pick-mode="finale_operation" data-category="event">
               <div class="modeFortTileBg modeFortBgWorkshop"></div>
               <div class="modeFortTileBar"><strong>FINALE OPERATION</strong></div>
             </button>
@@ -39897,7 +40872,7 @@
             <span>Realtime aktiv</span>
           </div>
         </div>
-        <div class="adminStatusPill">Season 4 Control</div>
+        <div class="adminStatusPill">Chapter 4 Control</div>
       </div>
 
       <div class="adminTabs">
@@ -40023,11 +40998,11 @@
           <div class="adminSectionTitle">Live & Rabatte</div>
 
           <div class="adminControlCard adminSeasonResetCard">
-            <div class="adminSectionEyebrow">Season 4 Reset</div>
+            <div class="adminSectionEyebrow">Chapter 4 Reset</div>
             <div class="adminModeTitle">Hard Reset für neue Season</div>
             <div class="smallInfo">Setzt Level, XP, Skillpunkte, Battle Pass, Claims und Saison-Fortschritt zurück. Premium muss danach neu gekauft werden.</div>
             <div class="adminToggleRow">
-              <button id="adminSeasonHardResetBtn" class="achievementCloseBtn adminDangerBtn">Season 4 Hard Reset</button>
+              <button id="adminSeasonHardResetBtn" class="achievementCloseBtn adminDangerBtn">Chapter 4 Hard Reset</button>
             </div>
             <div id="adminSeasonHardResetInfo" class="smallInfo"></div>
           </div>
@@ -40448,7 +41423,7 @@
       <div class="helpHero">
         <div class="helpHeroText">
           <div class="helpTitle">Tutorial</div>
-        <div class="helpLead">Alles Wichtige für Lobby, Start ins Spiel und Chapter 3 Season 4 auf einen Blick. Schnell rein, schnell los.</div>
+        <div class="helpLead">Alles Wichtige für Lobby, Start ins Spiel und Chapter 4 Season 1 auf einen Blick. Schnell rein, schnell los.</div>
         </div>
         <div class="helpBadge">Chapter 3 • S4 Guide</div>
       </div>
@@ -40534,7 +41509,7 @@
           <div class="helpPanelTitle">Lobby & Kapitel</div>
           <div class="helpPillGrid">
             <div class="helpPill">Shop, Spind, Creator, Twitch und Battle Pass sind nur in der Lobby sichtbar und oben erreichbar.</div>
-            <div class="helpPill">Chapter 3 Season 4 baut das Rift-Setup weiter aus. Neue Runs starten direkt im Hub.</div>
+            <div class="helpPill">Chapter 4 Season 1 bringt New Dawn Protocol, neue Weltzonen und eine frische Pass-Route. Neue Runs starten direkt im Hub.</div>
             <div class="helpPill">Daily Shop & Events findest du in der Lobby rechts, Boosts oben.</div>
             <div class="helpPill">Wenn die Lobby aktiv ist, kannst du dort jederzeit Modus und Party checken.</div>
           </div>
@@ -40613,7 +41588,7 @@
 
   <div id="season4ContinuationOverlay" class="season4ContinuationOverlay hidden">
     <div class="season4ContinuationBox">
-      <div class="season4ContinuationKicker">Season 4 Wuerfel</div>
+      <div class="season4ContinuationKicker">Archive Signal</div>
       <h1 class="season4ContinuationTitle">FORTSETZUNG FOLGT</h1>
       <p class="season4ContinuationMeta">Das Event ist abgeschlossen. Danke fuers Zuschauen. Die naechste Phase startet bald.</p>
     </div>
@@ -40623,7 +41598,7 @@
     <div class="season4ContinuationBox">
       <div id="finaleOperationKicker" class="season4ContinuationKicker">Finale Operation</div>
       <h1 id="finaleOperationTitle" class="season4ContinuationTitle">SYNC WARTET</h1>
-      <p id="finaleOperationMeta" class="season4ContinuationMeta">Der Live-Countdown endet am 05.06.2026 um 15:30 Uhr. Alle Spieler starten gleichzeitig in New Dawn Protocol.</p>
+      <p id="finaleOperationMeta" class="season4ContinuationMeta">Der Live-Countdown endet am 05.06.2026 um 15:10 Uhr. Alle Spieler starten gleichzeitig in New Dawn Protocol.</p>
     </div>
   </div>
 
@@ -40854,12 +41829,12 @@
       <section class="crewRoadmap">
         <div class="crewRoadmapHeader">
           <div class="crewRoadmapTitle">Chapter Timeline</div>
-          <div class="crewRoadmapMeta">Live-Plan: Chapter 3 Season 4 bis Chapter 4 Season 3</div>
+          <div class="crewRoadmapMeta">Live-Plan: Chapter 4 Season 1 bis Chapter 4 Season 3</div>
         </div>
         <div class="crewRoadmapGrid">
           <div class="crewRoadmapCard done">
             <div class="crewRoadmapCheck">✓</div>
-            <div class="crewRoadmapLabel">Chapter 3 · Season 4</div>
+            <div class="crewRoadmapLabel">Chapter 4 · Season 1</div>
             <div class="crewRoadmapItem">Rift Stabilization</div>
             <div class="crewRoadmapText">Wartungs-Bridge, Konto-Sync, Popup-UX, Shop 3.0 und Queue/Mode-Rework.</div>
           </div>
@@ -41182,7 +42157,7 @@
         </div>
         <div class="skillMeta">
           <div class="questBoardWeek">
-            <div class="questBoardWeekLabel">Chapter 3 Season 4</div>
+            <div class="questBoardWeekLabel">Chapter 4 Season 1</div>
             <div id="questWeekLabel" class="questBoardWeekValue">Woche 1</div>
             <div id="questWeekCountdownLabel" class="questBoardWeekCountdown">--:--:--</div>
           </div>
@@ -41305,7 +42280,7 @@
     <div class="loreWrap">
       <div class="loreHero">
         <div class="loreHeroCard">
-          <div class="loreEyebrow">Season 4 • Riss-Zeit</div>
+          <div class="loreEyebrow">Chapter 4 • New Dawn</div>
           <div class="loreTitle">Weltchronik: Riss-Zeit</div>
           <div class="loreLead">Die Welt tickt nicht mehr im Takt. Risse schneiden Biome auf, Portale flackern, und jede Entscheidung zieht eine Spur durch die Zeit. Dieses Archiv sammelt die Hinweise, die du im Chapter gefunden hast.</div>
         </div>
@@ -41356,15 +42331,15 @@
         <div class="loreCard">
           <div class="loreCardMeta">Fraktionen</div>
           <div class="loreCardTitle">Hüter vs. Raider</div>
-          <div class="loreCardText">Die Hüter wollen die Risse schließen, die Raider sie nutzen. Deine Endgame-Wahl lenkt Season 4.</div>
+          <div class="loreCardText">Die Fraktionen streiten um die Kontrolle der neuen Dawn-Zonen. Deine Wahl lenkt, wie aggressiv sich die neue Welt oeffnet.</div>
         </div>
       </div>
 
       <div class="loreGrid">
         <div class="loreCard">
-          <div class="loreCardMeta">Season 4 Wahl</div>
+          <div class="loreCardMeta">New Dawn Wahl</div>
           <div class="loreCardTitle">Team auswählen</div>
-          <div class="loreCardText">Du darfst genau ein Team wählen. Die Entscheidung ist final und zählt für Season 4.</div>
+          <div class="loreCardText">Du darfst genau ein Team wählen. Die Entscheidung ist final und zählt fuer Chapter 4 Season 1.</div>
           <div class="factionChoiceRow">
             <button id="factionGuardianBtn" class="factionChoiceBtn" type="button" data-faction="hueter">Hüter</button>
             <button id="factionRaiderBtn" class="factionChoiceBtn" type="button" data-faction="raider">Raider</button>
@@ -41426,7 +42401,7 @@
   <div id="passMenu" class="inventoryMenu hidden">
     <div class="bpFortShell">
       <header class="bpFortHeader">
-        <div class="bpFortSeason">SAISON 3</div>
+        <div class="bpFortSeason">CHAPTER 4 • SEASON 1</div>
         <div class="bpFortHeaderRight">
           <div id="passPagePill" class="bpFortPage">SEITE 1 / 1</div>
           <button id="bpPrevPageBtn" class="bpFortNavBtn" type="button">◀</button>
@@ -41511,9 +42486,9 @@
     <div class="passPurchaseModal passPurchaseModalV2">
       <div class="passPurchaseTop passPurchaseTopV2">
         <div class="passPurchaseHero passPurchaseHeroV2">
-          <div id="passPurchaseEyebrow" class="passPurchaseEyebrow">Chapter 3 • Season 4</div>
-          <div id="passPurchaseTitle" class="passPurchaseTitle">RIFT WARS PASS FREISCHALTEN</div>
-          <div id="passPurchaseLead" class="passPurchaseLead">Wähle dein Paket und starte den Premium-Track mit exklusiven Rewards, 3-2-1-GO Themes und Bonus-Stufen.</div>
+          <div id="passPurchaseEyebrow" class="passPurchaseEyebrow">Chapter 4 • Season 1</div>
+          <div id="passPurchaseTitle" class="passPurchaseTitle">NEW DAWN PASS FREISCHALTEN</div>
+          <div id="passPurchaseLead" class="passPurchaseLead">Wähle dein Paket und starte den Premium-Track mit exklusiven Protocol-Rewards, Dawn-Themes und Bonus-Stufen.</div>
         </div>
         <div id="passPurchaseActivePrice" class="passPurchasePrice">950 M-Bucks</div>
       </div>
@@ -41536,8 +42511,8 @@
       </div>
 
       <div class="passPurchaseBenefits passPurchaseBenefitsV2">
-        <div class="passPurchaseBenefit"><span class="passPurchaseBenefitIcon">⚡</span> Premium Reward-Line über 100 Stufen</div>
-        <div class="passPurchaseBenefit"><span class="passPurchaseBenefitIcon">🎨</span> Exklusive 3-2-1-GO Intro-Themes</div>
+        <div class="passPurchaseBenefit"><span class="passPurchaseBenefitIcon">⚡</span> Premium Reward-Route über 200 Stufen</div>
+        <div class="passPurchaseBenefit"><span class="passPurchaseBenefitIcon">🎨</span> Exklusive Dawn-Protocol Themes</div>
         <div class="passPurchaseBenefit"><span class="passPurchaseBenefitIcon">💠</span> Bonus-Skins, M-Bucks und Skill-Rewards</div>
       </div>
 
@@ -41551,7 +42526,7 @@
   <div id="riftDecisionMenu" class="riftDecisionMenu hidden">
     <div class="riftDecisionPanel">
       <div class="riftDecisionHeader">
-        <div class="riftDecisionEyebrow">Chapter 3 Season 4 • Riss-Entscheidung</div>
+        <div class="riftDecisionEyebrow">Chapter 4 Season 1 • Protocol-Entscheidung</div>
         <div id="riftDecisionTitle" class="riftDecisionTitle">Der Wuerfel antwortet</div>
         <div id="riftDecisionLead" class="riftDecisionLead">Waehle eine Route fuer diesen Singleplayer-Run. Jede Entscheidung kippt Risiko, Wasser und Buffs in eine andere Richtung.</div>
       </div>
@@ -42505,7 +43480,7 @@
     const EMERGENCY_STATE_KEY = "mini_minecraft_emergency_state_v1";
     const LIVE_EVENT_STATE_KEY = "mini_minecraft_live_event_state_v1";
     const HEARTS_WARNING_KEY = "mini_minecraft_hearts_warning_v3";
-    const HEARTS_WARNING_DEFAULT = "Chapter 3 Season 4 Wuerfel ist live. Singleplayer-Direktiven laufen jetzt in jedem Run.";
+    const HEARTS_WARNING_DEFAULT = "Chapter 4 Season 1 New Dawn ist live. Einsatz-Direktiven laufen jetzt in jedem Run.";
     const HEARTS_WARNING_LEGACY = "Ingame update erst am 06.04.2026 im Lauf des Tages mit neuen Gameplay-Sachen.";
     const HEARTS_WARNING_SCOPES = ["all", "solo"];
     const CREATIVE_MAP_LIBRARY_KEY = "mini_minecraft_creative_maps_v1";
@@ -42565,6 +43540,10 @@
     const pinLoginBtn = document.getElementById("pinLoginBtn");
     const startInfo = document.getElementById("startInfo");
     const startStatusPing = document.getElementById("startStatusPing");
+    const startEventTopChip = document.getElementById("startEventTopChip");
+    const startFinaleCountdown = document.getElementById("startFinaleCountdown");
+    const startFinaleStatus = document.getElementById("startFinaleStatus");
+    const startFinaleStoryLead = document.getElementById("startFinaleStoryLead");
     const loginLoadingOverlay = document.getElementById("loginLoadingOverlay");
     const loginLoadingText = document.getElementById("loginLoadingText");
     const loginLoadingProgressFill = document.getElementById("loginLoadingProgressFill");
@@ -42672,9 +43651,19 @@
     const modeRulesStartBtn = document.getElementById("modeRulesStartBtn");
     const mbucksCreditMenu = document.getElementById("mbucksCreditMenu");
     const mbucksStoreMenu = document.getElementById("mbucksStoreMenu");
+    const refundCenterMenu = document.getElementById("refundCenterMenu");
     const mbucksStoreStatus = document.getElementById("mbucksStoreStatus");
+    const refundCenterList = document.getElementById("refundCenterList");
+    const refundTicketGrid = document.getElementById("refundTicketGrid");
+    const refundTicketAvailableCount = document.getElementById("refundTicketAvailableCount");
+    const refundCenterWallet = document.getElementById("refundCenterWallet");
+    const closeRefundCenterOverlayBtn = document.getElementById("closeRefundCenterOverlayBtn");
+    const openRefundCenterBtn = document.getElementById("openRefundCenterBtn");
+    const closeRefundCenterBtn = document.getElementById("closeRefundCenterBtn");
+    const closeRefundCenterTopBtn = document.getElementById("closeRefundCenterTopBtn");
     const mbucksStoreRefreshBtn = document.getElementById("mbucksStoreRefreshBtn");
     const closeMBucksStoreBtn = document.getElementById("closeMBucksStoreBtn");
+    const adminCoinReverseBuyBtns = Array.from(document.querySelectorAll(".mbucksReverseBuyBtn[data-admin-coin-pack]"));
     const adminCurrencyWalletValue = document.getElementById("adminCurrencyWalletValue");
     const adminCurrencyRateValue = document.getElementById("adminCurrencyRateValue");
     const redeemAdminCurrency1Btn = document.getElementById("redeemAdminCurrency1Btn");
@@ -43791,11 +44780,41 @@
     let gameStarted = false;
     let matchStartGraceUntil = 0;
     const SOLO_BOSS_COUNTDOWN_MS = 3 * 60 * 1000;
-    const FINALE_OPERATION_START_AT = new Date("2026-06-05T15:30:00+02:00").getTime();
+    const FINALE_OPERATION_START_AT = new Date("2026-06-05T15:10:00+02:00").getTime();
     const FINALE_OPERATION_DURATION_MS = 6 * 60 * 1000;
     const FINALE_OPERATION_END_AT = FINALE_OPERATION_START_AT + FINALE_OPERATION_DURATION_MS;
-    const FINALE_OPERATION_LABEL = "05.06.2026 15:30";
-    const FINALE_OPERATION_END_LABEL = "05.06.2026 15:36";
+    const FINALE_OPERATION_LABEL = "05.06.2026 15:10";
+    const FINALE_OPERATION_END_LABEL = "05.06.2026 15:16";
+    const FINALE_OPERATION_LIVE_SEGMENTS = [
+      {
+        id: "broadcast",
+        maxElapsedMs: 75 * 1000,
+        title: "EMERGENCY BROADCAST",
+        lead: "Warnsysteme springen an. Die gesamte Zone wird auf den globalen Sync vorbereitet.",
+        toast: "Phase 1: Emergency Broadcast - Warnsysteme aktiv."
+      },
+      {
+        id: "collapse",
+        maxElapsedMs: 165 * 1000,
+        title: "RIFT COLLAPSE",
+        lead: "Der Himmel reisst auf, Energiestrahlen schlagen ein und die Rift-Signaturen kollabieren sichtbar.",
+        toast: "Phase 2: Rift Collapse - Der Warnhimmel zieht ueber die Karte."
+      },
+      {
+        id: "dawn_sync",
+        maxElapsedMs: 255 * 1000,
+        title: "DAWN SYNC",
+        lead: "Die New-Dawn-Sequenz greift. Alle Spieler bleiben im selben globalen Takt der Operation.",
+        toast: "Phase 3: Dawn Sync - Die New-Dawn-Sequenz laeuft."
+      },
+      {
+        id: "final_transfer",
+        maxElapsedMs: FINALE_OPERATION_DURATION_MS,
+        title: "FINAL TRANSFER",
+        lead: "Die letzten Systeme uebertragen den Run in den Cliffhanger. Das Ende trifft fuer alle gleichzeitig ein.",
+        toast: "Phase 4: Final Transfer - Das gemeinsame Ende naehert sich."
+      }
+    ];
     const GLOBAL_EVENT_MATCHMAKING_UNLOCK_AT = 0;
     const GLOBAL_EVENT_CONFIG = {
       enabled: false,
@@ -43811,6 +44830,7 @@
     let finaleOperationSyncShown = false;
     let finaleOperationStartToastShown = false;
     let finaleOperationEndHandled = false;
+    let finaleOperationLiveSegmentId = "";
     let globalEventBossState = {
       spawned: false,
       defeated: false,
@@ -45777,7 +46797,6 @@ function renderCreativeHud() {
 }
 
 function getFirstAvailableLobbyMode() {
-  if (isLobbyModeEnabled("finale_operation") && getFinaleOperationPhase() !== "post") return "finale_operation";
   if (isLobbyModeEnabled("solo")) return "solo";
   return "solo";
 }
@@ -45803,6 +46822,43 @@ function getFinaleOperationPhase(now = Date.now()) {
   if (now >= FINALE_OPERATION_END_AT) return "post";
   if (now >= FINALE_OPERATION_START_AT) return "live";
   return "pre";
+}
+
+function formatFinaleOperationLongCountdown(ms) {
+  const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
+function updateStartFinaleOperationUi() {
+  if (!startFinaleCountdown || !startFinaleStatus || !startFinaleStoryLead) return;
+  const now = Date.now();
+  const phase = getFinaleOperationPhase(now);
+
+  if (phase === "pre") {
+    const remaining = Math.max(0, FINALE_OPERATION_START_AT - now);
+    startFinaleCountdown.textContent = formatFinaleOperationLongCountdown(remaining);
+    startFinaleStatus.textContent = `Sync-Start am ${FINALE_OPERATION_LABEL} Uhr • Alle Spieler beginnen gleichzeitig.`;
+    startFinaleStoryLead.textContent = "Die Rift-Zone kippt in den Notfallmodus. Alle Spieler werden gleichzeitig in das New-Dawn-Protokoll synchronisiert.";
+    if (startEventTopChip) startEventTopChip.textContent = "Finale Operation • Countdown aktiv";
+    return;
+  }
+
+  if (phase === "live") {
+    const remaining = Math.max(0, FINALE_OPERATION_END_AT - now);
+    startFinaleCountdown.textContent = formatFinaleOperationLongCountdown(remaining);
+    startFinaleStatus.textContent = `SYNC BEGINN aktiv • Event endet fuer alle um ${FINALE_OPERATION_END_LABEL} Uhr.`;
+    startFinaleStoryLead.textContent = "Der Warnhimmel ist live, die Rift-Signale kollabieren und alle Spieler erleben die Finale Operation parallel.";
+    if (startEventTopChip) startEventTopChip.textContent = "Finale Operation • LIVE";
+    return;
+  }
+
+  startFinaleCountdown.textContent = "00:00:00";
+  startFinaleStatus.textContent = "Event abgeschlossen • FORTSETZUNG FOLGT";
+  startFinaleStoryLead.textContent = "Die Finale Operation ist beendet und geht direkt in den Cliffhanger fuer Chapter 4 Season 1: New Dawn Protocol ueber.";
+  if (startEventTopChip) startEventTopChip.textContent = "Finale Operation • Abgeschlossen";
 }
 
 function isFinaleOperationModeSelected() {
@@ -45844,7 +46900,7 @@ function isGlobalMatchmakingLocked() {
 }
 
 function isLobbyModeEnabled(mode) {
-  if (mode === "finale_operation") return true;
+  if (mode === "finale_operation") return false;
   if (mode === "datamine") return false;
   if (mode === "creative") return false;
   return mode === "solo" && !!modeAccessState.solo;
@@ -45988,11 +47044,18 @@ function updateFinaleOperationOverlay() {
     const remaining = Math.max(0, FINALE_OPERATION_START_AT - Date.now());
     finaleOperationKicker.textContent = "Finale Operation";
     finaleOperationTitle.textContent = "COUNTDOWN LAEUFT";
-    finaleOperationMeta.textContent = `Sync beginnt in ${formatLobbyModeCountdown(remaining)}. Start fuer alle Spieler gleichzeitig am 05.06.2026 um 15:30 Uhr.`;
+    finaleOperationMeta.textContent = `Sync beginnt in ${formatLobbyModeCountdown(remaining)}. Start fuer alle Spieler gleichzeitig am 05.06.2026 um 15:10 Uhr.`;
     finaleOperationOverlay.classList.remove("hidden");
     return;
   }
   finaleOperationOverlay.classList.add("hidden");
+}
+
+function getFinaleOperationLiveSegment(now = Date.now()) {
+  if (getFinaleOperationPhase(now) !== "live") return null;
+  const elapsed = Math.max(0, now - FINALE_OPERATION_START_AT);
+  return FINALE_OPERATION_LIVE_SEGMENTS.find((segment) => elapsed <= segment.maxElapsedMs)
+    || FINALE_OPERATION_LIVE_SEGMENTS[FINALE_OPERATION_LIVE_SEGMENTS.length - 1];
 }
 
 function handleFinaleOperationPhase() {
@@ -46022,6 +47085,27 @@ function handleFinaleOperationPhase() {
     if (!finaleOperationStartToastShown) {
       finaleOperationStartToastShown = true;
       showMessage(`Finale Operation live bis ${FINALE_OPERATION_END_LABEL} Uhr.`, 2600);
+    }
+    const liveSegment = getFinaleOperationLiveSegment(now);
+    if (liveSegment && liveSegment.id !== finaleOperationLiveSegmentId) {
+      finaleOperationLiveSegmentId = liveSegment.id;
+      if (finaleOperationKicker) finaleOperationKicker.textContent = "Finale Operation";
+      if (finaleOperationTitle) finaleOperationTitle.textContent = liveSegment.title;
+      if (finaleOperationMeta) finaleOperationMeta.textContent = liveSegment.lead;
+      if (finaleOperationOverlay) {
+        finaleOperationOverlay.classList.remove("hidden");
+        setTimeout(() => {
+          if (
+            finaleOperationOverlay
+            && currentMatchMode === "finale_operation"
+            && getFinaleOperationPhase() === "live"
+            && finaleOperationLiveSegmentId === liveSegment.id
+          ) {
+            finaleOperationOverlay.classList.add("hidden");
+          }
+        }, 2600);
+      }
+      showMessage(liveSegment.toast, 2600);
     }
     return { freezeGameplay: false };
   }
@@ -47142,6 +48226,7 @@ async function resetGlobalDiscount() {
     let moreMenuOpen = false;
     let mbucksCreditOpen = false;
     let mbucksStoreOpen = false;
+    let refundCenterOpen = false;
     let dailyLoginOpen = false;
     let passOpen = false;
     let roadmapOpen = false;
@@ -47162,6 +48247,12 @@ async function resetGlobalDiscount() {
       action: { mbucks: 2800, adminCost: 28, label: "Action" },
       pro: { mbucks: 5000, adminCost: 50, label: "Pro" },
       ultra: { mbucks: 13500, adminCost: 135, label: "Ultra" }
+    };
+    const ADMIN_COIN_REVERSE_PACKS = {
+      single: { mbucksCost: 1000, coinAmount: 1, label: "Solo Card" },
+      boost: { mbucksCost: 2800, coinAmount: 3, label: "Boost Card" },
+      pro: { mbucksCost: 4500, coinAmount: 5, label: "Pro Card" },
+      vault: { mbucksCost: 8500, coinAmount: 10, label: "Vault Card" }
     };
     const ADMIN_CURRENCY_TO_MBUCKS_RATE = 100;
     let adminCurrencyBalance = 0;
@@ -47243,9 +48334,17 @@ let shopWishlist = [];
     let lockerLobbyBackgroundFilter = "all";
     let ytBgDialogVideoId = "";
     const NEW_SHOP_SAVE_KEY = "mini_minecraft_new_shop_v2";
+    const REFUND_CENTER_MAX_TICKETS = 3;
+    const REFUND_CANCEL_WINDOW_MS = 24 * 60 * 60 * 1000;
+    const REFUND_TICKET_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
+    const REFUND_TICKET_RECHARGE_MS = 365 * 24 * 60 * 60 * 1000;
     let newShopLoaded = false;
     let newShopOwned = [];
     let newShopBundleOwned = [];
+    let refundCenterState = {
+      history: [],
+      ticketSlots: Array(REFUND_CENTER_MAX_TICKETS).fill(0)
+    };
     let newShopPreviewSelection = { type: "eyes", id: "default" };
     let newShopActiveView = "all";
     let newShopSearchQuery = "";
@@ -47351,20 +48450,20 @@ let shopWishlist = [];
 
     const NEWS_ENTRIES = {
       added: [
-        "Chapter 3 Season 4 \"Wuerfel\" ist live mit 100 Battle-Pass-Hauptstufen, Reset und neuem Pass-Flow.",
-        "Singleplayer-Direktiven bringen im Match rotierende Ziele mit XP- und M-Bucks-Rewards.",
-        "Neue Cube-Looks, Rift-Regenfarben und Oracle-Belohnungen laufen jetzt ueber den Pass.",
-        "Der Battle Pass wurde auf Season 4 umgestellt und hat neue Pakete fuer +1 oder +25 Stufen."
+        "Chapter 4 Season 1 \"New Dawn Protocol\" ist live mit neuer Weltstruktur und kompletter Pass-Seitenarchitektur.",
+        "Alle Modi nutzen jetzt neue Dawn-Biome mit frischer Terrain-Silhouette, neuen Himmeln und klareren Zonen.",
+        "Das HUD wurde auf ein Operations-Layout umgebaut und zeigt Seite, Biom und Fortschritt deutlich kompakter.",
+        "Der Battle Pass setzt jetzt auf eine neue Seitenroute mit Free- und Premium-Lanes im New-Dawn-Look."
       ],
       adjusted: [
-        "Der News-Tab zeigt jetzt Season-8-Patchnotes, Shop-Highlights und aktuelle Wuerfel-Updates.",
-        "Der Battle Pass nutzt ein neues Intro, ein neues Layout und eine klare Premium-Paketstruktur.",
-        "Das HUD wurde fuer Season 4 erweitert: Singleplayer-Direktiven sitzen jetzt kompakt oben links im Match.",
-        "Die Lobby- und Fortschrittsanzeigen wurden an Chapter 3 Season 4 Wuerfel angepasst."
+        "Der News-Tab zeigt jetzt New-Dawn-Deployments, Shop-Highlights und Kapitel-4-Systemmeldungen.",
+        "Der Battle Pass nutzt ein neues Hero-Intro, neue Seiten und eine klar getrennte Premium-Route.",
+        "Die Lobby- und Fortschrittsanzeigen wurden an Chapter 4 Season 1 New Dawn angepasst.",
+        "Die Weltfarben und biomabhängigen Hintergrundlagen wurden für den neuen Protocol-Look neu abgestimmt."
       ],
       removed: [
         "Marvel-, Helden- und Gauntlet-Fokus wurden aus dem aktiven Season-8-Look entfernt.",
-        "Alte Season-4-Hinweise wurden aus den aktuellen News verdraengt und durch Wuerfel ersetzt.",
+        "Alte Season-4-Hinweise wurden aus den aktuellen News verdraengt und durch New Dawn ersetzt.",
         "Fruehere Event-Teaser stehen nicht mehr im Mittelpunkt des laufenden Season-8-Newsfeeds."
       ]
     };
@@ -47633,7 +48732,7 @@ let shopWishlist = [];
       : [
         {
           id: "season8_standard",
-          name: "Season 4 Standard",
+          name: "New Dawn Standard",
           description: "Fallback Hintergrund falls keine Config geladen wurde.",
           image: "assets/default_bg.jpg",
           sourceType: "default",
@@ -47845,7 +48944,7 @@ let shopWishlist = [];
     const STARTER_PACKET_DISABLED = false;
     const NUDELPASS_COMPENSATION_ID = "nudelpass_compensation_2026_04_01_v1";
     const WEBSITE_COMPENSATION_ID = "website_compensation_2026_04_02_v4_community100";
-    const BATTLE_PASS_SEASON_ID = "chapter3_s4_riftwars_2026_06_v1";
+    const BATTLE_PASS_SEASON_ID = "chapter4_s1_newdawn_2026_06_v1";
     const SEASON2_TEAM_KEY = "mini_season2_team_v1";
     const season2TeamState = {
       selectedTeam: "",
@@ -47888,11 +48987,11 @@ let shopWishlist = [];
     const BATTLE_PASS_DISABLED = false;
     const BATTLE_PASS_MAIN_TRACK_DISABLED = false;
     const BATTLE_PASS_COUNTDOWN_ENABLED = false;
-    const SEASON_HARD_RESET_TOKEN = "season3_hard_reset_2026_05_r2";
-    const PROGRESSION_RESET_ID = "progression_reset_chapter3_s4_riftwars_v1";
+    const SEASON_HARD_RESET_TOKEN = "chapter4_s1_reset_2026_06_r1";
+    const PROGRESSION_RESET_ID = "progression_reset_chapter4_s1_newdawn_v1";
     const QUEST_RESET_ID = "quest_reset_chapter3_s3_riftwars_v3";
     const QUEST_TRACK_VERSION = "ops_board_rework_2026_05_29";
-    const BATTLE_PASS_PAGE_SIZE = 3;
+    const BATTLE_PASS_PAGE_SIZE = 6;
     const MINI_PASS_SEASON_ID = "mini_pass_easter_2026";
     const MINI_PASS_DISABLED = true;
     const MINI_PASS_EGGS_PER_TIER = 2;
@@ -47906,47 +49005,51 @@ let shopWishlist = [];
     const BATTLE_PASS_END_LABEL = "12.09.2026 18:00 Uhr";
     const BATTLE_PASS_END_LABEL_SHORT = "12.09.2026 18:00 Uhr";
     const SOLO_CUSTOM_LOCK_AT = new Date("2026-05-21T23:00:00+02:00").getTime();
-    const BATTLE_PASS_MENU_THEME_NAME = "Rift Wars";
-    const BATTLE_PASS_MENU_TITLE = "RIFT WARS PASS";
+    const BATTLE_PASS_MENU_THEME_NAME = "New Dawn";
+    const BATTLE_PASS_MENU_TITLE = "NEW DAWN PASS";
     const BATTLE_PASS_MENU_DISPLAY_TIERS = BATTLE_PASS_BASE_TIERS;
     const BATTLE_PASS_MENU_DISPLAY_PAGE_SIZE = BATTLE_PASS_PAGE_SIZE;
+    const SEASON_CHAPTER_NAME = "Chapter 4";
+    const SEASON_NAME = "Season 1";
+    const SEASON_FULL_NAME = `${SEASON_CHAPTER_NAME} • ${SEASON_NAME}`;
+    const SEASON_WORLD_TITLE = "New Dawn Protocol";
     const SEASON4_LIVE_EVENT_START_AT = new Date("2026-09-12T17:45:00+02:00").getTime();
     const SEASON4_LIVE_EVENT_END_AT = BATTLE_PASS_END_AT;
     const battlePassPageThemes = [
-      { name: "Dawn Breach", accent: "Start der Rift Wars: klare frühe Rewards, schneller XP-Aufbau und erste Intro-Themes." },
-      { name: "Neon Clash", accent: "Mid-Season mit aggressiven Neon-Looks, Kontrast-Eyes und mehr M-Bucks-Fokus." },
-      { name: "Stormfront", accent: "Sturmphase mit schwereren Skins, seltenen Farben und taktischen Skillpunkt-Boni." },
-      { name: "Final Eclipse", accent: "Endgame-Phase mit den stärksten Pass-Rewards inklusive finaler 3-2-1-GO Themes." }
+      { name: "Dawn Breach", accent: "Der Neustart beginnt mit schnellen Early-Rewards, klarer Route und den ersten Protocol-Freischaltungen." },
+      { name: "Neon Clash", accent: "Mid-Season mit harten Kontrasten, futuristischen Outfits und extra Fokus auf M-Bucks und Style." },
+      { name: "Stormfront", accent: "Die Einsatzphase bringt schwerere Looks, seltene Farben und taktische Skillpunkt-Boni." },
+      { name: "Final Eclipse", accent: "Das Endgame liefert die staerksten New-Dawn-Rewards bis zu den finalen 3-2-1-GO-Themes." }
     ];
     const battlePassSkinCycle = [
-      { id: "rift_rogue", label: "Rift Rogue" },
-      { id: "shock_vanguard", label: "Shock Vanguard" },
-      { id: "ember_scout", label: "Ember Scout" },
-      { id: "ice_warden", label: "Ice Warden" },
-      { id: "void_hunter", label: "Void Hunter" },
+      { id: "rift_rogue", label: "Dawn Runner" },
+      { id: "shock_vanguard", label: "Skyglass Vanguard" },
+      { id: "ember_scout", label: "Ember Relay" },
+      { id: "ice_warden", label: "Aurora Warden" },
+      { id: "void_hunter", label: "Eclipse Hunter" },
       { id: "solar_breaker", label: "Solar Breaker" },
-      { id: "phantom_core", label: "Phantom Core" },
-      { id: "rift_emperor", label: "Rift Emperor" }
+      { id: "phantom_core", label: "Protocol Phantom" },
+      { id: "rift_emperor", label: "Zero Horizon" }
     ];
     const battlePassRainCycle = [
-      { id: "neon_drizzle", label: "Neon Drizzle" },
-      { id: "ember_spark", label: "Ember Spark" },
-      { id: "frost_shatter", label: "Frost Shatter" },
-      { id: "void_static", label: "Void Static" },
+      { id: "neon_drizzle", label: "Skyglass Drizzle" },
+      { id: "ember_spark", label: "Ember Static" },
+      { id: "frost_shatter", label: "Aurora Burst" },
+      { id: "void_static", label: "Eclipse Static" },
       { id: "solar_fall", label: "Solar Fall" },
-      { id: "rift_flux", label: "Rift Flux" }
+      { id: "rift_flux", label: "Protocol Flux" }
     ];
     const battlePassEyeCycle = [
-      { id: "ember_glow", label: "Ember Glow" },
-      { id: "ice_stare", label: "Ice Stare" },
-      { id: "void_blink", label: "Void Blink" },
+      { id: "ember_glow", label: "Dawn Glow" },
+      { id: "ice_stare", label: "Aurora Stare" },
+      { id: "void_blink", label: "Eclipse Blink" },
       { id: "solar_flash", label: "Solar Flash" }
     ];
     const battlePassBodyCycle = [
-      { id: "titan_frame", label: "Titan Frame" },
+      { id: "titan_frame", label: "Protocol Frame" },
       { id: "storm_plate", label: "Storm Plate" },
-      { id: "frost_core", label: "Frost Core" },
-      { id: "rift_shell", label: "Rift Shell" }
+      { id: "frost_core", label: "Aurora Core" },
+      { id: "rift_shell", label: "Eclipse Shell" }
     ];
     const freeLaneRewardTypes = [
       "currency",
@@ -48033,12 +49136,12 @@ let shopWishlist = [];
         let freeReward = createSeason8LaneReward("free", tier, freeCycle[(tier - 1) % freeCycle.length]);
         let premiumReward = createSeason8LaneReward("premium", tier, premiumCycle[(tier - 1) % premiumCycle.length]);
 
-        if (tier === 8) freeReward = { type: "countdownTheme", id: "go_turbo_cyan", label: "3-2-1 GO: Turbo Cyan" };
-        if (tier === 15) premiumReward = { type: "countdownTheme", id: "go_inferno_lime", label: "3-2-1 GO: Inferno Lime" };
-        if (tier === 30) premiumReward = { type: "countdownTheme", id: "go_plasma_rose", label: "3-2-1 GO: Plasma Rose" };
+        if (tier === 8) freeReward = { type: "countdownTheme", id: "go_turbo_cyan", label: "3-2-1 GO: Dawn Pulse" };
+        if (tier === 15) premiumReward = { type: "countdownTheme", id: "go_inferno_lime", label: "3-2-1 GO: Solar Drift" };
+        if (tier === 30) premiumReward = { type: "countdownTheme", id: "go_plasma_rose", label: "3-2-1 GO: Protocol Bloom" };
         if (tier === 55) premiumReward = { type: "countdownTheme", id: "go_auric_wave", label: "3-2-1 GO: Auric Wave" };
-        if (tier === 80) premiumReward = { type: "countdownTheme", id: "go_shadow_mint", label: "3-2-1 GO: Shadow Mint" };
-        if (tier === 100) premiumReward = { type: "countdownTheme", id: "go_zero_gold", label: "3-2-1 GO: Zero Gold (Finale)" };
+        if (tier === 80) premiumReward = { type: "countdownTheme", id: "go_shadow_mint", label: "3-2-1 GO: Skyglass Rush" };
+        if (tier === 100) premiumReward = { type: "countdownTheme", id: "go_zero_gold", label: "3-2-1 GO: Zero Horizon" };
 
         rewards.push({ tier, free: freeReward, premium: premiumReward, pageTheme: getBattlePassPageTheme(Math.floor((tier - 1) / BATTLE_PASS_PAGE_SIZE)).name });
       }
@@ -48472,7 +49575,7 @@ let shopWishlist = [];
         `;
       wrap.innerHTML = `
         <div style="border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding:12px; background:rgba(10,18,34,0.45);">
-          <div style="font-weight:900; font-size:12px; letter-spacing:.08em; color:#9fc8ff;">Season 4 TEAM AUSWAHL</div>
+          <div style="font-weight:900; font-size:12px; letter-spacing:.08em; color:#9fc8ff;">NEW DAWN TEAM AUSWAHL</div>
           <div style="font-size:12px; color:rgba(255,255,255,0.72); margin-top:4px;">Wähle ein Team. Nur eine Auswahl ist möglich.</div>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px;">
             <button class="shopActionBtn" data-season2-team="ice_king" ${selected ? "disabled" : ""}>TEAM ICE KING</button>
@@ -49154,6 +50257,43 @@ let shopWishlist = [];
       uiTick: 0
     };
 
+    function getChapter4BiomeSurfaceBlock(biome) {
+      return biome === "grass" ? 1 : (biome === "desert" ? 9 : (biome === "water" ? 31 : (biome === "rift" ? 28 : 15)));
+    }
+
+    function getChapter4BiomeSoilBlock(biome) {
+      return biome === "grass" ? 2 : (biome === "desert" ? 10 : (biome === "water" ? 32 : (biome === "rift" ? 29 : 16)));
+    }
+
+    function getChapter4SurfaceProfile(x, biome) {
+      const continental = Math.sin(x * 0.042) * 2.8;
+      const local = Math.sin(x * 0.11 + 0.6) * 1.4;
+      const jitter = (((x * 53) % 9) - 4) * 0.18;
+      let base = 20;
+
+      if (biome === "grass") {
+        base = 19 + continental + local * 0.8 + jitter;
+      } else if (biome === "desert") {
+        base = 21 + Math.sin(x * 0.16) * 2.2 + Math.cos(x * 0.052) * 1.6 + jitter;
+      } else if (biome === "water") {
+        base = 23 + Math.sin(x * 0.08) * 1.1 + Math.cos(x * 0.03 + 1.1) * 0.9;
+      } else if (biome === "alien") {
+        base = 18 + Math.cos(x * 0.06) * 2.4 + Math.sin(x * 0.14) * 1.5 + jitter;
+      } else if (biome === "rift") {
+        base = 20 + Math.sin(x * 0.19) * 2.8 + Math.cos(x * 0.07) * 2.2 + jitter * 1.2;
+      }
+
+      const surfaceY = Math.max(14, Math.min(26, Math.floor(base)));
+      const subDepth = biome === "water" ? 7 : (biome === "rift" ? 6 : 5);
+      return {
+        surfaceY,
+        subTop: surfaceY + 1,
+        subBottom: surfaceY + subDepth,
+        topBlock: getChapter4BiomeSurfaceBlock(biome),
+        soilBlock: getChapter4BiomeSoilBlock(biome)
+      };
+    }
+
     const world = [];
     for (let y = 0; y < WORLD_HEIGHT; y++) {
       const row = [];
@@ -49161,20 +50301,15 @@ let shopWishlist = [];
         const biome = x >= RIFT_BIOME_START
           ? "rift"
           : (x >= ALIEN_BIOME_START ? "alien" : (x >= WATER_BIOME_START ? "water" : (x >= DESERT_BIOME_START ? "desert" : "grass")));
-        const waveA = Math.sin(x * 0.08) * 2.4;
-        const waveB = Math.sin(x * 0.023 + 1.3) * 2.1;
-        const noise = ((x * 37) % 11) / 10 - 0.5;
-        const surfaceY = Math.max(15, Math.min(23, Math.floor(20 + waveA + waveB + noise)));
-        const subTop = surfaceY + 1;
-        const subBottom = surfaceY + 5;
+        const profile = getChapter4SurfaceProfile(x, biome);
         const caveSignal = (Math.sin(x * 0.41 + y * 0.55) + Math.cos(x * 0.17 - y * 0.43)) * 0.5;
-        const isCave = y > surfaceY + 6 && y < WORLD_HEIGHT - 3 && caveSignal > 0.72;
-        if (y < surfaceY) {
+        const isCave = y > profile.surfaceY + 6 && y < WORLD_HEIGHT - 3 && caveSignal > 0.7;
+        if (y < profile.surfaceY) {
           row.push(0);
-        } else if (y === surfaceY) {
-          row.push(biome === "grass" ? 1 : (biome === "desert" ? 9 : (biome === "water" ? 31 : (biome === "rift" ? 28 : 15))));
-        } else if (y >= subTop && y <= subBottom) {
-          row.push(biome === "grass" ? 2 : (biome === "desert" ? 10 : (biome === "water" ? 32 : (biome === "rift" ? 29 : 16))));
+        } else if (y === profile.surfaceY) {
+          row.push(profile.topBlock);
+        } else if (y >= profile.subTop && y <= profile.subBottom) {
+          row.push(profile.soilBlock);
         } else if (isCave) {
           row.push(0);
         } else {
@@ -49641,7 +50776,7 @@ let shopWishlist = [];
         ? `
           <div class="eventCountdownLabel">Community-Ziel erreicht</div>
           <div class="eventCountdownTime">100% freigeschaltet</div>
-          <div class="eventCountdownMeta">Season 4 Battle Pass wird kostenlos für alle freigeschaltet.</div>
+          <div class="eventCountdownMeta">Der New Dawn Pass wird kostenlos fuer alle freigeschaltet.</div>
         `
         : `
           <div class="eventCountdownLabel">Event endet in</div>
@@ -49652,7 +50787,7 @@ let shopWishlist = [];
       communityEventProgressText.textContent = `${communityEventState.totalBlocks.toLocaleString("de-DE")} / ${communityEventState.targetBlocks.toLocaleString("de-DE")} M-Bucks`;
       communityEventProgressBar.style.width = `${progress}%`;
       communityEventRewardText.textContent = communityEventState.biomeUnlocked
-        ? "100% erreicht: Season 4 Battle Pass ist kostenlos freigeschaltet."
+        ? "100% erreicht: Der New Dawn Pass ist kostenlos freigeschaltet."
         : `Aktive Event-Stufe: ${stage === 0 ? "Noch ruhig" : `${stageEntries[stage - 1].percent}% • ${stageEntries[stage - 1].title}`}. Spendet weiter M-Bucks, um die nächste Stufe freizuschalten.`;
       if (communityEventStageRail) {
         communityEventStageRail.innerHTML = stageEntries.map((entry, index) => `
@@ -52808,6 +53943,9 @@ let shopWishlist = [];
       const loginTabs = document.querySelectorAll('.startTab');
       const tabContents = document.querySelectorAll('.startTabContent');
 
+      updateStartFinaleOperationUi();
+      setInterval(updateStartFinaleOperationUi, 1000);
+
       loginTabs.forEach(tab => {
         tab.addEventListener('click', () => {
           const targetTab = tab.getAttribute('data-tab');
@@ -53272,7 +54410,7 @@ let shopWishlist = [];
       if (createAccountBtn) createAccountBtn.disabled = START_ACCESS_DISABLED;
       if (pinLoginBtn) pinLoginBtn.disabled = START_ACCESS_DISABLED;
       if (startInfo && START_ACCESS_DISABLED) {
-        startInfo.textContent = "Season 4 startet bald! Der Zugang ist voruebergehend deaktiviert.";
+        startInfo.textContent = "Chapter 4 Season 1 startet bald! Der Zugang ist voruebergehend deaktiviert.";
       }
     }
 
@@ -53996,7 +55134,7 @@ let shopWishlist = [];
         const info = getQuestSeasonWeekInfo(Date.now());
         const start = new Date(info.weekStart).toLocaleDateString("de-DE");
         const end = new Date(info.weekEnd - 1000).toLocaleDateString("de-DE");
-        questWeeklyCardMeta.textContent = `${start} - ${end} • Chapter 3 Season 4`;
+        questWeeklyCardMeta.textContent = `${start} - ${end} • Chapter 4 Season 1`;
       }
       if (ensureQuestCadenceState()) queueDeferredSave();
     }
@@ -54327,6 +55465,18 @@ let shopWishlist = [];
       const currentXp = battlePassState.xp || 0;
       const tierXp = currentXp % BATTLE_PASS_TIER_XP;
       const passProgress = (tierXp / BATTLE_PASS_TIER_XP) * 100;
+      const currentTier = getBattlePassCurrentTier();
+      const passPage = Math.ceil(currentTier / 6);
+      const currentBiome = getBiomeAt(Math.floor((player.x + player.w / 2) / TILE));
+      const biomeLabel = currentBiome === "crystal"
+        ? "Skyglass Heights"
+        : (currentBiome === "alien"
+          ? "Aurora Reach"
+          : (currentBiome === "desert"
+            ? "Ember Dunes"
+            : (currentBiome === "water"
+              ? "Floodline Basin"
+              : (currentBiome === "rift" ? "Eclipse Frontier" : "Dawnwild"))));
       let questTitle = "Keine aktive Quest";
       let questDesc = "Öffne Quests, um neue Aufgaben zu sehen.";
       let questCurrent = 0;
@@ -54353,9 +55503,27 @@ let shopWishlist = [];
       
       xpHud.innerHTML = `
         <div class="hudTitle">Fortschritt</div>
+        <div class="xpSeasonStrip">
+          <span>${SEASON_FULL_NAME}</span>
+          <strong>${SEASON_WORLD_TITLE}</strong>
+        </div>
         <div class="xpTop">
           <div class="xpPassBadge">Pass ${battlePassState.tier || 1}</div>
           <div class="xpLevelBadge">Level ${progression.level}</div>
+        </div>
+        <div class="xpStatRail">
+          <div class="xpStatChip">
+            <div class="xpStatChipLabel">Route</div>
+            <div class="xpStatChipValue">Seite ${passPage}</div>
+          </div>
+          <div class="xpStatChip">
+            <div class="xpStatChipLabel">Biome</div>
+            <div class="xpStatChipValue">${biomeLabel}</div>
+          </div>
+          <div class="xpStatChip">
+            <div class="xpStatChipLabel">Next Tier</div>
+            <div class="xpStatChipValue">${Math.max(0, BATTLE_PASS_TIER_XP - tierXp)} XP</div>
+          </div>
         </div>
         <div class="xpBarWrap">
           <div class="xpBar" style="width: ${passProgress}%"></div>
@@ -54809,7 +55977,7 @@ let shopWishlist = [];
       if (!passBtn) return;
       passBtn.classList.remove("hidden");
       passBtn.disabled = isBattlePassExpired();
-      if (passBtnLabel) passBtnLabel.textContent = isBattlePassFeatureDisabled() ? "WUERFEL AUS" : (isBattlePassExpired() ? "WUERFEL Ende" : "WUERFEL-Pass");
+      if (passBtnLabel) passBtnLabel.textContent = isBattlePassFeatureDisabled() ? "PASS AUS" : (isBattlePassExpired() ? "PASS ENDE" : "NEW DAWN PASS");
     }
 
     function renderBattlePassButtonCountdown() {
@@ -54818,7 +55986,7 @@ let shopWishlist = [];
         ? "Von Admin gesperrt"
         : (BATTLE_PASS_COUNTDOWN_ENABLED
         ? (isBattlePassExpired() ? "Season beendet" : `Noch ${formatRemainingTimeWithDays(BATTLE_PASS_END_AT)}`)
-        : "Chapter 3 • S4 WUERFEL");
+        : "Chapter 4 • S1 NEW DAWN");
     }
 
     function renderBattlePassCountdownCard() {
@@ -54830,7 +55998,7 @@ let shopWishlist = [];
           <div class="passCountdownBadge">
             <div class="passCountdownIcon">?</div>
             <div class="passCountdownBadgeText">
-              <div class="passCountdownLabel">Chapter 3</div>
+              <div class="passCountdownLabel">${SEASON_CHAPTER_NAME}</div>
               <div class="passCountdownTitle">${BATTLE_PASS_MENU_TITLE} pausiert</div>
             </div>
           </div>
@@ -54839,7 +56007,7 @@ let shopWishlist = [];
           <div class="passCountdownMain">
           <div>
             <div class="passCountdownTime">Season beendet</div>
-            <div class="passCountdownSubtext">Chapter 3 • Season 4 ${BATTLE_PASS_MENU_THEME_NAME.toUpperCase()} ist gerade pausiert. Der ${BATTLE_PASS_MENU_DISPLAY_TIERS}-Stufen-Track bleibt ohne Countdown sichtbar.</div>
+            <div class="passCountdownSubtext">${SEASON_FULL_NAME} ${BATTLE_PASS_MENU_THEME_NAME.toUpperCase()} ist gerade pausiert. Der ${BATTLE_PASS_MENU_DISPLAY_TIERS}-Stufen-Track bleibt ohne Countdown sichtbar.</div>
           </div>
           <div class="passCountdownMeta">
             <div class="passCountdownMetaItem">Status: Abgelaufen</div>
@@ -54851,7 +56019,7 @@ let shopWishlist = [];
           <div class="passCountdownBadge">
             <div class="passCountdownIcon">?</div>
             <div class="passCountdownBadgeText">
-              <div class="passCountdownLabel">Chapter 3</div>
+              <div class="passCountdownLabel">${SEASON_CHAPTER_NAME}</div>
               <div class="passCountdownTitle">${BATTLE_PASS_COUNTDOWN_ENABLED ? `${BATTLE_PASS_MENU_THEME_NAME} Countdown` : `${BATTLE_PASS_MENU_THEME_NAME} Status`}</div>
             </div>
           </div>
@@ -54867,7 +56035,7 @@ let shopWishlist = [];
             }</div>
           </div>
           <div class="passCountdownMeta">
-            <div class="passCountdownMetaItem">Status: Chapter 3 live</div>
+            <div class="passCountdownMetaItem">Status: ${SEASON_FULL_NAME} live</div>
             <div class="passCountdownMetaItem">${BATTLE_PASS_MENU_DISPLAY_TIERS} Hauptstufen</div>
           </div>
         </div>
@@ -55472,7 +56640,7 @@ let shopWishlist = [];
       updateUI();
       
       openShopPurchaseModal({
-        lead: "Du hast den Battle Pass für Season 4 freigeschaltet!",
+        lead: "Du hast den New Dawn Pass für Chapter 4 Season 1 freigeschaltet!",
         rewards: [
           "Premium-Track Aktiviert",
           "+1 Pass-Stufe Boost",
@@ -56091,12 +57259,12 @@ let shopWishlist = [];
           <div class="passNeoCountdown ${communityEventState.biomeUnlocked ? "expired" : ""}">
             <div class="passNeoCountdownLabel">Community Event</div>
             <div class="passNeoCountdownTime">${progress.toFixed(1)}%</div>
-            <div class="passNeoCountdownMeta">${communityEventState.totalBlocks.toLocaleString("de-DE")} / ${communityEventState.targetBlocks.toLocaleString("de-DE")} M-Bucks gespendet. Bei 100% ist der Season 4 Battle Pass FREE.</div>
+            <div class="passNeoCountdownMeta">${communityEventState.totalBlocks.toLocaleString("de-DE")} / ${communityEventState.targetBlocks.toLocaleString("de-DE")} M-Bucks gespendet. Bei 100% ist der New Dawn Pass FREE.</div>
           </div>
           <div class="passNeoPanelHeader">
             <div>
               <div class="passNeoPanelTitle">COMMUNITY EVENT</div>
-              <div class="passNeoPanelText">Dieses Event zählt global. Alle 25% gibt es neue Belohnungen: 1.000 Skillpunkte, 1.000 M-Bucks, eine geheime Season-4-Änderung und am Ende den Season 4 Battle Pass FREE.</div>
+              <div class="passNeoPanelText">Dieses Event zählt global. Alle 25% gibt es neue Belohnungen: 1.000 Skillpunkte, 1.000 M-Bucks, eine geheime New-Dawn-Aenderung und am Ende den New Dawn Pass FREE.</div>
             </div>
             <div class="passNeoPanelChip">Ziel: 200.000 M-Bucks</div>
           </div>
@@ -56130,8 +57298,9 @@ let shopWishlist = [];
       updateBattlePassSeasonWarPanel();
       
       const totalTiers = battlePassRewards.length;
-      const tiersPerPage = 8;
+      const tiersPerPage = 6;
       const totalPages = getBattlePassTotalPages();
+      const pageTheme = battlePassPageThemes[bpCurrentPage % battlePassPageThemes.length];
       
       // Update Stats
       const passInfo = document.getElementById("passInfo");
@@ -56159,8 +57328,18 @@ let shopWishlist = [];
       // Render current page only (Fortnite-style board)
       const startTier = (bpCurrentPage * tiersPerPage) + 1;
       passTrack.innerHTML = `
+        <div class="bpFortPageHero">
+          <div>
+            <div class="bpFortPageEyebrow">${SEASON_FULL_NAME} • ${SEASON_WORLD_TITLE}</div>
+            <div class="bpFortPageTitle">${pageTheme?.name || "Dawn Page"}</div>
+            <div class="bpFortPageMeta">${pageTheme?.accent || "Neue Rewards, neue Welt, neue Dawn-Protokolle."}</div>
+          </div>
+          <div class="bpFortPageProgress">Seite ${bpCurrentPage + 1} • Stufe ${startTier}-${Math.min(totalTiers, startTier + tiersPerPage - 1)}</div>
+        </div>
         <div class="bpFortTierStrip"></div>
+        <div class="bpFortLaneLabel free">Free Route</div>
         <div class="bpFortLaneRow free"></div>
+        <div class="bpFortLaneLabel premium">Premium Route</div>
         <div class="bpFortLaneRow premium"></div>
       `;
       const tierStrip = passTrack.querySelector(".bpFortTierStrip");
@@ -56234,15 +57413,15 @@ let shopWishlist = [];
 
       const currentTier = getBattlePassCurrentTier();
       const neededForNext = Math.max(0, (currentTier * BATTLE_PASS_TIER_XP) - (battlePassState.xp || 0));
-      summary.textContent = `S4 Reset aktiv • Pass ${currentTier}/${BATTLE_PASS_MAX_TIERS} • ${neededForNext.toLocaleString("de-DE")} XP bis nächste Stufe`;
-      openBtn.textContent = "S4 Infos";
+      summary.textContent = `${SEASON_FULL_NAME} • Pass ${currentTier}/${BATTLE_PASS_MAX_TIERS} • ${neededForNext.toLocaleString("de-DE")} XP bis naechste Stufe`;
+      openBtn.textContent = "New Dawn Infos";
       openBtn.onclick = () => {
         openShopPurchaseModal({
-          lead: "Chapter 3 Season 4 ist aktiv.",
+          lead: `${SEASON_FULL_NAME} ist aktiv.`,
           rewards: [
-            "Battle Pass für alle zurückgesetzt",
-            "Premium muss neu gekauft werden",
-            "Neue 3-2-1 GO Belohnungen bis Tier 200"
+            "Neues Dawn-Pass Layout aktiv",
+            "Premium laeuft ueber die neue Route",
+            "Neue Protocol-Belohnungen bis Tier 200"
           ],
           equipAction: null,
           equipLabel: "Okay"
@@ -56307,7 +57486,7 @@ let shopWishlist = [];
 
     let bpCurrentPage = 0;
     function getBattlePassTotalPages() {
-      return Math.max(1, Math.ceil((battlePassRewards?.length || 0) / 8));
+      return Math.max(1, Math.ceil((battlePassRewards?.length || 0) / 6));
     }
 
     function goBattlePassPage(nextPage) {
@@ -56848,15 +58027,15 @@ let shopWishlist = [];
         renderXp();
         updateUI();
       } catch (err) {
-        console.warn("Season 4 UI refresh failed:", err);
+        console.warn("Chapter 4 UI refresh failed:", err);
       }
 
       if (adminSeasonHardResetInfo) {
-        adminSeasonHardResetInfo.textContent = "Season 4 Hard Reset durchgeführt. Pass und Progress wurden vollständig neu gestartet.";
+        adminSeasonHardResetInfo.textContent = "Chapter 4 Hard Reset durchgefuehrt. Pass und Progress wurden vollstaendig neu gestartet.";
       }
 
       saveGame();
-      showMessage("Season 4 Hard Reset aktiv. Alle müssen den Battle Pass neu freischalten.", 3200);
+      showMessage("Chapter 4 Hard Reset aktiv. Alle muessen den Battle Pass neu freischalten.", 3200);
     }
 
 async function loadMaintenanceStateFromSupabase() {
@@ -56976,6 +58155,7 @@ async function loadMaintenanceStateFromSupabase() {
         weatherState,
         newShopOwned,
         newShopBundleOwned,
+        refundCenterState,
         threeDPlayer: {
           x: threeDState.player.x,
           y: threeDState.player.y,
@@ -57185,7 +58365,7 @@ async function loadMaintenanceStateFromSupabase() {
         };
         enforceLobbyPartyLimit();
       }
-      if (parsed.selectedLobbyMode === "solo" || parsed.selectedLobbyMode === "creative" || parsed.selectedLobbyMode === "finale_operation") {
+      if (parsed.selectedLobbyMode === "solo" || parsed.selectedLobbyMode === "creative") {
         selectedLobbyMode = parsed.selectedLobbyMode;
         ensureSelectedLobbyModeAvailable();
       } else {
@@ -57195,7 +58375,7 @@ async function loadMaintenanceStateFromSupabase() {
       mbucksEconomyState = normalizeMBucksEconomyState(parsed.mbucksEconomyState);
       localAdminCurrencyBalance = Math.max(0, Math.floor(Number(mbucksEconomyState.localAdminCoins || 0)));
       Object.assign(commandPlusState, normalizeCommandPlusState(parsed.commandPlusState));
-      if (parsed.lastPlayedLobbyMode === "solo" || parsed.lastPlayedLobbyMode === "creative" || parsed.lastPlayedLobbyMode === "finale_operation") {
+      if (parsed.lastPlayedLobbyMode === "solo" || parsed.lastPlayedLobbyMode === "creative") {
         lastPlayedLobbyMode = parsed.lastPlayedLobbyMode;
       } else {
         lastPlayedLobbyMode = "";
@@ -57266,6 +58446,9 @@ async function loadMaintenanceStateFromSupabase() {
       }
       if (Array.isArray(parsed.newShopBundleOwned)) {
         newShopBundleOwned = parsed.newShopBundleOwned.filter((id) => shopBundles.some((entry) => entry.id === id));
+      }
+      if (parsed.refundCenterState) {
+        refundCenterState = normalizeRefundCenterState(parsed.refundCenterState);
       }
       if (parsed.communityPassState?.seasonId === COMMUNITY_EVENT_SEASON_ID && Array.isArray(parsed.communityPassState.claimedMilestones)) {
         communityPassState.seasonId = COMMUNITY_EVENT_SEASON_ID;
@@ -58390,7 +59573,7 @@ async function loadMaintenanceStateFromSupabase() {
 
       return {
         eyebrow: "Chapter 3 • WUERFEL",
-        title: "Season 4 Pakete",
+        title: "New Dawn Pakete",
         lead: "Waehle zwischen +1 Stufe oder dem grossen +25 Stufen Paket fuer den WUERFEL-Pass.",
         price: formatCurrency(priceValue),
         benefits: [],
@@ -60374,6 +61557,10 @@ async function loadMaintenanceStateFromSupabase() {
         mbucksStoreOpen = false;
         if (mbucksStoreMenu) mbucksStoreMenu.classList.add("hidden");
       }
+      if (except !== "refundCenter") {
+        refundCenterOpen = false;
+        if (refundCenterMenu) refundCenterMenu.classList.add("hidden");
+      }
       if (except !== "lore") {
         loreOpen = false;
         if (loreMenu) loreMenu.classList.add("hidden");
@@ -60438,6 +61625,14 @@ async function loadMaintenanceStateFromSupabase() {
         if (mbucksStoreOpen) {
           fetchAdminCurrencyWallet().then(() => renderMBucksStoreStatus());
           applyMBucksCardMouseEffects();
+        }
+      }
+      else if (name === 'refundCenter') {
+        closeMenus("refundCenter");
+        refundCenterOpen = true;
+        if (refundCenterMenu) refundCenterMenu.classList.toggle("hidden", !refundCenterOpen);
+        if (refundCenterOpen) {
+          renderRefundCenterMenu();
         }
       }
       else if (name === 'showdown') {
@@ -60565,7 +61760,13 @@ async function loadMaintenanceStateFromSupabase() {
         btn.disabled = !!isBusy;
         btn.textContent = isBusy ? "Wird eingelöst..." : "Mit Admin-Coin einlösen";
       });
-      if (buyAdminCoinFromMBucksBtn) buyAdminCoinFromMBucksBtn.disabled = !!isBusy;
+      adminCoinReverseBuyBtns.forEach((btn) => {
+        const pack = ADMIN_COIN_REVERSE_PACKS[btn.dataset.adminCoinPack];
+        btn.disabled = !!isBusy;
+        btn.textContent = isBusy
+          ? "Wird gebucht..."
+          : `Für ${(pack?.mbucksCost || 0).toLocaleString("de-DE")} M-Bucks kaufen`;
+      });
       if (mbucksStoreRefreshBtn) mbucksStoreRefreshBtn.disabled = !!isBusy;
       if (redeemAdminCurrency1Btn) redeemAdminCurrency1Btn.disabled = !!isBusy;
       if (redeemAdminCurrency5Btn) redeemAdminCurrency5Btn.disabled = !!isBusy;
@@ -60664,10 +61865,13 @@ async function loadMaintenanceStateFromSupabase() {
       }
     }
 
-    function buyAdminCoinFromMBucks(amount = 1) {
-      const coinAmount = Math.max(0, Math.floor(Number(amount || 0)));
-      if (coinAmount <= 0) return;
-      const mbucksCost = coinAmount * 1000;
+    function buyAdminCoinFromMBucks(packOrAmount = 1) {
+      const pack = typeof packOrAmount === "string"
+        ? ADMIN_COIN_REVERSE_PACKS[packOrAmount]
+        : null;
+      const coinAmount = Math.max(0, Math.floor(Number(pack?.coinAmount || packOrAmount || 0)));
+      const mbucksCost = Math.max(0, Math.floor(Number(pack?.mbucksCost || (coinAmount * 1000) || 0)));
+      if (coinAmount <= 0 || mbucksCost <= 0) return;
       if (!spendMBucks(mbucksCost, "Admin-Coin Kauf", { showToast: false })) {
         showMessage("Nicht genug M-Bucks für den AC-Kauf.", 2200);
         renderMBucksStoreStatus("Zu wenig M-Bucks für den AC-Kauf.");
@@ -62192,6 +63396,17 @@ async function loadMaintenanceStateFromSupabase() {
 
       playerSkin.ownedLobbyBackgrounds.push(background.id);
       playerSkin.activeLobbyBackground = background.id;
+      if (background.sourceType === "shop" && Math.max(0, Number(background.price) || 0) > 0) {
+        recordRefundablePurchase({
+          kind: "cosmetic",
+          itemType: "lobbyBackgrounds",
+          itemId: background.id,
+          title: background.name,
+          price: Math.max(0, Number(background.price) || 0),
+          rarity: background.rarity || "common",
+          previewImage: background.image || ""
+        });
+      }
       applyLobbyBackgroundVisual();
       saveGame();
       renderLocker();
@@ -62410,6 +63625,15 @@ async function loadMaintenanceStateFromSupabase() {
           onGrant: () => {
             if (!playerSkin.ownedMiningEffects.includes(id)) playerSkin.ownedMiningEffects.push(id);
             playerSkin.activeMiningEffect = id;
+            recordRefundablePurchase({
+              kind: "cosmetic",
+              itemType: "miningfx",
+              itemId: id,
+              title: effect.name,
+              price: finalPrice,
+              rarity: effect.rarity || "common",
+              previewLabel: effect.icon || "FX"
+            });
           },
           equipAction: () => equipMiningEffect(id),
           equipLabel: "Effekt anlegen",
@@ -62440,6 +63664,15 @@ async function loadMaintenanceStateFromSupabase() {
           ],
           onGrant: () => {
             if (!playerSkin.ownedCountdownThemes.includes(id)) playerSkin.ownedCountdownThemes.push(id);
+            recordRefundablePurchase({
+              kind: "cosmetic",
+              itemType: "countdowns",
+              itemId: id,
+              title: theme.name,
+              price: finalPrice,
+              rarity: theme.rarity || "common",
+              previewLabel: "GO"
+            });
           },
           equipAction: () => {
             equipCountdownTheme(id);
@@ -63213,7 +64446,7 @@ async function loadMaintenanceStateFromSupabase() {
         finale_operation: {
           title: "FINALE OPERATION",
           desc: "Live Event Modus mit globalem Countdown, synchronem Start und gemeinsamem Finale fuer New Dawn Protocol.",
-          list: ["Start exakt am 05.06.2026 um 15:30.", "Alle Spieler beginnen gleichzeitig.", "Gemeinsames Ende mit FORTSETZUNG FOLGT."]
+          list: ["Start exakt am 05.06.2026 um 15:10.", "Alle Spieler beginnen gleichzeitig.", "Gemeinsames Ende mit FORTSETZUNG FOLGT."]
         },
         solo: {
           title: "SINGLEPLAYER",
@@ -63264,7 +64497,7 @@ async function loadMaintenanceStateFromSupabase() {
         && !selectedModeBlockedByLock
         && (selectedLobbyMode === "finale_operation" || !lockedByGlobalEvent)
         && !(selectedLobbyMode === "finale_operation" && finalePhase === "post");
-      const enabledModes = ["solo", "finale_operation"].filter((mode) => {
+      const enabledModes = ["solo"].filter((mode) => {
         if (!isLobbyModeEnabled(mode)) return false;
         if (mode === "finale_operation") return finalePlayable;
         return true;
@@ -63348,8 +64581,9 @@ async function loadMaintenanceStateFromSupabase() {
           const footer = button.querySelector(".modePickerModeStateText");
           const isSelected = mode === selectedLobbyMode;
           const isRecommended = mode === recommendedMode;
-          const isPlayableMode = mode === "solo" || mode === "finale_operation";
+          const isPlayableMode = mode === "solo";
           const isModeEnabled = isLobbyModeEnabled(mode);
+          button.classList.toggle("hidden", mode === "finale_operation");
           const lockByCountdown = soloCustomLocked && mode === "solo";
           const modeEnded = mode === "finale_operation" && finalePhase === "post";
           const isLocked = (ended || !isModeEnabled || !isPlayableMode || lockByCountdown || modeEnded);
@@ -63468,7 +64702,7 @@ async function loadMaintenanceStateFromSupabase() {
 
     function selectLobbyMode(mode) {
       if (isBattlePassExpired()) {
-        showMessage(`Chapter 3 Season 4 HELDEN ist seit ${BATTLE_PASS_END_LABEL} beendet.`, 2600);
+        showMessage(`Chapter 4 Season 1 NEW DAWN ist seit ${BATTLE_PASS_END_LABEL} beendet.`, 2600);
         return;
       }
       const targetMode = mode || "solo";
@@ -63523,13 +64757,14 @@ async function loadMaintenanceStateFromSupabase() {
           const biome = x >= RIFT_BIOME_START
             ? "rift"
             : (x >= ALIEN_BIOME_START ? "alien" : (x >= WATER_BIOME_START ? "water" : (x >= DESERT_BIOME_START ? "desert" : "grass")));
-          if (y < 20) row.push(0);
-          else if (y === 20) row.push(
-            biome === "grass" ? 1 : (biome === "desert" ? 9 : (biome === "water" ? 31 : (biome === "rift" ? 28 : 15)))
-          );
-          else if (y < 26) row.push(
-            biome === "grass" ? 2 : (biome === "desert" ? 10 : (biome === "water" ? 32 : (biome === "rift" ? 29 : 16)))
-          );
+          const profile = getChapter4SurfaceProfile(x, biome);
+          const caveSignal = (Math.sin(x * 0.41 + y * 0.55) + Math.cos(x * 0.17 - y * 0.43)) * 0.5;
+          const isCave = y > profile.surfaceY + 6 && y < WORLD_HEIGHT - 3 && caveSignal > 0.7;
+
+          if (y < profile.surfaceY) row.push(0);
+          else if (y === profile.surfaceY) row.push(profile.topBlock);
+          else if (y >= profile.subTop && y <= profile.subBottom) row.push(profile.soilBlock);
+          else if (isCave) row.push(0);
           else row.push(3);
         }
         grid.push(row);
@@ -64174,7 +65409,7 @@ async function loadMaintenanceStateFromSupabase() {
     function renderLobbyCardPanel() {
       if (!lobbyBetaPanel) return;
       const preview = getLockerPreviewData();
-      const activeBackgroundName = getActiveLobbyBackground()?.name || "Season 4 Standard";
+      const activeBackgroundName = getActiveLobbyBackground()?.name || "New Dawn Standard";
       const activeMiningEffectName = getMiningEffectData(playerSkin.activeMiningEffect)?.name || "Classic Chip";
       const cardDisplayName = (cloudAccountName || playerName || "Spieler").trim() || "Spieler";
       const cardAccountState = cloudSyncEnabled && cloudPlayerKey ? "Cloud verbunden" : "Lokaler Spielstand";
@@ -64452,7 +65687,7 @@ async function loadMaintenanceStateFromSupabase() {
         lobbyYoutubeLayer.innerHTML = "";
       }
       const hideHud = inLobby || startScreenActive;
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || dailyLoginOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || dailyLoginOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || refundCenterOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       if (mbucksCreditOpen) renderMBucksCreditMenu();
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
       if (hudCombo) hudCombo.style.display = (hideHud || anyMenuOpen) ? "none" : "grid";
@@ -64634,6 +65869,7 @@ async function loadMaintenanceStateFromSupabase() {
       finaleOperationSyncShown = false;
       finaleOperationStartToastShown = false;
       finaleOperationEndHandled = false;
+      finaleOperationLiveSegmentId = "";
       if (finaleOperationOverlay) finaleOperationOverlay.classList.add("hidden");
       season4ContinuationOverlayShown = false;
       if (season4ContinuationOverlay) season4ContinuationOverlay.classList.add("hidden");
@@ -64689,9 +65925,7 @@ async function loadMaintenanceStateFromSupabase() {
       if (lobbyPortalBtn) lobbyPortalBtn.classList.remove("isLaunching");
 
       const creativeStart = isCreativeModeSelected();
-      currentMatchMode = selectedLobbyMode === "finale_operation"
-        ? "finale_operation"
-        : (creativeStart ? "creative" : "normal");
+      currentMatchMode = creativeStart ? "creative" : "normal";
       isThreeDMode = false;
       lastPlayedLobbyMode = selectedLobbyMode;
       inLobby = false;
@@ -64700,6 +65934,7 @@ async function loadMaintenanceStateFromSupabase() {
       finaleOperationSyncShown = false;
       finaleOperationStartToastShown = false;
       finaleOperationEndHandled = false;
+      finaleOperationLiveSegmentId = "";
       season4ContinuationOverlayShown = false;
       if (season4ContinuationOverlay) season4ContinuationOverlay.classList.add("hidden");
 
@@ -65188,7 +66423,7 @@ async function loadMaintenanceStateFromSupabase() {
       ensureLobbyBackgroundOwnership();
       const activeSpecialName = playerSkin.activeSpecial ? (getSpecialSkinData(playerSkin.activeSpecial)?.name || "Spezial") : "Kein Spezial-Skin";
       const activeRainName = getActiveRainColor()?.name || "Standard Regen";
-      const activeBackgroundName = getActiveLobbyBackground()?.name || "Season 4 Standard";
+      const activeBackgroundName = getActiveLobbyBackground()?.name || "New Dawn Standard";
       const ownedAll = [
         ...playerSkin.ownedEyes.map((id) => getSkinData("eyes", id)),
         ...playerSkin.ownedBodies.map((id) => getSkinData("bodies", id)),
@@ -65363,11 +66598,24 @@ async function loadMaintenanceStateFromSupabase() {
 
     function updateHeartsHud() {
       if (!heartsHud) return;
+      const currentBiome = getBiomeAt(Math.floor((player.x + player.w / 2) / TILE));
+      const biomeLabel = currentBiome === "crystal"
+        ? "Skyglass"
+        : (currentBiome === "alien"
+          ? "Aurora"
+          : (currentBiome === "desert"
+            ? "Ember"
+            : (currentBiome === "water"
+              ? "Floodline"
+              : (currentBiome === "rift" ? "Eclipse" : "Dawnwild"))));
       
       heartsHud.innerHTML = `
         <div class="hudTitle">Leben</div>
         <div class="heartsRow"></div>
-        <div class="heartsMeta">${player.health} / ${player.maxHealth} Herzen</div>
+        <div class="heartsMetaRow">
+          <div class="heartsMeta">${player.health} / ${player.maxHealth} Integritaet</div>
+          <div class="heartsMetaTag">${biomeLabel}</div>
+        </div>
       `;
       const row = heartsHud.querySelector(".heartsRow");
       for (let i = 0; i < player.maxHealth; i++) {
@@ -65472,19 +66720,19 @@ async function loadMaintenanceStateFromSupabase() {
     const blogPosts = [
       {
         id: "season8_wuerfel_patchnotes_2026_04_23",
-        title: "Season 4 ist live: Wuerfel Patch Notes",
+        title: "Chapter 4 ist live: New Dawn Protocol",
         date: "23.04.2026",
-        tags: ["Season 4", "Wuerfel", "Patch Notes"],
+        tags: ["Chapter 4", "New Dawn", "Patch Notes"],
         imageClass: "blogImgSeason3",
-        body: "Build 2.8.0 • 23.04.2026\n\nChapter 3 Season 4 \"Wuerfel\" ist jetzt live. Das Update spult die Spielwelt direkt in die Cube-Season vor, setzt den Battle Pass komplett zurueck und stellt den gesamten Flow auf einen 200-Stufen-Track mit drei Rewards pro Seite um. Gleichzeitig fuehren neue Singleplayer-Direktiven durch jeden Run und geben klares Ingame-Feedback fuer Ziele, Fortschritt und Rewards.\n\nNeu:\n- Season 4 Wuerfel als aktives Chapter-Thema\n- Battle Pass mit 200 Hauptstufen\n- Neue Cube-, Rift- und Oracle-Belohnungen bis Level 200\n- Singleplayer-Direktiven mit Live-HUD im Match\n- Frischer Pass-Flow mit drei Stufen pro Seite\n- Ueberarbeitete Season-Texte in Lobby, Pass und News\n\nGameplay:\n- Singleplayer-Runs bekommen rotierende Direktiven fuer Mining, Kills, Bewegung, Gold und Build-Aufgaben\n- Abgeschlossene Direktiven geben XP und M-Bucks direkt waehrend des Runs\n- Die Season fuehlt sich dadurch schneller, klarer und deutlich missionslastiger an\n- Cube-Thema und Riss-Elemente tragen den Fortschritt jetzt sichtbar durch das Match\n\nBattle Pass:\n- Der Pass wurde vollstaendig auf Season 4 umgestellt\n- Premium laeuft weiter ueber +1 oder +25 Stufen Pakete\n- Kostenlos und Premium bleiben parallel aktiv\n- Der Track ist jetzt kompakter, sauberer und klar auf 67 Seiten aufgebaut\n\nUI & Flow:\n- Alte Season-Texte wurden im aktiven Flow auf Season 4 angezogen\n- Das Match-HUD zeigt jetzt Singleplayer-Direktiven statt nur Combo-Fokus\n- News, Pass, Lobby und Hintergrund-Galerie laufen auf dem neuen Season-Stand\n\nKurzfassung: Season 4 setzt auf Cube-Energie, klare Direktiven, einen frischen 200-Level-Pass und mehr echtes Singleplayer-Gameplay mitten im Run.",
+        body: "Build 2.8.0 • 05.06.2026\n\nChapter 4 Season 1 \"New Dawn Protocol\" ist jetzt live. Das Update baut die Welt in allen Modi neu auf, schaltet das HUD auf ein kompakteres Operations-Layout um und ersetzt den bisherigen Pass-Flow durch eine neue Seitenstruktur mit klarer Free- und Premium-Route.\n\nNeu:\n- New-Dawn-Weltprofil in allen Modi\n- Kompakteres Operations-HUD im Match\n- Battle Pass mit 200 Hauptstufen und 6er-Seiten\n- Neue Dawn-, Aurora-, Eclipse- und Skyglass-Rewards\n- Ueberarbeitete Lobby-, Fortschritts- und Quest-Texte\n\nGameplay:\n- Die Welt hat neue Terrainlinien, neue Biome und einen frischen Himmelslook\n- Biome fuehlen sich klarer getrennt an und werden im HUD direkt angezeigt\n- Das Match startet mit lesbarerem Progress-, Direktiven- und Integritaets-Feedback\n\nBattle Pass:\n- Der Pass nutzt jetzt Hero-Seiten, Free Route und Premium Route\n- Neue Reward-Namen und ein konsistenter New-Dawn-Look ziehen sich durch den gesamten Track\n- Premium bleibt ueber direkte Freischaltung oder Bundle-Kauf aktiv\n\nKurzfassung: Chapter 4 Season 1 liefert eine neue Welt, ein kleineres HUD und einen komplett neu strukturierten New Dawn Pass.",
       },
       {
         id: "season3_flood_drop_2026_04_08",
-        title: "Season 4 ist da: Flut-Update",
+        title: "New Dawn Deploy: Welt-Reset abgeschlossen",
         date: "08.04.2026",
-        tags: ["Season 4", "Flut", "Neuer Modus"],
+        tags: ["New Dawn", "Welt", "Deploy"],
         imageClass: "blogImgSeason3",
-        body: "Build 2.3.0 • 08.04.2026\n\nChapter 3 Season 4 startet mit einem klaren Flut-Fokus: ueberarbeitete Menues, ein frisch strukturierter Fortschrittsbereich und neue Match-Steuerung. Im Zentrum steht der neue Modus Flut-Anstieg. Das Wasser startet unterhalb der Welt und steigt in Wellen. Du spielst auf Hoehe, baust dir Wege nach oben und musst immer wieder reagieren, wenn der naechste Anstieg kommt. Der Timer zeigt dir den Rhythmus an, damit du riskante Runs planen kannst.\n\nNeu:\n- Flut-Anstieg: steigende Wasserlinie mit Wellen-Tempo\n- Timer + Fortschrittsleiste fuer den naechsten Anstieg\n- Neuer Blog-Post mit Season-3-Thumbnail\n\nUeberarbeitet:\n- Lobby-Flow und Match-Deck klarer strukturiert\n- Fortschritt-Bereich mit besserer Lesbarkeit\n- Season-UI mit Flut-Akzenten und sauberem Layout\n\nFixes:\n- UI-Feedback fuer Modi vereinheitlicht\n- Status-Chips und Labels konsistenter dargestellt\n\nDev Notes:\nWir wollten, dass die Flut nicht nur wie ein Event wirkt, sondern die ganze Season traegt. Darum ziehen sich Wasser-Highlights, kuehlere Farben und der neue Rhythmus durch die UI. Gleichzeitig bleibt der Einstieg schnell, damit du direkt in den Run kommst.\n\nWas kommt als Naechstes:\n- weitere Flut-Varianten mit Spezial-Events\n- neue Rewards und kosmetische Drops\n- Feinschliff am Modus-Feedback (Sound, Warning, Puls)\n\nKurzfassung: mehr Dynamik, mehr Druck nach oben und ein Modus, der sich wie ein echtes Season-Event anfuehlt."
+        body: "Build 2.8.1 • 05.06.2026\n\nDer zweite Deploy fuer Chapter 4 Season 1 stabilisiert die neue Weltbasis in allen Modi. Terrain, Biome und Hintergrundfarben sind jetzt auf einen gemeinsamen New-Dawn-Standard gezogen, damit sich Solo-Runs, Quest-Fortschritt und Lobby-Vorschau wie ein einziges Kapitel anfuehlen.\n\nNeu:\n- Vereinheitlichte Weltfarben und Dawn-Zonen\n- Ueberarbeitete HUD-Groessen fuer mehr Sicht auf das Spielfeld\n- Neue Fallback-Hintergruende und aktualisierte Progress-Texte\n\nFixes:\n- Alte Season-4-Bezeichnungen im aktiven Flow ersetzt\n- Event-Modus Finale Operation aus der aktuellen Modus-Auswahl entfernt\n- Battle-Pass-Seiten und Rewards konsistenter auf Chapter 4 gezogen\n\nKurzfassung: New Dawn ist jetzt nicht nur Theme, sondern die neue Basisschicht fuer die gesamte Spielwelt."
       },
       {
         id: "xxl_update_2026_04_07",
@@ -65551,6 +66799,15 @@ async function loadMaintenanceStateFromSupabase() {
           onGrant: () => {
             playerSkin.ownedEyes.push(id);
             ensureSkinStored("eyes", id);
+            recordRefundablePurchase({
+              kind: "cosmetic",
+              itemType: "eyes",
+              itemId: id,
+              title: skin.name,
+              price: finalPrice,
+              rarity: skin.rarity || "common",
+              previewLabel: "AU"
+            });
           },
           equipAction: () => {
             playerSkin.activeSpecial = null;
@@ -65588,6 +66845,15 @@ async function loadMaintenanceStateFromSupabase() {
           onGrant: () => {
             playerSkin.ownedBodies.push(id);
             ensureSkinStored("bodies", id);
+            recordRefundablePurchase({
+              kind: "cosmetic",
+              itemType: "bodies",
+              itemId: id,
+              title: skin.name,
+              price: finalPrice,
+              rarity: skin.rarity || "common",
+              previewLabel: "KO"
+            });
           },
           equipAction: () => {
             playerSkin.activeSpecial = null;
@@ -65624,6 +66890,15 @@ async function loadMaintenanceStateFromSupabase() {
           ],
           onGrant: () => {
             playerSkin.ownedOutfits.push(id);
+            recordRefundablePurchase({
+              kind: "cosmetic",
+              itemType: "outfits",
+              itemId: id,
+              title: outfit.name,
+              price: finalPrice,
+              rarity: outfit.rarity || "common",
+              previewLabel: "OF"
+            });
           },
           equipAction: () => {
             activeThreeDOutfitId = id;
@@ -65669,6 +66944,15 @@ async function loadMaintenanceStateFromSupabase() {
           onGrant: () => {
             playerSkin.ownedRains.push(id);
             ensureSkinStored("rains", id);
+            recordRefundablePurchase({
+              kind: "cosmetic",
+              itemType: "rains",
+              itemId: id,
+              title: skin.name,
+              price: finalPrice,
+              rarity: skin.rarity || "common",
+              previewLabel: "RG"
+            });
           },
           equipAction: () => {
             playerSkin.activeRain = id;
@@ -65704,6 +66988,15 @@ async function loadMaintenanceStateFromSupabase() {
           onGrant: () => {
             playerSkin.ownedSpecials.push(id);
             ensureSkinStored("specials", id);
+            recordRefundablePurchase({
+              kind: "cosmetic",
+              itemType: "specials",
+              itemId: id,
+              title: skin.name,
+              price: finalPrice,
+              rarity: skin.rarity || "common",
+              previewLabel: "SP"
+            });
           },
           equipAction: () => {
             playerSkin.activeSpecial = id;
@@ -65905,6 +67198,280 @@ async function loadMaintenanceStateFromSupabase() {
       } catch (err) {
         console.warn("New shop state could not be saved:", err);
       }
+    }
+
+    function normalizeRefundCenterState(input = {}) {
+      const rawHistory = Array.isArray(input.history) ? input.history : [];
+      const history = rawHistory.map((entry) => ({
+        id: String(entry?.id || `refund_${Math.random().toString(36).slice(2, 10)}`),
+        kind: String(entry?.kind || ""),
+        itemType: String(entry?.itemType || ""),
+        itemId: String(entry?.itemId || ""),
+        title: String(entry?.title || "Unbekannter Kauf"),
+        price: Math.max(0, Math.floor(Number(entry?.price || 0))),
+        purchasedAt: Math.max(0, Math.floor(Number(entry?.purchasedAt || 0))),
+        refundedAt: Math.max(0, Math.floor(Number(entry?.refundedAt || 0))),
+        refundMode: String(entry?.refundMode || ""),
+        rarity: String(entry?.rarity || "common"),
+        previewLabel: String(entry?.previewLabel || ""),
+        previewImage: String(entry?.previewImage || "")
+      })).sort((a, b) => b.purchasedAt - a.purchasedAt).slice(0, 40);
+
+      const ticketSlots = Array.isArray(input.ticketSlots)
+        ? input.ticketSlots.slice(0, REFUND_CENTER_MAX_TICKETS).map((value) => Math.max(0, Math.floor(Number(value || 0))))
+        : [];
+      while (ticketSlots.length < REFUND_CENTER_MAX_TICKETS) ticketSlots.push(0);
+
+      return { history, ticketSlots };
+    }
+
+    function getRefundTicketAvailableCount() {
+      const now = Date.now();
+      return refundCenterState.ticketSlots.filter((value) => Number(value || 0) <= now).length;
+    }
+
+    function consumeRefundTicket() {
+      const now = Date.now();
+      const slotIndex = refundCenterState.ticketSlots.findIndex((value) => Number(value || 0) <= now);
+      if (slotIndex < 0) return false;
+      refundCenterState.ticketSlots[slotIndex] = now + REFUND_TICKET_RECHARGE_MS;
+      return true;
+    }
+
+    function getCountdownThemeIdFromCatalogItem(itemId = "") {
+      if (!String(itemId).startsWith("countdown_")) return "";
+      return `go_${String(itemId).slice("countdown_".length)}`;
+    }
+
+    function getRefundPreviewLabel(entry) {
+      if (entry.previewLabel) return entry.previewLabel;
+      const title = String(entry.title || "").trim();
+      return title ? title.slice(0, 2).toUpperCase() : "MB";
+    }
+
+    function isRefundEntryEquipped(entry) {
+      if (!entry) return false;
+      const type = entry.itemType;
+      const id = entry.itemId;
+      if (type === "eyes") return !playerSkin.activeSpecial && playerSkin.activeEyes === id;
+      if (type === "bodies") return !playerSkin.activeSpecial && playerSkin.activeBody === id;
+      if (type === "specials") return playerSkin.activeSpecial === id;
+      if (type === "rains") return playerSkin.activeRain === id;
+      if (type === "outfits") return activeThreeDOutfitId === id;
+      if (type === "countdowns") return playerSkin.activeCountdownTheme === id;
+      if (type === "miningfx") return playerSkin.activeMiningEffect === id;
+      if (type === "lobbyBackgrounds") return playerSkin.activeLobbyBackground === id;
+      if (type === "catalog_countdown") return playerSkin.activeCountdownTheme === getCountdownThemeIdFromCatalogItem(id);
+      return false;
+    }
+
+    function getRefundEntryEligibility(entry) {
+      const now = Date.now();
+      if (!entry || entry.refundedAt) return { mode: "", label: "Bereits zurückgegeben", canRefund: false };
+      const ageMs = Math.max(0, now - Number(entry.purchasedAt || 0));
+      const withinCancelWindow = ageMs <= REFUND_CANCEL_WINDOW_MS;
+      const withinTicketWindow = ageMs <= REFUND_TICKET_WINDOW_MS;
+      const equipped = isRefundEntryEquipped(entry);
+      if (withinCancelWindow && !equipped) {
+        return { mode: "cancel", label: "Kauf rückgängig machen", canRefund: true, status: "Direkt stornierbar" };
+      }
+      if (withinTicketWindow && getRefundTicketAvailableCount() > 0) {
+        return { mode: "ticket", label: "Rückgabeticket nutzen", canRefund: true, status: "Ticket möglich" };
+      }
+      if (withinTicketWindow) {
+        return { mode: "", label: "Nicht genügend Rückgabetickets", canRefund: false, status: "Keine Tickets frei" };
+      }
+      return { mode: "", label: "Rückgabefrist abgelaufen", canRefund: false, status: "Nicht mehr erstattbar" };
+    }
+
+    function recordRefundablePurchase(entry = {}) {
+      if (!entry.kind || !entry.itemType || !entry.itemId || Number(entry.price || 0) <= 0) return;
+      refundCenterState = normalizeRefundCenterState(refundCenterState);
+      refundCenterState.history.unshift({
+        id: `refund_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+        kind: entry.kind,
+        itemType: entry.itemType,
+        itemId: entry.itemId,
+        title: entry.title || "Shop Kauf",
+        price: Math.max(0, Math.floor(Number(entry.price || 0))),
+        purchasedAt: Date.now(),
+        refundedAt: 0,
+        refundMode: "",
+        rarity: entry.rarity || "common",
+        previewLabel: entry.previewLabel || "",
+        previewImage: entry.previewImage || ""
+      });
+      refundCenterState.history = refundCenterState.history.slice(0, 40);
+      if (typeof queueDeferredSave === "function") queueDeferredSave();
+    }
+
+    function removeOwnedValue(list, value) {
+      if (!Array.isArray(list)) return [];
+      return list.filter((entry) => entry !== value);
+    }
+
+    function refundCatalogCountdownPurchase(itemId) {
+      newShopOwned = removeOwnedValue(newShopOwned, itemId);
+      const themeId = getCountdownThemeIdFromCatalogItem(itemId);
+      if (themeId) {
+        playerSkin.ownedCountdownThemes = removeOwnedValue(playerSkin.ownedCountdownThemes, themeId);
+        if (!playerSkin.ownedCountdownThemes.includes("rift_blue")) playerSkin.ownedCountdownThemes.unshift("rift_blue");
+        if (!playerSkin.ownedCountdownThemes.includes(playerSkin.activeCountdownTheme)) {
+          playerSkin.activeCountdownTheme = "rift_blue";
+        }
+      }
+      return true;
+    }
+
+    function revokeRefundablePurchase(entry) {
+      if (!entry) return false;
+      const id = entry.itemId;
+      const type = entry.itemType;
+
+      if (type === "catalog_countdown") {
+        return refundCatalogCountdownPurchase(id);
+      }
+
+      if (type === "eyes") {
+        playerSkin.ownedEyes = removeOwnedValue(playerSkin.ownedEyes, id);
+        if (!playerSkin.ownedEyes.includes("black")) playerSkin.ownedEyes.unshift("black");
+        if (!playerSkin.ownedEyes.includes(playerSkin.activeEyes)) playerSkin.activeEyes = "black";
+        return true;
+      }
+      if (type === "bodies") {
+        playerSkin.ownedBodies = removeOwnedValue(playerSkin.ownedBodies, id);
+        if (!playerSkin.ownedBodies.includes("red")) playerSkin.ownedBodies.unshift("red");
+        if (!playerSkin.ownedBodies.includes(playerSkin.activeBody)) playerSkin.activeBody = "red";
+        return true;
+      }
+      if (type === "specials") {
+        playerSkin.ownedSpecials = removeOwnedValue(playerSkin.ownedSpecials, id);
+        if (playerSkin.activeSpecial === id) playerSkin.activeSpecial = null;
+        return true;
+      }
+      if (type === "rains") {
+        playerSkin.ownedRains = removeOwnedValue(playerSkin.ownedRains, id);
+        if (!playerSkin.ownedRains.includes("default")) playerSkin.ownedRains.unshift("default");
+        if (!playerSkin.ownedRains.includes(playerSkin.activeRain)) playerSkin.activeRain = "default";
+        return true;
+      }
+      if (type === "outfits") {
+        playerSkin.ownedOutfits = removeOwnedValue(playerSkin.ownedOutfits, id);
+        if (!playerSkin.ownedOutfits.includes("metro")) playerSkin.ownedOutfits.unshift("metro");
+        if (!playerSkin.ownedOutfits.includes(activeThreeDOutfitId)) {
+          activeThreeDOutfitId = playerSkin.ownedOutfits[0] || "metro";
+          saveThreeDOutfitSetting();
+        }
+        return true;
+      }
+      if (type === "countdowns") {
+        playerSkin.ownedCountdownThemes = removeOwnedValue(playerSkin.ownedCountdownThemes, id);
+        if (!playerSkin.ownedCountdownThemes.includes("rift_blue")) playerSkin.ownedCountdownThemes.unshift("rift_blue");
+        if (!playerSkin.ownedCountdownThemes.includes(playerSkin.activeCountdownTheme)) playerSkin.activeCountdownTheme = "rift_blue";
+        return true;
+      }
+      if (type === "miningfx") {
+        playerSkin.ownedMiningEffects = removeOwnedValue(playerSkin.ownedMiningEffects, id);
+        if (!playerSkin.ownedMiningEffects.includes("classic_chip")) playerSkin.ownedMiningEffects.unshift("classic_chip");
+        if (!playerSkin.ownedMiningEffects.includes(playerSkin.activeMiningEffect)) playerSkin.activeMiningEffect = "classic_chip";
+        return true;
+      }
+      if (type === "lobbyBackgrounds") {
+        playerSkin.ownedLobbyBackgrounds = removeOwnedValue(playerSkin.ownedLobbyBackgrounds, id);
+        if (!playerSkin.ownedLobbyBackgrounds.includes("default_bg")) playerSkin.ownedLobbyBackgrounds.unshift("default_bg");
+        if (!playerSkin.ownedLobbyBackgrounds.includes(playerSkin.activeLobbyBackground)) {
+          playerSkin.activeLobbyBackground = playerSkin.ownedLobbyBackgrounds[0] || "default_bg";
+        }
+        applyLobbyBackgroundVisual();
+        return true;
+      }
+
+      return false;
+    }
+
+    function getRefundEntryPreviewMarkup(entry) {
+      if (entry.previewImage) {
+        return `<div class="refundEntryPreview"><img src="${entry.previewImage}" alt="${entry.title}"></div>`;
+      }
+      return `<div class="refundEntryPreview">${getRefundPreviewLabel(entry)}</div>`;
+    }
+
+    function processRefundEntry(entryId) {
+      refundCenterState = normalizeRefundCenterState(refundCenterState);
+      const entry = refundCenterState.history.find((item) => item.id === entryId);
+      if (!entry) return;
+      const eligibility = getRefundEntryEligibility(entry);
+      if (!eligibility.canRefund) {
+        showMessage(eligibility.label || "Keine Rueckerstattung moeglich.", 2200);
+        renderRefundCenterMenu();
+        return;
+      }
+      if (eligibility.mode === "ticket" && !consumeRefundTicket()) {
+        showMessage("Keine Rueckgabetickets verfuegbar.", 2200);
+        renderRefundCenterMenu();
+        return;
+      }
+      if (!revokeRefundablePurchase(entry)) {
+        showMessage("Dieser Kauf kann aktuell nicht rueckgaengig gemacht werden.", 2400);
+        renderRefundCenterMenu();
+        return;
+      }
+      inventory[7] = Math.max(0, Math.floor(Number(inventory[7] || 0))) + Math.max(0, Number(entry.price || 0));
+      entry.refundedAt = Date.now();
+      entry.refundMode = eligibility.mode;
+      saveNewShopState();
+      refreshStoreUi();
+      renderRefundCenterMenu();
+      if (typeof queueDeferredSave === "function") queueDeferredSave();
+      showMessage(`${entry.title} rueckerstattet (+${Number(entry.price || 0).toLocaleString("de-DE")} M-Bucks)`, 2600);
+    }
+
+    function renderRefundCenterMenu() {
+      if (!refundCenterList || !refundTicketGrid || !refundTicketAvailableCount || !refundCenterWallet) return;
+      refundCenterState = normalizeRefundCenterState(refundCenterState);
+      refundCenterWallet.innerHTML = `<img src="assets/K8NlPp.png" alt="M-Bucks">${Math.max(0, Math.floor(Number(inventory[7] || 0))).toLocaleString("de-DE")}`;
+      refundTicketAvailableCount.textContent = String(getRefundTicketAvailableCount());
+
+      refundTicketGrid.innerHTML = refundCenterState.ticketSlots.map((availableAt) => {
+        const isAvailable = Number(availableAt || 0) <= Date.now();
+        const dateLabel = isAvailable
+          ? "Verfuegbar jetzt"
+          : `Verfuegbar am ${new Date(availableAt).toLocaleDateString("de-DE")}`;
+        return `
+          <div class="refundTicketCard">
+            <div class="refundTicketVisual"></div>
+            <div class="refundTicketDate">${dateLabel}</div>
+          </div>
+        `;
+      }).join("");
+
+      const entries = refundCenterState.history.slice().sort((a, b) => b.purchasedAt - a.purchasedAt);
+      if (!entries.length) {
+        refundCenterList.innerHTML = `<div class="refundCenterEmpty">Noch keine erstattungsfaehigen Shop-Kaeufe vorhanden. Sobald du Kosmetik mit M-Bucks kaufst, taucht sie hier mit Kaufdatum und Rueckgabeoption auf.</div>`;
+        return;
+      }
+
+      refundCenterList.innerHTML = entries.map((entry) => {
+        const eligibility = getRefundEntryEligibility(entry);
+        const purchasedLabel = new Date(entry.purchasedAt).toLocaleDateString("de-DE");
+        const refundedLabel = entry.refundedAt ? `${new Date(entry.refundedAt).toLocaleDateString("de-DE")} zurueckgegeben` : `Gekauft: ${purchasedLabel}`;
+        return `
+          <div class="refundCenterEntry ${entry.refundedAt ? "isRefunded" : ""}">
+            ${getRefundEntryPreviewMarkup(entry)}
+            <div class="refundEntryMeta">
+              <div class="refundEntryTitleRow">
+                <div class="refundEntryTitle">${entry.title}</div>
+                <div class="refundEntryStatus ${entry.refundedAt ? "isRefunded" : (eligibility.canRefund ? "isEligible" : "")}">${entry.refundedAt ? "Bereits zurueckgegeben" : (eligibility.status || "Pruefung laeuft")}</div>
+              </div>
+              <div class="refundEntryPurchase">${entry.price.toLocaleString("de-DE")} M-Bucks • ${entry.rarity}</div>
+            </div>
+            <div class="refundEntryActionWrap">
+              <div class="refundEntryDate">${refundedLabel}</div>
+              <button class="refundEntryBtn ${eligibility.mode === "cancel" ? "isPrimary" : ""}" data-refund-entry="${entry.id}" ${eligibility.canRefund ? "" : "disabled"}>${eligibility.label || "Nicht verfuegbar"}</button>
+            </div>
+          </div>
+        `;
+      }).join("");
     }
 
     function isNewShopOwned(itemId) {
@@ -66368,6 +67935,17 @@ async function loadMaintenanceStateFromSupabase() {
         onGrant: () => {
           newShopOwned.push(item.id);
           if (typeof item.onBuy === "function") item.onBuy();
+          if (item.id.startsWith("countdown_")) {
+            recordRefundablePurchase({
+              kind: "catalog",
+              itemType: "catalog_countdown",
+              itemId: item.id,
+              title: item.name,
+              price: finalPrice,
+              rarity: item.rarity || "common",
+              previewLabel: "GO"
+            });
+          }
         },
         equipAction: null,
         equipLabel: "OK",
@@ -67061,6 +68639,24 @@ async function loadMaintenanceStateFromSupabase() {
     if (closeMBucksStoreBtn) closeMBucksStoreBtn.addEventListener("click", () => {
       closeMBucksStoreMenu();
     });
+    if (openRefundCenterBtn) openRefundCenterBtn.addEventListener("click", () => {
+      openMenu("refundCenter");
+    });
+    if (closeRefundCenterBtn) closeRefundCenterBtn.addEventListener("click", () => {
+      refundCenterOpen = false;
+      if (refundCenterMenu) refundCenterMenu.classList.add("hidden");
+      openMenu("mbucksStore");
+    });
+    if (closeRefundCenterTopBtn) closeRefundCenterTopBtn.addEventListener("click", () => {
+      refundCenterOpen = false;
+      if (refundCenterMenu) refundCenterMenu.classList.add("hidden");
+      openMenu("mbucksStore");
+    });
+    if (closeRefundCenterOverlayBtn) closeRefundCenterOverlayBtn.addEventListener("click", () => {
+      refundCenterOpen = false;
+      if (refundCenterMenu) refundCenterMenu.classList.add("hidden");
+      openMenu("mbucksStore");
+    });
     if (mbucksStoreRefreshBtn) mbucksStoreRefreshBtn.addEventListener("click", () => {
       fetchAdminCurrencyWallet().then(() => {
         renderMBucksStoreStatus("Status aktualisiert.");
@@ -67070,12 +68666,19 @@ async function loadMaintenanceStateFromSupabase() {
     mbucksStoreBuyBtns.forEach((btn) => {
       btn.addEventListener("click", () => startMBucksCheckout(btn.dataset.mbucksPack));
     });
-    if (buyAdminCoinFromMBucksBtn) {
-      buyAdminCoinFromMBucksBtn.addEventListener("click", () => buyAdminCoinFromMBucks(1));
-    }
+    adminCoinReverseBuyBtns.forEach((btn) => {
+      btn.addEventListener("click", () => buyAdminCoinFromMBucks(btn.dataset.adminCoinPack || "single"));
+    });
     if (redeemAdminCurrency1Btn) redeemAdminCurrency1Btn.addEventListener("click", () => redeemAdminCurrency(1));
     if (redeemAdminCurrency5Btn) redeemAdminCurrency5Btn.addEventListener("click", () => redeemAdminCurrency(5));
     if (redeemAdminCurrency10Btn) redeemAdminCurrency10Btn.addEventListener("click", () => redeemAdminCurrency(10));
+    if (refundCenterList) {
+      refundCenterList.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-refund-entry]");
+        if (!button) return;
+        processRefundEntry(button.dataset.refundEntry);
+      });
+    }
     if (closeCommandPlusBtn) closeCommandPlusBtn.addEventListener("click", () => {
       commandPlusOpen = false;
       if (commandPlusMenu) commandPlusMenu.classList.add("hidden");
@@ -68548,7 +70151,7 @@ async function loadMaintenanceStateFromSupabase() {
     if (adminEventCommunityOnBtn) adminEventCommunityOnBtn.addEventListener("click", () => applyLiveEventToggle("communityBoost", true));
     if (adminEventCommunityOffBtn) adminEventCommunityOffBtn.addEventListener("click", () => applyLiveEventToggle("communityBoost", false));
     if (adminSeasonHardResetBtn) adminSeasonHardResetBtn.addEventListener("click", () => {
-      const ok = window.confirm("Wirklich Season 4 Hard Reset ausführen? Das setzt Level, Battle Pass und Claims komplett zurück.");
+      const ok = window.confirm("Wirklich Chapter 4 Hard Reset ausfuehren? Das setzt Level, Battle Pass und Claims komplett zurueck.");
       if (!ok) return;
       runSeason4HardResetFromAdmin();
     });
@@ -68867,7 +70470,7 @@ async function loadMaintenanceStateFromSupabase() {
         }
         if (!RESPAWN_ENABLED) {
           gameStarted = false;
-          showMessage("Du bist in die Lava-Tiefe gefallen. Kein Respawn in Season 4.", 2600);
+          showMessage("Du bist in die Lava-Tiefe gefallen. Kein Respawn in Chapter 4 Season 1.", 2600);
           setTimeout(() => openLobby(), 900);
           return;
         }
@@ -68941,11 +70544,17 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function getSkyTopColor() {
+      if (currentMatchMode === "finale_operation") {
+        const phase = getFinaleOperationPhase();
+        if (phase === "pre") return "rgb(33, 48, 86)";
+        if (phase === "live") return "rgb(97, 58, 96)";
+        return "rgb(14, 18, 28)";
+      }
       const daylight = getDaylight();
       const stage = getActiveCommunityWorldStage();
-      const r = Math.floor(10 + daylight * 125);
-      const g = Math.floor(20 + daylight * 186);
-      const b = Math.floor(40 + daylight * 195);
+      const r = Math.floor(18 + daylight * 124);
+      const g = Math.floor(34 + daylight * 178);
+      const b = Math.floor(64 + daylight * 188);
       if (weatherState.current === "ufo" || weatherState.current === "ufoCrash") {
         return `rgb(${Math.max(16, r - 24)}, ${Math.min(255, g + 8)}, ${Math.min(255, b + 18)})`;
       }
@@ -68956,11 +70565,17 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function getSkyBottomColor() {
+      if (currentMatchMode === "finale_operation") {
+        const phase = getFinaleOperationPhase();
+        if (phase === "pre") return "rgb(244, 140, 84)";
+        if (phase === "live") return "rgb(255, 168, 82)";
+        return "rgb(18, 18, 22)";
+      }
       const daylight = getDaylight();
       const stage = getCommunityEventStage();
-      const r = Math.floor(20 + daylight * 195);
-      const g = Math.floor(30 + daylight * 205);
-      const b = Math.floor(60 + daylight * 195);
+      const r = Math.floor(44 + daylight * 182);
+      const g = Math.floor(62 + daylight * 186);
+      const b = Math.floor(94 + daylight * 176);
       if (weatherState.current === "ufo" || weatherState.current === "ufoCrash") {
         return `rgb(${Math.max(18, r - 18)}, ${Math.min(255, g + 6)}, ${Math.min(255, b + 28)})`;
       }
@@ -68968,6 +70583,46 @@ async function loadMaintenanceStateFromSupabase() {
         return `rgb(${Math.min(255, r + 85)}, ${Math.max(26, g - 42)}, ${Math.max(20, b - 86)})`;
       }
       return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    function drawFinaleOperationSky(cam, groundY) {
+      const phase = getFinaleOperationPhase();
+      const pulse = Date.now() * 0.0022;
+
+      ctx.save();
+
+      const upperGlow = ctx.createRadialGradient(canvas.width * 0.72, 96, 40, canvas.width * 0.72, 96, 280);
+      upperGlow.addColorStop(0, phase === "live" ? "rgba(255, 205, 138, 0.42)" : "rgba(161, 199, 255, 0.26)");
+      upperGlow.addColorStop(1, "rgba(255, 180, 112, 0)");
+      ctx.fillStyle = upperGlow;
+      ctx.fillRect(0, 0, canvas.width, Math.max(groundY, 0));
+
+      const riftGlow = ctx.createRadialGradient(canvas.width * 0.28, 120, 20, canvas.width * 0.28, 120, 220);
+      riftGlow.addColorStop(0, phase === "live" ? "rgba(181, 106, 255, 0.3)" : "rgba(95, 157, 255, 0.18)");
+      riftGlow.addColorStop(1, "rgba(106, 64, 255, 0)");
+      ctx.fillStyle = riftGlow;
+      ctx.fillRect(0, 0, canvas.width, Math.max(groundY, 0));
+
+      for (let i = 0; i < 4; i++) {
+        const beamX = ((i + 1) * canvas.width) / 5 + Math.sin(pulse + i * 0.9) * 26;
+        const beamWidth = 36 + i * 6;
+        const beamGradient = ctx.createLinearGradient(beamX, 0, beamX, groundY);
+        beamGradient.addColorStop(0, phase === "live" ? "rgba(255, 224, 176, 0.44)" : "rgba(168, 209, 255, 0.18)");
+        beamGradient.addColorStop(1, "rgba(255, 164, 96, 0)");
+        ctx.fillStyle = beamGradient;
+        ctx.fillRect(beamX - beamWidth * 0.5, 0, beamWidth, Math.max(groundY - 40, 0));
+      }
+
+      ctx.strokeStyle = phase === "live" ? "rgba(255, 204, 120, 0.22)" : "rgba(140, 198, 255, 0.16)";
+      ctx.lineWidth = 1;
+      for (let y = 36; y < groundY - 30; y += 28) {
+        ctx.beginPath();
+        ctx.moveTo(0, y + Math.sin(pulse + y * 0.02) * 1.5);
+        ctx.lineTo(canvas.width, y + Math.sin(pulse + y * 0.02) * 1.5);
+        ctx.stroke();
+      }
+
+      ctx.restore();
     }
 
     function drawDayNightOverlay() {
@@ -69231,7 +70886,7 @@ async function loadMaintenanceStateFromSupabase() {
         }
         if (!RESPAWN_ENABLED) {
           gameStarted = false;
-          showMessage("Du bist ausgeschieden. Kein Respawn in Season 4.", 2600);
+          showMessage("Du bist ausgeschieden. Kein Respawn in Chapter 4 Season 1.", 2600);
           setTimeout(() => openLobby(), 900);
           return;
         }
@@ -69250,6 +70905,9 @@ async function loadMaintenanceStateFromSupabase() {
       skyGradient.addColorStop(1, getSkyBottomColor());
       ctx.fillStyle = skyGradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+      if (currentMatchMode === "finale_operation") {
+        drawFinaleOperationSky(cam, groundY);
+      }
 
       const desertScreenX = DESERT_BIOME_START * TILE - cam.x;
       const waterScreenX = WATER_BIOME_START * TILE - cam.x;
@@ -69259,47 +70917,49 @@ async function loadMaintenanceStateFromSupabase() {
       const crystalActive = communityEventState.biomeUnlocked;
       const alienEndX = crystalActive ? CRYSTAL_BIOME_START : RIFT_BIOME_START;
 
-      ctx.fillStyle = "#4f7c45";
+      ctx.fillStyle = "#6c9f6c";
       ctx.fillRect(-cam.x, groundY, DESERT_BIOME_START * TILE, canvas.height - groundY);
 
-      ctx.fillStyle = "#8a5f39";
+      ctx.fillStyle = "#b97746";
       ctx.fillRect(desertScreenX, groundY, (WATER_BIOME_START - DESERT_BIOME_START) * TILE, canvas.height - groundY);
 
       ctx.save();
       ctx.globalAlpha = 0.22;
-      ctx.fillStyle = "rgba(255, 209, 133, 0.26)";
+      ctx.fillStyle = "rgba(255, 191, 126, 0.3)";
       ctx.fillRect(desertScreenX, groundY - 120, (WATER_BIOME_START - DESERT_BIOME_START) * TILE, 140);
       ctx.restore();
 
-      ctx.fillStyle = "#2e84b7";
+      ctx.fillStyle = "#2d6fa5";
       ctx.fillRect(waterScreenX, groundY, (ALIEN_BIOME_START - WATER_BIOME_START) * TILE, canvas.height - groundY);
 
       ctx.save();
       ctx.globalAlpha = 0.25;
-      ctx.fillStyle = "rgba(160, 220, 255, 0.28)";
+      ctx.fillStyle = "rgba(122, 223, 255, 0.26)";
       ctx.fillRect(waterScreenX, groundY - 120, (ALIEN_BIOME_START - WATER_BIOME_START) * TILE, 140);
       ctx.restore();
 
-      ctx.fillStyle = "#7cc66d";
+      ctx.fillStyle = "#7d8ce3";
       ctx.fillRect(alienScreenX, groundY, (alienEndX - ALIEN_BIOME_START) * TILE, canvas.height - groundY);
 
       if (crystalActive) {
-        ctx.fillStyle = "#8de7ff";
+        ctx.fillStyle = "#9fe7ff";
         ctx.fillRect(crystalScreenX, groundY, (RIFT_BIOME_START - CRYSTAL_BIOME_START) * TILE, canvas.height - groundY);
       }
 
-      ctx.fillStyle = "#2a1b3d";
+      ctx.fillStyle = "#34204b";
       ctx.fillRect(riftScreenX, groundY, (WORLD_WIDTH - RIFT_BIOME_START) * TILE, canvas.height - groundY);
 
       ctx.save();
       ctx.globalAlpha = 0.28;
-      ctx.fillStyle = "rgba(128, 186, 255, 0.18)";
+      ctx.fillStyle = "rgba(180, 126, 255, 0.18)";
       ctx.fillRect(riftScreenX, groundY - 140, (WORLD_WIDTH - RIFT_BIOME_START) * TILE, 160);
       ctx.restore();
 
       drawRiftCracks(cam, groundY);
 
-      const cloudAlpha = 0.08 + daylight * 0.12;
+      const cloudAlpha = currentMatchMode === "finale_operation"
+        ? (getFinaleOperationPhase() === "live" ? 0.2 : 0.14)
+        : (0.08 + daylight * 0.12);
       ctx.fillStyle = `rgba(255,214,180,${cloudAlpha})`;
       ctx.fillRect(120 - cam.x * 0.15, 80, 90, 26);
       ctx.fillRect(330 - cam.x * 0.12, 130, 110, 30);
@@ -69312,18 +70972,20 @@ async function loadMaintenanceStateFromSupabase() {
 
       ctx.beginPath();
       ctx.arc(sunX, sunY, 35, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255, 213, 79, ${daylight})`;
+      ctx.fillStyle = currentMatchMode === "finale_operation"
+        ? `rgba(255, 191, 112, ${getFinaleOperationPhase() === "live" ? 0.92 : 0.72})`
+        : `rgba(255, 213, 79, ${daylight})`;
       ctx.fill();
 
       const moonAlpha = 1 - daylight;
-      if (moonAlpha > 0.05) {
+      if (moonAlpha > 0.05 && currentMatchMode !== "finale_operation") {
         ctx.beginPath();
         ctx.arc(moonX, moonY, 28, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(230, 235, 255, ${moonAlpha})`;
         ctx.fill();
       }
 
-      if (weatherState.current !== "ufoCrash") {
+      if (weatherState.current !== "ufoCrash" && currentMatchMode !== "finale_operation") {
         const bgUfoX = alienScreenX + 210 + Math.sin(dayTime * 1.7) * 80;
         const bgUfoY = 120 + Math.cos(dayTime * 1.4) * 18;
         ctx.fillStyle = "rgba(149,255,223,0.72)";
@@ -69709,6 +71371,22 @@ async function loadMaintenanceStateFromSupabase() {
     function renderHotbar() {
       ensureHotbarSlots();
       hotbar.innerHTML = "";
+      const currentBiome = getBiomeAt(Math.floor((player.x + player.w / 2) / TILE));
+      const modeName = currentMatchMode === "creative" ? "Creative Grid" : (currentMatchMode === "finale_operation" ? "Live Operation" : "Field Run");
+      const biomeLabel = currentBiome === "crystal"
+        ? "Skyglass Heights"
+        : (currentBiome === "alien"
+          ? "Aurora Reach"
+          : (currentBiome === "desert"
+            ? "Ember Dunes"
+            : (currentBiome === "water"
+              ? "Floodline Basin"
+              : (currentBiome === "rift" ? "Eclipse Frontier" : "Dawnwild"))));
+
+      const header = document.createElement("div");
+      header.className = "hotbarHeader";
+      header.innerHTML = `<span>${modeName}</span><strong>${biomeLabel}</strong>`;
+      hotbar.appendChild(header);
       
       hotbarSlots.forEach((id, i) => {
         const slot = document.createElement("div");
@@ -69773,7 +71451,7 @@ async function loadMaintenanceStateFromSupabase() {
 
     function updateUI() {
       const startScreenActive = !!startScreen && startScreen.style.display !== "none";
-      const anyMenuOpen = shopOpen || lockerOpen || questOpen || dailyLoginOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
+      const anyMenuOpen = shopOpen || lockerOpen || questOpen || dailyLoginOpen || passOpen || communityEventOpen || seasonFinaleVoteOpen || mbucksCreditOpen || mbucksStoreOpen || refundCenterOpen || inventoryOpen || skillOpen || craftOpen || equipmentOpen || helpOpen || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof blogOpen !== 'undefined' && blogOpen) || (typeof blogDetailOpen !== 'undefined' && blogDetailOpen) || (typeof loreOpen !== 'undefined' && loreOpen) || (typeof leakOpen !== 'undefined' && leakOpen) || (typeof crewOpen !== 'undefined' && crewOpen) || (typeof creatorOpen !== 'undefined' && creatorOpen) || (typeof twitchOpen !== 'undefined' && twitchOpen);
       const hideHud = inLobby || startScreenActive || anyMenuOpen;
 
       if (hudRack) hudRack.style.display = (startScreenActive || anyMenuOpen) ? "none" : "grid";
@@ -69826,14 +71504,14 @@ async function loadMaintenanceStateFromSupabase() {
       const playerTileX = Math.floor((player.x + player.w / 2) / TILE);
       const currentBiome = getBiomeAt(playerTileX);
       const biomeLabel = currentBiome === "crystal"
-        ? "Kristall-Biom"
+        ? "Skyglass Heights"
         : (currentBiome === "alien"
-          ? "Alien-Biom"
+          ? "Aurora Reach"
           : (currentBiome === "desert"
-            ? "Wuesten-Biom"
+            ? "Ember Dunes"
             : (currentBiome === "water"
-              ? "Flut-Biom"
-              : (currentBiome === "rift" ? "Riss-Zeit-Biom" : "Grasland"))));
+              ? "Floodline Basin"
+              : (currentBiome === "rift" ? "Eclipse Frontier" : "Dawnwild Plains"))));
       const skinLabel = playerSkin.activeSpecial
         ? (getSpecialSkinData(playerSkin.activeSpecial)?.name || "Spezial")
         : `${getBodySkinData(playerSkin.activeBody)?.name || "Body"} / ${getEyeSkinData(playerSkin.activeEyes)?.name || "Augen"}`;
@@ -69881,11 +71559,11 @@ async function loadMaintenanceStateFromSupabase() {
         const bannerEl = document.getElementById("zoneBanner");
         const bannerNameEl = document.getElementById("zoneBannerName");
         if (bannerEl && bannerNameEl) {
-          const zoneLabel = currentBiome === "crystal" ? "?? Kristall-Welt"
-            : currentBiome === "alien" ? "?? Kosmische Station"
-            : currentBiome === "water" ? "?? Storm-Peak"
-            : currentBiome === "rift" ? "? Riss-Zeit-Zone"
-            : "?? Tech-City";
+          const zoneLabel = currentBiome === "crystal" ? "Skyglass Heights"
+            : currentBiome === "alien" ? "Aurora Reach"
+            : currentBiome === "water" ? "Floodline Basin"
+            : currentBiome === "rift" ? "Eclipse Frontier"
+            : "Dawnwild Plains";
           bannerNameEl.textContent = zoneLabel;
           bannerEl.classList.add("visible");
           clearTimeout(heroZoneBannerTimeoutId);
