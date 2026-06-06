@@ -47784,10 +47784,12 @@ function updateGlobalDiscountInfo() {
     }
 
     function getActiveLiveEventEntries() {
+      const dailyXpRush = getDailyXpRushStatus();
       return [
         liveEventState.xpBoost ? { key: "xpBoost", label: "Doppelte XP", labelHtml: `<span class="boostIcon boostXp"></span>Doppelte XP`, desc: "Alle XP im Gameplay zaehlen gerade doppelt." } : null,
         liveEventState.passBoost ? { key: "passBoost", label: "Battle-Pass-Boost", desc: "Battle-Pass-XP laufen aktuell doppelt." } : null,
-        liveEventState.communityBoost ? { key: "communityBoost", label: "Community-Boost", desc: "Community-Blöcke zaehlen global doppelt." } : null
+        liveEventState.communityBoost ? { key: "communityBoost", label: "Community-Boost", desc: "Community-Blöcke zaehlen global doppelt." } : null,
+        dailyXpRush.active ? { key: "dailyXpBoost", label: "3x XP Rush", labelHtml: `<span class="boostIcon boostXp"></span>3x XP Rush`, desc: `Taeglicher Boost aktiv fuer Level und Battle Pass. Endet in ${formatRemainingTime(dailyXpRush.endAt)}.` } : null
       ].filter(Boolean);
     }
 
@@ -47976,12 +47978,70 @@ function updateGlobalDiscountInfo() {
       return !!emergencyState.twitch;
     }
 
+    function getDailyXpRushStatus(now = new Date()) {
+      const nowMs = now.getTime();
+      if (nowMs >= DAILY_XP_RUSH_SPECIAL_START_AT && nowMs < DAILY_XP_RUSH_SPECIAL_END_AT) {
+        return {
+          active: true,
+          multiplier: DAILY_XP_RUSH_MULTIPLIER,
+          startAt: DAILY_XP_RUSH_SPECIAL_START_AT,
+          endAt: DAILY_XP_RUSH_SPECIAL_END_AT,
+          nextStartAt: DAILY_XP_RUSH_SPECIAL_START_AT,
+          mode: "special",
+          windowLabel: "Heute bis 20:00 Uhr",
+          metaLabel: "Sonderfenster am 06.06.2026"
+        };
+      }
+
+      const startAt = new Date(now);
+      startAt.setHours(DAILY_XP_RUSH_START_HOUR, 0, 0, 0);
+
+      const endAt = new Date(now);
+      endAt.setHours(DAILY_XP_RUSH_END_HOUR, 0, 0, 0);
+
+      if (nowMs >= DAILY_XP_RUSH_DAILY_START_DATE && now >= startAt && now < endAt) {
+        return {
+          active: true,
+          multiplier: DAILY_XP_RUSH_MULTIPLIER,
+          startAt: startAt.getTime(),
+          endAt: endAt.getTime(),
+          nextStartAt: startAt.getTime(),
+          mode: "daily",
+          windowLabel: "Taeglich 15:00 - 16:00 Uhr",
+          metaLabel: "Standardfenster ab 07.06.2026"
+        };
+      }
+
+      const nextStart = new Date(startAt);
+      if (now >= endAt) {
+        nextStart.setDate(nextStart.getDate() + 1);
+      }
+      if (nextStart.getTime() < DAILY_XP_RUSH_DAILY_START_DATE) {
+        nextStart.setTime(DAILY_XP_RUSH_DAILY_START_DATE);
+      }
+
+      return {
+        active: false,
+        multiplier: 1,
+        startAt: startAt.getTime(),
+        endAt: endAt.getTime(),
+        nextStartAt: nextStart.getTime(),
+        mode: nowMs < DAILY_XP_RUSH_DAILY_START_DATE ? "pre_daily" : "daily",
+        windowLabel: "Taeglich 15:00 - 16:00 Uhr",
+        metaLabel: nowMs < DAILY_XP_RUSH_DAILY_START_DATE ? "Startet erstmals am 07.06.2026" : "Standardfenster ab 07.06.2026"
+      };
+    }
+
+    function getDailyXpRushMultiplier() {
+      return getDailyXpRushStatus().active ? DAILY_XP_RUSH_MULTIPLIER : 1;
+    }
+
     function getLiveXpMultiplier() {
-      return liveEventState.xpBoost ? 2 : 1;
+      return (liveEventState.xpBoost ? 2 : 1) * getDailyXpRushMultiplier();
     }
 
     function getLiveBattlePassMultiplier() {
-      return liveEventState.passBoost ? 2 : 1;
+      return (liveEventState.passBoost ? 2 : 1) * getDailyXpRushMultiplier();
     }
 
     function getLiveCommunityMultiplier() {
@@ -48935,7 +48995,13 @@ let shopWishlist = [];
     const PASS_SUPPORT_PACKAGE_PRICE = 750;
     const CURRENCY_NAME = "M-Bucks";
     const CURRENCY_ICON_PATH = "assets/K8NlPp.png";
-    const BATTLE_PASS_TIER_XP = 10000;
+    const BATTLE_PASS_TIER_XP = 15000;
+    const DAILY_XP_RUSH_START_HOUR = 15;
+    const DAILY_XP_RUSH_END_HOUR = 16;
+    const DAILY_XP_RUSH_MULTIPLIER = 3;
+    const DAILY_XP_RUSH_SPECIAL_START_AT = new Date(2026, 5, 6, 0, 0, 0, 0).getTime();
+    const DAILY_XP_RUSH_SPECIAL_END_AT = new Date(2026, 5, 6, 20, 0, 0, 0).getTime();
+    const DAILY_XP_RUSH_DAILY_START_DATE = new Date(2026, 5, 7, 15, 0, 0, 0).getTime();
     const BATTLE_PASS_SINGLE_TIER_PRICE = 150;
     const BATTLE_PASS_25_PACKAGE_PRICE = 2800;
     const BATTLE_PASS_25_PACKAGE_TIERS = 25;
@@ -55402,11 +55468,19 @@ let shopWishlist = [];
 
     function getXpNeeded() {
       if ((progression.level || 1) >= PLAYER_MAX_LEVEL) return Infinity;
-      return 100 + (progression.level - 1) * 50;
+      return 140 + (progression.level - 1) * 70;
     }
 
     function getCurrentLevel() {
       return Math.max(1, Number(progression?.level || 1));
+    }
+
+    function formatXpRewardSummary(levelXp = 0, passXp = 0) {
+      const chips = [];
+      if (levelXp > 0) chips.push(`+${Number(levelXp).toLocaleString("de-DE")} XP`);
+      if (passXp > 0) chips.push(`+${Number(passXp).toLocaleString("de-DE")} Pass-XP`);
+      if (getDailyXpRushStatus().active) chips.push(`${DAILY_XP_RUSH_MULTIPLIER}x Boost`);
+      return chips.join(" • ");
     }
 
     function addBattlePassXp(amount, options = {}) {
@@ -55457,11 +55531,13 @@ let shopWishlist = [];
       renderSkills();
       renderBattlePass();
       saveGame();
+      return finalAmount;
     }
 
     function renderXp() {
       const xpHud = document.querySelector(".xpHud");
       if (!xpHud) return;
+      const dailyXpRush = getDailyXpRushStatus();
       const currentXp = battlePassState.xp || 0;
       const tierXp = currentXp % BATTLE_PASS_TIER_XP;
       const passProgress = (tierXp / BATTLE_PASS_TIER_XP) * 100;
@@ -55510,6 +55586,14 @@ let shopWishlist = [];
         <div class="xpTop">
           <div class="xpPassBadge">Pass ${battlePassState.tier || 1}</div>
           <div class="xpLevelBadge">Level ${progression.level}</div>
+        </div>
+        <div style="margin-top: 2px; padding: 10px 12px; border-radius: 14px; border: 1px solid ${dailyXpRush.active ? "rgba(126, 255, 177, 0.42)" : "rgba(120, 190, 255, 0.22)"}; background: ${dailyXpRush.active ? "linear-gradient(135deg, rgba(22, 59, 39, 0.96), rgba(10, 29, 22, 0.96))" : "linear-gradient(135deg, rgba(18, 33, 54, 0.94), rgba(11, 20, 34, 0.96))"}; box-shadow: ${dailyXpRush.active ? "0 0 0 1px rgba(126, 255, 177, 0.08), 0 12px 24px rgba(0,0,0,0.18)" : "0 10px 20px rgba(0,0,0,0.14)"};">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:4px;">
+            <div style="font-size:10px; font-weight:900; letter-spacing:0.14em; text-transform:uppercase; color:${dailyXpRush.active ? "#86ffb5" : "rgba(196, 219, 247, 0.82)"};">3x XP Rush</div>
+            <div style="padding:3px 8px; border-radius:999px; font-size:10px; font-weight:900; letter-spacing:0.08em; text-transform:uppercase; background:${dailyXpRush.active ? "rgba(126,255,177,0.16)" : "rgba(255,255,255,0.08)"}; color:${dailyXpRush.active ? "#dffff0" : "#eef5ff"};">${dailyXpRush.active ? "LIVE" : "NEXT"}</div>
+          </div>
+          <div style="font-size:16px; font-weight:1000; color:#ffffff; line-height:1.1;">${dailyXpRush.active ? `Endet in ${formatRemainingTime(dailyXpRush.endAt)}` : `Startet in ${formatRemainingTime(dailyXpRush.nextStartAt)}`}</div>
+          <div style="margin-top:4px; font-size:11px; line-height:1.45; color:rgba(231, 240, 252, 0.82);">${dailyXpRush.active ? `Aktiv in dieser Runde: ${DAILY_XP_RUSH_MULTIPLIER}x XP fuer Level und Battle Pass.` : `Fenster: ${dailyXpRush.mode === "special" ? "06.06.2026 bis 20:00 Uhr" : "taeglich 15:00 - 16:00 Uhr"}`}</div>
         </div>
         <div class="xpStatRail">
           <div class="xpStatChip">
@@ -56401,10 +56485,10 @@ let shopWishlist = [];
       soloDirectiveState.active = false;
       soloDirectiveState.lastCompletedId = soloDirectiveState.currentId;
       soloDirectiveState.chain += 1;
-      addXp(soloDirectiveState.rewardXp || 0);
-      addBattlePassXp(Math.max(20, Math.round((soloDirectiveState.rewardXp || 0) * 0.7)));
+      const grantedLevelXp = addXp(soloDirectiveState.rewardXp || 0);
+      const grantedPassXp = addBattlePassXp(Math.max(20, Math.round((soloDirectiveState.rewardXp || 0) * 0.7)));
       inventory[7] += Number(soloDirectiveState.rewardCurrency || 0);
-      showMessage(`Singleplayer-Direktive abgeschlossen: ${soloDirectiveState.title} • ${getSoloDirectiveRewardText()}`, 2600);
+      showMessage(`Singleplayer-Direktive abgeschlossen: ${soloDirectiveState.title} • ${formatXpRewardSummary(grantedLevelXp, grantedPassXp)} • +${Number(soloDirectiveState.rewardCurrency || 0).toLocaleString("de-DE")} M-Bucks`, 2800);
       queueDeferredSave(60);
       rollNextSoloDirective({ preserveChain: true, showToast: false });
     }
@@ -60933,10 +61017,19 @@ async function loadMaintenanceStateFromSupabase() {
     }
 
     function applyQuestRewardPackage(packageReward = {}) {
-      if (packageReward.levelXp > 0) addXp(packageReward.levelXp);
-      if (packageReward.passXp > 0) addBattlePassXp(packageReward.passXp);
+      const granted = {
+        levelXp: 0,
+        passXp: 0,
+        mBucks: 0,
+        skillPoints: 0
+      };
+      if (packageReward.levelXp > 0) granted.levelXp = addXp(packageReward.levelXp);
+      if (packageReward.passXp > 0) granted.passXp = addBattlePassXp(packageReward.passXp);
       if (packageReward.mBucks > 0) inventory[7] += packageReward.mBucks;
       if (packageReward.skillPoints > 0) progression.skillPoints += packageReward.skillPoints;
+      granted.mBucks = Number(packageReward.mBucks || 0);
+      granted.skillPoints = Number(packageReward.skillPoints || 0);
+      return granted;
     }
 
     function claimQuestReward(id) {
@@ -60950,17 +61043,22 @@ async function loadMaintenanceStateFromSupabase() {
         if (isQuestClaimed(id, def.cadence)) return showMessage("Quest schon abgeholt!", 1800);
         if (!isQuestComplete(def)) return showMessage("Quest noch nicht fertig!", 1800);
         const rewardPack = normalizeQuestRewardPackage(def.reward, def.cadence);
-        applyQuestRewardPackage(rewardPack);
+        const granted = applyQuestRewardPackage(rewardPack);
         if (def.cadence === "weekly") {
           questState.claimedWeekly.push(id);
         } else {
           questState.claimedDaily.push(id);
         }
         renderQuestMenu();
+        const rewardSummary = [
+          formatXpRewardSummary(granted.levelXp, granted.passXp),
+          granted.mBucks > 0 ? `+${granted.mBucks.toLocaleString("de-DE")} M-Bucks` : "",
+          granted.skillPoints > 0 ? `+${granted.skillPoints} Skillpunkt${granted.skillPoints > 1 ? "e" : ""}` : ""
+        ].filter(Boolean).join(" • ");
+        showMessage(`Quest abgeschlossen: ${def.name} • ${rewardSummary}`, 2600);
         renderInventory();
         updateUI();
         queueDeferredSave();
-        showMessage(`Quest abgeschlossen: ${def.name} Rewards gutgeschrieben.`, 2200);
       } catch (err) {
         console.error("Quest Claim Fehler:", err);
         showMessage("Quest-Claim fehlgeschlagen. Siehe Konsole.", 2200);
@@ -65491,7 +65589,8 @@ async function loadMaintenanceStateFromSupabase() {
       const preview = getLockerPreviewData();
       const modeLabel = `${getLobbyModeLabel(selectedLobbyMode)} Queue`;
       const walletValue = Math.max(0, Math.floor(Number(inventory[7] || 0))).toLocaleString("de-DE");
-      const activeBoostEntries = getActiveLiveEventEntries().filter((entry) => ["xpBoost", "passBoost", "communityBoost"].includes(entry.key));
+      const dailyXpRush = getDailyXpRushStatus();
+      const activeBoostEntries = getActiveLiveEventEntries().filter((entry) => ["xpBoost", "passBoost", "communityBoost", "dailyXpBoost"].includes(entry.key));
       
       const stageKicker = "COMMAND CENTER";
       const stageTitle = "OPERATIONS HUB";
@@ -65503,9 +65602,16 @@ async function loadMaintenanceStateFromSupabase() {
           : (getFinaleOperationPhase() === "live"
             ? `Finale Operation laeuft live bis ${FINALE_OPERATION_END_LABEL} Uhr.`
             : "Finale Operation ist beendet. Fortsetzung folgt.");
+        const operationsText = selectedLobbyMode === "finale_operation"
+          ? finaleCommandText
+          : (dailyXpRush.active
+            ? `3x XP Rush ist live bis ${dailyXpRush.mode === "special" ? "20:00 Uhr" : "16:00 Uhr"}. Restzeit: ${formatRemainingTime(dailyXpRush.endAt)}.`
+            : (activeBoostEntries.length
+              ? `Live aktiv: ${activeBoostEntries.map((entry) => entry.label).join(" + ")}`
+              : `Naechster 3x XP Rush startet in ${formatRemainingTime(dailyXpRush.nextStartAt)}.`));
         lobbyCenterCommandStrip.innerHTML = `
           <div class="lobbyCenterCommandStripTitle">Operations Feed</div>
-          <div class="lobbyCenterCommandStripText">${selectedLobbyMode === "finale_operation" ? finaleCommandText : (activeBoostEntries.length ? `Live aktiv: ${activeBoostEntries.map((entry) => entry.label).join(" + ")}` : `${getLobbyModeLabel(selectedLobbyMode)} ist online. Alle Systeme bereit fuer den naechsten Run.`)}</div>
+          <div class="lobbyCenterCommandStripText">${operationsText}</div>
         `;
       }
 
@@ -65566,7 +65672,16 @@ async function loadMaintenanceStateFromSupabase() {
         
         // Active Boosts
         let boostCardsMarkup = "";
-        
+        const dailyRushWindowLabel = dailyXpRush.mode === "special"
+          ? "06.06.2026 bis 20:00 Uhr"
+          : "ab 07.06.2026 taeglich 15:00 - 16:00 Uhr";
+        const dailyRushCountdown = dailyXpRush.active
+          ? `Endet in ${formatRemainingTime(dailyXpRush.endAt)}`
+          : `Startet in ${formatRemainingTime(dailyXpRush.nextStartAt)}`;
+        const dailyRushMeta = dailyXpRush.active
+          ? `Level und Battle Pass laufen gerade mit ${DAILY_XP_RUSH_MULTIPLIER}x XP.`
+          : `${dailyRushWindowLabel}. Ausserhalb davon gilt normale XP.`;
+
         activeBoostEntries.forEach(entry => {
           const label = entry.label || "Boost aktiv";
           boostCardsMarkup += `
@@ -65577,6 +65692,14 @@ async function loadMaintenanceStateFromSupabase() {
             </div>
           `;
         });
+
+        boostCardsMarkup += `
+          <div class="lobbyStatCard" style="${dailyXpRush.active ? "border-color: rgba(126, 255, 177, 0.36); box-shadow: 0 0 0 1px rgba(126, 255, 177, 0.08), 0 18px 34px rgba(0,0,0,0.18);" : ""}">
+            <div class="lobbyStatLabel">3x XP Rush</div>
+            <div class="lobbyStatValue" style="font-size: 18px;">${dailyRushCountdown}</div>
+            <div class="lobbyStatMeta">${dailyRushMeta} ${dailyXpRush.metaLabel ? `• ${dailyXpRush.metaLabel}` : ""}</div>
+          </div>
+        `;
 
         lobbyStatsPanel.innerHTML = `
           <div class="lobbyStatsTitle">Progress & Modus</div>
@@ -65617,7 +65740,7 @@ async function loadMaintenanceStateFromSupabase() {
       const lobbyBoostBar = document.getElementById("lobbyBoostBar");
       if (lobbyBoostBar) {
         const activeLiveEvents = getActiveLiveEventEntries();
-        const activeBoostEntries = activeLiveEvents.filter((entry) => ["xpBoost", "passBoost", "communityBoost"].includes(entry.key));
+        const activeBoostEntries = activeLiveEvents.filter((entry) => ["xpBoost", "passBoost", "communityBoost", "dailyXpBoost"].includes(entry.key));
         if (activeBoostEntries.length) {
           lobbyBoostBar.innerHTML = `
             <div class="lobbyBoostLabel">Boost Aktiv</div>
@@ -65674,7 +65797,7 @@ async function loadMaintenanceStateFromSupabase() {
     function updateLobbyUi() {
       const startScreenActive = !!startScreen && startScreen.style.display !== "none";
       const activeLiveEvents = getActiveLiveEventEntries();
-      const activeBoostEntries = activeLiveEvents.filter((entry) => ["xpBoost", "passBoost", "communityBoost"].includes(entry.key));
+      const activeBoostEntries = activeLiveEvents.filter((entry) => ["xpBoost", "passBoost", "communityBoost", "dailyXpBoost"].includes(entry.key));
       applyLobbyBackgroundVisual();
       settleOverdueMBucksCredit();
       processMBucksAutoIncome();
@@ -70744,16 +70867,19 @@ async function loadMaintenanceStateFromSupabase() {
               addLoot("alienFragment", 1);
             }
           }
-          addXp(xpGain);
-          addBattlePassXp(block === 7 ? 12 : block === 6 ? 9 : 6);
+          const grantedLevelXp = addXp(xpGain);
+          const grantedPassXp = addBattlePassXp(block === 7 ? 12 : block === 6 ? 9 : 6);
+          const miningRewardText = formatXpRewardSummary(grantedLevelXp, grantedPassXp);
+          const boostVisible = getDailyXpRushStatus().active;
 
-          if (block === 7) showMessage("Gold gefunden!");
-          if (block === 6) showMessage("Kohle abgebaut");
-          if (block === 9) showMessage("Sand abgebaut");
-          if (block === 11) showMessage("Kaktus abgebaut");
-          if (block === 15) showMessage("Alienboden abgebaut");
-          if (block === 16) showMessage("Alienfels abgebaut");
-          if (block === 17) showMessage("Plasmakristall gefunden!");
+          if (block === 7) showMessage(`Gold gefunden! • ${miningRewardText}`, 1800);
+          else if (block === 6) showMessage(`Kohle abgebaut • ${miningRewardText}`, 1800);
+          else if (block === 9) showMessage(`Sand abgebaut • ${miningRewardText}`, 1600);
+          else if (block === 11) showMessage(`Kaktus abgebaut • ${miningRewardText}`, 1600);
+          else if (block === 15) showMessage(`Alienboden abgebaut • ${miningRewardText}`, 1800);
+          else if (block === 16) showMessage(`Alienfels abgebaut • ${miningRewardText}`, 1800);
+          else if (block === 17) showMessage(`Plasmakristall gefunden! • ${miningRewardText}`, 2000);
+          else if (boostVisible) showMessage(miningRewardText, 1200);
 
           if ((block === 6 || block === 7) && rollFortuneBonus()) {
             inventory[block] = (inventory[block] || 0) + 1;
@@ -72591,6 +72717,12 @@ drawRiftGlitchOverlay(cam);
     setLobbyNavActive("overview");
     setInterval(() => {
       updateLoginStatusHud();
+      if (inLobby) {
+        renderLobbyScreen();
+        updateLobbyUi();
+      } else if (gameStarted) {
+        renderXp();
+      }
     }, 1000);
 
     try {
